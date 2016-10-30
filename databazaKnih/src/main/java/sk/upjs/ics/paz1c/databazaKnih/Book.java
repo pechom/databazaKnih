@@ -1,21 +1,23 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Book {
-private String name;
-private String author;
-private int year;
-private ArrayList <String> genres;
-private int numberOfPages;
-private int ISBN;
-private ArrayList <String> tags;
-private String description;
-private int numberOfReviews;
-private int averageOfReviews;
-private int numberInChart;
-private boolean verificationStatus; // 0-neoverena, 1-overena
-private boolean issuedStatus; //vydana alebo nie
+
+    private String name;
+    private String author;
+    private int year;
+    private List<String> genres;
+    private int numberOfPages;
+    private int ISBN;
+    private List<String> tags;
+    private String description;
+    private int numberOfReviews;
+    private int averageOfReviews;
+    private int numberInChart;
+    private boolean verificationStatus; // 0-neoverena, 1-overena
+    private boolean issuedStatus; //vydana alebo nie
 
     /**
      * @return the name
@@ -62,14 +64,14 @@ private boolean issuedStatus; //vydana alebo nie
     /**
      * @return the genres
      */
-    public ArrayList <String> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
     /**
      * @param genres the genres to set
      */
-    public void setGenres(ArrayList <String> genres) {
+    public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
 
@@ -104,14 +106,14 @@ private boolean issuedStatus; //vydana alebo nie
     /**
      * @return the tags
      */
-    public ArrayList <String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
     /**
      * @param tags the tags to set
      */
-    public void setTags(ArrayList <String> tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
@@ -198,6 +200,5 @@ private boolean issuedStatus; //vydana alebo nie
     public void setIssuedStatus(boolean issuedStatus) {
         this.issuedStatus = issuedStatus;
     }
-
 
 }

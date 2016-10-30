@@ -2,24 +2,25 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-
 public class User {
+
     private String login;
     private String password;
     private String mail;
     private String name;
     private String surname;
     private LocalDateTime lastLogin;
-    private ArrayList<Book> reviewedBooks;
-    private ArrayList<Book> readBooks;
-    private ArrayList<Book> favoriteBooks;
-    private ArrayList<Book> wantedBooks;
-    private ArrayList<Author> reviewedAuthors;
-    private ArrayList<Author> favoriteAuthors;
-    private ArrayList<User> friends;
-    private ArrayList<User> favoriteReviewers;
+    private List<Book> reviewedBooks;
+    private List<Book> readBooks;
+    private List<Book> favoriteBooks;
+    private List<Book> wantedBooks;
+    private List<Author> reviewedAuthors;
+    private List<Author> favoriteAuthors;
+    private List<User> friends;
+    private List<User> favoriteReviewers;
     private Map<Book, Integer> reading; // kniha, strana kde sa skoncilo
     private Map<Book, String> note; //poznamka ku knihe;
     private boolean Status; //1-admin, 0-obycajny user
@@ -111,112 +112,112 @@ public class User {
     /**
      * @return the reviewedBooks
      */
-    public ArrayList<Book> getReviewedBooks() {
+    public List<Book> getReviewedBooks() {
         return reviewedBooks;
     }
 
     /**
      * @param reviewedBooks the reviewedBooks to set
      */
-    public void setReviewedBooks(ArrayList<Book> reviewedBooks) {
+    public void setReviewedBooks(List<Book> reviewedBooks) {
         this.reviewedBooks = reviewedBooks;
     }
 
     /**
      * @return the readBooks
      */
-    public ArrayList<Book> getReadBooks() {
+    public List<Book> getReadBooks() {
         return readBooks;
     }
 
     /**
      * @param readBooks the readBooks to set
      */
-    public void setReadBooks(ArrayList<Book> readBooks) {
+    public void setReadBooks(List<Book> readBooks) {
         this.readBooks = readBooks;
     }
 
     /**
      * @return the favoriteBooks
      */
-    public ArrayList<Book> getFavoriteBooks() {
+    public List<Book> getFavoriteBooks() {
         return favoriteBooks;
     }
 
     /**
      * @param favoriteBooks the favoriteBooks to set
      */
-    public void setFavoriteBooks(ArrayList<Book> favoriteBooks) {
+    public void setFavoriteBooks(List<Book> favoriteBooks) {
         this.favoriteBooks = favoriteBooks;
     }
 
     /**
      * @return the wantedBooks
      */
-    public ArrayList<Book> getWantedBooks() {
+    public List<Book> getWantedBooks() {
         return wantedBooks;
     }
 
     /**
      * @param wantedBooks the wantedBooks to set
      */
-    public void setWantedBooks(ArrayList<Book> wantedBooks) {
+    public void setWantedBooks(List<Book> wantedBooks) {
         this.wantedBooks = wantedBooks;
     }
 
     /**
      * @return the reviewedAuthors
      */
-    public ArrayList<Author> getReviewedAuthors() {
+    public List<Author> getReviewedAuthors() {
         return reviewedAuthors;
     }
 
     /**
      * @param reviewedAuthors the reviewedAuthors to set
      */
-    public void setReviewedAuthors(ArrayList<Author> reviewedAuthors) {
+    public void setReviewedAuthors(List<Author> reviewedAuthors) {
         this.reviewedAuthors = reviewedAuthors;
     }
 
     /**
      * @return the favoriteAuthors
      */
-    public ArrayList<Author> getFavoriteAuthors() {
+    public List<Author> getFavoriteAuthors() {
         return favoriteAuthors;
     }
 
     /**
      * @param favoriteAuthors the favoriteAuthors to set
      */
-    public void setFavoriteAuthors(ArrayList<Author> favoriteAuthors) {
+    public void setFavoriteAuthors(List<Author> favoriteAuthors) {
         this.favoriteAuthors = favoriteAuthors;
     }
 
     /**
      * @return the friends
      */
-    public ArrayList<User> getFriends() {
+    public List<User> getFriends() {
         return friends;
     }
 
     /**
      * @param friends the friends to set
      */
-    public void setFriends(ArrayList<User> friends) {
+    public void setFriends(List<User> friends) {
         this.friends = friends;
     }
 
     /**
      * @return the favoriteReviewers
      */
-    public ArrayList<User> getFavoriteReviewers() {
+    public List<User> getFavoriteReviewers() {
         return favoriteReviewers;
     }
 
     /**
      * @param favoriteReviewers the favoriteReviewers to set
      */
-    public void setFavoriteReviewers(ArrayList<User> favoriteReviewers) {
+    public void setFavoriteReviewers(List<User> favoriteReviewers) {
         this.favoriteReviewers = favoriteReviewers;
     }
 
@@ -261,5 +262,5 @@ public class User {
     public void setStatus(boolean Status) {
         this.Status = Status;
     }
-    
+
 }

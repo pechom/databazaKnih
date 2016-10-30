@@ -2,10 +2,11 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Author {
-  private ArrayList <Book> books;
-  private ArrayList <String> genres;
+  private List <Book> books;
+  private List <String> genres;
   private int numberInChart;
   private Date birth;
   private Date death;
@@ -18,7 +19,7 @@ public class Author {
     /**
      * @return the books
      */
-    public ArrayList <Book> getBooks() {
+    public List <Book> getBooks() {
         return books;
     }
 
@@ -32,7 +33,7 @@ public class Author {
     /**
      * @return the genres
      */
-    public ArrayList <String> getGenres() {
+    public List <String> getGenres() {
         return genres;
     }
 
