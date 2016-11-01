@@ -18,22 +18,22 @@ import static org.junit.Assert.*;
  * @author Peťo Chomič
  */
 public class AuthorsManagerTest {
-    
+
     public AuthorsManagerTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -106,5 +106,4 @@ public class AuthorsManagerTest {
         public void updateAuthor(Author author) {
         }
     }
-    
 }

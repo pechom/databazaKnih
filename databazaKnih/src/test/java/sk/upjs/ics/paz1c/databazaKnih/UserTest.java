@@ -498,5 +498,32 @@ public class UserTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getSalt method, of class User.
+     */
+    @Test
+    public void testGetSalt() {
+        System.out.println("getSalt");
+        User instance = new User();
+        String expResult = "";
+        String result = instance.getSalt();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setSalt method, of class User.
+     */
+    @Test
+    public void testSetSalt() {
+        System.out.println("setSalt");
+        String Salt = "";
+        User instance = new User();
+        instance.setSalt(Salt);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

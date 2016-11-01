@@ -106,5 +106,4 @@ public class InterfaceUserDaoTest {
         public void updateUser(User user) {
         }
     }
-    
 }

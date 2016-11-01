@@ -106,5 +106,4 @@ public class InterfaceAuthorDaoTest {
         public void updateAuthor(Author author) {
         }
     }
-    
 }

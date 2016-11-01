@@ -106,5 +106,4 @@ public class InterfaceBookDaoTest {
         public void updateBook(Book book) {
         }
     }
-    
 }

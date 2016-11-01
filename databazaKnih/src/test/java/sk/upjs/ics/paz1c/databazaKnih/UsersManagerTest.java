@@ -106,5 +106,4 @@ public class UsersManagerTest {
         public void updateUser(User user) {
         }
     }
-    
 }

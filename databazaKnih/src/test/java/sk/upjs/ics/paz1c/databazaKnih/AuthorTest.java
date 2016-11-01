@@ -309,5 +309,32 @@ public class AuthorTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getAllNationalities method, of class Author.
+     */
+    @Test
+    public void testGetAllNationalities() {
+        System.out.println("getAllNationalities");
+        Author instance = new Author();
+        List<String> expResult = null;
+        List<String> result = instance.getAllNationalities();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setAllNationalities method, of class Author.
+     */
+    @Test
+    public void testSetAllNationalities() {
+        System.out.println("setAllNationalities");
+        List<String> allNationalities = null;
+        Author instance = new Author();
+        instance.setAllNationalities(allNationalities);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
