@@ -1,9 +1,15 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.DatatypeConverter;
 
 public class User {
 
@@ -24,6 +30,7 @@ public class User {
     private Map<Book, Integer> reading; // kniha, strana kde sa skoncilo
     private Map<Book, String> note; //poznamka ku knihe;
     private boolean Status; //1-admin, 0-obycajny user
+    private String Salt;
 
     /**
      * @return the login
@@ -50,7 +57,17 @@ public class User {
      * @param password the password to set
      */
     public void setPassword(String password) {
-        this.password = password;
+        String forHash = password + this.getSalt();
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        md.update(forHash.getBytes());
+        byte[] data = md.digest();
+        String hashString = DatatypeConverter.printHexBinary(data);
+        this.password = hashString;
     }
 
     /**
@@ -261,6 +278,20 @@ public class User {
      */
     public void setStatus(boolean Status) {
         this.Status = Status;
+    }
+
+    /**
+     * @return the Salt
+     */
+    public String getSalt() {
+        return Salt;
+    }
+
+    /**
+     * @param Salt the Salt to set
+     */
+    public void setSalt(String Salt) {
+        this.Salt = UUID.randomUUID().toString();;
     }
 
 }
