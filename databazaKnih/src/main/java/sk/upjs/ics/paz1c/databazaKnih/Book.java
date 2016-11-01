@@ -18,7 +18,9 @@ public class Book {
     private int numberInChart;
     private boolean verificationStatus; // 0-neoverena, 1-overena
     private boolean issuedStatus; //vydana alebo nie
-
+    private List<String>allTags;
+    private List<String>allGenres;
+    
     /**
      * @return the name
      */
@@ -199,6 +201,34 @@ public class Book {
      */
     public void setIssuedStatus(boolean issuedStatus) {
         this.issuedStatus = issuedStatus;
+    }
+
+    /**
+     * @return the allTags
+     */
+    public List<String> getAllTags() {
+        return allTags;
+    }
+
+    /**
+     * @param allTags the allTags to set
+     */
+    public void setAllTags(List<String> allTags) {
+        this.allTags = allTags;
+    }
+
+    /**
+     * @return the allGenres
+     */
+    public List<String> getAllGenres() {
+        return allGenres;
+    }
+
+    /**
+     * @param allGenres the allGenres to set
+     */
+    public void setAllGenres(List<String> allGenres) {
+        this.allGenres = allGenres;
     }
 
 }

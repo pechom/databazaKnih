@@ -15,7 +15,7 @@ public class Author {
   private String biography;
   private boolean verificationStatus;
   private boolean lifeStatus; //zivy alebo mrtvy;
-
+  private List<String>allNationalities;
     /**
      * @return the books
      */
@@ -154,6 +154,20 @@ public class Author {
      */
     public void setLifeStatus(boolean lifeStatus) {
         this.lifeStatus = lifeStatus;
+    }
+
+    /**
+     * @return the allNationalities
+     */
+    public List<String> getAllNationalities() {
+        return allNationalities;
+    }
+
+    /**
+     * @param allNationalities the allNationalities to set
+     */
+    public void setAllNationalities(List<String> allNationalities) {
+        this.allNationalities = allNationalities;
     }
 
 }
