@@ -71,9 +71,9 @@ public class InterfaceBookDaoTest {
     @Test
     public void testDeleteBook() {
         System.out.println("deleteBook");
-        Book book = null;
+        int id = 0;
         InterfaceBookDao instance = new InterfaceBookDaoImpl();
-        instance.deleteBook(book);
+        instance.deleteBook(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class InterfaceBookDaoTest {
     @Test
     public void testUpdateBook() {
         System.out.println("updateBook");
-        Book book = null;
+        int id = 0;
         InterfaceBookDao instance = new InterfaceBookDaoImpl();
-        instance.updateBook(book);
+        instance.updateBook(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -100,10 +100,11 @@ public class InterfaceBookDaoTest {
         public void insertBook(Book book) {
         }
 
-        public void deleteBook(Book book) {
+        public void deleteBook(int id) {
         }
 
-        public void updateBook(Book book) {
+        public void updateBook(int id) {
         }
     }
+    
 }

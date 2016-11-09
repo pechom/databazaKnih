@@ -44,7 +44,7 @@ public class MysqlUserDaoTest {
     @Test
     public void testGetAllUsers() {
         System.out.println("getAllUsers");
-        MysqlUserDao instance = new MysqlUserDao();
+        MysqlUserDao instance = null;
         List<User> expResult = null;
         List<User> result = instance.getAllUsers();
         assertEquals(expResult, result);
@@ -59,7 +59,7 @@ public class MysqlUserDaoTest {
     public void testInsertUser() {
         System.out.println("insertUser");
         User user = null;
-        MysqlUserDao instance = new MysqlUserDao();
+        MysqlUserDao instance = null;
         instance.insertUser(user);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -71,9 +71,9 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteUser() {
         System.out.println("deleteUser");
-        User user = null;
-        MysqlUserDao instance = new MysqlUserDao();
-        instance.deleteUser(user);
+        int id = 0;
+        MysqlUserDao instance = null;
+        instance.deleteUser(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class MysqlUserDaoTest {
     @Test
     public void testUpdateUser() {
         System.out.println("updateUser");
-        User user = null;
-        MysqlUserDao instance = new MysqlUserDao();
-        instance.updateUser(user);
+        int id = 0;
+        MysqlUserDao instance = null;
+        instance.updateUser(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

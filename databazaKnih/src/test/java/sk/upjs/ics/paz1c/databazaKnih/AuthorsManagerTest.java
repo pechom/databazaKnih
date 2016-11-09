@@ -18,22 +18,22 @@ import static org.junit.Assert.*;
  * @author Peťo Chomič
  */
 public class AuthorsManagerTest {
-
+    
     public AuthorsManagerTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
     }
-
+    
     @After
     public void tearDown() {
     }
@@ -71,9 +71,9 @@ public class AuthorsManagerTest {
     @Test
     public void testDeleteAuthor() {
         System.out.println("deleteAuthor");
-        Author author = null;
+        int id = 0;
         AuthorsManager instance = new AuthorsManagerImpl();
-        instance.deleteAuthor(author);
+        instance.deleteAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class AuthorsManagerTest {
     @Test
     public void testUpdateAuthor() {
         System.out.println("updateAuthor");
-        Author author = null;
+        int id = 0;
         AuthorsManager instance = new AuthorsManagerImpl();
-        instance.updateAuthor(author);
+        instance.updateAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -100,10 +100,11 @@ public class AuthorsManagerTest {
         public void insertAuthor(Author author) {
         }
 
-        public void deleteAuthor(Author author) {
+        public void deleteAuthor(int id) {
         }
 
-        public void updateAuthor(Author author) {
+        public void updateAuthor(int id) {
         }
     }
+    
 }

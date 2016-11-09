@@ -6,16 +6,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlUserDao implements InterfaceUserDao {
 
-    private final JdbcTemplate jdbcTemplate;
-    private MysqlDataSource dataSource;
+    JdbcTemplate jdbcTemplate;
 
-    public MysqlUserDao() {
-        dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName("databaza-knih");
-        dataSource.setUser("root");
-        dataSource.setPassword("yareyare");
-
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    public MysqlUserDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
@@ -30,12 +24,12 @@ public class MysqlUserDao implements InterfaceUserDao {
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

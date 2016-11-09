@@ -5,22 +5,55 @@ import java.util.List;
 
 public class Book {
 
+    private int id;
     private String name;
-    private String author;
+    private Author author;
     private int year;
     private List<String> genres;
     private int numberOfPages;
     private int ISBN;
-    private List<String> tags;
+    private List<Tag> tags;
     private String description;
     private int numberOfReviews;
     private int averageOfReviews;
     private int numberInChart;
     private boolean verificationStatus; // 0-neoverena, 1-overena
     private boolean issuedStatus; //vydana alebo nie
-    private List<String>allTags;
-    private List<String>allGenres;
-    
+    private List<BookReview> bookReviews;
+
+    public enum allGenres { //.name by malo vratit string takze netreba case
+        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
+        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN
+    }
+
+    /**
+     * @return the bookReviews
+     */
+    public List<BookReview> getBookReviews() {
+        return bookReviews;
+    }
+
+    /**
+     * @param bookReviews the bookReviews to set
+     */
+    public void setBookReviews(List<BookReview> bookReviews) {
+        this.bookReviews = bookReviews;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /**
      * @return the name
      */
@@ -38,14 +71,14 @@ public class Book {
     /**
      * @return the author
      */
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
     /**
      * @param author the author to set
      */
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -108,14 +141,14 @@ public class Book {
     /**
      * @return the tags
      */
-    public List<String> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
     /**
      * @param tags the tags to set
      */
-    public void setTags(ArrayList<String> tags) {
+    public void setTags(ArrayList<Tag> tags) {
         this.tags = tags;
     }
 
@@ -202,33 +235,4 @@ public class Book {
     public void setIssuedStatus(boolean issuedStatus) {
         this.issuedStatus = issuedStatus;
     }
-
-    /**
-     * @return the allTags
-     */
-    public List<String> getAllTags() {
-        return allTags;
-    }
-
-    /**
-     * @param allTags the allTags to set
-     */
-    public void setAllTags(List<String> allTags) {
-        this.allTags = allTags;
-    }
-
-    /**
-     * @return the allGenres
-     */
-    public List<String> getAllGenres() {
-        return allGenres;
-    }
-
-    /**
-     * @param allGenres the allGenres to set
-     */
-    public void setAllGenres(List<String> allGenres) {
-        this.allGenres = allGenres;
-    }
-
 }

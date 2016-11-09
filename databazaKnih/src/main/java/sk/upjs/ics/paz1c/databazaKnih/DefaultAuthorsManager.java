@@ -1,11 +1,12 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-// tu budu metody s autormi
+// tu budu metody s autormi napr autori od zadaneho roku, autori s urcitym(i)
+//zanrami, tagmi,narodnostami, hodnoteniami...
 import java.util.List;
 
 public class DefaultAuthorsManager implements AuthorsManager {
     
-    private InterfaceAuthorDao authorDao = AuthorDaoFactory.INSTANCE.getAuthorDao();
+    private InterfaceAuthorDao authorDao = MySQLDaoFactory.INSTANCE.getAuthorDao();
     
     @Override
     public List<Author> getAllAuthors() {
@@ -17,14 +18,15 @@ public class DefaultAuthorsManager implements AuthorsManager {
         authorDao.insertAuthor(author);
     }
     
+
     @Override
-    public void deleteAuthor(Author author) {
-        authorDao.deleteAuthor(author);
+    public void deleteAuthor(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
-    public void updateAuthor(Author author) {
-        authorDao.updateAuthor(author);
+    public void updateAuthor(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

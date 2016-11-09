@@ -15,12 +15,12 @@ public class FileAuthorDao implements InterfaceAuthorDao {
     }
 
     @Override
-    public void deleteAuthor(Author author) {
+    public void deleteAuthor(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateAuthor(Author author) {
+    public void updateAuthor(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

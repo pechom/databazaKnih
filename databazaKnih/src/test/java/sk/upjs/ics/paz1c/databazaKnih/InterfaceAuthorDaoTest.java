@@ -71,9 +71,9 @@ public class InterfaceAuthorDaoTest {
     @Test
     public void testDeleteAuthor() {
         System.out.println("deleteAuthor");
-        Author author = null;
+        int id = 0;
         InterfaceAuthorDao instance = new InterfaceAuthorDaoImpl();
-        instance.deleteAuthor(author);
+        instance.deleteAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class InterfaceAuthorDaoTest {
     @Test
     public void testUpdateAuthor() {
         System.out.println("updateAuthor");
-        Author author = null;
+        int id = 0;
         InterfaceAuthorDao instance = new InterfaceAuthorDaoImpl();
-        instance.updateAuthor(author);
+        instance.updateAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -100,10 +100,11 @@ public class InterfaceAuthorDaoTest {
         public void insertAuthor(Author author) {
         }
 
-        public void deleteAuthor(Author author) {
+        public void deleteAuthor(int id) {
         }
 
-        public void updateAuthor(Author author) {
+        public void updateAuthor(int id) {
         }
     }
+    
 }

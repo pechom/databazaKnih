@@ -8,8 +8,8 @@ public interface UsersManager {
 
     void insertUser(User user);
 
-    void deleteUser(User user);
+    void deleteUser(int id);
 
-    void updateUser(User user);
+    void updateUser(int id);
 
 }

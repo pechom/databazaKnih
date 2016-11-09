@@ -71,9 +71,9 @@ public class DefaultAuthorsManagerTest {
     @Test
     public void testDeleteAuthor() {
         System.out.println("deleteAuthor");
-        Author author = null;
+        int id = 0;
         DefaultAuthorsManager instance = new DefaultAuthorsManager();
-        instance.deleteAuthor(author);
+        instance.deleteAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class DefaultAuthorsManagerTest {
     @Test
     public void testUpdateAuthor() {
         System.out.println("updateAuthor");
-        Author author = null;
+        int id = 0;
         DefaultAuthorsManager instance = new DefaultAuthorsManager();
-        instance.updateAuthor(author);
+        instance.updateAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

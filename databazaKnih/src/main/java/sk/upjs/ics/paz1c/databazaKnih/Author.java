@@ -5,42 +5,83 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Author {
-  private List <Book> books;
-  private List <String> genres;
-  private int numberInChart;
-  private Date birth;
-  private Date death;
-  private String nationality;
-  private String sex;
-  private String biography;
-  private boolean verificationStatus;
-  private boolean lifeStatus; //zivy alebo mrtvy;
-  private List<String>allNationalities;
+
+    private int id;
+    private List<Book> books;
+    private List<String> genres;
+    private int numberInChart;
+    private Date birth;
+    private Date death;
+    private String nationality;
+    private String sex;
+    private String biography;
+    private List<AuthorReview> authorReviews;
+    private boolean verificationStatus;
+    private boolean lifeStatus; //0-zivy alebo 1-mrtvy;
+
+    public enum allNationalities {
+        CZE, SVK, GBR, USA, HUN, AUT, CAN, DEU, DNK, ESP, FIN, FRA, GRC, IRL, ITA, JPN, NOR, POL,
+        PRT, RUS
+    }
+
+    public enum allGenres { //.name by malo vratit string takze netreba case
+        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
+        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN
+    }
+
+    /**
+     * @return the authorReviews
+     */
+    public List<AuthorReview> getAuthorReviews() {
+        return authorReviews;
+    }
+
+    /**
+     * @param authorReviews the authorReviews to set
+     */
+    public void setAuthorReviews(List<AuthorReview> authorReviews) {
+        this.authorReviews = authorReviews;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /**
      * @return the books
      */
-    public List <Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
     /**
      * @param books the books to set
      */
-    public void setBooks(ArrayList <Book> books) {
+    public void setBooks(ArrayList<Book> books) {
         this.books = books;
     }
 
     /**
      * @return the genres
      */
-    public List <String> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
     /**
      * @param genres the genres to set
      */
-    public void setGenres(ArrayList <String> genres) {
+    public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
 
@@ -155,20 +196,4 @@ public class Author {
     public void setLifeStatus(boolean lifeStatus) {
         this.lifeStatus = lifeStatus;
     }
-
-    /**
-     * @return the allNationalities
-     */
-    public List<String> getAllNationalities() {
-        return allNationalities;
-    }
-
-    /**
-     * @param allNationalities the allNationalities to set
-     */
-    public void setAllNationalities(List<String> allNationalities) {
-        this.allNationalities = allNationalities;
-    }
-
 }
-  

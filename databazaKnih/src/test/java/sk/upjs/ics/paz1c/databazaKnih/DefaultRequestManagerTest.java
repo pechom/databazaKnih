@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author Peťo Chomič
  */
-public class BookDaoFactoryTest {
+public class DefaultRequestManagerTest {
     
-    public BookDaoFactoryTest() {
+    public DefaultRequestManagerTest() {
     }
     
     @BeforeClass
@@ -38,42 +39,41 @@ public class BookDaoFactoryTest {
     }
 
     /**
-     * Test of values method, of class BookDaoFactory.
+     * Test of getAllRequests method, of class DefaultRequestManager.
      */
     @Test
-    public void testValues() {
-        System.out.println("values");
-        BookDaoFactory[] expResult = null;
-        BookDaoFactory[] result = BookDaoFactory.values();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of valueOf method, of class BookDaoFactory.
-     */
-    @Test
-    public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        BookDaoFactory expResult = null;
-        BookDaoFactory result = BookDaoFactory.valueOf(name);
+    public void testGetAllRequests() {
+        System.out.println("getAllRequests");
+        DefaultRequestManager instance = new DefaultRequestManager();
+        List<Request> expResult = null;
+        List<Request> result = instance.getAllRequests();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getBookDao method, of class BookDaoFactory.
+     * Test of insertRequest method, of class DefaultRequestManager.
      */
     @Test
-    public void testGetBookDao() {
-        System.out.println("getBookDao");
-        BookDaoFactory instance = null;
-        InterfaceBookDao expResult = null;
-        InterfaceBookDao result = instance.getBookDao();
-        assertEquals(expResult, result);
+    public void testInsertRequest() {
+        System.out.println("insertRequest");
+        Request request = null;
+        DefaultRequestManager instance = new DefaultRequestManager();
+        instance.insertRequest(request);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of deleteRequest method, of class DefaultRequestManager.
+     */
+    @Test
+    public void testDeleteRequest() {
+        System.out.println("deleteRequest");
+        int id = 0;
+        DefaultRequestManager instance = new DefaultRequestManager();
+        instance.deleteRequest(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

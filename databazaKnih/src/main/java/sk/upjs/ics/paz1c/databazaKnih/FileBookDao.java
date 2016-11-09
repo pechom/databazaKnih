@@ -15,12 +15,12 @@ public class FileBookDao implements InterfaceBookDao {
     }
 
     @Override
-    public void deleteBook(Book book) {
+    public void deleteBook(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateBook(Book book) {
+    public void updateBook(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

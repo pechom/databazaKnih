@@ -44,7 +44,7 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testGetAllAuthors() {
         System.out.println("getAllAuthors");
-        MysqlAuthorDao instance = new MysqlAuthorDao();
+        MysqlAuthorDao instance = null;
         List<Author> expResult = null;
         List<Author> result = instance.getAllAuthors();
         assertEquals(expResult, result);
@@ -59,7 +59,7 @@ public class MysqlAuthorDaoTest {
     public void testInsertAuthor() {
         System.out.println("insertAuthor");
         Author author = null;
-        MysqlAuthorDao instance = new MysqlAuthorDao();
+        MysqlAuthorDao instance = null;
         instance.insertAuthor(author);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -71,9 +71,9 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testDeleteAuthor() {
         System.out.println("deleteAuthor");
-        Author author = null;
-        MysqlAuthorDao instance = new MysqlAuthorDao();
-        instance.deleteAuthor(author);
+        int id = 0;
+        MysqlAuthorDao instance = null;
+        instance.deleteAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testUpdateAuthor() {
         System.out.println("updateAuthor");
-        Author author = null;
-        MysqlAuthorDao instance = new MysqlAuthorDao();
-        instance.updateAuthor(author);
+        int id = 0;
+        MysqlAuthorDao instance = null;
+        instance.updateAuthor(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

@@ -12,25 +12,27 @@ import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
 
 public class User {
-
+    private int id;
     private String login;
     private String password;
     private String mail;
     private String name;
     private String surname;
     private LocalDateTime lastLogin;
-    private List<Book> reviewedBooks;
+    private Map<Book, Integer> reviewedBooks;
     private List<Book> readBooks;
     private List<Book> favoriteBooks;
     private List<Book> wantedBooks;
-    private List<Author> reviewedAuthors;
+    private Map<Author,Integer> reviewedAuthors;
     private List<Author> favoriteAuthors;
     private List<User> friends;
     private List<User> favoriteReviewers;
     private Map<Book, Integer> reading; // kniha, strana kde sa skoncilo
     private Map<Book, String> note; //poznamka ku knihe;
-    private boolean Status; //1-admin, 0-obycajny user
+    private List<UserGroup> myGroups;
     private String Salt;
+    private List<BookReview> bookReviews;
+    private List<AuthorReview> authorReviews;
 
     /**
      * @return the login
@@ -127,20 +129,6 @@ public class User {
     }
 
     /**
-     * @return the reviewedBooks
-     */
-    public List<Book> getReviewedBooks() {
-        return reviewedBooks;
-    }
-
-    /**
-     * @param reviewedBooks the reviewedBooks to set
-     */
-    public void setReviewedBooks(List<Book> reviewedBooks) {
-        this.reviewedBooks = reviewedBooks;
-    }
-
-    /**
      * @return the readBooks
      */
     public List<Book> getReadBooks() {
@@ -180,20 +168,6 @@ public class User {
      */
     public void setWantedBooks(List<Book> wantedBooks) {
         this.wantedBooks = wantedBooks;
-    }
-
-    /**
-     * @return the reviewedAuthors
-     */
-    public List<Author> getReviewedAuthors() {
-        return reviewedAuthors;
-    }
-
-    /**
-     * @param reviewedAuthors the reviewedAuthors to set
-     */
-    public void setReviewedAuthors(List<Author> reviewedAuthors) {
-        this.reviewedAuthors = reviewedAuthors;
     }
 
     /**
@@ -267,20 +241,6 @@ public class User {
     }
 
     /**
-     * @return the Status
-     */
-    public boolean isStatus() {
-        return Status;
-    }
-
-    /**
-     * @param Status the Status to set
-     */
-    public void setStatus(boolean Status) {
-        this.Status = Status;
-    }
-
-    /**
      * @return the Salt
      */
     public String getSalt() {
@@ -292,6 +252,90 @@ public class User {
      */
     public void setSalt(String Salt) {
         this.Salt = UUID.randomUUID().toString();;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the myGroups
+     */
+    public List<UserGroup> getMyGroups() {
+        return myGroups;
+    }
+
+    /**
+     * @param myGroups the myGroups to set
+     */
+    public void setMyGroups(List<UserGroup> myGroups) {
+        this.myGroups = myGroups;
+    }
+
+    /**
+     * @return the bookReviews
+     */
+    public List<BookReview> getBookReviews() {
+        return bookReviews;
+    }
+
+    /**
+     * @param bookReviews the bookReviews to set
+     */
+    public void setBookReviews(List<BookReview> bookReviews) {
+        this.bookReviews = bookReviews;
+    }
+
+    /**
+     * @return the authorReviews
+     */
+    public List<AuthorReview> getAuthorReviews() {
+        return authorReviews;
+    }
+
+    /**
+     * @param authorReviews the authorReviews to set
+     */
+    public void setAuthorReviews(List<AuthorReview> authorReviews) {
+        this.authorReviews = authorReviews;
+    }
+
+    /**
+     * @return the reviewedBooks
+     */
+    public Map<Book, Integer> getReviewedBooks() {
+        return reviewedBooks;
+    }
+
+    /**
+     * @param reviewedBooks the reviewedBooks to set
+     */
+    public void setReviewedBooks(Map<Book, Integer> reviewedBooks) {
+        this.reviewedBooks = reviewedBooks;
+    }
+
+    /**
+     * @return the reviewedAuthors
+     */
+    public Map<Author,Integer> getReviewedAuthors() {
+        return reviewedAuthors;
+    }
+
+    /**
+     * @param reviewedAuthors the reviewedAuthors to set
+     */
+    public void setReviewedAuthors(Map<Author,Integer> reviewedAuthors) {
+        this.reviewedAuthors = reviewedAuthors;
     }
 
 }

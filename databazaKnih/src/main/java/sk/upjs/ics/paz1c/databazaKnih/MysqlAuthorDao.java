@@ -6,16 +6,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlAuthorDao implements InterfaceAuthorDao {
 
-    private final JdbcTemplate jdbcTemplate;
-    private MysqlDataSource dataSource;
+    JdbcTemplate jdbcTemplate;
 
-    public MysqlAuthorDao() {
-        dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName("databaza-knih");
-        dataSource.setUser("root");
-        dataSource.setPassword("yareyare");
-
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    public MysqlAuthorDao(JdbcTemplate jdbcTemplat) {
+        this.jdbcTemplate = jdbcTemplat;
     }
 
     @Override
@@ -30,12 +24,12 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
     }
 
     @Override
-    public void deleteAuthor(Author author) {
+    public void deleteAuthor(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateAuthor(Author author) {
+    public void updateAuthor(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

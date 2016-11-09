@@ -8,7 +8,7 @@ public interface InterfaceAuthorDao {
 
     void insertAuthor(Author author);
 
-    void deleteAuthor(Author author);
+    void deleteAuthor(int id);
 
-    void updateAuthor(Author author);
+    void updateAuthor(int id);
 }

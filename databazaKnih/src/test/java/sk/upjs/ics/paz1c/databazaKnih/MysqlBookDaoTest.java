@@ -44,7 +44,7 @@ public class MysqlBookDaoTest {
     @Test
     public void testGetAllBooks() {
         System.out.println("getAllBooks");
-        MysqlBookDao instance = new MysqlBookDao();
+        MysqlBookDao instance = null;
         List<Book> expResult = null;
         List<Book> result = instance.getAllBooks();
         assertEquals(expResult, result);
@@ -59,7 +59,7 @@ public class MysqlBookDaoTest {
     public void testInsertBook() {
         System.out.println("insertBook");
         Book book = null;
-        MysqlBookDao instance = new MysqlBookDao();
+        MysqlBookDao instance = null;
         instance.insertBook(book);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -71,9 +71,9 @@ public class MysqlBookDaoTest {
     @Test
     public void testDeleteBook() {
         System.out.println("deleteBook");
-        Book book = null;
-        MysqlBookDao instance = new MysqlBookDao();
-        instance.deleteBook(book);
+        int id = 0;
+        MysqlBookDao instance = null;
+        instance.deleteBook(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class MysqlBookDaoTest {
     @Test
     public void testUpdateBook() {
         System.out.println("updateBook");
-        Book book = null;
-        MysqlBookDao instance = new MysqlBookDao();
-        instance.updateBook(book);
+        int id = 0;
+        MysqlBookDao instance = null;
+        instance.updateBook(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

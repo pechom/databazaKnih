@@ -18,22 +18,22 @@ import static org.junit.Assert.*;
  * @author Peťo Chomič
  */
 public class BooksManagerTest {
-
+    
     public BooksManagerTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
     }
-
+    
     @After
     public void tearDown() {
     }
@@ -71,9 +71,9 @@ public class BooksManagerTest {
     @Test
     public void testDeleteBook() {
         System.out.println("deleteBook");
-        Book book = null;
+        int id = 0;
         BooksManager instance = new BooksManagerImpl();
-        instance.deleteBook(book);
+        instance.deleteBook(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class BooksManagerTest {
     @Test
     public void testUpdateBook() {
         System.out.println("updateBook");
-        Book book = null;
+        int id = 0;
         BooksManager instance = new BooksManagerImpl();
-        instance.updateBook(book);
+        instance.updateBook(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -100,10 +100,11 @@ public class BooksManagerTest {
         public void insertBook(Book book) {
         }
 
-        public void deleteBook(Book book) {
+        public void deleteBook(int id) {
         }
 
-        public void updateBook(Book book) {
+        public void updateBook(int id) {
         }
     }
+    
 }

@@ -71,9 +71,9 @@ public class FileUserDaoTest {
     @Test
     public void testDeleteUser() {
         System.out.println("deleteUser");
-        User user = null;
+        int id = 0;
         FileUserDao instance = new FileUserDao();
-        instance.deleteUser(user);
+        instance.deleteUser(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class FileUserDaoTest {
     @Test
     public void testUpdateUser() {
         System.out.println("updateUser");
-        User user = null;
+        int id = 0;
         FileUserDao instance = new FileUserDao();
-        instance.updateUser(user);
+        instance.updateUser(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

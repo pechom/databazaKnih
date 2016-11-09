@@ -6,16 +6,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlBookDao implements InterfaceBookDao {
 
-    private final JdbcTemplate jdbcTemplate;
-    private MysqlDataSource dataSource;
+    JdbcTemplate jdbcTemplate;
 
-    public MysqlBookDao() {
-        dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName("databaza-knih");
-        dataSource.setUser("root");
-        dataSource.setPassword("yareyare");
-
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    public MysqlBookDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
@@ -30,12 +24,12 @@ public class MysqlBookDao implements InterfaceBookDao {
     }
 
     @Override
-    public void deleteBook(Book book) {
+    public void deleteBook(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateBook(Book book) {
+    public void updateBook(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

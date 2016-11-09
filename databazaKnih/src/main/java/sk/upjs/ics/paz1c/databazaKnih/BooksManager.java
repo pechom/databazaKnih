@@ -8,7 +8,7 @@ public interface BooksManager {
 
     void insertBook(Book book);
 
-    void deleteBook(Book book);
+    void deleteBook(int id);
 
-    void updateBook(Book book);
+    void updateBook(int id);
 }

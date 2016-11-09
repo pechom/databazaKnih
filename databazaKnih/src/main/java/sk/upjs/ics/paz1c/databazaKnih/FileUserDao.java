@@ -15,12 +15,12 @@ public class FileUserDao implements InterfaceUserDao {
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

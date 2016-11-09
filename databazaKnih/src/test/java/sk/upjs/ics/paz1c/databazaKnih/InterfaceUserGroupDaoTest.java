@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author Peťo Chomič
  */
-public class UserDaoFactoryTest {
+public class InterfaceUserGroupDaoTest {
     
-    public UserDaoFactoryTest() {
+    public InterfaceUserGroupDaoTest() {
     }
     
     @BeforeClass
@@ -38,44 +39,43 @@ public class UserDaoFactoryTest {
     }
 
     /**
-     * Test of values method, of class UserDaoFactory.
+     * Test of getGroupById method, of class InterfaceUserGroupDao.
      */
     @Test
-    public void testValues() {
-        System.out.println("values");
-        UserDaoFactory[] expResult = null;
-        UserDaoFactory[] result = UserDaoFactory.values();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of valueOf method, of class UserDaoFactory.
-     */
-    @Test
-    public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        UserDaoFactory expResult = null;
-        UserDaoFactory result = UserDaoFactory.valueOf(name);
+    public void testGetGroupById() {
+        System.out.println("getGroupById");
+        long id = 0L;
+        InterfaceUserGroupDao instance = new InterfaceUserGroupDaoImpl();
+        UserGroup expResult = null;
+        UserGroup result = instance.getGroupById(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUserDao method, of class UserDaoFactory.
+     * Test of getGroups method, of class InterfaceUserGroupDao.
      */
     @Test
-    public void testGetUserDao() {
-        System.out.println("getUserDao");
-        UserDaoFactory instance = null;
-        InterfaceUserDao expResult = null;
-        InterfaceUserDao result = instance.getUserDao();
+    public void testGetGroups() {
+        System.out.println("getGroups");
+        InterfaceUserGroupDao instance = new InterfaceUserGroupDaoImpl();
+        List<UserGroup> expResult = null;
+        List<UserGroup> result = instance.getGroups();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    public class InterfaceUserGroupDaoImpl implements InterfaceUserGroupDao {
+
+        public UserGroup getGroupById(long id) {
+            return null;
+        }
+
+        public List<UserGroup> getGroups() {
+            return null;
+        }
     }
     
 }

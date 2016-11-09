@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author Peťo Chomič
  */
-public class AuthorDaoFactoryTest {
+public class FileUserGroupDaoTest {
     
-    public AuthorDaoFactoryTest() {
+    public FileUserGroupDaoTest() {
     }
     
     @BeforeClass
@@ -38,41 +39,29 @@ public class AuthorDaoFactoryTest {
     }
 
     /**
-     * Test of values method, of class AuthorDaoFactory.
+     * Test of getGroupById method, of class FileUserGroupDao.
      */
     @Test
-    public void testValues() {
-        System.out.println("values");
-        AuthorDaoFactory[] expResult = null;
-        AuthorDaoFactory[] result = AuthorDaoFactory.values();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of valueOf method, of class AuthorDaoFactory.
-     */
-    @Test
-    public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        AuthorDaoFactory expResult = null;
-        AuthorDaoFactory result = AuthorDaoFactory.valueOf(name);
+    public void testGetGroupById() {
+        System.out.println("getGroupById");
+        long id = 0L;
+        FileUserGroupDao instance = new FileUserGroupDao();
+        UserGroup expResult = null;
+        UserGroup result = instance.getGroupById(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getAuthorDao method, of class AuthorDaoFactory.
+     * Test of getGroups method, of class FileUserGroupDao.
      */
     @Test
-    public void testGetAuthorDao() {
-        System.out.println("getAuthorDao");
-        AuthorDaoFactory instance = null;
-        InterfaceAuthorDao expResult = null;
-        InterfaceAuthorDao result = instance.getAuthorDao();
+    public void testGetGroups() {
+        System.out.println("getGroups");
+        FileUserGroupDao instance = new FileUserGroupDao();
+        List<UserGroup> expResult = null;
+        List<UserGroup> result = instance.getGroups();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

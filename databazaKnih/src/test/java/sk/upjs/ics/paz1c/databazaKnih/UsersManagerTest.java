@@ -71,9 +71,9 @@ public class UsersManagerTest {
     @Test
     public void testDeleteUser() {
         System.out.println("deleteUser");
-        User user = null;
+        int id = 0;
         UsersManager instance = new UsersManagerImpl();
-        instance.deleteUser(user);
+        instance.deleteUser(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -84,9 +84,9 @@ public class UsersManagerTest {
     @Test
     public void testUpdateUser() {
         System.out.println("updateUser");
-        User user = null;
+        int id = 0;
         UsersManager instance = new UsersManagerImpl();
-        instance.updateUser(user);
+        instance.updateUser(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -100,10 +100,11 @@ public class UsersManagerTest {
         public void insertUser(User user) {
         }
 
-        public void deleteUser(User user) {
+        public void deleteUser(int id) {
         }
 
-        public void updateUser(User user) {
+        public void updateUser(int id) {
         }
     }
+    
 }
