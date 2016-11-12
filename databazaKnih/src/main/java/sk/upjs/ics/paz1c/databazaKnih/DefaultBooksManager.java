@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 // tu budu metody s knihami ako knihy od urciteho roku, zanru, hodnotenia,s tagmi...
+//bude sa pocitat bayesian average (priemerne hodnotenie celej databazy sa vzdy bude ziskavat zo vsetkych bookreviews)
 import java.util.List;
 
 public class DefaultBooksManager implements BooksManager {

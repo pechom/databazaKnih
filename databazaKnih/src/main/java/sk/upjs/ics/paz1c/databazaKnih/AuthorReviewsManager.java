@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
 
-public interface AuthorRewievsManager {
+public interface AuthorReviewsManager {
 
     List<AuthorReview> getAllReviews();
 

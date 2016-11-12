@@ -15,12 +15,27 @@ public class Book {
     private List<Tag> tags;
     private String description;
     private int numberOfReviews;
-    private int averageOfReviews;
+    private int averageOfReviews; 
     private int numberInChart;
     private boolean verificationStatus; // 0-neoverena, 1-overena
     private boolean issuedStatus; //vydana alebo nie
     private List<BookReview> bookReviews;
+    private int bayesianAverage;
 
+    /**
+     * @return the bayesianAverage
+     */
+    public int getBayesianAverage() {
+        return bayesianAverage;
+    }
+
+    /**
+     * @param bayesianAverage the bayesianAverage to set
+     */
+    public void setBayesianAverage(int bayesianAverage) {
+        this.bayesianAverage = bayesianAverage;
+    }
+    
     public enum allGenres { //.name by malo vratit string takze netreba case
         ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
         FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN

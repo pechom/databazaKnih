@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.util.List;
 //metody s reviews ako select podla zanru, roku, stavu, tagu, narodnosti od aj do...
 
-public class DefaultAuthorReviewsManager implements AuthorRewievsManager{
+public class DefaultAuthorReviewsManager implements AuthorReviewsManager{
 
     private InterfaceAuthorReviewDao authorReviewDao = MySQLDaoFactory.INSTANCE.getAuthorReviewDao();
 

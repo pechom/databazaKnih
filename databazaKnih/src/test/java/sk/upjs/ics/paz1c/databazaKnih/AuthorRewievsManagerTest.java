@@ -44,7 +44,7 @@ public class AuthorRewievsManagerTest {
     @Test
     public void testGetAllReviews() {
         System.out.println("getAllReviews");
-        AuthorRewievsManager instance = new AuthorRewievsManagerImpl();
+        AuthorReviewsManager instance = new AuthorRewievsManagerImpl();
         List<AuthorReview> expResult = null;
         List<AuthorReview> result = instance.getAllReviews();
         assertEquals(expResult, result);
@@ -59,7 +59,7 @@ public class AuthorRewievsManagerTest {
     public void testInsertReview() {
         System.out.println("insertReview");
         AuthorReview review = null;
-        AuthorRewievsManager instance = new AuthorRewievsManagerImpl();
+        AuthorReviewsManager instance = new AuthorRewievsManagerImpl();
         instance.insertReview(review);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -72,7 +72,7 @@ public class AuthorRewievsManagerTest {
     public void testDeleteReview() {
         System.out.println("deleteReview");
         int id = 0;
-        AuthorRewievsManager instance = new AuthorRewievsManagerImpl();
+        AuthorReviewsManager instance = new AuthorRewievsManagerImpl();
         instance.deleteReview(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -85,13 +85,13 @@ public class AuthorRewievsManagerTest {
     public void testUpdateReview() {
         System.out.println("updateReview");
         int id = 0;
-        AuthorRewievsManager instance = new AuthorRewievsManagerImpl();
+        AuthorReviewsManager instance = new AuthorRewievsManagerImpl();
         instance.updateReview(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
-    public class AuthorRewievsManagerImpl implements AuthorRewievsManager {
+    public class AuthorRewievsManagerImpl implements AuthorReviewsManager {
 
         public List<AuthorReview> getAllReviews() {
             return null;
