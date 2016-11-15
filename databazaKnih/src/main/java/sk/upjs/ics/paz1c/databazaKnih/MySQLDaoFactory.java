@@ -15,6 +15,7 @@ public enum MySQLDaoFactory {
     private InterfaceAuthorReviewDao authorReviewDao;
     private InterfaceTagDao tagDao;
     private InterfaceRequestDao requestDao;
+    private JdbcTemplate jdbcTemplate;
 
     private MySQLDaoFactory() {
         MysqlDataSource dataSource = new MysqlDataSource();
@@ -22,16 +23,30 @@ public enum MySQLDaoFactory {
         dataSource.setUser("root");
         dataSource.setPassword("yareyare");
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate = new JdbcTemplate(dataSource);
 
         userDao = new MysqlUserDao(jdbcTemplate);
         bookDao = new MysqlBookDao(jdbcTemplate);
         authorDao = new MysqlAuthorDao(jdbcTemplate);
         userGroupDao = new MysqlUserGroupDao(jdbcTemplate);
-        bookReviewDao=new MysqlBookReviewDao(jdbcTemplate);
-        authorReviewDao=new MysqlAuthorReviewDao(jdbcTemplate);
-        tagDao=new MysqlTagDao(jdbcTemplate);
-        requestDao=new MysqlRequestDao(jdbcTemplate);
+        bookReviewDao = new MysqlBookReviewDao(jdbcTemplate);
+        authorReviewDao = new MysqlAuthorReviewDao(jdbcTemplate);
+        tagDao = new MysqlTagDao(jdbcTemplate);
+        requestDao = new MysqlRequestDao(jdbcTemplate);
+    }
+
+    private JdbcTemplate getJdbcTemplate() {
+        if (jdbcTemplate != null) {
+            return jdbcTemplate;
+        } else {
+            MysqlDataSource dataSource = new MysqlDataSource();
+            dataSource.setDatabaseName("databaza-knih");
+            dataSource.setUser("root");
+            dataSource.setPassword("yareyare");
+
+            jdbcTemplate = new JdbcTemplate(dataSource);
+            return jdbcTemplate;
+        }
     }
 
     public InterfaceUserDao getUserDao() {
@@ -49,18 +64,21 @@ public enum MySQLDaoFactory {
     public InterfaceUserGroupDao getUserGroupDao() {
         return userGroupDao;
     }
-    public InterfaceBookReviewDao getBookReviewDao(){
+
+    public InterfaceBookReviewDao getBookReviewDao() {
         return bookReviewDao;
     }
-    
-   public InterfaceAuthorReviewDao getAuthorReviewDao(){
-       return authorReviewDao;
-   }
-   public InterfaceTagDao getTagDao(){
-       return tagDao;
-   }
-   public InterfaceRequestDao getRequestDao(){
-       return requestDao;
-   }
+
+    public InterfaceAuthorReviewDao getAuthorReviewDao() {
+        return authorReviewDao;
+    }
+
+    public InterfaceTagDao getTagDao() {
+        return tagDao;
+    }
+
+    public InterfaceRequestDao getRequestDao() {
+        return requestDao;
+    }
 
 }
