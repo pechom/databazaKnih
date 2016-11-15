@@ -35,7 +35,7 @@ public enum MySQLDaoFactory {
         requestDao = new MysqlRequestDao(jdbcTemplate);
     }
 
-    private JdbcTemplate getJdbcTemplate() {
+    public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate != null) {
             return jdbcTemplate;
         } else {
