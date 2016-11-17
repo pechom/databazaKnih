@@ -14,6 +14,7 @@ public enum MySQLDaoFactory {
     private InterfaceAuthorReviewDao authorReviewDao;
     private InterfaceTagDao tagDao;
     private InterfaceRequestDao requestDao;
+    private InterfaceGenreDao genreDao;
     private JdbcTemplate jdbcTemplate;
 
     private MySQLDaoFactory() {
@@ -31,6 +32,7 @@ public enum MySQLDaoFactory {
         authorReviewDao = new MysqlAuthorReviewDao(jdbcTemplate);
         tagDao = new MysqlTagDao(jdbcTemplate);
         requestDao = new MysqlRequestDao(jdbcTemplate);
+        genreDao=new MysqlGenreDao(jdbcTemplate);
     }
 
     public JdbcTemplate getJdbcTemplate() {
@@ -73,6 +75,10 @@ public enum MySQLDaoFactory {
 
     public InterfaceRequestDao getRequestDao() {
         return requestDao;
+    }
+    
+    public InterfaceGenreDao getGenreDao(){
+        return genreDao;
     }
 
 }

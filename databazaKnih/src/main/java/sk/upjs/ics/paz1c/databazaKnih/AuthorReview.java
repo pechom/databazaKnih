@@ -5,8 +5,22 @@ class AuthorReview {
     private int id;
     private Author author;
     private User user;
-    private int value;
+    private int rating;
     private String review;
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**
      * @return the author
@@ -39,15 +53,15 @@ class AuthorReview {
     /**
      * @return the value
      */
-    public int getValue() {
-        return value;
+    public int getRating() {
+        return rating;
     }
 
     /**
-     * @param value the value to set
+     * @param rating the value to set
      */
-    public void setValue(int value) {
-        this.value = value;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     /**
@@ -64,17 +78,4 @@ class AuthorReview {
         this.review = review;
     }
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 }

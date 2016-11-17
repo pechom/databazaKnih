@@ -75,7 +75,7 @@ public class UserTest {
         System.out.println("getPassword");
         User instance = new User();
         String expResult = "";
-        String result = instance.getPassword();
+        String result = instance.getPasswordHash();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -89,7 +89,7 @@ public class UserTest {
         System.out.println("setPassword");
         String password = "";
         User instance = new User();
-        instance.setPassword(password);
+        instasetPasswordHashword(password);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

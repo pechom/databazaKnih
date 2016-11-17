@@ -99,7 +99,7 @@ public class BookReviewTest {
         System.out.println("getValue");
         BookReview instance = new BookReview();
         int expResult = 0;
-        int result = instance.getValue();
+        int result = instance.getRating();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -113,7 +113,7 @@ public class BookReviewTest {
         System.out.println("setValue");
         int value = 0;
         BookReview instance = new BookReview();
-        instance.setValue(value);
+        instance.setRating(value);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

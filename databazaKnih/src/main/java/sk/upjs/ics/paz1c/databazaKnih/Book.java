@@ -9,49 +9,21 @@ public class Book {
     private String name;
     private Author author;
     private int year;
-    private List<String> genres;
+    private List<Genre> genres;
     private int numberOfPages;
     private int ISBN;
     private List<Tag> tags;
     private String description;
     private int numberOfReviews;
-    private int averageOfReviews; 
+    private int averageOfReviews;
     private int numberInChart;
     private boolean verificationStatus; // 0-neoverena, 1-overena
     private List<BookReview> bookReviews;
     private int bayesianAverage;
 
-    /**
-     * @return the bayesianAverage
-     */
-    public int getBayesianAverage() {
-        return bayesianAverage;
-    }
-
-    /**
-     * @param bayesianAverage the bayesianAverage to set
-     */
-    public void setBayesianAverage(int bayesianAverage) {
-        this.bayesianAverage = bayesianAverage;
-    }
-    
     public enum allGenres { //.name by malo vratit string takze netreba case
         ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
         FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN
-    }
-
-    /**
-     * @return the bookReviews
-     */
-    public List<BookReview> getBookReviews() {
-        return bookReviews;
-    }
-
-    /**
-     * @param bookReviews the bookReviews to set
-     */
-    public void setBookReviews(List<BookReview> bookReviews) {
-        this.bookReviews = bookReviews;
     }
 
     /**
@@ -113,14 +85,14 @@ public class Book {
     /**
      * @return the genres
      */
-    public List<String> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
     /**
      * @param genres the genres to set
      */
-    public void setGenres(ArrayList<String> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
@@ -162,7 +134,7 @@ public class Book {
     /**
      * @param tags the tags to set
      */
-    public void setTags(ArrayList<Tag> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 
@@ -237,6 +209,31 @@ public class Book {
     }
 
     /**
-     * @return the issuedStatus
+     * @return the bookReviews
      */
+    public List<BookReview> getBookReviews() {
+        return bookReviews;
+    }
+
+    /**
+     * @param bookReviews the bookReviews to set
+     */
+    public void setBookReviews(List<BookReview> bookReviews) {
+        this.bookReviews = bookReviews;
+    }
+
+    /**
+     * @return the bayesianAverage
+     */
+    public int getBayesianAverage() {
+        return bayesianAverage;
+    }
+
+    /**
+     * @param bayesianAverage the bayesianAverage to set
+     */
+    public void setBayesianAverage(int bayesianAverage) {
+        this.bayesianAverage = bayesianAverage;
+    }
+
 }

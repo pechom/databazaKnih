@@ -9,11 +9,12 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class User {
     private int id;
     private String userName;
-    private String password;
+    private String passwordHash;
     private String mail;
     private String name;
     private String surname;
@@ -47,27 +48,29 @@ public class User {
     /**
      * @return the password
      */
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     /**
-     * @param password the password to set
+     * @param passwordHash the password to set
      */
-    public void setPassword(String password) {
-        String forHash = password + this.getSalt();
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        md.update(forHash.getBytes());
-        byte[] data = md.digest();
-        String hashString = DatatypeConverter.printHexBinary(data);
-        this.password = hashString;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash=passwordHash;
     }
-
+    
+    
+    public void setPassword(String password) {
+        if (Salt == null) {
+            Salt = BCrypt.gensalt();
+        }
+        this.passwordHash = BCrypt.hashpw(password, Salt);
+    }
+    
+    public boolean checkPassword(String password) {
+        String result = BCrypt.hashpw(password, Salt);
+        return result.equals(passwordHash);
+    }
     /**
      * @return the mail
      */
@@ -247,7 +250,7 @@ public class User {
      * @param Salt the Salt to set
      */
     public void setSalt(String Salt) {
-        this.Salt = UUID.randomUUID().toString();;
+          this.Salt = Salt;
     }
 
     /**

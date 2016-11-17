@@ -5,7 +5,7 @@ class BookReview {
     private int id;
     private Book book;
     private User user;
-    private int value;
+    private int rating;
     private String review;
 
     /**
@@ -39,15 +39,15 @@ class BookReview {
     /**
      * @return the value
      */
-    public int getValue() {
-        return value;
+    public int getRating() {
+        return rating;
     }
 
     /**
-     * @param value the value to set
+     * @param rating the value to set
      */
-    public void setValue(int value) {
-        this.value = value;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     /**
