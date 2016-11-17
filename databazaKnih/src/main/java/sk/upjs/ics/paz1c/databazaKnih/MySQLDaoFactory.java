@@ -10,7 +10,6 @@ public enum MySQLDaoFactory {
     private InterfaceUserDao userDao;
     private InterfaceBookDao bookDao;
     private InterfaceAuthorDao authorDao;
-    private InterfaceUserGroupDao userGroupDao;
     private InterfaceBookReviewDao bookReviewDao;
     private InterfaceAuthorReviewDao authorReviewDao;
     private InterfaceTagDao tagDao;
@@ -28,7 +27,6 @@ public enum MySQLDaoFactory {
         userDao = new MysqlUserDao(jdbcTemplate);
         bookDao = new MysqlBookDao(jdbcTemplate);
         authorDao = new MysqlAuthorDao(jdbcTemplate);
-        userGroupDao = new MysqlUserGroupDao(jdbcTemplate);
         bookReviewDao = new MysqlBookReviewDao(jdbcTemplate);
         authorReviewDao = new MysqlAuthorReviewDao(jdbcTemplate);
         tagDao = new MysqlTagDao(jdbcTemplate);
@@ -59,10 +57,6 @@ public enum MySQLDaoFactory {
 
     public InterfaceAuthorDao getAuthorDao() {
         return authorDao;
-    }
-
-    public InterfaceUserGroupDao getUserGroupDao() {
-        return userGroupDao;
     }
 
     public InterfaceBookReviewDao getBookReviewDao() {

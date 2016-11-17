@@ -1,15 +1,14 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Author {
 
     private int id;
+    private String name;
     private List<Book> books;
     private List<String> genres;
-    private int numberInChart;
     private Date birth;
     private Date death;
     private String nationality;
@@ -19,6 +18,20 @@ public class Author {
     private boolean verificationStatus;
     private boolean lifeStatus; //0-zivy alebo 1-mrtvy;
 
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public enum allNationalities {
         CZE, SVK, GBR, USA, HUN, AUT, CAN, DEU, DNK, ESP, FIN, FRA, GRC, IRL, ITA, JPN, NOR, POL,
         PRT, RUS
@@ -26,7 +39,7 @@ public class Author {
 
     public enum allGenres { //.name by malo vratit string takze netreba case
         ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
-        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN
+        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTALE, WESTERN
     }
 
     /**
@@ -67,7 +80,7 @@ public class Author {
     /**
      * @param books the books to set
      */
-    public void setBooks(ArrayList<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 
@@ -81,22 +94,8 @@ public class Author {
     /**
      * @param genres the genres to set
      */
-    public void setGenres(ArrayList<String> genres) {
+    public void setGenres(List<String> genres) {
         this.genres = genres;
-    }
-
-    /**
-     * @return the numberInChart
-     */
-    public int getNumberInChart() {
-        return numberInChart;
-    }
-
-    /**
-     * @param numberInChart the numberInChart to set
-     */
-    public void setNumberInChart(int numberInChart) {
-        this.numberInChart = numberInChart;
     }
 
     /**

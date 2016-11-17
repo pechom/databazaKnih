@@ -41,28 +41,28 @@ public class UserTest {
     }
 
     /**
-     * Test of getLogin method, of class User.
+     * Test of getUserName method, of class User.
      */
     @Test
-    public void testGetLogin() {
-        System.out.println("getLogin");
+    public void testGetUserName() {
+        System.out.println("getUserName");
         User instance = new User();
         String expResult = "";
-        String result = instance.getLogin();
+        String result = instance.getUserName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setLogin method, of class User.
+     * Test of setUserName method, of class User.
      */
     @Test
-    public void testSetLogin() {
-        System.out.println("setLogin");
-        String login = "";
+    public void testSetUserName() {
+        System.out.println("setUserName");
+        String userName = "";
         User instance = new User();
-        instance.setLogin(login);
+        instance.setUserName(userName);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -473,33 +473,6 @@ public class UserTest {
     }
 
     /**
-     * Test of getMyGroups method, of class User.
-     */
-    @Test
-    public void testGetMyGroups() {
-        System.out.println("getMyGroups");
-        User instance = new User();
-        List<UserGroup> expResult = null;
-        List<UserGroup> result = instance.getMyGroups();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setMyGroups method, of class User.
-     */
-    @Test
-    public void testSetMyGroups() {
-        System.out.println("setMyGroups");
-        List<UserGroup> myGroups = null;
-        User instance = new User();
-        instance.setMyGroups(myGroups);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getBookReviews method, of class User.
      */
     @Test
@@ -554,55 +527,28 @@ public class UserTest {
     }
 
     /**
-     * Test of getReviewedBooks method, of class User.
+     * Test of isIsAdmin method, of class User.
      */
     @Test
-    public void testGetReviewedBooks() {
-        System.out.println("getReviewedBooks");
+    public void testIsIsAdmin() {
+        System.out.println("isIsAdmin");
         User instance = new User();
-        Map<Book, Integer> expResult = null;
-        Map<Book, Integer> result = instance.getReviewedBooks();
+        boolean expResult = false;
+        boolean result = instance.isIsAdmin();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setReviewedBooks method, of class User.
+     * Test of setIsAdmin method, of class User.
      */
     @Test
-    public void testSetReviewedBooks() {
-        System.out.println("setReviewedBooks");
-        Map<Book, Integer> reviewedBooks = null;
+    public void testSetIsAdmin() {
+        System.out.println("setIsAdmin");
+        boolean isAdmin = false;
         User instance = new User();
-        instance.setReviewedBooks(reviewedBooks);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getReviewedAuthors method, of class User.
-     */
-    @Test
-    public void testGetReviewedAuthors() {
-        System.out.println("getReviewedAuthors");
-        User instance = new User();
-        Map<Author, Integer> expResult = null;
-        Map<Author, Integer> result = instance.getReviewedAuthors();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setReviewedAuthors method, of class User.
-     */
-    @Test
-    public void testSetReviewedAuthors() {
-        System.out.println("setReviewedAuthors");
-        Map<Author, Integer> reviewedAuthors = null;
-        User instance = new User();
-        instance.setReviewedAuthors(reviewedAuthors);
+        instance.setIsAdmin(isAdmin);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

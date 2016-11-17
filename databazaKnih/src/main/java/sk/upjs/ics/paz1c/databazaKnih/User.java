@@ -3,7 +3,6 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -13,39 +12,36 @@ import javax.xml.bind.DatatypeConverter;
 
 public class User {
     private int id;
-    private String login;
+    private String userName;
     private String password;
     private String mail;
     private String name;
     private String surname;
     private LocalDateTime lastLogin;
-    private Map<Book, Integer> reviewedBooks;
     private List<Book> readBooks;
     private List<Book> favoriteBooks;
     private List<Book> wantedBooks;
-    private Map<Author,Integer> reviewedAuthors;
     private List<Author> favoriteAuthors;
     private List<User> friends;
     private List<User> favoriteReviewers;
     private Map<Book, Integer> reading; // kniha, strana kde sa skoncilo
     private Map<Book, String> note; //poznamka ku knihe;
-    private List<UserGroup> myGroups;
     private String Salt;
     private List<BookReview> bookReviews;
     private List<AuthorReview> authorReviews;
-
+    private boolean isAdmin;
     /**
      * @return the login
      */
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * @param login the login to set
+     * @param userName the login to set
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
@@ -269,20 +265,6 @@ public class User {
     }
 
     /**
-     * @return the myGroups
-     */
-    public List<UserGroup> getMyGroups() {
-        return myGroups;
-    }
-
-    /**
-     * @param myGroups the myGroups to set
-     */
-    public void setMyGroups(List<UserGroup> myGroups) {
-        this.myGroups = myGroups;
-    }
-
-    /**
      * @return the bookReviews
      */
     public List<BookReview> getBookReviews() {
@@ -311,31 +293,17 @@ public class User {
     }
 
     /**
-     * @return the reviewedBooks
+     * @return the isAdmin
      */
-    public Map<Book, Integer> getReviewedBooks() {
-        return reviewedBooks;
+    public boolean isIsAdmin() {
+        return isAdmin;
     }
 
     /**
-     * @param reviewedBooks the reviewedBooks to set
+     * @param isAdmin the isAdmin to set
      */
-    public void setReviewedBooks(Map<Book, Integer> reviewedBooks) {
-        this.reviewedBooks = reviewedBooks;
-    }
-
-    /**
-     * @return the reviewedAuthors
-     */
-    public Map<Author,Integer> getReviewedAuthors() {
-        return reviewedAuthors;
-    }
-
-    /**
-     * @param reviewedAuthors the reviewedAuthors to set
-     */
-    public void setReviewedAuthors(Map<Author,Integer> reviewedAuthors) {
-        this.reviewedAuthors = reviewedAuthors;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }

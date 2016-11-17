@@ -6,7 +6,6 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -38,6 +37,33 @@ public class AuthorTest {
     
     @After
     public void tearDown() {
+    }
+
+    /**
+     * Test of getName method, of class Author.
+     */
+    @Test
+    public void testGetName() {
+        System.out.println("getName");
+        Author instance = new Author();
+        String expResult = "";
+        String result = instance.getName();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setName method, of class Author.
+     */
+    @Test
+    public void testSetName() {
+        System.out.println("setName");
+        String name = "";
+        Author instance = new Author();
+        instance.setName(name);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -114,7 +140,7 @@ public class AuthorTest {
     @Test
     public void testSetBooks() {
         System.out.println("setBooks");
-        ArrayList<Book> books = null;
+        List<Book> books = null;
         Author instance = new Author();
         instance.setBooks(books);
         // TODO review the generated test code and remove the default call to fail.
@@ -141,36 +167,9 @@ public class AuthorTest {
     @Test
     public void testSetGenres() {
         System.out.println("setGenres");
-        ArrayList<String> genres = null;
+        List<String> genres = null;
         Author instance = new Author();
         instance.setGenres(genres);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getNumberInChart method, of class Author.
-     */
-    @Test
-    public void testGetNumberInChart() {
-        System.out.println("getNumberInChart");
-        Author instance = new Author();
-        int expResult = 0;
-        int result = instance.getNumberInChart();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setNumberInChart method, of class Author.
-     */
-    @Test
-    public void testSetNumberInChart() {
-        System.out.println("setNumberInChart");
-        int numberInChart = 0;
-        Author instance = new Author();
-        instance.setNumberInChart(numberInChart);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

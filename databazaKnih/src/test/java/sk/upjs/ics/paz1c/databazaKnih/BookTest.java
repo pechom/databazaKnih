@@ -40,6 +40,33 @@ public class BookTest {
     }
 
     /**
+     * Test of getBayesianAverage method, of class Book.
+     */
+    @Test
+    public void testGetBayesianAverage() {
+        System.out.println("getBayesianAverage");
+        Book instance = new Book();
+        int expResult = 0;
+        int result = instance.getBayesianAverage();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setBayesianAverage method, of class Book.
+     */
+    @Test
+    public void testSetBayesianAverage() {
+        System.out.println("setBayesianAverage");
+        int bayesianAverage = 0;
+        Book instance = new Book();
+        instance.setBayesianAverage(bayesianAverage);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
      * Test of getBookReviews method, of class Book.
      */
     @Test
@@ -413,33 +440,6 @@ public class BookTest {
         boolean verificationStatus = false;
         Book instance = new Book();
         instance.setVerificationStatus(verificationStatus);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of isIssuedStatus method, of class Book.
-     */
-    @Test
-    public void testIsIssuedStatus() {
-        System.out.println("isIssuedStatus");
-        Book instance = new Book();
-        boolean expResult = false;
-        boolean result = instance.isIssuedStatus();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setIssuedStatus method, of class Book.
-     */
-    @Test
-    public void testSetIssuedStatus() {
-        System.out.println("setIssuedStatus");
-        boolean issuedStatus = false;
-        Book instance = new Book();
-        instance.setIssuedStatus(issuedStatus);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

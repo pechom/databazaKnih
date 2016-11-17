@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -65,6 +66,20 @@ public class MySQLDaoFactoryTest {
     }
 
     /**
+     * Test of getJdbcTemplate method, of class MySQLDaoFactory.
+     */
+    @Test
+    public void testGetJdbcTemplate() {
+        System.out.println("getJdbcTemplate");
+        MySQLDaoFactory instance = null;
+        JdbcTemplate expResult = null;
+        JdbcTemplate result = instance.getJdbcTemplate();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
      * Test of getUserDao method, of class MySQLDaoFactory.
      */
     @Test
@@ -101,20 +116,6 @@ public class MySQLDaoFactoryTest {
         MySQLDaoFactory instance = null;
         InterfaceAuthorDao expResult = null;
         InterfaceAuthorDao result = instance.getAuthorDao();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getUserGroupDao method, of class MySQLDaoFactory.
-     */
-    @Test
-    public void testGetUserGroupDao() {
-        System.out.println("getUserGroupDao");
-        MySQLDaoFactory instance = null;
-        InterfaceUserGroupDao expResult = null;
-        InterfaceUserGroupDao result = instance.getUserGroupDao();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

@@ -18,7 +18,6 @@ public class Book {
     private int averageOfReviews; 
     private int numberInChart;
     private boolean verificationStatus; // 0-neoverena, 1-overena
-    private boolean issuedStatus; //vydana alebo nie
     private List<BookReview> bookReviews;
     private int bayesianAverage;
 
@@ -240,14 +239,4 @@ public class Book {
     /**
      * @return the issuedStatus
      */
-    public boolean isIssuedStatus() {
-        return issuedStatus;
-    }
-
-    /**
-     * @param issuedStatus the issuedStatus to set
-     */
-    public void setIssuedStatus(boolean issuedStatus) {
-        this.issuedStatus = issuedStatus;
-    }
 }

@@ -118,32 +118,5 @@ public class TagTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of isStav method, of class Tag.
-     */
-    @Test
-    public void testIsStav() {
-        System.out.println("isStav");
-        Tag instance = new Tag();
-        boolean expResult = false;
-        boolean result = instance.isStav();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setStav method, of class Tag.
-     */
-    @Test
-    public void testSetStav() {
-        System.out.println("setStav");
-        boolean stav = false;
-        Tag instance = new Tag();
-        instance.setStav(stav);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

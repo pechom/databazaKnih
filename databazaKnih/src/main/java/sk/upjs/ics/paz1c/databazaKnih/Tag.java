@@ -5,7 +5,6 @@ import java.util.List;
 class Tag {
 
     private int id;
-    private boolean stav;//1-overeny, 0-neovereny
     private String name;
     private List<Book> booksWithTag;
 
@@ -49,19 +48,5 @@ class Tag {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * @return the stav
-     */
-    public boolean isStav() {
-        return stav;
-    }
-
-    /**
-     * @param stav the stav to set
-     */
-    public void setStav(boolean stav) {
-        this.stav = stav;
     }
 }
