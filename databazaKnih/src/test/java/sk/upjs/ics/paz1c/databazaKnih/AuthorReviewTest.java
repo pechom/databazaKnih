@@ -38,6 +38,33 @@ public class AuthorReviewTest {
     }
 
     /**
+     * Test of getId method, of class AuthorReview.
+     */
+    @Test
+    public void testGetId() {
+        System.out.println("getId");
+        AuthorReview instance = new AuthorReview();
+        int expResult = 0;
+        int result = instance.getId();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setId method, of class AuthorReview.
+     */
+    @Test
+    public void testSetId() {
+        System.out.println("setId");
+        int id = 0;
+        AuthorReview instance = new AuthorReview();
+        instance.setId(id);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
      * Test of getAuthor method, of class AuthorReview.
      */
     @Test
@@ -92,11 +119,11 @@ public class AuthorReviewTest {
     }
 
     /**
-     * Test of getValue method, of class AuthorReview.
+     * Test of getRating method, of class AuthorReview.
      */
     @Test
-    public void testGetValue() {
-        System.out.println("getValue");
+    public void testGetRating() {
+        System.out.println("getRating");
         AuthorReview instance = new AuthorReview();
         int expResult = 0;
         int result = instance.getRating();
@@ -106,14 +133,14 @@ public class AuthorReviewTest {
     }
 
     /**
-     * Test of setValue method, of class AuthorReview.
+     * Test of setRating method, of class AuthorReview.
      */
     @Test
-    public void testSetValue() {
-        System.out.println("setValue");
-        int value = 0;
+    public void testSetRating() {
+        System.out.println("setRating");
+        int rating = 0;
         AuthorReview instance = new AuthorReview();
-        instancesetRatinge(value);
+        instance.setRating(rating);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -141,33 +168,6 @@ public class AuthorReviewTest {
         String review = "";
         AuthorReview instance = new AuthorReview();
         instance.setReview(review);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getId method, of class AuthorReview.
-     */
-    @Test
-    public void testGetId() {
-        System.out.println("getId");
-        AuthorReview instance = new AuthorReview();
-        int expResult = 0;
-        int result = instance.getId();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setId method, of class AuthorReview.
-     */
-    @Test
-    public void testSetId() {
-        System.out.println("setId");
-        int id = 0;
-        AuthorReview instance = new AuthorReview();
-        instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

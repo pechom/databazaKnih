@@ -92,11 +92,11 @@ public class BookReviewTest {
     }
 
     /**
-     * Test of getValue method, of class BookReview.
+     * Test of getRating method, of class BookReview.
      */
     @Test
-    public void testGetValue() {
-        System.out.println("getValue");
+    public void testGetRating() {
+        System.out.println("getRating");
         BookReview instance = new BookReview();
         int expResult = 0;
         int result = instance.getRating();
@@ -106,14 +106,14 @@ public class BookReviewTest {
     }
 
     /**
-     * Test of setValue method, of class BookReview.
+     * Test of setRating method, of class BookReview.
      */
     @Test
-    public void testSetValue() {
-        System.out.println("setValue");
-        int value = 0;
+    public void testSetRating() {
+        System.out.println("setRating");
+        int rating = 0;
         BookReview instance = new BookReview();
-        instance.setRating(value);
+        instance.setRating(rating);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

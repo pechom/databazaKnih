@@ -5,7 +5,6 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,60 +36,6 @@ public class BookTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of getBayesianAverage method, of class Book.
-     */
-    @Test
-    public void testGetBayesianAverage() {
-        System.out.println("getBayesianAverage");
-        Book instance = new Book();
-        int expResult = 0;
-        int result = instance.getBayesianAverage();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setBayesianAverage method, of class Book.
-     */
-    @Test
-    public void testSetBayesianAverage() {
-        System.out.println("setBayesianAverage");
-        int bayesianAverage = 0;
-        Book instance = new Book();
-        instance.setBayesianAverage(bayesianAverage);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getBookReviews method, of class Book.
-     */
-    @Test
-    public void testGetBookReviews() {
-        System.out.println("getBookReviews");
-        Book instance = new Book();
-        List<BookReview> expResult = null;
-        List<BookReview> result = instance.getBookReviews();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setBookReviews method, of class Book.
-     */
-    @Test
-    public void testSetBookReviews() {
-        System.out.println("setBookReviews");
-        List<BookReview> bookReviews = null;
-        Book instance = new Book();
-        instance.setBookReviews(bookReviews);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -208,8 +153,8 @@ public class BookTest {
     public void testGetGenres() {
         System.out.println("getGenres");
         Book instance = new Book();
-        List<String> expResult = null;
-        List<String> result = instance.getGenres();
+        List<Genre> expResult = null;
+        List<Genre> result = instance.getGenres();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -221,7 +166,7 @@ public class BookTest {
     @Test
     public void testSetGenres() {
         System.out.println("setGenres");
-        ArrayList<String> genres = null;
+        List<Genre> genres = null;
         Book instance = new Book();
         instance.setGenres(genres);
         // TODO review the generated test code and remove the default call to fail.
@@ -302,7 +247,7 @@ public class BookTest {
     @Test
     public void testSetTags() {
         System.out.println("setTags");
-        ArrayList<Tag> tags = null;
+        List<Tag> tags = null;
         Book instance = new Book();
         instance.setTags(tags);
         // TODO review the generated test code and remove the default call to fail.
@@ -440,6 +385,60 @@ public class BookTest {
         boolean verificationStatus = false;
         Book instance = new Book();
         instance.setVerificationStatus(verificationStatus);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBookReviews method, of class Book.
+     */
+    @Test
+    public void testGetBookReviews() {
+        System.out.println("getBookReviews");
+        Book instance = new Book();
+        List<BookReview> expResult = null;
+        List<BookReview> result = instance.getBookReviews();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setBookReviews method, of class Book.
+     */
+    @Test
+    public void testSetBookReviews() {
+        System.out.println("setBookReviews");
+        List<BookReview> bookReviews = null;
+        Book instance = new Book();
+        instance.setBookReviews(bookReviews);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBayesianAverage method, of class Book.
+     */
+    @Test
+    public void testGetBayesianAverage() {
+        System.out.println("getBayesianAverage");
+        Book instance = new Book();
+        int expResult = 0;
+        int result = instance.getBayesianAverage();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setBayesianAverage method, of class Book.
+     */
+    @Test
+    public void testSetBayesianAverage() {
+        System.out.println("setBayesianAverage");
+        int bayesianAverage = 0;
+        Book instance = new Book();
+        instance.setBayesianAverage(bayesianAverage);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

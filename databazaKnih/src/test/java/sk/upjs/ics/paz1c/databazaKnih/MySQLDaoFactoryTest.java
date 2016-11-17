@@ -176,5 +176,19 @@ public class MySQLDaoFactoryTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getGenreDao method, of class MySQLDaoFactory.
+     */
+    @Test
+    public void testGetGenreDao() {
+        System.out.println("getGenreDao");
+        MySQLDaoFactory instance = null;
+        InterfaceGenreDao expResult = null;
+        InterfaceGenreDao result = instance.getGenreDao();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

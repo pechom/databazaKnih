@@ -68,15 +68,28 @@ public class UserTest {
     }
 
     /**
-     * Test of getPassword method, of class User.
+     * Test of getPasswordHash method, of class User.
      */
     @Test
-    public void testGetPassword() {
-        System.out.println("getPassword");
+    public void testGetPasswordHash() {
+        System.out.println("getPasswordHash");
         User instance = new User();
         String expResult = "";
         String result = instance.getPasswordHash();
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setPasswordHash method, of class User.
+     */
+    @Test
+    public void testSetPasswordHash() {
+        System.out.println("setPasswordHash");
+        String passwordHash = "";
+        User instance = new User();
+        instance.setPasswordHash(passwordHash);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -89,7 +102,22 @@ public class UserTest {
         System.out.println("setPassword");
         String password = "";
         User instance = new User();
-        instasetPasswordHashword(password);
+        instance.setPassword(password);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of checkPassword method, of class User.
+     */
+    @Test
+    public void testCheckPassword() {
+        System.out.println("checkPassword");
+        String password = "";
+        User instance = new User();
+        boolean expResult = false;
+        boolean result = instance.checkPassword(password);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
