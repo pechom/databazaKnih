@@ -20,6 +20,7 @@ public enum MySQLDaoFactory {
     private MySQLDaoFactory() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setDatabaseName("databaza-knih");
+        dataSource.setUrl("jdbc:mysql://localhost/databaza-knih");
         dataSource.setUser("root");
         dataSource.setPassword("yareyare");
 

@@ -1,19 +1,19 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
+//metody s reviews ako select podla zanru, roku, stavu, tagu, narodnosti od aj do...
 
-public class DefaultBookReviewManager implements BookReviewManager {
-    //tu budu metody na reviews podla autorov, uzivatelov, knih
+public class DefaultAuthorReviewManager implements AuthorReviewManager{
 
-    private InterfaceBookReviewDao bookReviewDao = MySQLDaoFactory.INSTANCE.getBookReviewDao();
+    private InterfaceAuthorReviewDao authorReviewDao = MySQLDaoFactory.INSTANCE.getAuthorReviewDao();
 
     @Override
-    public List<BookReview> getAllReviews() {
+    public List<AuthorReview> getAllReviews() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insertReview(BookReview review) {
+    public void insertReview(AuthorReview review) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -26,5 +26,4 @@ public class DefaultBookReviewManager implements BookReviewManager {
     public void updateReview(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
