@@ -1,27 +1,23 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
+// tu budu metody s autormi napr autori od zadaneho roku, autori s urcitym(i)
+//zanrami, tagmi,narodnostami, hodnoteniami...
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-public class MysqlAuthorDao implements InterfaceAuthorDao {
-
-    JdbcTemplate jdbcTemplate;
-
-    public MysqlAuthorDao(JdbcTemplate jdbcTemplat) {
-        this.jdbcTemplate = jdbcTemplat;
-    }
-
+public class DefaultAuthorManager implements AuthorManager {
+    
+    private InterfaceAuthorDao authorDao = MySQLDaoFactory.INSTANCE.getAuthorDao();
+    
     @Override
     public List<Author> getAllAuthors() {
-        String sql = "SELECT * FROM author";
-        return jdbcTemplate.query(sql, new AuthorRowMapper());
+        return authorDao.getAllAuthors();
     }
-
+    
     @Override
     public void insertAuthor(Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        authorDao.insertAuthor(author);
     }
+    
 
     @Override
     public void deleteAuthor(int id) {
@@ -32,5 +28,5 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
     public void updateAuthor(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

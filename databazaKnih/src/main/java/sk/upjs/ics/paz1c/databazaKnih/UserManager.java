@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
 
-public interface InterfaceUserDao {
+public interface UserManager {
 
     List<User> getAllUsers();
 
@@ -11,4 +11,5 @@ public interface InterfaceUserDao {
     void deleteUser(int id);
 
     void updateUser(int id);
+
 }

@@ -1,58 +1,76 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.DatatypeConverter;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class User {
-
-    private String login;
-    private String password;
+    private int id;
+    private String userName;
+    private String passwordHash;
     private String mail;
     private String name;
     private String surname;
     private LocalDateTime lastLogin;
-    private List<Book> reviewedBooks;
     private List<Book> readBooks;
     private List<Book> favoriteBooks;
     private List<Book> wantedBooks;
-    private List<Author> reviewedAuthors;
     private List<Author> favoriteAuthors;
     private List<User> friends;
     private List<User> favoriteReviewers;
     private Map<Book, Integer> reading; // kniha, strana kde sa skoncilo
     private Map<Book, String> note; //poznamka ku knihe;
-    private boolean Status; //1-admin, 0-obycajny user
-
+    private String Salt;
+    private List<BookReview> bookReviews;
+    private List<AuthorReview> authorReviews;
+    private boolean isAdmin;
     /**
      * @return the login
      */
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * @param login the login to set
+     * @param userName the login to set
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
      * @return the password
      */
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     /**
-     * @param password the password to set
+     * @param passwordHash the password to set
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash=passwordHash;
     }
-
+    
+    
+    public void setPassword(String password) {
+        if (Salt == null) {
+            Salt = BCrypt.gensalt();
+        }
+        this.passwordHash = BCrypt.hashpw(password, Salt);
+    }
+    
+    public boolean checkPassword(String password) {
+        String result = BCrypt.hashpw(password, Salt);
+        return result.equals(passwordHash);
+    }
     /**
      * @return the mail
      */
@@ -110,20 +128,6 @@ public class User {
     }
 
     /**
-     * @return the reviewedBooks
-     */
-    public List<Book> getReviewedBooks() {
-        return reviewedBooks;
-    }
-
-    /**
-     * @param reviewedBooks the reviewedBooks to set
-     */
-    public void setReviewedBooks(List<Book> reviewedBooks) {
-        this.reviewedBooks = reviewedBooks;
-    }
-
-    /**
      * @return the readBooks
      */
     public List<Book> getReadBooks() {
@@ -163,20 +167,6 @@ public class User {
      */
     public void setWantedBooks(List<Book> wantedBooks) {
         this.wantedBooks = wantedBooks;
-    }
-
-    /**
-     * @return the reviewedAuthors
-     */
-    public List<Author> getReviewedAuthors() {
-        return reviewedAuthors;
-    }
-
-    /**
-     * @param reviewedAuthors the reviewedAuthors to set
-     */
-    public void setReviewedAuthors(List<Author> reviewedAuthors) {
-        this.reviewedAuthors = reviewedAuthors;
     }
 
     /**
@@ -250,17 +240,73 @@ public class User {
     }
 
     /**
-     * @return the Status
+     * @return the Salt
      */
-    public boolean isStatus() {
-        return Status;
+    public String getSalt() {
+        return Salt;
     }
 
     /**
-     * @param Status the Status to set
+     * @param Salt the Salt to set
      */
-    public void setStatus(boolean Status) {
-        this.Status = Status;
+    public void setSalt(String Salt) {
+          this.Salt = Salt;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the bookReviews
+     */
+    public List<BookReview> getBookReviews() {
+        return bookReviews;
+    }
+
+    /**
+     * @param bookReviews the bookReviews to set
+     */
+    public void setBookReviews(List<BookReview> bookReviews) {
+        this.bookReviews = bookReviews;
+    }
+
+    /**
+     * @return the authorReviews
+     */
+    public List<AuthorReview> getAuthorReviews() {
+        return authorReviews;
+    }
+
+    /**
+     * @param authorReviews the authorReviews to set
+     */
+    public void setAuthorReviews(List<AuthorReview> authorReviews) {
+        this.authorReviews = authorReviews;
+    }
+
+    /**
+     * @return the isAdmin
+     */
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    /**
+     * @param isAdmin the isAdmin to set
+     */
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }

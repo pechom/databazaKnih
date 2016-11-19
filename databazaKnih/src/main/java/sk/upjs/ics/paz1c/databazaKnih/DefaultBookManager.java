@@ -1,26 +1,21 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
+// tu budu metody s knihami ako knihy od urciteho roku, zanru, hodnotenia,s tagmi...
+//bude sa pocitat bayesian average (priemerne hodnotenie celej databazy sa vzdy bude ziskavat zo vsetkych bookreviews)
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-public class MysqlBookDao implements InterfaceBookDao {
-
-    JdbcTemplate jdbcTemplate;
-
-    public MysqlBookDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
+public class DefaultBookManager implements BookManager {
+    
+    private InterfaceBookDao bookDao = MySQLDaoFactory.INSTANCE.getBookDao();
+    
     @Override
     public List<Book> getAllBooks() {
-        String sql = "SELECT * FROM book";
-        return jdbcTemplate.query(sql, new BookRowMapper());
+        return bookDao.getAllBooks();
     }
-
+    
     @Override
     public void insertBook(Book book) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bookDao.insertBook(book);
     }
 
     @Override
@@ -32,5 +27,5 @@ public class MysqlBookDao implements InterfaceBookDao {
     public void updateBook(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

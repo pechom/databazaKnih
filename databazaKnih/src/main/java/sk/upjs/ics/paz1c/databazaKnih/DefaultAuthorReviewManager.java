@@ -1,36 +1,29 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
+//metody s reviews ako select podla zanru, roku, stavu, tagu, narodnosti od aj do...
 
-public class MysqlAuthorDao implements InterfaceAuthorDao {
+public class DefaultAuthorReviewManager implements AuthorReviewManager{
 
-    JdbcTemplate jdbcTemplate;
-
-    public MysqlAuthorDao(JdbcTemplate jdbcTemplat) {
-        this.jdbcTemplate = jdbcTemplat;
-    }
+    private InterfaceAuthorReviewDao authorReviewDao = MySQLDaoFactory.INSTANCE.getAuthorReviewDao();
 
     @Override
-    public List<Author> getAllAuthors() {
-        String sql = "SELECT * FROM author";
-        return jdbcTemplate.query(sql, new AuthorRowMapper());
-    }
-
-    @Override
-    public void insertAuthor(Author author) {
+    public List<AuthorReview> getAllReviews() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteAuthor(int id) {
+    public void insertReview(AuthorReview review) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateAuthor(int id) {
+    public void deleteReview(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void updateReview(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
