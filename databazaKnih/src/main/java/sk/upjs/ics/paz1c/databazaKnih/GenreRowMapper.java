@@ -9,7 +9,11 @@ public class GenreRowMapper implements RowMapper<Genre>{
 
     @Override
     public Genre mapRow(ResultSet rs, int i) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Genre genre=new Genre();
+      genre.setId(rs.getInt("idgenre"));
+      genre.setName(rs.getString("name"));
+      
+      return genre;
     }
     
 }

@@ -9,7 +9,11 @@ public class TagRowMapper implements RowMapper<Tag> {
 
     @Override
     public Tag mapRow(ResultSet rs, int i) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tag tag=new Tag();
+        tag.setId(rs.getInt("idtag"));
+        tag.setName(rs.getString("name"));
+        
+        return tag;
     }
     
 }

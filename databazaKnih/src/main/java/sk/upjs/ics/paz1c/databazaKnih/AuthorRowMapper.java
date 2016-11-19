@@ -10,12 +10,23 @@ import org.springframework.jdbc.core.RowMapper;
 
 class AuthorRowMapper implements RowMapper<Author> {
 
-    public AuthorRowMapper() {
-    }
 
+    
     @Override
     public Author mapRow(ResultSet rs, int i) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Author author=new Author();
+      author.setBiography(rs.getString("biography"));
+      author.setBirth(rs.getDate("birth"));
+      author.setDeath(rs.getDate("death"));
+      author.setId(rs.getInt("idauthor"));
+      author.setLifeStatus(rs.getBoolean("lifeStatus"));
+      author.setName(rs.getString("name"));
+      author.setNationality(rs.getString("nationality"));
+      author.setSex(rs.getString("sex"));
+      author.setVerificationStatus(rs.getBoolean("verificationStatus"));
+      
+      return author;
+
     }
 
 }

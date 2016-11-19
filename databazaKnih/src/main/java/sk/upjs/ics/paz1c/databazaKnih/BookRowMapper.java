@@ -10,12 +10,27 @@ import org.springframework.jdbc.core.RowMapper;
 
 class BookRowMapper implements RowMapper<Book> {
 
-    public BookRowMapper() {
-    }
-
+    AuthorRowMapper authorRowMapper=new AuthorRowMapper();
+    
     @Override
     public Book mapRow(ResultSet rs, int i) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Book book=new Book();
+       book.setAverageOfReviews(rs.getInt("averageOfRviews"));
+       book.setBayesianAverage(rs.getInt("bayesianAverage"));
+       book.setDescription(rs.getString("description"));
+       book.setISBN(rs.getInt("ISBN"));
+       book.setId(rs.getInt("idbook"));
+       book.setName(rs.getString("name"));
+       book.setNumberInChart(rs.getInt("numberInChart"));
+       book.setNumberOfPages(rs.getInt("numberOfPages"));
+       book.setNumberOfReviews(rs.getInt("numberOfPages"));
+       book.setNumberOfReviews(rs.getInt("numberOfReviews"));
+       book.setVerificationStatus(rs.getBoolean("verificationStatus"));
+       book.setYear(rs.getInt("year"));
+       
+       book.setAuthor(authorRowMapper.mapRow(rs, i));
+       
+       return book;
     }
 
 }

@@ -7,9 +7,20 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class AuthorReviewRowMapper implements RowMapper<AuthorReview>{
 
+    private AuthorRowMapper authorRowMapper= new AuthorRowMapper();
+    private UserRowMapper userRowMapper=new UserRowMapper();
+    
     @Override
     public AuthorReview mapRow(ResultSet rs, int i) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AuthorReview authorReview= new AuthorReview();
+        authorReview.setId(rs.getInt("idauthorreview"));
+        authorReview.setRating(rs.getInt("rating"));
+        authorReview.setReview(rs.getString("review"));
+        
+        authorReview.setAuthor(authorRowMapper.mapRow(rs, i));
+        authorReview.setUser(userRowMapper.mapRow(rs, i));
+        
+        return authorReview;
     }
     
 }
