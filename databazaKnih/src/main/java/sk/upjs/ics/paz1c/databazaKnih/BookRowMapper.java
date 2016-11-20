@@ -23,7 +23,6 @@ class BookRowMapper implements RowMapper<Book> {
        book.setName(rs.getString("name"));
        book.setNumberInChart(rs.getInt("numberInChart"));
        book.setNumberOfPages(rs.getInt("numberOfPages"));
-       book.setNumberOfReviews(rs.getInt("numberOfPages"));
        book.setNumberOfReviews(rs.getInt("numberOfReviews"));
        book.setVerificationStatus(rs.getBoolean("verificationStatus"));
        book.setYear(rs.getInt("year"));

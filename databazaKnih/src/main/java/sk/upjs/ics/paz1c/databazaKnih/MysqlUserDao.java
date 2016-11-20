@@ -6,7 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlUserDao implements InterfaceUserDao {
 
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
+    private UserRowMapper userRowMapper = new UserRowMapper();
 
     public MysqlUserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -14,8 +15,7 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public List<User> getAllUsers() {
-        String sql = "SELECT * FROM user";
-        return jdbcTemplate.query(sql, new UserRowMapper());
+        return jdbcTemplate.query(SqlQueries.SELECT_ALL_USERS, userRowMapper);
     }
 
     @Override
@@ -29,7 +29,17 @@ public class MysqlUserDao implements InterfaceUserDao {
     }
 
     @Override
-    public void updateUser(int id) {
+    public void updateUser(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void searchByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User findById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

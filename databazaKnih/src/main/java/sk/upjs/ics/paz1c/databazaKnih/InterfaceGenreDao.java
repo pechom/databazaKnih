@@ -10,5 +10,7 @@ public interface InterfaceGenreDao {
 
     void deleteGenre(int id);
 
-    void updateGenre(int id);
+    void updateGenre(Genre genre);
+    
+     void searchByName(String name);
 }

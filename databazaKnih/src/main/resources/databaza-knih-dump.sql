@@ -121,7 +121,6 @@ CREATE TABLE `book` (
   `idbook` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
-  `genres` varchar(150) DEFAULT NULL,
   `numberOfPages` int(11) DEFAULT NULL,
   `ISBN` int(11) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
@@ -463,7 +462,7 @@ CREATE TABLE `user` (
   `salt` varchar(45) DEFAULT NULL,
   `isAdmin` binary(1) DEFAULT NULL,
   `frienduser_iduser` int(11) NOT NULL,
-  `favoriteuser_iduse1r` int(11) NOT NULL,
+  `favoriteuser_iduser` int(11) NOT NULL,
   `bookreview_idbookreview` int(11) NOT NULL,
   `authorreview_idauthorreview` int(11) NOT NULL,
   `readbook_idbook1` int(11) NOT NULL,
@@ -472,7 +471,7 @@ CREATE TABLE `user` (
   `favoriteauthor_idauthor` int(11) NOT NULL,
   PRIMARY KEY (`iduser`,`bookreview_idbookreview`),
   KEY `fk_user_user1_idx` (`frienduser_iduser`),
-  KEY `fk_user_user2_idx` (`favoriteuser_iduse1r`),
+  KEY `fk_user_user2_idx` (`favoriteuser_iduser`),
   KEY `fk_user_bookreview1_idx` (`bookreview_idbookreview`),
   KEY `fk_user_authorreview1_idx` (`authorreview_idauthorreview`),
   KEY `fk_user_book1_idx` (`readbook_idbook1`),
@@ -486,7 +485,7 @@ CREATE TABLE `user` (
   CONSTRAINT `fk_user_book3` FOREIGN KEY (`wantedbook_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_bookreview1` FOREIGN KEY (`bookreview_idbookreview`) REFERENCES `bookreview` (`idbookreview`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_user1` FOREIGN KEY (`frienduser_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_user2` FOREIGN KEY (`favoriteuser_iduse1r`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_user_user2` FOREIGN KEY (`favoriteuser_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -516,4 +515,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-18 22:08:56
+-- Dump completed on 2016-11-20 23:02:59

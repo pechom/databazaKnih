@@ -1,21 +1,20 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlAuthorDao implements InterfaceAuthorDao {
 
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
+    private AuthorRowMapper authorRowMapper = new AuthorRowMapper();
 
-    public MysqlAuthorDao(JdbcTemplate jdbcTemplat) {
-        this.jdbcTemplate = jdbcTemplat;
+    public MysqlAuthorDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Author> getAllAuthors() {
-        String sql = "SELECT * FROM author";
-        return jdbcTemplate.query(sql, new AuthorRowMapper());
+        return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORS, authorRowMapper);
     }
 
     @Override
@@ -28,8 +27,20 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
-    public void updateAuthor(int id) {
+    public void updateAuthor(Author author) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public void searchByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Author findById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

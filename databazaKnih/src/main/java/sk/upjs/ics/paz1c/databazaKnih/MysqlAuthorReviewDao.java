@@ -5,7 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
+    private AuthorReviewRowMapper authorReviewRowMapper = new AuthorReviewRowMapper();
 
     public MysqlAuthorReviewDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -13,7 +14,7 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public List<AuthorReview> getAllReviews() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORREVIEWS, authorReviewRowMapper);
     }
 
     @Override
@@ -26,8 +27,9 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
-    public void updateReview(int id) {
+    public void updateReview(AuthorReview review) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

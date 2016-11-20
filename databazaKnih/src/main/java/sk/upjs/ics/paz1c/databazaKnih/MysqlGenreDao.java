@@ -5,15 +5,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlGenreDao implements InterfaceGenreDao {
 
-    JdbcTemplate jdbcTemplate;
-    
+    private JdbcTemplate jdbcTemplate;
+    private GenreRowMapper genreRowMapper = new GenreRowMapper();
+
     public MysqlGenreDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Genre> getAllGenre() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jdbcTemplate.query(SqlQueries.SELECT_ALL_GENRES, genreRowMapper);
     }
 
     @Override
@@ -27,7 +28,12 @@ public class MysqlGenreDao implements InterfaceGenreDao {
     }
 
     @Override
-    public void updateGenre(int id) {
+    public void updateGenre(Genre genre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void searchByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

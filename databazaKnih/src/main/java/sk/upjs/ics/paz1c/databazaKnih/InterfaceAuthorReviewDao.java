@@ -10,5 +10,7 @@ public interface InterfaceAuthorReviewDao {
 
     void deleteReview(int id);
 
-    void updateReview(int id);
+    void updateReview(AuthorReview review);
+    
+    
 }

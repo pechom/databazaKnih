@@ -10,5 +10,9 @@ public interface InterfaceBookDao {
 
     void deleteBook(int id);
 
-    void updateBook(int id);
+    void updateBook(Book book);
+    
+    Book findById(int id);
+    
+    void searchByName(String name);
 }

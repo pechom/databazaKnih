@@ -10,5 +10,7 @@ public interface InterfaceTagDao {
 
     void deleteTag(int id);
 
-    void updateTag(int id);
+    void updateTag(Tag tag);
+    
+    void searchByName(String name);
 }

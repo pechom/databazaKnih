@@ -5,7 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class MysqlRequestDao implements InterfaceRequestDao {
 
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
+    private RequestRowMapper requestRowMapper = new RequestRowMapper();
 
     public MysqlRequestDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -13,7 +14,7 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public List<Request> getAllRequests() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jdbcTemplate.query(SqlQueries.SELECT_ALL_REQUESTS, requestRowMapper);
     }
 
     @Override
@@ -23,6 +24,11 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void deleteRequest(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Request findById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
