@@ -12,5 +12,6 @@ public interface InterfaceAuthorReviewDao {
 
     void updateReview(AuthorReview review);
     
+    AuthorReview findById(int id);
     
 }

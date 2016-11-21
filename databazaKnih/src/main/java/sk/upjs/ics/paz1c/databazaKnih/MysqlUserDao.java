@@ -2,7 +2,9 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlUserDao implements InterfaceUserDao {
 
@@ -20,7 +22,7 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public void insertUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
     }
 
     @Override
@@ -34,13 +36,12 @@ public class MysqlUserDao implements InterfaceUserDao {
     }
 
     @Override
-    public void searchByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public User findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return jdbcTemplate.queryForObject(SqlQueries.SELECT_USER_BY_ID, userRowMapper, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 }

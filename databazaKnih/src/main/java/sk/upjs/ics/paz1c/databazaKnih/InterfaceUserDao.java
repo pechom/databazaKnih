@@ -14,5 +14,4 @@ public interface InterfaceUserDao {
     
     User findById(int id);
     
-    void searchByName(String name);
 }

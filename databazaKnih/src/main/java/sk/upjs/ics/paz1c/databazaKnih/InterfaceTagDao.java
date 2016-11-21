@@ -12,5 +12,6 @@ public interface InterfaceTagDao {
 
     void updateTag(Tag tag);
     
-    void searchByName(String name);
+    Tag findById(int id);
+    
 }

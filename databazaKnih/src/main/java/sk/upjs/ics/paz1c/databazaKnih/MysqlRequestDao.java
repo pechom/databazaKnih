@@ -1,7 +1,9 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlRequestDao implements InterfaceRequestDao {
 
@@ -19,7 +21,7 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void insertRequest(Request request) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
     }
 
     @Override
@@ -29,7 +31,11 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public Request findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return jdbcTemplate.queryForObject(SqlQueries.SELECT_REQUEST_BY_ID, requestRowMapper, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 }

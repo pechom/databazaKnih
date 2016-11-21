@@ -12,5 +12,6 @@ public interface InterfaceGenreDao {
 
     void updateGenre(Genre genre);
     
-     void searchByName(String name);
+    Genre findById (int id);
+    
 }
