@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public enum MySQLDaoFactory {
+public enum ObjectFactory {
 
     INSTANCE;
 
@@ -17,7 +17,7 @@ public enum MySQLDaoFactory {
     private InterfaceGenreDao genreDao;
     private JdbcTemplate jdbcTemplate;
 
-    private MySQLDaoFactory() {
+    private ObjectFactory() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setDatabaseName("databaza-knih");
         dataSource.setUrl("jdbc:mysql://localhost/databaza-knih");

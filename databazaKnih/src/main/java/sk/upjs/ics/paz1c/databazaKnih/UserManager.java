@@ -10,6 +10,8 @@ public interface UserManager {
 
     void deleteUser(int id);
 
-    void updateUser(int id);
+    void updateUser(User user);
+    
+    User findById(int id);
 
 }

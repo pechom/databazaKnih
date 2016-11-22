@@ -1,29 +1,35 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
-// metody na overene,neoverene tagy
-public class DefaultTagManager implements TagManager{
-    
-   private InterfaceTagDao TagDao = MySQLDaoFactory.INSTANCE.getTagDao();
+// metody na filtre na parametre, overenost
+
+public class DefaultTagManager implements TagManager {
+
+    private InterfaceTagDao tagDao = ObjectFactory.INSTANCE.getTagDao();
 
     @Override
     public List<Tag> getAllTag() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tagDao.getAllTag();
     }
 
     @Override
     public void insertTag(Tag tag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tagDao.insertTag(tag);
     }
 
     @Override
     public void deleteTag(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tagDao.deleteTag(id);
     }
 
     @Override
-    public void updateTag(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateTag(Tag tag) {
+        tagDao.updateTag(tag);
     }
-    
+
+    @Override
+    public Tag findById(int id) {
+        return tagDao.findById(id);
+    }
+
 }

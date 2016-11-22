@@ -2,27 +2,35 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
 
+//metody na filtre na parametre
 
 public class DefaultGenreManager implements GenreManager {
 
+    private InterfaceGenreDao genreDao = ObjectFactory.INSTANCE.getGenreDao();
+
     @Override
     public List<Genre> getAllGenre() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return genreDao.getAllGenre();
     }
 
     @Override
     public void insertGenre(Genre genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        genreDao.insertGenre(genre);
     }
 
     @Override
     public void deleteGenre(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        genreDao.deleteGenre(id);
     }
 
     @Override
-    public void updateGenre(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateGenre(Genre genre) {
+        genreDao.updateGenre(genre);
     }
-    
+
+    @Override
+    public Genre findById(int id) {
+        return genreDao.findById(id);
+    }
+
 }

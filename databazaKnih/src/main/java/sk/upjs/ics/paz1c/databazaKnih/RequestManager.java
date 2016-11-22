@@ -9,5 +9,7 @@ public interface RequestManager {
     void insertRequest(Request request);
 
     void deleteRequest(int id);
+    
+    Request findById(int id);
 
 }

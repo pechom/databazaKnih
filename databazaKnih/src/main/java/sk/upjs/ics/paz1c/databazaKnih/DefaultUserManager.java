@@ -1,11 +1,11 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-// tu budu metody s uzivatelmi napr dnes prihlaseni, neprhlaseni viac ako rok...
+// tu budu metody s uzivatelmi neprihlaseni viac ako rok, filtre na parametre
 import java.util.List;
 
 public class DefaultUserManager implements UserManager {
     
-    private InterfaceUserDao userDao = MySQLDaoFactory.INSTANCE.getUserDao();
+    private InterfaceUserDao userDao = ObjectFactory.INSTANCE.getUserDao();
     
     @Override
     public List<User> getAllUsers() {
@@ -19,12 +19,15 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void deleteUser(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        userDao.deleteUser(id);
+    }
+    
+    public User findById(int id){
+        return userDao.findById(id);
     }
 
     @Override
-    public void updateUser(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
-    
 }

@@ -1,29 +1,34 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
-//metody s reviews ako select podla zanru, roku, stavu, tagu, narodnosti od aj do...
+//metody na filtre na parametre
 
-public class DefaultAuthorReviewManager implements AuthorReviewManager{
+public class DefaultAuthorReviewManager implements AuthorReviewManager {
 
-    private InterfaceAuthorReviewDao authorReviewDao = MySQLDaoFactory.INSTANCE.getAuthorReviewDao();
+    private InterfaceAuthorReviewDao authorReviewDao = ObjectFactory.INSTANCE.getAuthorReviewDao();
 
     @Override
     public List<AuthorReview> getAllReviews() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return authorReviewDao.getAllReviews();
     }
 
     @Override
     public void insertReview(AuthorReview review) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        authorReviewDao.insertReview(review);
     }
 
     @Override
     public void deleteReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        authorReviewDao.deleteReview(id);
     }
 
     @Override
-    public void updateReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateReview(AuthorReview authorReview) {
+        authorReviewDao.updateReview(authorReview);
+    }
+
+    @Override
+    public AuthorReview findById(int id) {
+        return authorReviewDao.findById(id);
     }
 }

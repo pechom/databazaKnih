@@ -10,5 +10,7 @@ public interface GenreManager {
 
     void deleteGenre(int id);
 
-    void updateGenre(int id);
+    void updateGenre(Genre genre);
+    
+    Genre findById(int id);
 }

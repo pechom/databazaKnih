@@ -10,5 +10,7 @@ public interface BookReviewManager {
 
     void deleteReview(int id);
 
-    void updateReview(int id);
+    void updateReview(BookReview bookReview);
+
+    BookReview findById(int id);
 }

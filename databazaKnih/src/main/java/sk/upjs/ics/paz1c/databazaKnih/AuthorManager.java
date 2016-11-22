@@ -10,5 +10,7 @@ public interface AuthorManager {
 
     void deleteAuthor(int id);
 
-    void updateAuthor(int id);
+    void updateAuthor(Author author);
+    
+    Author findById(int id);
 }

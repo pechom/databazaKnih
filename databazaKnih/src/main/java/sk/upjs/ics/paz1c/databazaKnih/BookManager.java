@@ -10,5 +10,7 @@ public interface BookManager {
 
     void deleteBook(int id);
 
-    void updateBook(int id);
+    void updateBook(Book book);
+
+    Book findById(int id);
 }

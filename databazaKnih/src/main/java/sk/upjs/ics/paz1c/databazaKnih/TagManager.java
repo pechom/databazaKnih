@@ -10,6 +10,8 @@ public interface TagManager {
 
     void deleteTag(int id);
 
-    void updateTag(int id);
+    void updateTag(Tag tag);
+    
+    Tag findById(int id);
 
 }

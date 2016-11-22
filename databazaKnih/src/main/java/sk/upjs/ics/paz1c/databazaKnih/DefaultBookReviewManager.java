@@ -3,28 +3,33 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.util.List;
 
 public class DefaultBookReviewManager implements BookReviewManager {
-    //tu budu metody na reviews podla autorov, uzivatelov, knih
+    //tu budu metody na filtre na parametre
 
-    private InterfaceBookReviewDao bookReviewDao = MySQLDaoFactory.INSTANCE.getBookReviewDao();
+    private InterfaceBookReviewDao bookReviewDao = ObjectFactory.INSTANCE.getBookReviewDao();
 
     @Override
     public List<BookReview> getAllReviews() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return bookReviewDao.getAllReviews();
     }
 
     @Override
     public void insertReview(BookReview review) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bookReviewDao.insertReview(review);
     }
 
     @Override
     public void deleteReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bookReviewDao.deleteReview(id);
     }
 
     @Override
-    public void updateReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateReview(BookReview review) {
+        bookReviewDao.updateReview(review);
+    }
+
+    @Override
+    public BookReview findById(int id) {
+        return bookReviewDao.findById(id);
     }
 
 }
