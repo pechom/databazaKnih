@@ -24,7 +24,7 @@ class AuthorRowMapper implements RowMapper<Author> {
       author.setNationality(rs.getString("nationality"));
       author.setSex(rs.getString("sex"));
       author.setVerificationStatus(rs.getBoolean("verificationStatus"));
-      
+      author.setIsActive(rs.getBoolean("isActive"));
       return author;
 
     }

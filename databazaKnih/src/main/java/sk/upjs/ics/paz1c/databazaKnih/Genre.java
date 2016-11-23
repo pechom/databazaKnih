@@ -8,6 +8,7 @@ public class Genre {
     private String name;
     private List<Book>booksWithGenre;
     private List<Author>authorsWithGenre;
+    private boolean isActive;
 
     /**
      * @return the id
@@ -63,5 +64,19 @@ public class Genre {
      */
     public void setAuthorsWithGenre(List<Author> authorsWithGenre) {
         this.authorsWithGenre = authorsWithGenre;
+    }
+
+    /**
+     * @return the isActive
+     */
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    /**
+     * @param isActive the isActive to set
+     */
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }

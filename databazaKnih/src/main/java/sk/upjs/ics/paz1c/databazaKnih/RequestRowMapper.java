@@ -16,6 +16,7 @@ public class RequestRowMapper implements RowMapper<Request>{
        Request request=new Request();
        request.setContent(rs.getString("content"));
        request.setId(rs.getInt("idrequest"));
+       
        request.setAuthor(authorRowMapper.mapRow(rs, i));
        request.setBook(bookRowMapper.mapRow(rs, i));
        request.setRequester(userRowMapper.mapRow(rs, i));

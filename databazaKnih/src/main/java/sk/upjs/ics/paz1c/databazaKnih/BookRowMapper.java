@@ -26,6 +26,7 @@ class BookRowMapper implements RowMapper<Book> {
        book.setNumberOfReviews(rs.getInt("numberOfReviews"));
        book.setVerificationStatus(rs.getBoolean("verificationStatus"));
        book.setYear(rs.getInt("year"));
+       book.setIsActive(rs.getBoolean("isActive"));
        
        book.setAuthor(authorRowMapper.mapRow(rs, i));
        

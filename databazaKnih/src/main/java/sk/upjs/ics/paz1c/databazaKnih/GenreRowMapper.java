@@ -12,6 +12,7 @@ public class GenreRowMapper implements RowMapper<Genre>{
       Genre genre=new Genre();
       genre.setId(rs.getInt("idgenre"));
       genre.setName(rs.getString("name"));
+      genre.setIsActive(rs.getBoolean("isActive"));
       
       return genre;
     }

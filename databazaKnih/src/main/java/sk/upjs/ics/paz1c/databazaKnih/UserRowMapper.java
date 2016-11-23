@@ -26,6 +26,7 @@ public class UserRowMapper implements RowMapper<User> {
        user.setSalt(rs.getString("salt"));
        user.setSurname(rs.getString("surname"));
        user.setUserName(rs.getString("userName"));
+       user.setIsActive(rs.getBoolean("isActive"));
        
        return user;
     }

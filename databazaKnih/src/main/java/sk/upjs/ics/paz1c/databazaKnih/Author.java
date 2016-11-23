@@ -17,16 +17,31 @@ public class Author {
     private List<AuthorReview> authorReviews;
     private boolean verificationStatus;
     private boolean lifeStatus; //0-zivy alebo 1-mrtvy;
+    private boolean isActive;
 
-    public enum allNationalities {
-        CZE, SVK, GBR, USA, HUN, AUT, CAN, DEU, DNK, ESP, FIN, FRA, GRC, IRL, ITA, JPN, NOR, POL,
-        PRT, RUS
+    /**
+     * @return the isActive
+     */
+    public boolean isIsActive() {
+        return isActive;
     }
 
-    public enum allGenres { //.name by malo vratit string takze netreba case
-        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
-        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTALE, WESTERN
+    /**
+     * @param isActive the isActive to set
+     */
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
+
+//    public enum allNationalities {
+//        CZE, SVK, GBR, USA, HUN, AUT, CAN, DEU, DNK, ESP, FIN, FRA, GRC, IRL, ITA, JPN, NOR, POL,
+//        PRT, RUS
+//    }
+//
+//    public enum allGenres { //.name by malo vratit string takze netreba case
+//        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
+//        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTALE, WESTERN
+//    }
 
     /**
      * @return the id

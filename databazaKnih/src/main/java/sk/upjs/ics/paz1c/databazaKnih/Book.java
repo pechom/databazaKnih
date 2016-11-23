@@ -20,11 +20,12 @@ public class Book {
     private boolean verificationStatus; // 0-neoverena, 1-overena
     private List<BookReview> bookReviews;
     private int bayesianAverage;
+    private boolean isActive;
 
-    public enum allGenres { //.name by malo vratit string takze netreba case
-        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
-        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN
-    }
+//    public enum allGenres { //.name by malo vratit string takze netreba case
+//        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
+//        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN
+//    }
 
     /**
      * @return the id
@@ -234,6 +235,20 @@ public class Book {
      */
     public void setBayesianAverage(int bayesianAverage) {
         this.bayesianAverage = bayesianAverage;
+    }
+
+    /**
+     * @return the isActive
+     */
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    /**
+     * @param isActive the isActive to set
+     */
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
 }

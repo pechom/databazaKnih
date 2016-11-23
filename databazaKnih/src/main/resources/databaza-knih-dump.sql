@@ -36,6 +36,7 @@ CREATE TABLE `author` (
   `lifeStatus` binary(1) DEFAULT NULL,
   `book_idbook` int(11) NOT NULL,
   `authorreview_idauthorreview` int(11) NOT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idauthor`),
   KEY `fk_author_book1_idx` (`book_idbook`),
   KEY `fk_author_authorreview1_idx` (`authorreview_idauthorreview`),
@@ -131,6 +132,7 @@ CREATE TABLE `book` (
   `bayesianAverage` int(11) DEFAULT NULL,
   `author_idauthor` int(11) NOT NULL,
   `bookreview_idbookreview` int(11) NOT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idbook`),
   KEY `fk_book_author1_idx` (`author_idauthor`),
   KEY `fk_book_bookreview1_idx` (`bookreview_idbookreview`),
@@ -270,6 +272,7 @@ DROP TABLE IF EXISTS `genre`;
 CREATE TABLE `genre` (
   `idgenre` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idgenre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -377,11 +380,14 @@ CREATE TABLE `request` (
   `content` varchar(200) DEFAULT NULL,
   `book_idbook` int(11) NOT NULL,
   `author_idauthor` int(11) NOT NULL,
+  `user_iduser` int(11) NOT NULL,
   PRIMARY KEY (`idrequest`,`book_idbook`),
   KEY `fk_request_book1_idx` (`book_idbook`),
   KEY `fk_request_author1_idx` (`author_idauthor`),
+  KEY `fk_request_user1_idx` (`user_iduser`),
   CONSTRAINT `fk_request_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_request_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_request_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_request_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -404,6 +410,7 @@ DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `idtag` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idtag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -469,6 +476,7 @@ CREATE TABLE `user` (
   `favoritebook_idbook` int(11) NOT NULL,
   `wantedbook_idbook` int(11) NOT NULL,
   `favoriteauthor_idauthor` int(11) NOT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`iduser`,`bookreview_idbookreview`),
   KEY `fk_user_user1_idx` (`frienduser_iduser`),
   KEY `fk_user_user2_idx` (`favoriteuser_iduser`),
@@ -515,4 +523,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-20 23:02:59
+-- Dump completed on 2016-11-24  0:01:02

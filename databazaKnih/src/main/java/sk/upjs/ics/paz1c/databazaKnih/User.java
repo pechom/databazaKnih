@@ -31,6 +31,7 @@ public class User {
     private List<BookReview> bookReviews;
     private List<AuthorReview> authorReviews;
     private boolean isAdmin;
+    private boolean isActive;
     /**
      * @return the login
      */
@@ -307,6 +308,20 @@ public class User {
      */
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    /**
+     * @return the isActive
+     */
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    /**
+     * @param isActive the isActive to set
+     */
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
 }

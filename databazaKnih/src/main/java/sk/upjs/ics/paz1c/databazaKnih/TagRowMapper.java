@@ -12,6 +12,7 @@ public class TagRowMapper implements RowMapper<Tag> {
         Tag tag=new Tag();
         tag.setId(rs.getInt("idtag"));
         tag.setName(rs.getString("name"));
+        tag.setIsActive(rs.getBoolean("isActive"));
         
         return tag;
     }

@@ -17,6 +17,7 @@ public class AuthorReviewRowMapper implements RowMapper<AuthorReview>{
         authorReview.setRating(rs.getInt("rating"));
         authorReview.setReview(rs.getString("review"));
         
+        
         authorReview.setAuthor(authorRowMapper.mapRow(rs, i));
         authorReview.setUser(userRowMapper.mapRow(rs, i));
         
