@@ -159,12 +159,12 @@ DROP TABLE IF EXISTS `booknote`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `booknote` (
   `user_iduser` int(11) NOT NULL,
-  `book_idbook` int(11) NOT NULL,
+  `booknote_idbook` int(11) NOT NULL,
   `note` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`user_iduser`,`book_idbook`),
-  KEY `fk_user_has_book_book2_idx` (`book_idbook`),
+  PRIMARY KEY (`user_iduser`,`booknote_idbook`),
+  KEY `fk_user_has_book_book2_idx` (`booknote_idbook`),
   KEY `fk_user_has_book_user2_idx` (`user_iduser`),
-  CONSTRAINT `fk_user_has_book_book2` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_book_book2` FOREIGN KEY (`booknote_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_has_book_user2` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -349,12 +349,12 @@ DROP TABLE IF EXISTS `readingbook`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `readingbook` (
   `user_iduser` int(11) NOT NULL,
-  `book_idbook` int(11) NOT NULL,
+  `readingbook_idbook` int(11) NOT NULL,
   `pocetStran` int(11) DEFAULT NULL,
-  PRIMARY KEY (`user_iduser`,`book_idbook`),
-  KEY `fk_user_has_book_book1_idx` (`book_idbook`),
+  PRIMARY KEY (`user_iduser`,`readingbook_idbook`),
+  KEY `fk_user_has_book_book1_idx` (`readingbook_idbook`),
   KEY `fk_user_has_book_user1_idx` (`user_iduser`),
-  CONSTRAINT `fk_user_has_book_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_book_book1` FOREIGN KEY (`readingbook_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_has_book_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -523,4 +523,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-24  0:01:02
+-- Dump completed on 2016-11-25 22:22:35

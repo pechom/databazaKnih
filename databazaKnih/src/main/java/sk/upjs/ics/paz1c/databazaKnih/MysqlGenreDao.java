@@ -87,7 +87,7 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public Genre findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_GENRE_BY_ID, new ResultSetExtractor<Genre>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_GENRE_BY_ID+id, new ResultSetExtractor<Genre>() {
             @Override
             public Genre extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Genre genre = null;

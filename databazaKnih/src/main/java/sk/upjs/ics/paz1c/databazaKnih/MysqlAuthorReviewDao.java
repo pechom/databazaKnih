@@ -84,7 +84,7 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public AuthorReview findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_AUTHORREVIEW_BY_ID, new ResultSetExtractor<AuthorReview>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_AUTHORREVIEW_BY_ID+id, new ResultSetExtractor<AuthorReview>() {
             @Override
             public AuthorReview extractData(ResultSet rs) throws SQLException, DataAccessException {
                 AuthorReview authorReview = null;

@@ -42,7 +42,7 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         bookReview.setReview(rs.getString("review"));
                         reviews.add(bookReview);
 
-                        int bookid = rs.getInt("book_book");
+                        int bookid = rs.getInt("book_idbook");
                         if (rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
@@ -85,7 +85,7 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     @Override
     public BookReview findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_BOOKREVIEW_BY_ID, new ResultSetExtractor<BookReview>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_BOOKREVIEW_BY_ID+id, new ResultSetExtractor<BookReview>() {
             
             @Override
             public BookReview extractData(ResultSet rs) throws SQLException, DataAccessException {

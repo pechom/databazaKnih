@@ -25,8 +25,8 @@ public class User {
     private List<Author> favoriteAuthors;
     private List<User> friends;
     private List<User> favoriteReviewers;
-    private Map<Book, Integer> reading; // kniha, strana kde sa skoncilo
-    private Map<Book, String> note; //poznamka ku knihe;
+    private List<Map<Book, Integer>> reading; // kniha, strana kde sa skoncilo
+    private List<Map<Book, String>> note; //poznamka ku knihe;
     private String Salt;
     private List<BookReview> bookReviews;
     private List<AuthorReview> authorReviews;
@@ -212,34 +212,7 @@ public class User {
         this.favoriteReviewers = favoriteReviewers;
     }
 
-    /**
-     * @return the reading
-     */
-    public Map<Book, Integer> getReading() {
-        return reading;
-    }
-
-    /**
-     * @param reading the reading to set
-     */
-    public void setReading(Map<Book, Integer> reading) {
-        this.reading = reading;
-    }
-
-    /**
-     * @return the note
-     */
-    public Map<Book, String> getNote() {
-        return note;
-    }
-
-    /**
-     * @param note the note to set
-     */
-    public void setNote(Map<Book, String> note) {
-        this.note = note;
-    }
-
+  
     /**
      * @return the Salt
      */
@@ -322,6 +295,34 @@ public class User {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the reading
+     */
+    public List<Map<Book, Integer>> getReading() {
+        return reading;
+    }
+
+    /**
+     * @param reading the reading to set
+     */
+    public void setReading(List<Map<Book, Integer>> reading) {
+        this.reading = reading;
+    }
+
+    /**
+     * @return the note
+     */
+    public List<Map<Book, String>> getNote() {
+        return note;
+    }
+
+    /**
+     * @param note the note to set
+     */
+    public void setNote(List<Map<Book, String>> note) {
+        this.note = note;
     }
 
 }

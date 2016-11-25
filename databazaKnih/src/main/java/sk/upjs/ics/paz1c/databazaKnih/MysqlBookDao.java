@@ -120,7 +120,7 @@ public class MysqlBookDao implements InterfaceBookDao {
 
     @Override
     public Book findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_BOOK_BY_ID, new ResultSetExtractor<Book>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_BOOK_BY_ID+id, new ResultSetExtractor<Book>() {
             @Override
             public Book extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Book book = null;

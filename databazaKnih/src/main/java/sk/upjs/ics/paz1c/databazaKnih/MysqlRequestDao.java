@@ -86,7 +86,7 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public Request findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_REQUEST_BY_ID, new ResultSetExtractor<Request>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_REQUEST_BY_ID+id, new ResultSetExtractor<Request>() {
             @Override
             public Request extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Request request = null;

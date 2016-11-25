@@ -106,7 +106,7 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public Author findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_AUTHOR_BY_ID, new ResultSetExtractor<Author>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_AUTHOR_BY_ID+id, new ResultSetExtractor<Author>() {
             @Override
             public Author extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Author author = null;
@@ -143,5 +143,4 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
             }
         });
     }
-
 }

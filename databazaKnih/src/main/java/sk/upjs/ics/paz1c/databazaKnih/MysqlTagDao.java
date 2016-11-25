@@ -74,7 +74,7 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public Tag findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_TAG_BY_ID, new ResultSetExtractor<Tag>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_TAG_BY_ID+id, new ResultSetExtractor<Tag>() {
             @Override
             public Tag extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Tag tag = null;
