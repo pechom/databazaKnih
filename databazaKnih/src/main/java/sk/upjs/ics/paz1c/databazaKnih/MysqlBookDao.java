@@ -110,7 +110,9 @@ public class MysqlBookDao implements InterfaceBookDao {
 
     @Override
     public void deleteBook(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Book book = findById(id);
+        book.setIsActive(false);
+        updateBook(book);
     }
 
     @Override
@@ -120,7 +122,7 @@ public class MysqlBookDao implements InterfaceBookDao {
 
     @Override
     public Book findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_BOOK_BY_ID+id, new ResultSetExtractor<Book>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_BOOK_BY_ID + id, new ResultSetExtractor<Book>() {
             @Override
             public Book extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Book book = null;
@@ -162,6 +164,13 @@ public class MysqlBookDao implements InterfaceBookDao {
                 return book;
             }
         });
+    }
+
+    @Override
+    public void undeleteBook(int id) {
+        Book book = findById(id);
+        book.setIsActive(true);
+        updateBook(book);
     }
 
 }

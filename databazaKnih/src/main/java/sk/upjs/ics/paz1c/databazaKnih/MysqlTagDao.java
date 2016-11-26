@@ -64,7 +64,9 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public void deleteTag(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tag tag = findById(id);
+        tag.setIsActive(false);
+        updateTag(tag);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public Tag findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_TAG_BY_ID+id, new ResultSetExtractor<Tag>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_TAG_BY_ID + id, new ResultSetExtractor<Tag>() {
             @Override
             public Tag extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Tag tag = null;
@@ -92,7 +94,14 @@ public class MysqlTagDao implements InterfaceTagDao {
                 }
                 return tag;
             }
-        } );
+        });
+    }
+
+    @Override
+    public void undeleteTag(int id) {
+        Tag tag = findById(id);
+        tag.setIsActive(true);
+        updateTag(tag);
     }
 
 }

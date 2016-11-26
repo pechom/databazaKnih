@@ -77,7 +77,9 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public void deleteGenre(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Genre genre = findById(id);
+        genre.setIsActive(false);
+        updateGenre(genre);
     }
 
     @Override
@@ -87,7 +89,7 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public Genre findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_GENRE_BY_ID+id, new ResultSetExtractor<Genre>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_GENRE_BY_ID + id, new ResultSetExtractor<Genre>() {
             @Override
             public Genre extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Genre genre = null;
@@ -110,6 +112,13 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                 return genre;
             }
         });
+    }
+
+    @Override
+    public void undeleteGenre(int id) {
+        Genre genre = findById(id);
+        genre.setIsActive(true);
+        updateGenre(genre);
     }
 
 }

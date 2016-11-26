@@ -96,8 +96,12 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public void deleteAuthor(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Author author=findById(id);
+        author.setIsActive(false);
+        updateAuthor(author);
     }
+    
+    
 
     @Override
     public void updateAuthor(Author author) {
@@ -142,5 +146,12 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                 return author;
             }
         });
+    }
+
+    @Override
+    public void undeleteAuthor(int id) {
+         Author author=findById(id);
+        author.setIsActive(true);
+        updateAuthor(author);
     }
 }

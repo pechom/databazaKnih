@@ -6,6 +6,24 @@ public interface BookReviewManager {
 
     List<BookReview> getAllReviews();
 
+    List<BookReview> getReviewsByBook(Book book);
+
+    List<BookReview> getReviewsByUser(User user);
+
+    List<BookReview> getReviewsFromRating(int rating);
+
+    List<BookReview> getReviewsToRating(int rating);
+
+    List<BookReview> getReviewsFromToRating(int from, int to);
+
+    void addOrUpdateUser(BookReview review, User user);
+
+    void addOrUpdateBook(BookReview review, User user);
+
+    void deleteReviewsWithBook(Book book);
+
+    void deleteReviewsWithUser(User user);
+
     void insertReview(BookReview review);
 
     void deleteReview(int id);

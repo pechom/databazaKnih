@@ -10,8 +10,10 @@ public interface InterfaceBookDao {
 
     void deleteBook(int id);
 
+    void undeleteBook(int id);
+
     void updateBook(Book book);
-    
+
     Book findById(int id);
-    
+
 }

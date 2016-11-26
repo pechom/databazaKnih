@@ -4,14 +4,26 @@ import java.util.List;
 
 public interface TagManager {
 
-    List<Tag> getAllTag();
+    List<Tag> getAllTags();
+
+    List<Tag> getActiveTags();
+
+    Tag getTagByName();
+
+    void addBooksToTag(List<Book> books, Tag tag);
+
+    void removeBooksFromTag(List<Book> book, Tag tag);
+
+    void removeBook(Book book);//odstrani knihu zo vsetkych vztahov
 
     void insertTag(Tag tag);
 
     void deleteTag(int id);
+    
+    void undeleteTag(Tag tag);
 
     void updateTag(Tag tag);
-    
+
     Tag findById(int id);
 
 }

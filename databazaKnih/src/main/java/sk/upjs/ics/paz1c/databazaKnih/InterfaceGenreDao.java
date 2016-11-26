@@ -10,8 +10,10 @@ public interface InterfaceGenreDao {
 
     void deleteGenre(int id);
 
+    void undeleteGenre(int id);
+
     void updateGenre(Genre genre);
-    
-    Genre findById (int id);
-    
+
+    Genre findById(int id);
+
 }

@@ -10,8 +10,10 @@ public interface InterfaceAuthorDao {
 
     void deleteAuthor(int id);
 
+    void undeleteAuthor(int id);
+
     void updateAuthor(Author author);
 
     Author findById(int id);
-    
+
 }

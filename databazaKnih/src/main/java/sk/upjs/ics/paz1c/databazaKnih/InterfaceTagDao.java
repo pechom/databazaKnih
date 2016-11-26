@@ -10,8 +10,10 @@ public interface InterfaceTagDao {
 
     void deleteTag(int id);
 
+    void undeleteTag(int id);
+
     void updateTag(Tag tag);
-    
+
     Tag findById(int id);
-    
+
 }

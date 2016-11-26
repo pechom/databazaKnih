@@ -192,7 +192,9 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public void deleteUser(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User user = findById(id);
+        user.setIsActive(false);
+        updateUser(user);
     }
 
     @Override
@@ -277,5 +279,12 @@ public class MysqlUserDao implements InterfaceUserDao {
                 return user;
             }
         });
+    }
+
+    @Override
+    public void undeleteUser(int id) {
+        User user = findById(id);
+        user.setIsActive(true);
+        updateUser(user);
     }
 }

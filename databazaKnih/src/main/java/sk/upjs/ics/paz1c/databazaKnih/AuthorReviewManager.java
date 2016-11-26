@@ -6,11 +6,29 @@ public interface AuthorReviewManager {
 
     List<AuthorReview> getAllReviews();
 
+    List<AuthorReview> getReviewsByAuthor(Author author);
+
+    List<AuthorReview> getReviewsByUser(User user);
+
+    List<AuthorReview> getReviewsFromRating(int rating);
+
+    List<AuthorReview> getReviewsToRating(int rating);
+
+    List<AuthorReview> getReviewsFromToRating(int from, int to);
+
+    void addOrUpdateAuthor(AuthorReview review, Author author);
+
+    void addOrUpdateUser(AuthorReview review, User user);
+
+    void DeleteReviewsWithAuthor(Author author);
+
+    void deleteReviewsWithUser(User user);
+
     void insertReview(AuthorReview review);
 
     void deleteReview(int id);
 
     void updateReview(AuthorReview authorReview);
 
-    AuthorReview findById(int id);
+    AuthorReview findById(int id);// podla potreby sa z neho budu tahat parametre
 }

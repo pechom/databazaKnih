@@ -1,7 +1,7 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 public class Request {
-//request kde je book null sa tyka autora samotneho
+//request kde je book null sa tyka autora samotneho atd
     private int id;
     private User requester;
     private Book book;
