@@ -7,6 +7,7 @@ class AuthorReview {
     private User user;
     private int rating;
     private String review;
+    private boolean isActive;
 
     /**
      * @return the id
@@ -76,6 +77,20 @@ class AuthorReview {
      */
     public void setReview(String review) {
         this.review = review;
+    }
+
+    /**
+     * @return the isActive
+     */
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    /**
+     * @param isActive the isActive to set
+     */
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
 }

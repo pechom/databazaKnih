@@ -9,8 +9,8 @@ public class Author {
     private String name;
     private List<Book> books;
     private List<Genre> genres;
-    private Date birth;
-    private Date death;
+    private int birth;
+    private int death;
     private String nationality;
     private String sex;
     private String biography;
@@ -99,33 +99,6 @@ public class Author {
         this.genres = genres;
     }
 
-    /**
-     * @return the birth
-     */
-    public Date getBirth() {
-        return birth;
-    }
-
-    /**
-     * @param birth the birth to set
-     */
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    /**
-     * @return the death
-     */
-    public Date getDeath() {
-        return death;
-    }
-
-    /**
-     * @param death the death to set
-     */
-    public void setDeath(Date death) {
-        this.death = death;
-    }
 
     /**
      * @return the nationality
@@ -209,6 +182,34 @@ public class Author {
      */
     public void setLifeStatus(boolean lifeStatus) {
         this.lifeStatus = lifeStatus;
+    }
+
+    /**
+     * @return the birth
+     */
+    public int getBirth() {
+        return birth;
+    }
+
+    /**
+     * @param birth the birth to set
+     */
+    public void setBirth(int birth) {
+        this.birth = birth;
+    }
+
+    /**
+     * @return the death
+     */
+    public int getDeath() {
+        return death;
+    }
+
+    /**
+     * @param death the death to set
+     */
+    public void setDeath(int death) {
+        this.death = death;
     }
 
 }

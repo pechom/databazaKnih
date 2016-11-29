@@ -94,6 +94,7 @@ CREATE TABLE `authorreview` (
   `review` varchar(500) DEFAULT NULL,
   `author_idauthor` int(11) NOT NULL,
   `user_iduser` int(11) NOT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idauthorreview`,`user_iduser`),
   KEY `fk_authorreview_author1_idx` (`author_idauthor`),
   KEY `fk_authorreview_user1_idx` (`user_iduser`),
@@ -245,6 +246,7 @@ CREATE TABLE `bookreview` (
   `review` varchar(500) DEFAULT NULL,
   `book_idbook` int(11) NOT NULL,
   `user_iduser` int(11) NOT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idbookreview`),
   KEY `fk_bookreview_book1_idx` (`book_idbook`),
   KEY `fk_bookreview_user1_idx` (`user_iduser`),
@@ -381,6 +383,7 @@ CREATE TABLE `request` (
   `book_idbook` int(11) NOT NULL,
   `author_idauthor` int(11) NOT NULL,
   `user_iduser` int(11) NOT NULL,
+  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idrequest`,`book_idbook`),
   KEY `fk_request_book1_idx` (`book_idbook`),
   KEY `fk_request_author1_idx` (`author_idauthor`),
@@ -523,4 +526,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-25 22:22:35
+-- Dump completed on 2016-11-28 20:56:09

@@ -6,13 +6,15 @@ public interface AuthorManager {
 
     List<Author> getAllAuthors();
 
-    List<Author> getVerificatedAndActiveAuthors();
+    List<Author> getVerificatedAuthors();
 
-    List<Author> getActiveAuthors();
+    List<Author> getNotVerificatedAuthors();
 
     List<Author> getAuthorsByName(String name);
 
     List<Author> getAuthorsByGenres(List<Genre> genres);
+
+    List<Author> getAuthorsByAllGenres(List<Genre> genres);
 
     List<Author> getAuthorsFromBirth(int year);
 
@@ -32,7 +34,7 @@ public interface AuthorManager {
 
     List<Author> getAuthorsByLifeStatus(boolean lifeStatus);
 
-    void addBooksToAuthor(List<Book> books, Author author);// autorovi sa pridaju knihy/a
+    void addBooksToAuthor(List<Book> books, Author author);// autorovi sa pridaju knihy/a a updatne sa
 
     void removeBooksFromAuthor(List<Book> books, Author author);//autorovi sa odoberu knihy/a
 

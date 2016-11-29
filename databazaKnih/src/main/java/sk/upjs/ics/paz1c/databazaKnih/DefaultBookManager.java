@@ -34,12 +34,12 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public List<Book> getVerificatedAndActiveBooks() {
+    public List<Book> getVerificatedBooks() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Book> getActiveBooks() {
+    public List<Book> getNotVerificatedBooks() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -210,6 +210,16 @@ public class DefaultBookManager implements BookManager {
 
     @Override
     public void undeleteBook(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Book> GetBooksByAllGenres(List<Genre> genres) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Book> GetBooksByAllTags(List<Tag> tags) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

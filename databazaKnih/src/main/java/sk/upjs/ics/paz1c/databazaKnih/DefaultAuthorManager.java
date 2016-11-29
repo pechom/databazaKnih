@@ -2,6 +2,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 // tu budu metody sna filtre na parametre, overenost.v manageroch po add/remove, average.. dat update. V manageroch je add na vytvaranie vztahov 
 //medzi objektami a remove ak treba odstranit chybny vztah prirpadne ak treba prerusit vztahy pred tym ako nieco odstranim (pri realnom odstraneni)
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultAuthorManager implements AuthorManager {
@@ -30,42 +31,96 @@ public class DefaultAuthorManager implements AuthorManager {
 
     @Override
     public Author findById(int id) {
-        return authorDao.findById(id);
+        Author author = authorDao.findById(id);
+        return author;
     }
 
     @Override
-    public List<Author> getVerificatedAndActiveAuthors() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Author> getVerificatedAuthors() {
+        List<Author> authors = getAllAuthors();
+        List<Author> verificatedAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if (author.isVerificationStatus()) {
+                verificatedAuthors.add(author);
+            }
+        }
+        return verificatedAuthors;
     }
 
     @Override
-    public List<Author> getActiveAuthors() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Author> getNotVerificatedAuthors() {
+        List<Author> authors = getAllAuthors();
+        List<Author> notVerificatedAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if (!author.isVerificationStatus()) {
+                notVerificatedAuthors.add(author);
+            }
+        }
+        return notVerificatedAuthors;
+
     }
 
     @Override
     public List<Author> getAuthorsByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> namedAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if (author.getName().equals(name)) {
+                namedAuthors.add(author);
+            }
+        }
+        return namedAuthors;
     }
 
     @Override
     public List<Author> getAuthorsByGenres(List<Genre> genres) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> genreAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            for (Genre genre : genres) {
+                if (author.getGenres().contains(genre)) {
+                    genreAuthors.add(author);
+                    break;
+                }
+            }
+        }
+        return genreAuthors;
     }
 
     @Override
     public List<Author> getAuthorsFromBirth(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> birthAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if (author.getBirth() >= year) {
+                birthAuthors.add(author);
+            }
+        }
+        return birthAuthors;
     }
 
     @Override
     public List<Author> getAuthorsToBirth(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> birthAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if (author.getBirth() <= year) {
+                birthAuthors.add(author);
+            }
+        }
+        return birthAuthors;
     }
 
     @Override
     public List<Author> getAuthorsFromToBirth(int from, int to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> birthAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getBirth() >= from) && (author.getBirth() < to)) {
+                birthAuthors.add(author);
+            }
+        }
+        return birthAuthors;
     }
 
     @Override
@@ -135,6 +190,11 @@ public class DefaultAuthorManager implements AuthorManager {
 
     @Override
     public void undeleteAuthor(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Author> getAuthorsByAllGenres(List<Genre> genres) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

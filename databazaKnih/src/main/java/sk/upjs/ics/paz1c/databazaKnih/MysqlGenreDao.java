@@ -51,7 +51,9 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                                 author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
                                 authors.put(authorid, author);
                             }
-                            genre.getAuthorsWithGenre().add(author);
+                            if (author.isIsActive()) {
+                                genre.getAuthorsWithGenre().add(author);
+                            }
                         }
 
                         int bookid = rs.getInt("book_idbook");
@@ -61,7 +63,9 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                                 books.put(bookid, book);
                             }
-                            genre.getBooksWithGenre().add(book);
+                            if (book.isIsActive()) {
+                                genre.getBooksWithGenre().add(book);
+                            }
                         }
                     }
                 }
@@ -106,8 +110,12 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                     Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
                     int bookid = rs.getInt("book_idbook");
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                    genre.getAuthorsWithGenre().add(author);
-                    genre.getBooksWithGenre().add(book);
+                    if (author.isIsActive()) {
+                        genre.getAuthorsWithGenre().add(author);
+                    }
+                    if (book.isIsActive()) {
+                        genre.getBooksWithGenre().add(book);
+                    }
                 }
                 return genre;
             }

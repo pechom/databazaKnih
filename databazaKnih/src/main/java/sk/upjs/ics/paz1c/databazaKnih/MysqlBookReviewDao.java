@@ -49,7 +49,9 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                                 books.put(bookid, book);
                             }
-                            bookReview.setBook(book);
+                            if (book.isIsActive()) {
+                                bookReview.setBook(book);
+                            }
                         }
 
                         int userid = rs.getInt("user_iduser");
@@ -59,7 +61,9 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                                 user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
                                 users.put(userid, user);
                             }
-                            bookReview.setUser(user);
+                            if (user.isIsActive()) {
+                                bookReview.setUser(user);
+                            }
                         }
                     }
                 }
@@ -75,7 +79,9 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     @Override
     public void deleteReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        BookReview bookReview = findById(id);
+        bookReview.setIsActive(false);
+        updateReview(bookReview);
     }
 
     @Override
@@ -85,8 +91,8 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     @Override
     public BookReview findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_BOOKREVIEW_BY_ID+id, new ResultSetExtractor<BookReview>() {
-            
+        return jdbcTemplate.query(SqlQueries.SELECT_BOOKREVIEW_BY_ID + id, new ResultSetExtractor<BookReview>() {
+
             @Override
             public BookReview extractData(ResultSet rs) throws SQLException, DataAccessException {
                 BookReview bookReview = null;
@@ -101,14 +107,25 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                     int bookid = rs.getInt("book_idbook");
                     int userid = rs.getInt("user_iduser");
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                    bookReview.setBook(book);
+                    if (book.isIsActive()) {
+                        bookReview.setBook(book);
+                    }
                     User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                    bookReview.setUser(user);
+                    if (user.isIsActive()) {
+                        bookReview.setUser(user);
+                    }
                 }
 
                 return bookReview;
             }
         });
+    }
+
+    @Override
+    public void undeleteReview(int id) {
+        BookReview bookReview = findById(id);
+        bookReview.setIsActive(true);
+        updateReview(bookReview);
     }
 
 }

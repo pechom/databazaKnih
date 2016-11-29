@@ -38,8 +38,8 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                     if (author == null || author.getId() != id) {
                         author = new Author();
                         author.setBiography(rs.getString("biography"));
-                        author.setBirth(rs.getDate("birth"));
-                        author.setDeath(rs.getDate("death"));
+                        author.setBirth(rs.getInt("birth"));
+                        author.setDeath(rs.getInt("death"));
                         author.setId(id);
                         author.setLifeStatus(rs.getBoolean("lifeStatus"));
                         author.setName(rs.getString("name"));
@@ -60,7 +60,9 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                                 books.put(bookid, book);
                             }
-                            author.getBooks().add(book);
+                            if (book.isIsActive()) {
+                                author.getBooks().add(book);
+                            }
                         }
 
                         int genreid = rs.getInt("genre_idgenre");
@@ -70,7 +72,9 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                                 genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
                                 genres.put(genreid, genre);
                             }
-                            author.getGenres().add(genre);
+                            if (genre.isIsActive()) {
+                                author.getGenres().add(genre);
+                            }
                         }
 
                         int reviewid = rs.getInt("authorreview_idauthorreview");
@@ -80,7 +84,9 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                                 review = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(reviewid);
                                 reviews.put(reviewid, review);
                             }
-                            author.getAuthorReviews().add(review);
+                            if (review.isIsActive()) {
+                                author.getAuthorReviews().add(review);
+                            }
                         }
                     }
                 }
@@ -96,12 +102,10 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public void deleteAuthor(int id) {
-        Author author=findById(id);
+        Author author = findById(id);
         author.setIsActive(false);
         updateAuthor(author);
     }
-    
-    
 
     @Override
     public void updateAuthor(Author author) {
@@ -110,7 +114,7 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public Author findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_AUTHOR_BY_ID+id, new ResultSetExtractor<Author>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_AUTHOR_BY_ID + id, new ResultSetExtractor<Author>() {
             @Override
             public Author extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Author author = null;
@@ -119,8 +123,8 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                         author = new Author();
                         author.setId(id);
                         author.setBiography(rs.getString("biography"));
-                        author.setBirth(rs.getDate("birth"));
-                        author.setDeath(rs.getDate("death"));
+                        author.setBirth(rs.getInt("birth"));
+                        author.setDeath(rs.getInt("death"));
                         author.setLifeStatus(rs.getBoolean("lifeStatus"));
                         author.setName(rs.getString("name"));
                         author.setNationality(rs.getString("nationality"));
@@ -137,11 +141,17 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                     int genreid = rs.getInt("genre_idgenre");
                     int reviewid = rs.getInt("authorreview_idauthorreview");
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                    author.getBooks().add(book);
+                    if (book.isIsActive()) {
+                        author.getBooks().add(book);
+                    }
                     Genre genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
-                    author.getGenres().add(genre);
-                    AuthorReview  review = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(reviewid);
-                    author.getAuthorReviews().add(review);
+                    if (genre.isIsActive()) {
+                        author.getGenres().add(genre);
+                    }
+                    AuthorReview review = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(reviewid);
+                    if (review.isIsActive()) {
+                        author.getAuthorReviews().add(review);
+                    }
                 }
                 return author;
             }
@@ -150,7 +160,7 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public void undeleteAuthor(int id) {
-         Author author=findById(id);
+        Author author = findById(id);
         author.setIsActive(true);
         updateAuthor(author);
     }

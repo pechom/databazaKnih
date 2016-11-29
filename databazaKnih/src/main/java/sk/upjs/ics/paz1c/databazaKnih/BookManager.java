@@ -6,9 +6,9 @@ public interface BookManager {
 
     List<Book> getAllBooks();
 
-    List<Book> getVerificatedAndActiveBooks();
+    List<Book> getVerificatedBooks();
 
-    List<Book> getActiveBooks();
+    List<Book> getNotVerificatedBooks();
 
     List<Book> GetBooksByName(String name);
 
@@ -22,6 +22,8 @@ public interface BookManager {
 
     List<Book> GetBooksByGenres(List<Genre> genres);
 
+    List<Book> GetBooksByAllGenres(List<Genre> genres);
+
     List<Book> getBooksFromPages(int pages);
 
     List<Book> getBooksToPages(int pages);
@@ -31,6 +33,8 @@ public interface BookManager {
     Book getBookByISBN(int ISBN);
 
     List<Book> GetBooksByTags(List<Tag> tags);
+
+    List<Book> GetBooksByAllTags(List<Tag> tags);
 
     List<Book> GetBooksFromReviews(int numberOfReviews);
 

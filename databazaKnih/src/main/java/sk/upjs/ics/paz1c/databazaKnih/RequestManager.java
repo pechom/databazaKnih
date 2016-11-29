@@ -40,6 +40,8 @@ public interface RequestManager {
 
     void deleteRequest(int id);
 
+    void undeleteRequest(int id);
+
     Request findById(int id);
 
 }

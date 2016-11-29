@@ -28,6 +28,8 @@ public interface BookReviewManager {
 
     void deleteReview(int id);
 
+    void undeleteReview(int id);
+
     void updateReview(BookReview bookReview);
 
     BookReview findById(int id);

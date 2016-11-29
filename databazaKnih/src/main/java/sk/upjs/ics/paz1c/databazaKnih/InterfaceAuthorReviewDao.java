@@ -10,8 +10,10 @@ public interface InterfaceAuthorReviewDao {
 
     void deleteReview(int id);
 
+    void undeleteReview(int id);
+
     void updateReview(AuthorReview review);
-    
+
     AuthorReview findById(int id);
-    
+
 }

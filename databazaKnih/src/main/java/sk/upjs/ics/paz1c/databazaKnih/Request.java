@@ -7,6 +7,7 @@ public class Request {
     private Book book;
     private Author author;
     private String content;
+    private boolean isActive;
 
     /**
      * @return the author
@@ -76,5 +77,19 @@ public class Request {
      */
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    /**
+     * @return the isActive
+     */
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    /**
+     * @param isActive the isActive to set
+     */
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }

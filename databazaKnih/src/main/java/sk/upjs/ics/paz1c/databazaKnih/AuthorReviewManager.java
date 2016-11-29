@@ -28,6 +28,8 @@ public interface AuthorReviewManager {
 
     void deleteReview(int id);
 
+    void undeleteReview(int id);
+
     void updateReview(AuthorReview authorReview);
 
     AuthorReview findById(int id);// podla potreby sa z neho budu tahat parametre

@@ -47,7 +47,9 @@ public class MysqlTagDao implements InterfaceTagDao {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                                 books.put(bookid, book);
                             }
-                            tag.getBooksWithTag().add(book);
+                            if (book.isIsActive()) {
+                                tag.getBooksWithTag().add(book);
+                            }
                         }
                     }
                 }
@@ -90,7 +92,9 @@ public class MysqlTagDao implements InterfaceTagDao {
                     }
                     int bookid = rs.getInt("book_idbook");
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                    tag.getBooksWithTag().add(book);
+                    if (book.isIsActive()) {
+                        tag.getBooksWithTag().add(book);
+                    }
                 }
                 return tag;
             }

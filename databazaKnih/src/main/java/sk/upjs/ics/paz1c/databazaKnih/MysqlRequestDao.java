@@ -47,7 +47,9 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                                 books.put(bookid, book);
                             }
-                            request.setBook(book);
+                            if (book.isIsActive()) {
+                                request.setBook(book);
+                            }
                         }
 
                         int authorid = rs.getInt("author_idauthor");
@@ -56,7 +58,9 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                             if (author == null) {
                                 author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
                             }
-                            request.setAuthor(author);
+                            if (author.isIsActive()) {
+                                request.setAuthor(author);
+                            }
                         }
 
                         int userid = rs.getInt("user_iduser");
@@ -65,7 +69,9 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                             if (user == null) {
                                 user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
                             }
-                            request.setRequester(user);
+                            if (user.isIsActive()) {
+                                request.setRequester(user);
+                            }
                         }
                     }
                 }
@@ -81,12 +87,14 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void deleteRequest(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Request request = findById(id);
+        request.setIsActive(false);
+        updateRequest(request);
     }
 
     @Override
     public Request findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_REQUEST_BY_ID+id, new ResultSetExtractor<Request>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_REQUEST_BY_ID + id, new ResultSetExtractor<Request>() {
             @Override
             public Request extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Request request = null;
@@ -102,13 +110,31 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                     User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
                     Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                    request.setAuthor(author);
-                    request.setBook(book);
-                    request.setRequester(user);
+                    if (author.isIsActive()) {
+                        request.setAuthor(author);
+                    }
+                    if (book.isIsActive()) {
+                        request.setBook(book);
+                    }
+                    if (user.isIsActive()) {
+                        request.setRequester(user);
+                    }
                 }
                 return request;
             }
         });
+    }
+
+    @Override
+    public void undeleteRequest(int id) {
+        Request request = findById(id);
+        request.setIsActive(true);
+        updateRequest(request);
+    }
+
+    @Override
+    public void updateRequest(Request request) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -48,7 +48,9 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                                 author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
                                 authors.put(authorid, author);
                             }
-                            authorReview.setAuthor(author);
+                            if (author.isIsActive()) {
+                                authorReview.setAuthor(author);
+                            }
                         }
 
                         int userid = rs.getInt("user_iduser");
@@ -58,7 +60,9 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                                 user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
                                 users.put(userid, user);
                             }
-                            authorReview.setUser(user);
+                            if (user.isIsActive()) {
+                                authorReview.setUser(user);
+                            }
                         }
                     }
                 }
@@ -74,7 +78,9 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public void deleteReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AuthorReview authorReview = findById(id);
+        authorReview.setIsActive(false);
+        updateReview(authorReview);
     }
 
     @Override
@@ -84,7 +90,7 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public AuthorReview findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_AUTHORREVIEW_BY_ID+id, new ResultSetExtractor<AuthorReview>() {
+        return jdbcTemplate.query(SqlQueries.SELECT_AUTHORREVIEW_BY_ID + id, new ResultSetExtractor<AuthorReview>() {
             @Override
             public AuthorReview extractData(ResultSet rs) throws SQLException, DataAccessException {
                 AuthorReview authorReview = null;
@@ -98,14 +104,25 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                     }
                     int authorid = rs.getInt("author_idauthor");
                     int userid = rs.getInt("user_iduser");
-                    Author author=ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                    authorReview.setAuthor(author);
-                    User user=ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                    authorReview.setUser(user);
+                    Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
+                    if (author.isIsActive()) {
+                        authorReview.setAuthor(author);
+                    }
+                    User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
+                    if (user.isIsActive()) {
+                        authorReview.setUser(user);
+                    }
                 }
-                
+
                 return authorReview;
             }
         });
+    }
+
+    @Override
+    public void undeleteReview(int id) {
+        AuthorReview authorReview = findById(id);
+        authorReview.setIsActive(true);
+        updateReview(authorReview);
     }
 }
