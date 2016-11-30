@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.ArrayList;
 import java.util.List;
 //metody na filtre na parametre.
 
@@ -34,52 +35,144 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
 
     @Override
     public List<AuthorReview> getReviewsByAuthor(Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> authorReviews = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if ((review.getAuthor() != null) && (review.getAuthor().equals(author))) {
+                authorReviews.add(review);
+            }
+        }
+        return authorReviews;
     }
 
     @Override
     public List<AuthorReview> getReviewsByUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> userReviews = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if ((review.getUser() != null) && (review.getUser().equals(user))) {
+                userReviews.add(review);
+            }
+        }
+        return userReviews;
     }
 
     @Override
     public List<AuthorReview> getReviewsFromRating(int rating) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> ratingReviews = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if ((review.getRating() != 0) && (review.getRating() >= rating)) {
+                ratingReviews.add(review);
+            }
+        }
+        return ratingReviews;
     }
 
     @Override
     public List<AuthorReview> getReviewsToRating(int rating) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> ratingReviews = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if ((review.getRating() != 0) && (review.getRating() <= rating)) {
+                ratingReviews.add(review);
+            }
+        }
+        return ratingReviews;
     }
 
     @Override
     public List<AuthorReview> getReviewsFromToRating(int from, int to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> ratingReviews = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if ((review.getRating() != 0) && (review.getRating() >= from) && (review.getRating() <= to)) {
+                ratingReviews.add(review);
+            }
+        }
+        return ratingReviews;
     }
 
     @Override
-    public void addOrUpdateAuthor(AuthorReview review, Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addAuthor(AuthorReview review, Author author) {
+        review.setAuthor(author);
+        updateReview(review);
     }
 
     @Override
-    public void addOrUpdateUser(AuthorReview review, User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addUser(AuthorReview review, User user) {
+        review.setUser(user);
+        updateReview(review);
     }
 
     @Override
-    public void DeleteReviewsWithAuthor(Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<AuthorReview> DeleteReviewsWithAuthor(Author author) {
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> deleted = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if ((review.getAuthor() != null) && (review.getAuthor().equals(author))) {
+                deleteReview(review.getId());
+                deleted.add(review);
+            }
+        }
+        return deleted;
     }
 
     @Override
-    public void deleteReviewsWithUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<AuthorReview> deleteReviewsWithUser(User user) {
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> deleted = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if ((review.getUser() != null) && (review.getUser().equals(user))) {
+                deleteReview(review.getId());
+                deleted.add(review);
+            }
+        }
+        return deleted;
     }
 
     @Override
     public void undeleteReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        authorReviewDao.undeleteReview(id);
     }
 
+    @Override
+    public List<AuthorReview> removeAuthor(Author author) {
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> removed = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if (review.getAuthor().equals(author)) {
+                review.setAuthor(null);
+                updateReview(review);
+                removed.add(review);
+            }
+        }
+        return removed;
+    }
+
+    @Override
+    public List<AuthorReview> removeUser(User user) {
+        List<AuthorReview> reviews = getAllReviews();
+        List<AuthorReview> removed = new ArrayList<>();
+        for (AuthorReview review : reviews) {
+            if (review.getUser().equals(user)) {
+                review.setUser(null);
+                updateReview(review);
+                removed.add(review);
+            }
+        }
+        return removed;
+    }
+
+    @Override
+    public void removeAuthorFromReview(AuthorReview review) {
+        review.setAuthor(null);
+        updateReview(review);
+    }
+
+    @Override
+    public void removeUserFromReview(AuthorReview review) {
+        review.setUser(null);
+        updateReview(review);
+    }
 }

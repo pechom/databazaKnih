@@ -2,7 +2,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
 
-class Tag {
+public class Tag {
 
     private int id;
     private String name;

@@ -58,21 +58,21 @@ public interface BookManager {
 
     void addAuthorToBook(Book book, Author author);//knihe sa prida autor
 
-    void removeAuthorFromBook(Book book, Author author);//knihe sa odstrani autor
+    void removeAuthorFromBook(Book book);//knihe sa odstrani autor
 
-    void removeAuthor(Author author);//odstrani sa autor zo vsetkych knih
+    List<Book> removeAuthor(Author author);//odstrani sa autor zo vsetkych knih
 
     void addGenresToBook(List<Genre> genres, Book book);//knihe sa pridaju zanre
 
     void removeGenresFromBook(List<Genre> genres, Book book);//knihe sa odoberu zanre
 
-    void removeGenre();//odstrani zaner zo vsetkych knih
+    List<Book> removeGenre(Genre genre);//odstrani zaner zo vsetkych knih
 
     void addTagsToBook(List<Tag> tags, Book book);//knihe sa pridaju tagy
 
     void removeTagsFromBook(List<Tag> tags, Book book);//knihe sa odoberu tagy
 
-    void removeTag(Tag tag);//odstrani tag zo vsetkych knih
+    List<Book> removeTag(Tag tag);//odstrani tag zo vsetkych knih
 
     void addReview(BookReview review, Book book);//vypocitat aj avg a cekne rebricek
 

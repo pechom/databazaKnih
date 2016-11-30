@@ -1,6 +1,6 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-class AuthorReview {
+public class AuthorReview {
 
     private int id;
     private Author author;

@@ -32,7 +32,9 @@ public interface AuthorManager {
 
     List<Author> getAuthorsBySex(String sex);
 
-    List<Author> getAuthorsByLifeStatus(boolean lifeStatus);
+    List<Author> getAliveAuthors();
+
+    List<Author> getDeadAuthors();
 
     void addBooksToAuthor(List<Book> books, Author author);// autorovi sa pridaju knihy/a a updatne sa
 
@@ -42,7 +44,7 @@ public interface AuthorManager {
 
     void removeGenresFromAuthor(List<Genre> genres, Author author);//autorovi sa odoberu zanre/zaner
 
-    void removeGenre(Genre Genre);//zo vsetkych autorov sa odstrani zaner
+    List<Author> removeGenre(Genre genre);//zo vsetkych autorov sa odstrani zaner
 
     void addReview(AuthorReview review, Author author);
 

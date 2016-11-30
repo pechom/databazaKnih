@@ -16,13 +16,21 @@ public interface BookReviewManager {
 
     List<BookReview> getReviewsFromToRating(int from, int to);
 
-    void addOrUpdateUser(BookReview review, User user);
+    void addUser(BookReview review, User user);
 
-    void addOrUpdateBook(BookReview review, User user);
+    void removeUserFromReview(BookReview review);
 
-    void deleteReviewsWithBook(Book book);
+    void addBook(BookReview review, Book book);
 
-    void deleteReviewsWithUser(User user);
+    void removeBookFromReview(BookReview review);
+
+    List<BookReview> removeUser(User user);
+
+    List<BookReview> removeBook(Book book);
+
+    List<BookReview> deleteReviewsWithBook(Book book);
+
+    List<BookReview> deleteReviewsWithUser(User user);
 
     void insertReview(BookReview review);
 

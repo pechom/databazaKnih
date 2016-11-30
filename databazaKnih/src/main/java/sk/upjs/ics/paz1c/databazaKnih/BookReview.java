@@ -1,6 +1,6 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-class BookReview {
+public class BookReview {
 
     private int id;
     private Book book;

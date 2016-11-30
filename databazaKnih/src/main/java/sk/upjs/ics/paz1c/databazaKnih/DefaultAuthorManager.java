@@ -1,7 +1,7 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 // tu budu metody sna filtre na parametre, overenost.v manageroch po add/remove, average.. dat update. V manageroch je add na vytvaranie vztahov 
-//medzi objektami a remove ak treba odstranit chybny vztah prirpadne ak treba prerusit vztahy pred tym ako nieco odstranim (pri realnom odstraneni)
+//medzi objektami a remove ak treba odstranit chybny vztah pripadne ak treba prerusit vztahy pred tym ako nieco odstranim (pri realnom odstraneni)
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class DefaultAuthorManager implements AuthorManager {
         List<Author> authors = getAllAuthors();
         List<Author> namedAuthors = new ArrayList<>();
         for (Author author : authors) {
-            if (author.getName().equals(name)) {
+            if ((author.getName() != null) && (author.getName().equals(name))) {
                 namedAuthors.add(author);
             }
         }
@@ -78,7 +78,7 @@ public class DefaultAuthorManager implements AuthorManager {
         List<Author> genreAuthors = new ArrayList<>();
         for (Author author : authors) {
             for (Genre genre : genres) {
-                if (author.getGenres().contains(genre)) {
+                if ((author.getGenres() != null) && (author.getGenres().contains(genre))) {
                     genreAuthors.add(author);
                     break;
                 }
@@ -92,7 +92,7 @@ public class DefaultAuthorManager implements AuthorManager {
         List<Author> authors = getAllAuthors();
         List<Author> birthAuthors = new ArrayList<>();
         for (Author author : authors) {
-            if (author.getBirth() >= year) {
+            if ((author.getBirth() != 0) && (author.getBirth() >= year)) {
                 birthAuthors.add(author);
             }
         }
@@ -104,7 +104,7 @@ public class DefaultAuthorManager implements AuthorManager {
         List<Author> authors = getAllAuthors();
         List<Author> birthAuthors = new ArrayList<>();
         for (Author author : authors) {
-            if (author.getBirth() <= year) {
+            if ((author.getBirth() != 0) && (author.getBirth() <= year)) {
                 birthAuthors.add(author);
             }
         }
@@ -116,7 +116,7 @@ public class DefaultAuthorManager implements AuthorManager {
         List<Author> authors = getAllAuthors();
         List<Author> birthAuthors = new ArrayList<>();
         for (Author author : authors) {
-            if ((author.getBirth() >= from) && (author.getBirth() < to)) {
+            if ((author.getBirth() != 0) && (author.getBirth() >= from) && (author.getBirth() <= to)) {
                 birthAuthors.add(author);
             }
         }
@@ -125,77 +125,172 @@ public class DefaultAuthorManager implements AuthorManager {
 
     @Override
     public List<Author> getAuthorsFromDeath(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> deathAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getDeath() != 0) && (author.getDeath() >= year)) {
+                deathAuthors.add(author);
+            }
+        }
+        return deathAuthors;
     }
 
     @Override
     public List<Author> getAuthorsToDeath(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> deathAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getDeath() != 0) && (author.getDeath() <= year)) {
+                deathAuthors.add(author);
+            }
+        }
+        return deathAuthors;
     }
 
     @Override
     public List<Author> getAuthorsFromToDeath(int from, int to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> deathAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getDeath() != 0) && (author.getDeath() >= from) && (author.getDeath() <= to)) {
+                deathAuthors.add(author);
+            }
+        }
+        return deathAuthors;
     }
 
     @Override
     public List<Author> getAuthorsByNationality(String nationality) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> nationalityAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getNationality() != null) && (author.getNationality().equals(nationality))) {
+                nationalityAuthors.add(author);
+            }
+        }
+        return nationalityAuthors;
     }
 
     @Override
     public List<Author> getAuthorsBySex(String sex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Author> getAuthorsByLifeStatus(boolean lifeStatus) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> sexAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getSex() != null) && (author.getSex().equals(sex))) {
+                sexAuthors.add(author);
+            }
+        }
+        return sexAuthors;
     }
 
     @Override
     public void addBooksToAuthor(List<Book> books, Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Book book : books) {
+            if (!author.getBooks().contains(book)) {
+                author.getBooks().add(book);
+            }
+        }
+        updateAuthor(author);
     }
 
     @Override
     public void removeBooksFromAuthor(List<Book> books, Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (author.getBooks().containsAll(books)) {
+            author.getBooks().removeAll(books);
+        }
+        updateAuthor(author);
     }
 
     @Override
     public void addGenresToAuthor(List<Genre> genres, Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Genre genre : genres) {
+            if (!author.getGenres().contains(genre)) {
+                author.getGenres().add(genre);
+            }
+        }
+        updateAuthor(author);
     }
 
     @Override
     public void removeGenresFromAuthor(List<Genre> genres, Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (author.getGenres().containsAll(genres)) {
+            author.getGenres().removeAll(genres);
+        }
+        updateAuthor(author);
     }
 
     @Override
-    public void removeGenre(Genre Genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Author> removeGenre(Genre genre) {
+        List<Author> authors = getAllAuthors();
+        List<Author> removed = new ArrayList<>();
+        for (Author author : authors) {
+            if (author.getGenres().contains(genre)) {
+                author.getGenres().remove(genre);
+                updateAuthor(author);
+                removed.add(author);
+            }
+        }
+        return removed;
     }
 
     @Override
     public void addReview(AuthorReview review, Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        author.getAuthorReviews().add(review);
+        updateAuthor(author);
     }
 
     @Override
     public void removeReview(AuthorReview review, Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        author.getAuthorReviews().remove(review);
+        updateAuthor(author);
     }
 
     @Override
     public void undeleteAuthor(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        authorDao.undeleteAuthor(id);
     }
 
     @Override
     public List<Author> getAuthorsByAllGenres(List<Genre> genres) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Author> authors = getAllAuthors();
+        List<Author> genreAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            boolean gotThemAll = true;
+            for (Genre genre : genres) {
+                if (!author.getGenres().contains(genre)) {
+                    gotThemAll = false;
+                    break;
+                }
+            }
+            if (gotThemAll) {
+                genreAuthors.add(author);
+            }
+        }
+        return genreAuthors;
+    }
+
+    @Override
+    public List<Author> getAliveAuthors() {
+        List<Author> authors = getAllAuthors();
+        List<Author> aliveAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if (author.isLifeStatus()) {
+                aliveAuthors.add(author);
+            }
+        }
+        return aliveAuthors;
+    }
+
+    @Override
+    public List<Author> getDeadAuthors() {
+        List<Author> authors = getAllAuthors();
+        List<Author> deadAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if (!author.isLifeStatus()) {
+                deadAuthors.add(author);
+            }
+        }
+        return deadAuthors;
     }
 
 }
