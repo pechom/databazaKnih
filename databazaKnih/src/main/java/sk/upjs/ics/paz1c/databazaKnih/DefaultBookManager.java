@@ -408,23 +408,36 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public void addReview(BookReview review, Book book) {//tu som skoncil treba avg, bayesian, chart
+    public void addReview(BookReview review, Book book) {//treba chart
         book.getBookReviews().add(review);
-        book.setNumberOfReviews(book.getNumberOfReviews()+1);
-        
+        book.setNumberOfReviews(book.getNumberOfReviews() + 1);
+        book.setAverageOfReviews((book.getAverageOfReviews() + review.getRating()) / book.getNumberOfReviews());
+        calculateAndInsertBayesian(book, 5);
+
         updateBook(book);
     }
 
     @Override
-    public void removeReview(BookReview review, Book book) {
+    public void removeReview(BookReview review, Book book) {//treba chart
         book.getBookReviews().remove(review);
-        book.setNumberOfReviews(book.getNumberOfReviews()-1);
+        book.setNumberOfReviews(book.getNumberOfReviews() - 1);
+        book.setAverageOfReviews((book.getAverageOfReviews() + review.getRating()) / book.getNumberOfReviews());
+        calculateAndInsertBayesian(book, 5);
+
         updateBook(book);
     }
 
     @Override
     public void calculateAndInsertBayesian(Book book, int constant) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Book> books = getAllBooks();
+        int pocetDatabazy = 0;
+        int hodnotenieDatabazy = 0;
+        for (Book book1 : books) {
+            pocetDatabazy += book1.getNumberOfReviews();
+            hodnotenieDatabazy += book1.getNumberOfReviews() * book1.getAverageOfReviews();//priemer recenzii vynasobim ich poctom
+        }
+        hodnotenieDatabazy = hodnotenieDatabazy / pocetDatabazy;//poctom to vydelim poctom vsetkych recenzii
+        book.setBayesianAverage(((hodnotenieDatabazy * constant) + (book.getAverageOfReviews() * book.getNumberOfReviews())) / (constant + book.getNumberOfReviews()));
     }
 
     @Override
@@ -434,12 +447,39 @@ public class DefaultBookManager implements BookManager {
 
     @Override
     public List<Book> GetBooksByAllGenres(List<Genre> genres) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Book> books = getAllBooks();
+        List<Book> genreBooks = new ArrayList<>();
+        for (Book book : books) {
+            boolean gotThemAll = true;
+            for (Genre genre : genres) {
+                if (!book.getGenres().contains(genre)) {
+                    gotThemAll = false;
+                    break;
+                }
+            }
+            if (gotThemAll) {
+                genreBooks.add(book);
+            }
+        }
+        return genreBooks;
     }
 
     @Override
     public List<Book> GetBooksByAllTags(List<Tag> tags) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Book> books = getAllBooks();
+        List<Book> tagBooks = new ArrayList<>();
+        for (Book book : books) {
+            boolean gotThemAll = true;
+            for (Tag tag : tags) {
+                if (!book.getTags().contains(tag)) {
+                    gotThemAll = false;
+                    break;
+                }
+            }
+            if (gotThemAll) {
+                tagBooks.add(book);
+            }
+        }
+        return tagBooks;
     }
-
 }

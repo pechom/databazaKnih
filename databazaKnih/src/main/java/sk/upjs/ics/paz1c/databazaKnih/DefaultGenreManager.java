@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //metody na filtre na parametre
@@ -33,48 +34,85 @@ public class DefaultGenreManager implements GenreManager {
     }
 
     @Override
-    public List<Genre> getActiveGenres() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Genre getByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Genre> genres = getAllGenres();
+        Genre nameGenre = null;
+        for (Genre genre : genres) {
+            if ((genre.getName() != null) && (genre.getName().equals(name))) {
+                nameGenre = genre;
+                break;
+            }
+        }
+        return nameGenre;
     }
 
     @Override
     public void addBooksToGenre(Genre genre, List<Book> books) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Book book : books) {
+            if (!genre.getBooksWithGenre().contains(book)) {
+                genre.getBooksWithGenre().add(book);
+            }
+        }
+        updateGenre(genre);
     }
 
     @Override
     public void removeBooksFromGenre(Genre genre, List<Book> books) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (genre.getBooksWithGenre().containsAll(books)) {
+            genre.getBooksWithGenre().removeAll(books);
+        }
+        updateGenre(genre);
     }
 
     @Override
-    public void removeBook(Book book) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Genre> removeBook(Book book) {
+        List<Genre> genres = getAllGenres();
+        List<Genre> removed = new ArrayList<>();
+        for (Genre genre : genres) {
+            if (genre.getBooksWithGenre().contains(book)) {
+                genre.getBooksWithGenre().remove(book);
+                updateGenre(genre);
+                removed.add(genre);
+            }
+        }
+        return removed;
     }
 
     @Override
     public void addAuthorsToGenre(Genre genre, List<Author> authors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Author author : authors) {
+            if (!genre.getAuthorsWithGenre().contains(author)) {
+                genre.getAuthorsWithGenre().add(author);
+            }
+        }
+        updateGenre(genre);
     }
 
     @Override
     public void removeAuthorsFromGenre(Genre genre, List<Author> authors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (genre.getAuthorsWithGenre().containsAll(authors)) {
+            genre.getAuthorsWithGenre().removeAll(authors);
+        }
+        updateGenre(genre);
     }
 
     @Override
-    public void removeAuthor(Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Genre> removeAuthor(Author author) {
+        List<Genre> genres = getAllGenres();
+        List<Genre> removed = new ArrayList<>();
+        for (Genre genre : genres) {
+            if (genre.getAuthorsWithGenre().contains(author)) {
+                genre.getAuthorsWithGenre().remove(author);
+                updateGenre(genre);
+                removed.add(genre);
+            }
+        }
+        return removed;
     }
 
     @Override
     public void undeleteGenre(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        genreDao.undeleteGenre(id);
     }
 
 }

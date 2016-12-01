@@ -33,12 +33,7 @@ public class DefaultTagManager implements TagManager {
     }
 
     @Override
-    public List<Tag> getActiveTags() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Tag getTagByName() {
+    public Tag getTagByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -53,7 +48,7 @@ public class DefaultTagManager implements TagManager {
     }
 
     @Override
-    public void removeBook(Book book) {
+    public List<Tag> removeBook(Book book) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

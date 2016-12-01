@@ -18,23 +18,29 @@ public interface RequestManager {
 
     List<Request> getRequestsWhereBothAreNull();
 
-    void addRequester(User user);
+    void addRequester(User user, Request request);
 
-    void removeRequester(User user);
+    void removeRequesterFromRequest(Request request);
 
-    void deleteAllWithRequester(User user);
+    List<Request> removeRequester(User user);
 
-    void addBook(Book book);
+    List<Request> deleteAllWithRequester(User user);
 
-    void deleteAllWithBook(Book book);
+    void addBook(Book book, Request request);
 
-    void removeBook(Book book);
+    void removeBookFromRequest(Request request);
 
-    void addAuthor(Author author);
+    List<Request> removeBook(Book book);
 
-    void removeAuthor(Author author);
+    List<Request> deleteAllWithBook(Book book);
 
-    void deleteAllWithAuthor(Author author);
+    void addAuthor(Author author, Request request);
+
+    void removeAuthorFromRequest(Request request);
+
+    List<Request> removeAuhor(Author author);
+
+    List<Request> deleteAllWithAuthor(Author author);
 
     void insertRequest(Request request);
 
