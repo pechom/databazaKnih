@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.ArrayList;
 import java.util.List;
 // metody na filtre na parametre, overenost
 
@@ -34,27 +35,52 @@ public class DefaultTagManager implements TagManager {
 
     @Override
     public Tag getTagByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Tag> tags = getAllTags();
+        Tag nameTag = null;
+        for (Tag tag : tags) {
+            if ((tag.getName() != null) && (tag.getName().equals(name))) {
+                nameTag = tag;
+                break;
+            }
+        }
+        return nameTag;
     }
 
     @Override
     public void addBooksToTag(List<Book> books, Tag tag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Book book : books) {
+            if (!tag.getBooksWithTag().contains(book)) {
+                tag.getBooksWithTag().add(book);
+            }
+        }
+        updateTag(tag);
     }
 
     @Override
-    public void removeBooksFromTag(List<Book> book, Tag tag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void removeBooksFromTag(List<Book> books, Tag tag) {
+        if (tag.getBooksWithTag().containsAll(books)) {
+            tag.getBooksWithTag().addAll(books);
+        }
+        updateTag(tag);
     }
 
     @Override
     public List<Tag> removeBook(Book book) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Tag> tags = getAllTags();
+        List<Tag> removed = new ArrayList<>();
+        for (Tag tag : tags) {
+            if (tag.getBooksWithTag().contains(book)) {
+                tag.getBooksWithTag().remove(book);
+                updateTag(tag);
+                removed.add(tag);
+            }
+        }
+        return removed;
     }
 
     @Override
-    public void undeleteTag(Tag tag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void undeleteTag(int id) {
+        tagDao.undeleteTag(id);
     }
 
 }

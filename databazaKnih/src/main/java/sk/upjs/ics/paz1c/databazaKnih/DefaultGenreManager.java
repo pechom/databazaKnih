@@ -114,5 +114,4 @@ public class DefaultGenreManager implements GenreManager {
     public void undeleteGenre(int id) {
         genreDao.undeleteGenre(id);
     }
-
 }

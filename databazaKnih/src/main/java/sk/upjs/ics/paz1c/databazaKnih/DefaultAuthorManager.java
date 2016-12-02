@@ -197,8 +197,8 @@ public class DefaultAuthorManager implements AuthorManager {
     public void removeBooksFromAuthor(List<Book> books, Author author) {
         if (author.getBooks().containsAll(books)) {
             author.getBooks().removeAll(books);
+            updateAuthor(author);
         }
-        updateAuthor(author);
     }
 
     @Override
@@ -291,6 +291,12 @@ public class DefaultAuthorManager implements AuthorManager {
             }
         }
         return deadAuthors;
+    }
+
+    @Override
+    public void removeAllReviews(Author author) {
+        author.getAuthorReviews().clear();
+        updateAuthor(author);
     }
 
 }

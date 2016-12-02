@@ -44,6 +44,8 @@ public interface RequestManager {
 
     void insertRequest(Request request);
 
+    void updateRequest(Request request);
+
     void deleteRequest(int id);
 
     void undeleteRequest(int id);

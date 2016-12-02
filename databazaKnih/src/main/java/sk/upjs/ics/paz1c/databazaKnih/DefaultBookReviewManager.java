@@ -139,6 +139,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
         List<BookReview> deleted = new ArrayList<>();
         for (BookReview review : reviews) {
             if ((review.getBook() != null) && (review.getBook().equals(book))) {
+                review.setBook(null);
                 deleteReview(review.getId());
                 deleted.add(review);
             }
@@ -152,6 +153,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
         List<BookReview> deleted = new ArrayList<>();
         for (BookReview review : reviews) {
             if ((review.getUser() != null) && (review.getUser().equals(user))) {
+                review.setUser(null);
                 deleteReview(review.getId());
                 deleted.add(review);
             }

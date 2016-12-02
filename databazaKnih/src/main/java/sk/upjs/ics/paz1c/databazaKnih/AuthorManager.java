@@ -50,6 +50,8 @@ public interface AuthorManager {
 
     void removeReview(AuthorReview review, Author author);
 
+    void removeAllReviews(Author author);
+
     void insertAuthor(Author author);
 
     void deleteAuthor(int id);// vo vsetkych objektov ktore su s nim vo vztahu musim najprv  

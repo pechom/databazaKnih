@@ -10,7 +10,7 @@ public interface TagManager {
 
     void addBooksToTag(List<Book> books, Tag tag);
 
-    void removeBooksFromTag(List<Book> book, Tag tag);
+    void removeBooksFromTag(List<Book> books, Tag tag);
 
     List<Tag> removeBook(Book book);//odstrani knihu zo vsetkych vztahov
 
@@ -18,7 +18,7 @@ public interface TagManager {
 
     void deleteTag(int id);
     
-    void undeleteTag(Tag tag);
+    void undeleteTag(int id);
 
     void updateTag(Tag tag);
 

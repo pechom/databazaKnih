@@ -111,6 +111,7 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
         List<AuthorReview> deleted = new ArrayList<>();
         for (AuthorReview review : reviews) {
             if ((review.getAuthor() != null) && (review.getAuthor().equals(author))) {
+                review.setAuthor(null);
                 deleteReview(review.getId());
                 deleted.add(review);
             }
@@ -124,6 +125,7 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
         List<AuthorReview> deleted = new ArrayList<>();
         for (AuthorReview review : reviews) {
             if ((review.getUser() != null) && (review.getUser().equals(user))) {
+                review.setUser(null);
                 deleteReview(review.getId());
                 deleted.add(review);
             }

@@ -7,8 +7,6 @@ public interface UserManager {
 
     List<User> getAllUsers();
 
-    List<User> getActiveUsers();
-
     List<User> getAdmins();
 
     List<User> getNonAdmins();
@@ -25,7 +23,7 @@ public interface UserManager {
 
     void DeleteInactiveUsers();//ti ktori sa neprihlasili viac ako rok
 
-    void deleteBook(Book book);//vymaze knihu zo vsetkych tabuliek vsetkych uivatelov
+    List<User> deleteBook(Book book);//vymaze knihu zo vsetkych tabuliek vsetkych uivatelov
 
     void addReadBooksToUser(List<Book> books, User user);
 
@@ -39,7 +37,7 @@ public interface UserManager {
 
     void deleteWantedBooksFromUser(List<Book> books, User user);
 
-    void removeAuthor(Author author);//odstrani autora zo vsetkych userov
+    List<User> removeAuthor(Author author);//odstrani autora zo vsetkych userov
 
     void addFavoriteAuthorsToUser(List<Author> authors, User user);
 
@@ -53,23 +51,25 @@ public interface UserManager {
 
     void deleteFavoriteReviewers(List<User> reviewers, User user);
 
-    void addBookReviews(List<BookReview> bookReviews, User user);
+    void addBookReview(BookReview bookReview, User user);
 
-    void deleteBookReviews(List<BookReview> bookReviews, User user);
+    void deleteBookReview(BookReview bookReview, User user);
 
-    void addAuthorReviews(List<AuthorReview> authorReviews, User user);
+    void addAuthorReview(AuthorReview authorReview, User user);
 
-    void deleteAuthorReviews(List<AuthorReview> authorReviews, User user);
+    void deleteAuthorReview(AuthorReview authorReview, User user);
 
     void addReadingBooksToUser(List<Map<Book, Integer>> reading, User user);
 
     void deleteReadingBooksFromUser(List<Map<Book, Integer>> reading, User user);
 
+    List<User> removeUser(User user);
+
     void insertUser(User user);
 
     void deleteUser(int id);//odstrani ho aj z tabuliek ostatnych userov aj zo vsetkych ostatnych objetov
 
-    void undeleteUser(User user);
+    void undeleteUser(int id);
 
     void updateUser(User user);
 
