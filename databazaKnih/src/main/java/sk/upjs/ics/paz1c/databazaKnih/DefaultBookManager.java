@@ -3,6 +3,8 @@ package sk.upjs.ics.paz1c.databazaKnih;
 // tu budu metody filtre na parametre, overenost, pri add/remove review sa vypocita bayesian, prida pocet a avg a ak bude potrebne zmeni rebricek
 //bude sa pocitat bayesian average (priemerne hodnotenie celej databazy sa vzdy bude ziskavat zo vsetkych bookreviews)
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DefaultBookManager implements BookManager {
@@ -408,22 +410,22 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public void addReview(BookReview review, Book book) {//treba chart
+    public void addReview(BookReview review, Book book) {
         book.getBookReviews().add(review);
         book.setNumberOfReviews(book.getNumberOfReviews() + 1);
-        book.setAverageOfReviews((book.getAverageOfReviews() + review.getRating()) / book.getNumberOfReviews());
+        book.setAverageOfReviews((book.getAverageOfReviews() * (book.getNumberOfReviews() - 1) + review.getRating()) / book.getNumberOfReviews());
         calculateAndInsertBayesian(book, 5);
-
+        makeChart();
         updateBook(book);
     }
 
     @Override
-    public void removeReview(BookReview review, Book book) {//treba chart
+    public void removeReview(BookReview review, Book book) {
         book.getBookReviews().remove(review);
         book.setNumberOfReviews(book.getNumberOfReviews() - 1);
-        book.setAverageOfReviews((book.getAverageOfReviews() + review.getRating()) / book.getNumberOfReviews());
+        book.setAverageOfReviews((book.getAverageOfReviews() * (book.getNumberOfReviews() + 1) - review.getRating()) / book.getNumberOfReviews());
         calculateAndInsertBayesian(book, 5);
-
+        makeChart();
         updateBook(book);
     }
 
@@ -482,4 +484,19 @@ public class DefaultBookManager implements BookManager {
         }
         return tagBooks;
     }
+
+    @Override
+    public void makeChart() {
+        List<Book> books = getAllBooks();
+        Collections.sort(books, BookComparator);
+
+    }
+
+    public static Comparator<Book> BookComparator
+            = new Comparator<Book>() {
+        @Override
+        public int compare(Book o1, Book o2) {
+            return Double.compare((o2.getBayesianAverage() + (0.001 * o2.getNumberOfReviews())), (o1.getBayesianAverage() + (0.001 * o1.getNumberOfReviews())));
+        }
+    };
 }

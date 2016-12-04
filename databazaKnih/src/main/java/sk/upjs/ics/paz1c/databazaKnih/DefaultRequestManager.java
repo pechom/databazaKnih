@@ -225,5 +225,4 @@ public class DefaultRequestManager implements RequestManager {
     public void undeleteRequest(int id) {
         requestDao.undeleteRequest(id);
     }
-
 }

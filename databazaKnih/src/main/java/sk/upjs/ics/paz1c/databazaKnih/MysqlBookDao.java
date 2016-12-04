@@ -40,8 +40,8 @@ public class MysqlBookDao implements InterfaceBookDao {
                     int id = rs.getInt("idbook");
                     if (book == null || book.getId() != id) {
                         book = new Book();
-                        book.setAverageOfReviews(rs.getInt("averageOfRviews"));
-                        book.setBayesianAverage(rs.getInt("bayesianAverage"));
+                        book.setAverageOfReviews(rs.getDouble("averageOfReviews"));
+                        book.setBayesianAverage(rs.getDouble("bayesianAverage"));
                         book.setDescription(rs.getString("description"));
                         book.setISBN(rs.getInt("ISBN"));
                         book.setId(id);
@@ -138,8 +138,8 @@ public class MysqlBookDao implements InterfaceBookDao {
                     if (book == null || book.getId() != id) {
                         book = new Book();
                         book.setId(id);
-                        book.setAverageOfReviews(rs.getInt("averageOfRviews"));
-                        book.setBayesianAverage(rs.getInt("bayesianAverage"));
+                        book.setAverageOfReviews(rs.getDouble("averageOfReviews"));
+                        book.setBayesianAverage(rs.getDouble("bayesianAverage"));
                         book.setDescription(rs.getString("description"));
                         book.setISBN(rs.getInt("ISBN"));
                         book.setName(rs.getString("name"));

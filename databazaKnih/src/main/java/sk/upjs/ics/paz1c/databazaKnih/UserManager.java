@@ -63,7 +63,11 @@ public interface UserManager {
 
     void deleteReadingBooksFromUser(List<Map<Book, Integer>> reading, User user);
 
-    List<User> removeUser(User user);
+    void addNoteBooksToUser(List<Map<Book, String>> notebooks, User user);
+
+    void deleteNoteBooksFromUser(List<Map<Book, String>> notebooks, User user);
+
+    List<User> removeUser(User user); // odstrani usera zo vsetkych userov
 
     void insertUser(User user);
 

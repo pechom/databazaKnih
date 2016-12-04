@@ -110,7 +110,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
         List<BookReview> reviews = getAllReviews();
         List<BookReview> removed = new ArrayList<>();
         for (BookReview review : reviews) {
-            if (review.getUser().equals(user)) {
+            if ((review.getUser()!=null)&&(review.getUser().equals(user))) {
                 review.setUser(null);
                 updateReview(review);
                 removed.add(review);
@@ -124,7 +124,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
         List<BookReview> reviews = getAllReviews();
         List<BookReview> removed = new ArrayList<>();
         for (BookReview review : reviews) {
-            if (review.getBook().equals(book)) {
+            if ((review.getBook()!=null)&&(review.getBook().equals(book))) {
                 review.setBook(null);
                 updateReview(review);
                 removed.add(review);

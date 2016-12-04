@@ -15,8 +15,8 @@ class BookRowMapper implements RowMapper<Book> {
     @Override
     public Book mapRow(ResultSet rs, int i) throws SQLException {
        Book book=new Book();
-       book.setAverageOfReviews(rs.getInt("averageOfRviews"));
-       book.setBayesianAverage(rs.getInt("bayesianAverage"));
+       book.setAverageOfReviews(rs.getDouble("averageOfReviews"));
+       book.setBayesianAverage(rs.getDouble("bayesianAverage"));
        book.setDescription(rs.getString("description"));
        book.setISBN(rs.getInt("ISBN"));
        book.setId(rs.getInt("idbook"));

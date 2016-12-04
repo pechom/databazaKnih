@@ -15,11 +15,11 @@ public class Book {
     private List<Tag> tags;
     private String description;
     private int numberOfReviews;
-    private int averageOfReviews;
+    private double averageOfReviews;
     private int numberInChart;
     private boolean verificationStatus; // 0-neoverena, 1-overena
     private List<BookReview> bookReviews;
-    private int bayesianAverage;
+    private double bayesianAverage;
     private boolean isActive;
 
 //    public enum allGenres { //.name by malo vratit string takze netreba case
@@ -170,14 +170,14 @@ public class Book {
     /**
      * @return the averageOfReviews
      */
-    public int getAverageOfReviews() {
+    public double getAverageOfReviews() {
         return averageOfReviews;
     }
 
     /**
      * @param averageOfReviews the averageOfReviews to set
      */
-    public void setAverageOfReviews(int averageOfReviews) {
+    public void setAverageOfReviews(double averageOfReviews) {
         this.averageOfReviews = averageOfReviews;
     }
 
@@ -226,14 +226,14 @@ public class Book {
     /**
      * @return the bayesianAverage
      */
-    public int getBayesianAverage() {
+    public double getBayesianAverage() {
         return bayesianAverage;
     }
 
     /**
      * @param bayesianAverage the bayesianAverage to set
      */
-    public void setBayesianAverage(int bayesianAverage) {
+    public void setBayesianAverage(double bayesianAverage) {
         this.bayesianAverage = bayesianAverage;
     }
 

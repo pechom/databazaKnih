@@ -171,16 +171,36 @@ public class DefaultUserManager implements UserManager {
                     removed.add(user);
                 }
             }
+            for (Map<Book, Integer> reading : user.getReading()) {
+                if (reading.containsKey(book)) {
+                    user.getReading().remove(reading);
+                    updateUser(user);
+                    if (!removed.contains(user)) {
+                        removed.add(user);
+                    }
+                }
+            }
+            for (Map<Book, String> notebook : user.getNote()) {
+                if (notebook.containsKey(book)) {
+                    user.getNote().remove(notebook);
+                    updateUser(user);
+                    if (!removed.contains(user)) {
+                        removed.add(user);
+                    }
+                }
+            }
         }
         return removed;
     }
 
     @Override
     public void addReadBooksToUser(List<Book> books, User user) {
-        if (!user.getReadBooks().containsAll(books)) {
-            user.getReadBooks().addAll(books);
-            updateUser(user);
+        for (Book book : books) {
+            if (!user.getReadBooks().contains(book)) {
+                user.getReadBooks().add(book);
+            }
         }
+        updateUser(user);
     }
 
     @Override
@@ -193,10 +213,12 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void addFavoriteBooksToUser(List<Book> books, User user) {
-        if (!user.getFavoriteBooks().containsAll(books)) {
-            user.getFavoriteBooks().addAll(books);
-            updateUser(user);
+        for (Book book : books) {
+            if (!user.getFavoriteBooks().contains(book)) {
+                user.getFavoriteBooks().add(book);
+            }
         }
+        updateUser(user);
     }
 
     @Override
@@ -209,10 +231,12 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void addWantedBooksToUser(List<Book> books, User user) {
-        if (!user.getWantedBooks().containsAll(books)) {
-            user.getWantedBooks().addAll(books);
-            updateUser(user);
+        for (Book book : books) {
+            if (!user.getWantedBooks().contains(book)) {
+                user.getWantedBooks().add(book);
+            }
         }
+        updateUser(user);
     }
 
     @Override
@@ -239,10 +263,12 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void addFavoriteAuthorsToUser(List<Author> authors, User user) {
-        if (!user.getFavoriteAuthors().containsAll(authors)) {
-            user.getFavoriteAuthors().addAll(authors);
-            updateUser(user);
+        for (Author author : authors) {
+            if (!user.getFavoriteAuthors().contains(author)) {
+                user.getFavoriteAuthors().add(author);
+            }
         }
+        updateUser(user);
     }
 
     @Override
@@ -255,10 +281,12 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void addFriendsToUser(List<User> friends, User user) {
-        if (!user.getFriends().containsAll(friends)) {
-            user.getFriends().addAll(friends);
-            updateUser(user);
+        for (User friend : friends) {
+            if (!user.getFriends().contains(friend)) {
+                user.getFriends().add(friend);
+            }
         }
+        updateUser(user);
     }
 
     @Override
@@ -271,10 +299,12 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void addFavoriteReviewers(List<User> reviewers, User user) {
-        if (!user.getFavoriteReviewers().containsAll(reviewers)) {
-            user.getFavoriteReviewers().addAll(reviewers);
-            updateUser(user);
+        for (User reviewer : reviewers) {
+            if (!user.getFavoriteReviewers().contains(reviewer)) {
+                user.getFavoriteReviewers().add(reviewer);
+            }
         }
+        updateUser(user);
     }
 
     @Override
@@ -287,26 +317,34 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void addBookReview(BookReview bookReview, User user) {
-        user.getBookReviews().add(bookReview);
-        updateUser(user);
+        if (!user.getBookReviews().contains(bookReview)) {
+            user.getBookReviews().add(bookReview);
+            updateUser(user);
+        }
     }
 
     @Override
     public void deleteBookReview(BookReview bookReview, User user) {
-        user.getBookReviews().remove(bookReview);
-        updateUser(user);
+        if (user.getBookReviews().contains(bookReview)) {
+            user.getBookReviews().remove(bookReview);
+            updateUser(user);
+        }
     }
 
     @Override
     public void addAuthorReview(AuthorReview authorReview, User user) {
-        user.getAuthorReviews().add(authorReview);
-        updateUser(user);
+        if (!user.getAuthorReviews().contains(authorReview)) {
+            user.getAuthorReviews().add(authorReview);
+            updateUser(user);
+        }
     }
 
     @Override
     public void deleteAuthorReview(AuthorReview authorReview, User user) {
-        user.getAuthorReviews().remove(authorReview);
-        updateUser(user);
+        if (user.getAuthorReviews().contains(authorReview)) {
+            user.getAuthorReviews().remove(authorReview);
+            updateUser(user);
+        }
     }
 
     @Override
@@ -316,9 +354,11 @@ public class DefaultUserManager implements UserManager {
 
     @Override
     public void addReadingBooksToUser(List<Map<Book, Integer>> reading, User user) {
-        if (!user.getReading().containsAll(reading)) {
-            user.getReading().addAll(reading);
-            updateUser(user);
+        for (Map<Book, Integer> map : reading) {
+            if (!user.getReading().contains(map)) {
+                user.getReading().add(map);
+                updateUser(user);
+            }
         }
     }
 
@@ -326,6 +366,24 @@ public class DefaultUserManager implements UserManager {
     public void deleteReadingBooksFromUser(List<Map<Book, Integer>> reading, User user) {
         if (user.getReading().containsAll(reading)) {
             user.getReading().removeAll(reading);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addNoteBooksToUser(List<Map<Book, String>> notebooks, User user) {
+        for (Map<Book, String> notebook : notebooks) {
+            if (!user.getNote().contains(notebook)) {
+                user.getNote().add(notebook);
+                updateUser(user);
+            }
+        }
+    }
+
+    @Override
+    public void deleteNoteBooksFromUser(List<Map<Book, String>> notebooks, User user) {
+        if (user.getNote().containsAll(notebooks)) {
+            user.getNote().removeAll(notebooks);
             updateUser(user);
         }
     }

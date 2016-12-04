@@ -2,6 +2,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 // tu budu metody sna filtre na parametre, overenost.v manageroch po add/remove, average.. dat update. V manageroch je add na vytvaranie vztahov 
 //medzi objektami a remove ak treba odstranit chybny vztah pripadne ak treba prerusit vztahy pred tym ako nieco odstranim (pri realnom odstraneni)
+// u vsetkych manazerov treba urobit vynimky !
 import java.util.ArrayList;
 import java.util.List;
 
@@ -215,8 +216,8 @@ public class DefaultAuthorManager implements AuthorManager {
     public void removeGenresFromAuthor(List<Genre> genres, Author author) {
         if (author.getGenres().containsAll(genres)) {
             author.getGenres().removeAll(genres);
+            updateAuthor(author);
         }
-        updateAuthor(author);
     }
 
     @Override
@@ -235,14 +236,18 @@ public class DefaultAuthorManager implements AuthorManager {
 
     @Override
     public void addReview(AuthorReview review, Author author) {
-        author.getAuthorReviews().add(review);
-        updateAuthor(author);
+        if (!author.getAuthorReviews().contains(review)) {
+            author.getAuthorReviews().add(review);
+            updateAuthor(author);
+        }
     }
 
     @Override
     public void removeReview(AuthorReview review, Author author) {
-        author.getAuthorReviews().remove(review);
-        updateAuthor(author);
+        if (author.getAuthorReviews().contains(review)) {
+            author.getAuthorReviews().remove(review);
+            updateAuthor(author);
+        }
     }
 
     @Override

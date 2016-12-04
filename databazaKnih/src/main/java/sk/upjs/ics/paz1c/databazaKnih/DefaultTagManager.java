@@ -82,5 +82,4 @@ public class DefaultTagManager implements TagManager {
     public void undeleteTag(int id) {
         tagDao.undeleteTag(id);
     }
-
 }

@@ -56,6 +56,8 @@ public interface BookManager {
 
     List<Book> getBooksFromToBayesian(int from, int to);
 
+    void makeChart();
+
     void addAuthorToBook(Book book, Author author);//knihe sa prida autor
 
     void removeAuthorFromBook(Book book);//knihe sa odstrani autor
