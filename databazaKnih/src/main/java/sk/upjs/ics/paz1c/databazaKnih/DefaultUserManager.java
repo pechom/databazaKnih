@@ -82,8 +82,19 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public Boolean checkPassword(User user, String typedPassword) {
-        return user.checkPassword(typedPassword);
+    public Boolean checkNameAndPassword(String username, String typedPassword) {
+        User checked = null;
+        for (User user : getAllUsers()) {
+            if ((user.getUserName() != null) && (user.getUserName().equals(username))) {
+                checked = user;
+                break;
+            }
+        }
+        if (checked.equals(null)) {
+            return false;
+        } else {
+            return checked.checkPassword(typedPassword);
+        }
     }
 
     @Override

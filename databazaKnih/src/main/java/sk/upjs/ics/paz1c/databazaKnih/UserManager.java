@@ -11,7 +11,7 @@ public interface UserManager {
 
     List<User> getNonAdmins();
 
-    Boolean checkPassword(User user, String typedPassword);//porovnam to co zadal user s jeho heslom
+    Boolean checkNameAndPassword(String userName, String typedPassword);//porovnam to co zadal user s jeho heslom
 
     List<User> getUsersByUsername(String login);
 
