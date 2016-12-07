@@ -113,7 +113,11 @@ public class MysqlBookDao implements InterfaceBookDao {
 
     @Override
     public void insertBook(Book book) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcTemplate.update(SqlQueries.INSERT_BOOK, book.getName(), book.getYear(),
+                book.getNumberOfPages(), book.getISBN(), book.getDescription(),
+                book.getNumberOfReviews(), book.getAverageOfReviews(),
+                book.isVerificationStatus(), book.getNumberInChart(),
+                book.getBayesianAverage(), book.isIsActive());
     }
 
     @Override

@@ -8,34 +8,34 @@ import java.util.Comparator;
 import java.util.List;
 
 public class DefaultBookManager implements BookManager {
-    
+
     private InterfaceBookDao bookDao = ObjectFactory.INSTANCE.getBookDao();
-    
+
     @Override
     public List<Book> getAllBooks() {
         return bookDao.getAllBooks();
     }
-    
+
     @Override
     public void insertBook(Book book) {
         bookDao.insertBook(book);
     }
-    
+
     @Override
     public void deleteBook(int id) {
         bookDao.deleteBook(id);
     }
-    
+
     @Override
     public void updateBook(Book book) {
         bookDao.updateBook(book);
     }
-    
+
     @Override
     public Book findById(int id) {
         return bookDao.findById(id);
     }
-    
+
     @Override
     public List<Book> getVerificatedBooks() {
         List<Book> books = getAllBooks();
@@ -47,7 +47,7 @@ public class DefaultBookManager implements BookManager {
         }
         return verificated;
     }
-    
+
     @Override
     public List<Book> getNotVerificatedBooks() {
         List<Book> books = getAllBooks();
@@ -59,7 +59,7 @@ public class DefaultBookManager implements BookManager {
         }
         return notVerificated;
     }
-    
+
     @Override
     public List<Book> GetBooksByName(String name) {
         List<Book> books = getAllBooks();
@@ -71,7 +71,7 @@ public class DefaultBookManager implements BookManager {
         }
         return nameBooks;
     }
-    
+
     @Override
     public List<Book> GetBooksByAuthor(Author author) {
         List<Book> books = getAllBooks();
@@ -83,7 +83,7 @@ public class DefaultBookManager implements BookManager {
         }
         return authorBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromYear(int year) {
         List<Book> books = getAllBooks();
@@ -95,7 +95,7 @@ public class DefaultBookManager implements BookManager {
         }
         return ageBooks;
     }
-    
+
     @Override
     public List<Book> getBooksToYear(int year) {
         List<Book> books = getAllBooks();
@@ -107,7 +107,7 @@ public class DefaultBookManager implements BookManager {
         }
         return ageBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromToYear(int from, int to) {
         List<Book> books = getAllBooks();
@@ -119,7 +119,7 @@ public class DefaultBookManager implements BookManager {
         }
         return ageBooks;
     }
-    
+
     @Override
     public List<Book> GetBooksByGenres(List<Genre> genres) {
         List<Book> books = getAllBooks();
@@ -134,7 +134,7 @@ public class DefaultBookManager implements BookManager {
         }
         return genreBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromPages(int pages) {
         List<Book> books = getAllBooks();
@@ -146,7 +146,7 @@ public class DefaultBookManager implements BookManager {
         }
         return pageBooks;
     }
-    
+
     @Override
     public List<Book> getBooksToPages(int pages) {
         List<Book> books = getAllBooks();
@@ -158,7 +158,7 @@ public class DefaultBookManager implements BookManager {
         }
         return pageBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromToPages(int from, int to) {
         List<Book> books = getAllBooks();
@@ -170,7 +170,7 @@ public class DefaultBookManager implements BookManager {
         }
         return pageBooks;
     }
-    
+
     @Override
     public Book getBookByISBN(int ISBN) {
         List<Book> books = getAllBooks();
@@ -183,7 +183,7 @@ public class DefaultBookManager implements BookManager {
         }
         return ISBNBook;
     }
-    
+
     @Override
     public List<Book> GetBooksByTags(List<Tag> tags) {
         List<Book> books = getAllBooks();
@@ -198,7 +198,7 @@ public class DefaultBookManager implements BookManager {
         }
         return tagBooks;
     }
-    
+
     @Override
     public List<Book> GetBooksFromReviews(int numberOfReviews) {
         List<Book> books = getAllBooks();
@@ -210,7 +210,7 @@ public class DefaultBookManager implements BookManager {
         }
         return reviewBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromAverage(int average) {
         List<Book> books = getAllBooks();
@@ -222,7 +222,7 @@ public class DefaultBookManager implements BookManager {
         }
         return averageBooks;
     }
-    
+
     @Override
     public List<Book> getBooksToAverage(int average) {
         List<Book> books = getAllBooks();
@@ -234,7 +234,7 @@ public class DefaultBookManager implements BookManager {
         }
         return averageBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromToAverage(int from, int to) {
         List<Book> books = getAllBooks();
@@ -246,7 +246,7 @@ public class DefaultBookManager implements BookManager {
         }
         return averageBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromChart(int chart) {
         List<Book> books = getAllBooks();
@@ -258,7 +258,7 @@ public class DefaultBookManager implements BookManager {
         }
         return chartBooks;
     }
-    
+
     @Override
     public List<Book> getBooksToChart(int chart) {
         List<Book> books = getAllBooks();
@@ -270,7 +270,7 @@ public class DefaultBookManager implements BookManager {
         }
         return chartBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromToChart(int from, int to) {
         List<Book> books = getAllBooks();
@@ -282,7 +282,7 @@ public class DefaultBookManager implements BookManager {
         }
         return chartBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromBayesian(int average) {
         List<Book> books = getAllBooks();
@@ -294,7 +294,7 @@ public class DefaultBookManager implements BookManager {
         }
         return bayesianBooks;
     }
-    
+
     @Override
     public List<Book> getBooksToBayesian(int average) {
         List<Book> books = getAllBooks();
@@ -306,7 +306,7 @@ public class DefaultBookManager implements BookManager {
         }
         return bayesianBooks;
     }
-    
+
     @Override
     public List<Book> getBooksFromToBayesian(int from, int to) {
         List<Book> books = getAllBooks();
@@ -318,19 +318,19 @@ public class DefaultBookManager implements BookManager {
         }
         return bayesianBooks;
     }
-    
+
     @Override
     public void addAuthorToBook(Book book, Author author) {
         book.setAuthor(author);
         updateBook(book);
     }
-    
+
     @Override
     public void removeAuthorFromBook(Book book) {
         book.setAuthor(null);
         updateBook(book);
     }
-    
+
     @Override
     public List<Book> removeAuthor(Author author) {
         List<Book> books = getAllBooks();
@@ -344,25 +344,27 @@ public class DefaultBookManager implements BookManager {
         }
         return removed;
     }
-    
+
     @Override
     public void addGenresToBook(List<Genre> genres, Book book) {
         for (Genre genre : genres) {
             if (!book.getGenres().contains(genre)) {
                 book.getGenres().add(genre);
+                updateBook(book);
             }
         }
-        updateBook(book);
     }
-    
+
     @Override
     public void removeGenresFromBook(List<Genre> genres, Book book) {
-        if (book.getGenres().containsAll(genres)) {
-            book.getGenres().removeAll(genres);
+        for (Genre genre : genres) {
+            if (book.getGenres().contains(genre)) {
+                book.getGenres().remove(genre);
+                updateBook(book);
+            }
         }
-        updateBook(book);
     }
-    
+
     @Override
     public List<Book> removeGenre(Genre genre) {
         List<Book> books = getAllBooks();
@@ -376,25 +378,27 @@ public class DefaultBookManager implements BookManager {
         }
         return removed;
     }
-    
+
     @Override
     public void addTagsToBook(List<Tag> tags, Book book) {
         for (Tag tag : tags) {
             if (!book.getTags().contains(tag)) {
                 book.getTags().add(tag);
+                updateBook(book);
             }
         }
-        updateBook(book);
     }
-    
+
     @Override
     public void removeTagsFromBook(List<Tag> tags, Book book) {
-        if (book.getTags().containsAll(tags)) {
-            book.getTags().removeAll(tags);
+        for (Tag tag : tags) {
+            if (book.getTags().contains(tag)) {
+                book.getTags().remove(tag);
+                updateBook(book);
+            }
         }
-        updateBook(book);
     }
-    
+
     @Override
     public List<Book> removeTag(Tag tag) {
         List<Book> books = getAllBooks();
@@ -408,7 +412,7 @@ public class DefaultBookManager implements BookManager {
         }
         return removed;
     }
-    
+
     @Override
     public void addReview(BookReview review, Book book) {
         book.getBookReviews().add(review);
@@ -418,7 +422,7 @@ public class DefaultBookManager implements BookManager {
         makeChart();
         updateBook(book);
     }
-    
+
     @Override
     public void removeReview(BookReview review, Book book) {
         book.getBookReviews().remove(review);
@@ -428,7 +432,7 @@ public class DefaultBookManager implements BookManager {
         makeChart();
         updateBook(book);
     }
-    
+
     @Override
     public void calculateAndInsertBayesian(Book book, int constant) {
         List<Book> books = getAllBooks();
@@ -441,12 +445,12 @@ public class DefaultBookManager implements BookManager {
         hodnotenieDatabazy = hodnotenieDatabazy / pocetDatabazy;//poctom to vydelim poctom vsetkych recenzii
         book.setBayesianAverage(((hodnotenieDatabazy * constant) + (book.getAverageOfReviews() * book.getNumberOfReviews())) / (constant + book.getNumberOfReviews()));
     }
-    
+
     @Override
     public void undeleteBook(int id) {
         bookDao.undeleteBook(id);
     }
-    
+
     @Override
     public List<Book> GetBooksByAllGenres(List<Genre> genres) {
         List<Book> books = getAllBooks();
@@ -465,7 +469,7 @@ public class DefaultBookManager implements BookManager {
         }
         return genreBooks;
     }
-    
+
     @Override
     public List<Book> GetBooksByAllTags(List<Tag> tags) {
         List<Book> books = getAllBooks();
@@ -484,18 +488,18 @@ public class DefaultBookManager implements BookManager {
         }
         return tagBooks;
     }
-    
+
     @Override
     public void makeChart() {
         List<Book> books = getAllBooks();
         Collections.sort(books, BookComparator);
         for (int i = 1; i <= books.size(); i++) {
-            books.get(i-1).setNumberInChart(i);
-            
+            books.get(i - 1).setNumberInChart(i);
+
         }
-        
+
     }
-    
+
     public static Comparator<Book> BookComparator
             = new Comparator<Book>() {
         @Override

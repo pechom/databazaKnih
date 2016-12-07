@@ -74,7 +74,8 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     @Override
     public void insertReview(BookReview review) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcTemplate.update(SqlQueries.INSERT_BOOKREVIEW, review.getRating(),
+                review.getReview(), review.isIsActive());
     }
 
     @Override

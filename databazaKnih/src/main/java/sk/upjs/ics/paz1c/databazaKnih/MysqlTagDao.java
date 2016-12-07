@@ -61,7 +61,7 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public void insertTag(Tag tag) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+       jdbcTemplate.update(SqlQueries.INSERT_TAG, tag.getName(), tag.isIsActive());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-// tu budu metody sna filtre na parametre, overenost.v manageroch po add/remove, average.. dat update. V manageroch je add na vytvaranie vztahov 
+// tu budu metody na filtre na parametre, overenost.v manageroch po add/remove, average.. dat update. V manageroch je add na vytvaranie vztahov 
 //medzi objektami a remove ak treba odstranit chybny vztah pripadne ak treba prerusit vztahy pred tym ako nieco odstranim (pri realnom odstraneni)
 // u vsetkych manazerov treba urobit vynimky !
 import java.util.ArrayList;
@@ -189,16 +189,18 @@ public class DefaultAuthorManager implements AuthorManager {
         for (Book book : books) {
             if (!author.getBooks().contains(book)) {
                 author.getBooks().add(book);
+                updateAuthor(author);// po jednej sa updatuju
             }
         }
-        updateAuthor(author);
     }
 
     @Override
     public void removeBooksFromAuthor(List<Book> books, Author author) {
-        if (author.getBooks().containsAll(books)) {
-            author.getBooks().removeAll(books);
-            updateAuthor(author);
+       for (Book book : books) {
+            if (author.getBooks().contains(book)) {
+                author.getBooks().remove(book);
+                updateAuthor(author);// po jednej sa updatuju
+            }
         }
     }
 
@@ -207,19 +209,20 @@ public class DefaultAuthorManager implements AuthorManager {
         for (Genre genre : genres) {
             if (!author.getGenres().contains(genre)) {
                 author.getGenres().add(genre);
+                updateAuthor(author);
             }
         }
-        updateAuthor(author);
     }
 
     @Override
     public void removeGenresFromAuthor(List<Genre> genres, Author author) {
-        if (author.getGenres().containsAll(genres)) {
-            author.getGenres().removeAll(genres);
-            updateAuthor(author);
+        for (Genre genre : genres) {
+            if (author.getGenres().contains(genre)) {
+                author.getGenres().remove(genre);
+                updateAuthor(author);
+            }
         }
     }
-
     @Override
     public List<Author> removeGenre(Genre genre) {
         List<Author> authors = getAllAuthors();

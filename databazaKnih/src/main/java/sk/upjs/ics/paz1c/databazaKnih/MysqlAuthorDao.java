@@ -97,7 +97,10 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public void insertAuthor(Author author) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcTemplate.update(SqlQueries.INSERT_AUTHOR, author.getName(),
+                author.getBirth(), author.getDeath(), author.getNationality(),
+                author.getSex(), author.getBiography(), author.isVerificationStatus(),
+                author.isLifeStatus(), author.isIsActive());
     }
 
     @Override

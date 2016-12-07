@@ -51,17 +51,19 @@ public class DefaultTagManager implements TagManager {
         for (Book book : books) {
             if (!tag.getBooksWithTag().contains(book)) {
                 tag.getBooksWithTag().add(book);
+                updateTag(tag);
             }
         }
-        updateTag(tag);
     }
 
     @Override
     public void removeBooksFromTag(List<Book> books, Tag tag) {
-        if (tag.getBooksWithTag().containsAll(books)) {
-            tag.getBooksWithTag().addAll(books);
+        for (Book book : books) {
+            if (tag.getBooksWithTag().contains(book)) {
+                tag.getBooksWithTag().remove(book);
+                updateTag(tag);
+            }
         }
-        updateTag(tag);
     }
 
     @Override

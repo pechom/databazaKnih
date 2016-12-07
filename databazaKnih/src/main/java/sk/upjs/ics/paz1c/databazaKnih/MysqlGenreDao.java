@@ -76,7 +76,7 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public void insertGenre(Genre genre) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcTemplate.update(SqlQueries.INSERT_GENRE, genre.getName(), genre.isIsActive());
     }
 
     @Override

@@ -82,7 +82,9 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void insertRequest(Request request) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcTemplate.update(SqlQueries.INSERT_REQUEST, request.getContent(),
+                request.getBook().getId(), request.getAuthor().getId(), 
+                request.getRequester().getId(), request.isIsActive());
     }
 
     @Override

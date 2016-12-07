@@ -73,7 +73,8 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public void insertReview(AuthorReview review) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcTemplate.update(SqlQueries.INSERT_AUTHORREVIEW, review.getRating(),
+                review.getReview(), review.isIsActive());
     }
 
     @Override

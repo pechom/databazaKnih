@@ -51,19 +51,20 @@ public class DefaultGenreManager implements GenreManager {
         for (Book book : books) {
             if (!genre.getBooksWithGenre().contains(book)) {
                 genre.getBooksWithGenre().add(book);
+                 updateGenre(genre);
             }
         }
-        updateGenre(genre);
     }
 
     @Override
     public void removeBooksFromGenre(Genre genre, List<Book> books) {
-        if (genre.getBooksWithGenre().containsAll(books)) {
-            genre.getBooksWithGenre().removeAll(books);
+        for (Book book : books) {
+            if (genre.getBooksWithGenre().contains(book)) {
+                genre.getBooksWithGenre().remove(book);
+                 updateGenre(genre);
+            }
         }
-        updateGenre(genre);
     }
-
     @Override
     public List<Genre> removeBook(Book book) {
         List<Genre> genres = getAllGenres();
@@ -83,18 +84,21 @@ public class DefaultGenreManager implements GenreManager {
         for (Author author : authors) {
             if (!genre.getAuthorsWithGenre().contains(author)) {
                 genre.getAuthorsWithGenre().add(author);
+                updateGenre(genre);
             }
         }
-        updateGenre(genre);
     }
 
     @Override
     public void removeAuthorsFromGenre(Genre genre, List<Author> authors) {
-        if (genre.getAuthorsWithGenre().containsAll(authors)) {
-            genre.getAuthorsWithGenre().removeAll(authors);
+       for (Author author : authors) {
+            if (genre.getAuthorsWithGenre().contains(author)) {
+                genre.getAuthorsWithGenre().remove(author);
+                updateGenre(genre);
+            }
         }
-        updateGenre(genre);
     }
+
 
     @Override
     public List<Genre> removeAuthor(Author author) {
