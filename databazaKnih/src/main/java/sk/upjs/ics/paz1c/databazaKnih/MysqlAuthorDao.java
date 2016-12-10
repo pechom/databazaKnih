@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlAuthorDao implements InterfaceAuthorDao {
 
@@ -53,7 +51,8 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                         author.setGenres(new ArrayList<>());
 
                         authors.add(author);
-                        int bookid = rs.getInt("book_idbook");
+                        int bookid = rs.getInt("authorofbook.book_idbook");
+                        
                         if (rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
@@ -65,7 +64,7 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                             }
                         }
 
-                        int genreid = rs.getInt("genre_idgenre");
+                        int genreid = rs.getInt("genreofauthor.genre_idgenre");
                         if (rs.wasNull()) {
                             Genre genre = genres.get(genreid);
                             if (genre == null) {
@@ -77,7 +76,7 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                             }
                         }
 
-                        int reviewid = rs.getInt("authorreview_idauthorreview");
+                        int reviewid = rs.getInt("authorreview.idauthorreview");
                         if (rs.wasNull()) {
                             AuthorReview review = reviews.get(reviewid);
                             if (review == null) {
@@ -140,9 +139,9 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                         author.setGenres(new ArrayList<>());
 
                     }
-                    int bookid = rs.getInt("book_idbook");
-                    int genreid = rs.getInt("genre_idgenre");
-                    int reviewid = rs.getInt("authorreview_idauthorreview");
+                    int bookid = rs.getInt("authorofbook.book_idbook");
+                    int genreid = rs.getInt("genreofauthor.genre_idgenre");
+                    int reviewid = rs.getInt("authorreview.idauthorreview");
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                     if (book.isIsActive()) {
                         author.getBooks().add(book);

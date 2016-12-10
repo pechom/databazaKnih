@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlTagDao implements InterfaceTagDao {
 
@@ -40,7 +38,7 @@ public class MysqlTagDao implements InterfaceTagDao {
                         tag.setBooksWithTag(new ArrayList<>());
                         tags.add(tag);
 
-                        int bookid = rs.getInt("book_idbook");
+                        int bookid = rs.getInt("tagofbook.book_idbook");
                         if (rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
@@ -90,7 +88,7 @@ public class MysqlTagDao implements InterfaceTagDao {
                         tag.setIsActive(rs.getBoolean("isActive"));
                         tag.setBooksWithTag(new ArrayList<>());
                     }
-                    int bookid = rs.getInt("book_idbook");
+                    int bookid = rs.getInt("tagofbook.book_idbook");
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                     if (book.isIsActive()) {
                         tag.getBooksWithTag().add(book);

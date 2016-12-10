@@ -16,6 +16,14 @@ public enum ObjectFactory {
     private InterfaceRequestDao requestDao;
     private InterfaceGenreDao genreDao;
     private JdbcTemplate jdbcTemplate;
+    private UserManager userManager;
+    private AuthorManager authorManager;
+    private AuthorReviewManager authorreviewManager;
+    private BookManager bookManager;
+    private BookReviewManager bookreviewManager;
+    private GenreManager genreManager;
+    private RequestManager requestManager;
+    private TagManager tagManager;
 
     private ObjectFactory() {
         MysqlDataSource dataSource = new MysqlDataSource();
@@ -33,7 +41,14 @@ public enum ObjectFactory {
         authorReviewDao = new MysqlAuthorReviewDao(jdbcTemplate);
         tagDao = new MysqlTagDao(jdbcTemplate);
         requestDao = new MysqlRequestDao(jdbcTemplate);
-        genreDao=new MysqlGenreDao(jdbcTemplate);
+        genreDao = new MysqlGenreDao(jdbcTemplate);
+        userManager = new DefaultUserManager();
+        authorManager = new DefaultAuthorManager();
+        authorreviewManager = new DefaultAuthorReviewManager();
+        bookManager = new DefaultBookManager();
+        genreManager = new DefaultGenreManager();
+        requestManager = new DefaultRequestManager();
+        tagManager = new DefaultTagManager();
     }
 
     public JdbcTemplate getJdbcTemplate() {
@@ -77,9 +92,41 @@ public enum ObjectFactory {
     public InterfaceRequestDao getRequestDao() {
         return requestDao;
     }
-    
-    public InterfaceGenreDao getGenreDao(){
+
+    public InterfaceGenreDao getGenreDao() {
         return genreDao;
+    }
+
+    public UserManager getUserManager() {
+        return userManager;
+    }
+
+    public AuthorManager getAuthorManager() {
+        return authorManager;
+    }
+
+    public AuthorReviewManager getAuthorReviewManager() {
+        return authorreviewManager;
+    }
+
+    public BookManager getBookManager() {
+        return bookManager;
+    }
+
+    public BookReviewManager getBookReviewManager() {
+        return bookreviewManager;
+    }
+
+    public GenreManager getGenreManager() {
+        return genreManager;
+    }
+
+    public RequestManager getRequestManager() {
+        return requestManager;
+    }
+
+    public TagManager getTagManager() {
+        return tagManager;
     }
 
 }

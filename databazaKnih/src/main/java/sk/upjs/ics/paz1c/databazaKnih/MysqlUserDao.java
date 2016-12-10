@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -9,10 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlUserDao implements InterfaceUserDao {
 
@@ -72,7 +69,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setWantedBooks(new ArrayList<>());
                         users.add(user);
 
-                        int areviewid = rs.getInt("authorreview_idauthorreview");
+                        int areviewid = rs.getInt("authorreview.idauthorreview");
                         if (rs.wasNull()) {
                             AuthorReview authorreview = authorreviews.get(areviewid);
                             if (authorreview == null) {
@@ -84,7 +81,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int breviewid = rs.getInt("bookreview_idbookreview");
+                        int breviewid = rs.getInt("bookreview.idbookreview");
                         if (rs.wasNull()) {
                             BookReview bookReview = bookreviews.get(breviewid);
                             if (bookReview == null) {
@@ -96,7 +93,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int favauthorid = rs.getInt("favoriteauthor_idauthor");
+                        int favauthorid = rs.getInt("favoriteauthor.faveriteauthor_idauthor");
                         if (rs.wasNull()) {
                             Author author = favauthors.get(favauthorid);
                             if (author == null) {
@@ -108,7 +105,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int favbookid = rs.getInt("favoritebook_idbook");
+                        int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
                         if (rs.wasNull()) {
                             Book book = favbooks.get(favbookid);
                             if (book == null) {
@@ -120,7 +117,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int favuserid = rs.getInt("favoriteuser_iduser");
+                        int favuserid = rs.getInt("favoriteuser.favoriteuser_iduser");
                         if (rs.wasNull()) {
                             User favuser = favusers.get(favuserid);
                             if (favuser == null) {
@@ -132,7 +129,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int friendid = rs.getInt("frienduser_iduser");
+                        int friendid = rs.getInt("friend.friend");
                         if (rs.wasNull()) {
                             User frienduser = friends.get(friendid);
                             if (frienduser == null) {
@@ -144,7 +141,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int readid = rs.getInt("readbook_idbook");
+                        int readid = rs.getInt("readbook.readbook_idbook");
                         if (rs.wasNull()) {
                             Book readbook = readbooks.get(readid);
                             if (readbook == null) {
@@ -156,7 +153,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int wantedid = rs.getInt("wantedbook_idbook");
+                        int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
                         if (rs.wasNull()) {
                             Book wantedbook = wantedbooks.get(wantedid);
                             if (wantedbook == null) {
@@ -168,8 +165,8 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int noteid = rs.getInt("booknote_idbook");
-                        String note = rs.getString("note");
+                        int noteid = rs.getInt("booknote.booknote_idbook");
+                        String note = rs.getString("booknote.note");
                         if (rs.wasNull()) {
                             Book notebook = notes.get(noteid);
                             if (notebook == null) {
@@ -183,8 +180,8 @@ public class MysqlUserDao implements InterfaceUserDao {
                             }
                         }
 
-                        int readingid = rs.getInt("readingbook_idbook");
-                        int pocetReading = rs.getInt("pocetStran");
+                        int readingid = rs.getInt("readingbook.readingbook_idbook");
+                        int pocetReading = rs.getInt("readingbook.numberOfPages");
                         if (rs.wasNull()) {
                             Book readingBook = reading.get(readingid);
                             if (readingBook == null) {
@@ -260,19 +257,19 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setReading(new ArrayList<>());
                         user.setWantedBooks(new ArrayList<>());
                     }
-                    int areviewid = rs.getInt("authorreview_idauthorreview");
-                    int breviewid = rs.getInt("bookreview_idbookreview");
-                    int favauthorid = rs.getInt("favoriteauthor_idauthor");
-                    int favbookid = rs.getInt("favoritebook_idbook");
-                    int favuserid = rs.getInt("favoriteuser_iduser");
-                    int friendid = rs.getInt("frienduser_iduser");
-                    int readid = rs.getInt("readbook_idbook");
-                    int wantedid = rs.getInt("wantedbook_idbook");
-
-                    int noteid = rs.getInt("booknote_idbook");
-                    String note = rs.getString("note");
-                    int readingid = rs.getInt("readingbook_idbook");
-                    int pocetReading = rs.getInt("pocetStran");
+                    int areviewid = rs.getInt("authorreview.idauthorreview");
+                    int breviewid = rs.getInt("bookreview.idbookreview");
+                    int favauthorid = rs.getInt("favoriteauthor.faveriteauthor_idauthor");
+                    int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
+                    int favuserid = rs.getInt("favoriteuser.favoriteuser_iduser");
+                    int friendid = rs.getInt("friend.friend");
+                    int readid = rs.getInt("readbook.readbook_idbook");
+                    int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
+                    
+                    int noteid = rs.getInt("booknote.booknote_idbook");
+                    String note = rs.getString("booknote.note");
+                    int readingid = rs.getInt("readingbook.readingbook_idbook");
+                    int pocetReading = rs.getInt("readingbook.numberOfPages");
                     AuthorReview authorreview = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(areviewid);
                     if (authorreview.isIsActive()) {
                         user.getAuthorReviews().add(authorreview);

@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlGenreDao implements InterfaceGenreDao {
 
@@ -44,7 +42,7 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                         genre.setBooksWithGenre(new ArrayList<>());
                         genres.add(genre);
 
-                        int authorid = rs.getInt("author_idauthor");
+                        int authorid = rs.getInt("genreofauthor.author_idauthor");
                         if (rs.wasNull()) {
                             Author author = authors.get(authorid);
                             if (author == null) {
@@ -56,7 +54,7 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                             }
                         }
 
-                        int bookid = rs.getInt("book_idbook");
+                        int bookid = rs.getInt("genreofbook.book_idbook");
                         if (rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
@@ -106,9 +104,9 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                         genre.setAuthorsWithGenre(new ArrayList<>());
                         genre.setBooksWithGenre(new ArrayList<>());
                     }
-                    int authorid = rs.getInt("author_idauthor");
+                    int authorid = rs.getInt("genreofauthor.author_idauthor");
                     Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                    int bookid = rs.getInt("book_idbook");
+                    int bookid = rs.getInt("genreofbook.book_idbook");
                     Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
                     if (author.isIsActive()) {
                         genre.getAuthorsWithGenre().add(author);

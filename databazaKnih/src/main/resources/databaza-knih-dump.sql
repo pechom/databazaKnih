@@ -34,14 +34,8 @@ CREATE TABLE `author` (
   `biography` varchar(500) DEFAULT NULL,
   `verificationStatus` binary(1) DEFAULT '0',
   `lifeStatus` binary(1) DEFAULT NULL,
-  `book_idbook` int(11) DEFAULT NULL,
-  `authorreview_idauthorreview` int(11) DEFAULT NULL,
   `isActive` binary(1) DEFAULT NULL,
-  PRIMARY KEY (`idauthor`),
-  KEY `fk_author_book1_idx` (`book_idbook`),
-  KEY `fk_author_authorreview1_idx` (`authorreview_idauthorreview`),
-  CONSTRAINT `fk_author_authorreview1` FOREIGN KEY (`authorreview_idauthorreview`) REFERENCES `authorreview` (`idauthorreview`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_author_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`idauthor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,30 +49,29 @@ LOCK TABLES `author` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `authorofgenre`
+-- Table structure for table `authorofbook`
 --
 
-DROP TABLE IF EXISTS `authorofgenre`;
+DROP TABLE IF EXISTS `authorofbook`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `authorofgenre` (
-  `genre_idgenre` int(11) NOT NULL,
+CREATE TABLE `authorofbook` (
+  `book_idbook` int(11) NOT NULL,
   `author_idauthor` int(11) NOT NULL,
-  PRIMARY KEY (`genre_idgenre`,`author_idauthor`),
-  KEY `fk_genre_has_author_author1_idx` (`author_idauthor`),
-  KEY `fk_genre_has_author_genre1_idx` (`genre_idgenre`),
-  CONSTRAINT `fk_genre_has_author_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_genre_has_author_genre1` FOREIGN KEY (`genre_idgenre`) REFERENCES `genre` (`idgenre`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`book_idbook`,`author_idauthor`),
+  KEY `fk_authorofbook_author1_idx` (`author_idauthor`),
+  CONSTRAINT `fk_authorofbook_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_authorofbook_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `authorofgenre`
+-- Dumping data for table `authorofbook`
 --
 
-LOCK TABLES `authorofgenre` WRITE;
-/*!40000 ALTER TABLE `authorofgenre` DISABLE KEYS */;
-/*!40000 ALTER TABLE `authorofgenre` ENABLE KEYS */;
+LOCK TABLES `authorofbook` WRITE;
+/*!40000 ALTER TABLE `authorofbook` DISABLE KEYS */;
+/*!40000 ALTER TABLE `authorofbook` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -92,14 +85,14 @@ CREATE TABLE `authorreview` (
   `idauthorreview` int(11) NOT NULL AUTO_INCREMENT,
   `rating` int(1) DEFAULT NULL,
   `review` varchar(500) DEFAULT NULL,
-  `author_idauthor` int(11) DEFAULT NULL,
-  `user_iduser` int(11) DEFAULT NULL,
   `isActive` binary(1) DEFAULT NULL,
-  PRIMARY KEY (`idauthorreview`),
+  `author_idauthor` int(11) NOT NULL,
+  `user_iduser` int(11) NOT NULL,
+  PRIMARY KEY (`idauthorreview`,`author_idauthor`,`user_iduser`),
   KEY `fk_authorreview_author1_idx` (`author_idauthor`),
   KEY `fk_authorreview_user1_idx` (`user_iduser`),
-  CONSTRAINT `fk_authorreview_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_authorreview_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_authorreview_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_authorreview_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -131,14 +124,8 @@ CREATE TABLE `book` (
   `verificationStatus` binary(1) DEFAULT '0',
   `numberInChart` int(11) DEFAULT NULL,
   `bayesianAverage` double DEFAULT NULL,
-  `author_idauthor` int(11) DEFAULT NULL,
-  `bookreview_idbookreview` int(11) DEFAULT NULL,
   `isActive` binary(1) DEFAULT NULL,
-  PRIMARY KEY (`idbook`),
-  KEY `fk_book_author1_idx` (`author_idauthor`),
-  KEY `fk_book_bookreview1_idx` (`bookreview_idbookreview`),
-  CONSTRAINT `fk_book_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_book_bookreview1` FOREIGN KEY (`bookreview_idbookreview`) REFERENCES `bookreview` (`idbookreview`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`idbook`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -165,8 +152,8 @@ CREATE TABLE `booknote` (
   PRIMARY KEY (`user_iduser`,`booknote_idbook`),
   KEY `fk_user_has_book_book2_idx` (`booknote_idbook`),
   KEY `fk_user_has_book_user2_idx` (`user_iduser`),
-  CONSTRAINT `fk_user_has_book_book2` FOREIGN KEY (`booknote_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_book_user2` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_user_has_book_book2` FOREIGN KEY (`booknote_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_user_has_book_user2` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -180,60 +167,6 @@ LOCK TABLES `booknote` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bookofgenre`
---
-
-DROP TABLE IF EXISTS `bookofgenre`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bookofgenre` (
-  `genre_idgenre` int(11) NOT NULL,
-  `book_idbook` int(11) NOT NULL,
-  PRIMARY KEY (`genre_idgenre`,`book_idbook`),
-  KEY `fk_genre_has_book_book1_idx` (`book_idbook`),
-  KEY `fk_genre_has_book_genre1_idx` (`genre_idgenre`),
-  CONSTRAINT `fk_genre_has_book_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_genre_has_book_genre1` FOREIGN KEY (`genre_idgenre`) REFERENCES `genre` (`idgenre`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bookofgenre`
---
-
-LOCK TABLES `bookofgenre` WRITE;
-/*!40000 ALTER TABLE `bookofgenre` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bookofgenre` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bookoftag`
---
-
-DROP TABLE IF EXISTS `bookoftag`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bookoftag` (
-  `tag_idtag` int(11) NOT NULL,
-  `book_idbook` int(11) NOT NULL,
-  PRIMARY KEY (`tag_idtag`,`book_idbook`),
-  KEY `fk_tag_has_book_book1_idx` (`book_idbook`),
-  KEY `fk_tag_has_book_tag1_idx` (`tag_idtag`),
-  CONSTRAINT `fk_tag_has_book_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tag_has_book_tag1` FOREIGN KEY (`tag_idtag`) REFERENCES `tag` (`idtag`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bookoftag`
---
-
-LOCK TABLES `bookoftag` WRITE;
-/*!40000 ALTER TABLE `bookoftag` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bookoftag` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `bookreview`
 --
 
@@ -244,14 +177,14 @@ CREATE TABLE `bookreview` (
   `idbookreview` int(11) NOT NULL AUTO_INCREMENT,
   `rating` int(1) DEFAULT NULL,
   `review` varchar(500) DEFAULT NULL,
-  `book_idbook` int(11) DEFAULT NULL,
-  `user_iduser` int(11) DEFAULT NULL,
   `isActive` binary(1) DEFAULT NULL,
-  PRIMARY KEY (`idbookreview`),
-  KEY `fk_bookreview_book1_idx` (`book_idbook`),
+  `user_iduser` int(11) NOT NULL,
+  `book_idbook` int(11) NOT NULL,
+  PRIMARY KEY (`idbookreview`,`user_iduser`,`book_idbook`),
   KEY `fk_bookreview_user1_idx` (`user_iduser`),
-  CONSTRAINT `fk_bookreview_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bookreview_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_bookreview_book1_idx` (`book_idbook`),
+  CONSTRAINT `fk_bookreview_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_bookreview_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -262,6 +195,110 @@ CREATE TABLE `bookreview` (
 LOCK TABLES `bookreview` WRITE;
 /*!40000 ALTER TABLE `bookreview` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bookreview` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favoriteauthor`
+--
+
+DROP TABLE IF EXISTS `favoriteauthor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favoriteauthor` (
+  `user_iduser` int(11) NOT NULL,
+  `favoriteauthor_idauthor` int(11) NOT NULL,
+  PRIMARY KEY (`user_iduser`,`favoriteauthor_idauthor`),
+  KEY `fk_table1_author1_idx` (`favoriteauthor_idauthor`),
+  CONSTRAINT `fk_table1_author1` FOREIGN KEY (`favoriteauthor_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_table1_user5` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favoriteauthor`
+--
+
+LOCK TABLES `favoriteauthor` WRITE;
+/*!40000 ALTER TABLE `favoriteauthor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favoriteauthor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favoritebook`
+--
+
+DROP TABLE IF EXISTS `favoritebook`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favoritebook` (
+  `user_iduser` int(11) NOT NULL,
+  `favoritebook_idbook` int(11) NOT NULL,
+  PRIMARY KEY (`user_iduser`,`favoritebook_idbook`),
+  KEY `fk_table1_book1_idx` (`favoritebook_idbook`),
+  CONSTRAINT `fk_table1_book1` FOREIGN KEY (`favoritebook_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_table1_user3` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favoritebook`
+--
+
+LOCK TABLES `favoritebook` WRITE;
+/*!40000 ALTER TABLE `favoritebook` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favoritebook` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favoriteuser`
+--
+
+DROP TABLE IF EXISTS `favoriteuser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favoriteuser` (
+  `user_iduser` int(11) NOT NULL,
+  `favoriteuser` int(11) NOT NULL,
+  PRIMARY KEY (`user_iduser`,`favoriteuser`),
+  KEY `fk_favoriteuserofuser_user1_idx` (`favoriteuser`),
+  CONSTRAINT `fk_favoriteuserofuser_user1` FOREIGN KEY (`favoriteuser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_table1_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favoriteuser`
+--
+
+LOCK TABLES `favoriteuser` WRITE;
+/*!40000 ALTER TABLE `favoriteuser` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favoriteuser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `friend`
+--
+
+DROP TABLE IF EXISTS `friend`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `friend` (
+  `user_iduser` int(11) NOT NULL,
+  `friend` int(11) NOT NULL,
+  PRIMARY KEY (`user_iduser`,`friend`),
+  KEY `fk_friendofuser_user2_idx` (`friend`),
+  CONSTRAINT `fk_friendofuser_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_friendofuser_user2` FOREIGN KEY (`friend`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `friend`
+--
+
+LOCK TABLES `friend` WRITE;
+/*!40000 ALTER TABLE `friend` DISABLE KEYS */;
+/*!40000 ALTER TABLE `friend` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -296,13 +333,13 @@ DROP TABLE IF EXISTS `genreofauthor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genreofauthor` (
-  `author_idauthor` int(11) NOT NULL,
   `genre_idgenre` int(11) NOT NULL,
-  PRIMARY KEY (`author_idauthor`,`genre_idgenre`),
+  `author_idauthor` int(11) NOT NULL,
+  PRIMARY KEY (`genre_idgenre`,`author_idauthor`),
   KEY `fk_author_has_genre_genre1_idx` (`genre_idgenre`),
-  KEY `fk_author_has_genre_author1_idx` (`author_idauthor`),
-  CONSTRAINT `fk_author_has_genre_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_author_has_genre_genre1` FOREIGN KEY (`genre_idgenre`) REFERENCES `genre` (`idgenre`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_genreofauthor_author1_idx` (`author_idauthor`),
+  CONSTRAINT `fk_author_has_genre_genre1` FOREIGN KEY (`genre_idgenre`) REFERENCES `genre` (`idgenre`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_genreofauthor_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -328,8 +365,8 @@ CREATE TABLE `genreofbook` (
   PRIMARY KEY (`book_idbook`,`genre_idgenre`),
   KEY `fk_book_has_genre_genre1_idx` (`genre_idgenre`),
   KEY `fk_book_has_genre_book1_idx` (`book_idbook`),
-  CONSTRAINT `fk_book_has_genre_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_book_has_genre_genre1` FOREIGN KEY (`genre_idgenre`) REFERENCES `genre` (`idgenre`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_book_has_genre_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_book_has_genre_genre1` FOREIGN KEY (`genre_idgenre`) REFERENCES `genre` (`idgenre`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -343,6 +380,32 @@ LOCK TABLES `genreofbook` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `readbook`
+--
+
+DROP TABLE IF EXISTS `readbook`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `readbook` (
+  `user_iduser` int(11) NOT NULL,
+  `readbook_idbook` int(11) NOT NULL,
+  PRIMARY KEY (`user_iduser`,`readbook_idbook`),
+  KEY `fk_readbookofuser_book1_idx` (`readbook_idbook`),
+  CONSTRAINT `fk_readbookofuser_book1` FOREIGN KEY (`readbook_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_table1_user2` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `readbook`
+--
+
+LOCK TABLES `readbook` WRITE;
+/*!40000 ALTER TABLE `readbook` DISABLE KEYS */;
+/*!40000 ALTER TABLE `readbook` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `readingbook`
 --
 
@@ -352,12 +415,12 @@ DROP TABLE IF EXISTS `readingbook`;
 CREATE TABLE `readingbook` (
   `user_iduser` int(11) NOT NULL,
   `readingbook_idbook` int(11) NOT NULL,
-  `pocetStran` int(11) DEFAULT NULL,
+  `numberOfPages` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_iduser`,`readingbook_idbook`),
   KEY `fk_user_has_book_book1_idx` (`readingbook_idbook`),
   KEY `fk_user_has_book_user1_idx` (`user_iduser`),
-  CONSTRAINT `fk_user_has_book_book1` FOREIGN KEY (`readingbook_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_book_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_user_has_book_book1` FOREIGN KEY (`readingbook_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_user_has_book_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -380,17 +443,20 @@ DROP TABLE IF EXISTS `request`;
 CREATE TABLE `request` (
   `idrequest` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(200) DEFAULT NULL,
+  `isActive` binary(1) DEFAULT NULL,
+  `user_iduser` int(11) DEFAULT NULL,
   `book_idbook` int(11) DEFAULT NULL,
   `author_idauthor` int(11) DEFAULT NULL,
-  `user_iduser` int(11) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
   PRIMARY KEY (`idrequest`),
+  UNIQUE KEY `user_iduser_UNIQUE` (`user_iduser`),
+  UNIQUE KEY `book_idbook_UNIQUE` (`book_idbook`),
+  UNIQUE KEY `author_idauthor_UNIQUE` (`author_idauthor`),
+  KEY `fk_request_user1_idx` (`user_iduser`),
   KEY `fk_request_book1_idx` (`book_idbook`),
   KEY `fk_request_author1_idx` (`author_idauthor`),
-  KEY `fk_request_user1_idx` (`user_iduser`),
-  CONSTRAINT `fk_request_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_request_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_request_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_request_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_request_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_request_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -435,13 +501,13 @@ DROP TABLE IF EXISTS `tagofbook`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tagofbook` (
-  `book_idbook` int(11) NOT NULL,
   `tag_idtag` int(11) NOT NULL,
-  PRIMARY KEY (`book_idbook`,`tag_idtag`),
+  `book_idbook` int(11) NOT NULL,
+  PRIMARY KEY (`tag_idtag`,`book_idbook`),
   KEY `fk_book_has_tag_tag1_idx` (`tag_idtag`),
-  KEY `fk_book_has_tag_book_idx` (`book_idbook`),
-  CONSTRAINT `fk_book_has_tag_book` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_book_has_tag_tag1` FOREIGN KEY (`tag_idtag`) REFERENCES `tag` (`idtag`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_tagofbook_book1_idx` (`book_idbook`),
+  CONSTRAINT `fk_book_has_tag_tag1` FOREIGN KEY (`tag_idtag`) REFERENCES `tag` (`idtag`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_tagofbook_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -471,32 +537,8 @@ CREATE TABLE `user` (
   `lastLogin` datetime DEFAULT NULL,
   `salt` varchar(45) DEFAULT NULL,
   `isAdmin` binary(1) DEFAULT NULL,
-  `frienduser_iduser` int(11) DEFAULT NULL,
-  `favoriteuser_iduser` int(11) DEFAULT NULL,
-  `bookreview_idbookreview` int(11) DEFAULT NULL,
-  `authorreview_idauthorreview` int(11) DEFAULT NULL,
-  `readbook_idbook1` int(11) DEFAULT NULL,
-  `favoritebook_idbook` int(11) DEFAULT NULL,
-  `wantedbook_idbook` int(11) DEFAULT NULL,
-  `favoriteauthor_idauthor` int(11) DEFAULT NULL,
   `isActive` binary(1) DEFAULT NULL,
-  PRIMARY KEY (`iduser`),
-  KEY `fk_user_user1_idx` (`frienduser_iduser`),
-  KEY `fk_user_user2_idx` (`favoriteuser_iduser`),
-  KEY `fk_user_bookreview1_idx` (`bookreview_idbookreview`),
-  KEY `fk_user_authorreview1_idx` (`authorreview_idauthorreview`),
-  KEY `fk_user_book1_idx` (`readbook_idbook1`),
-  KEY `fk_user_book2_idx` (`favoritebook_idbook`),
-  KEY `fk_user_book3_idx` (`wantedbook_idbook`),
-  KEY `fk_user_author1_idx` (`favoriteauthor_idauthor`),
-  CONSTRAINT `fk_user_author1` FOREIGN KEY (`favoriteauthor_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_authorreview1` FOREIGN KEY (`authorreview_idauthorreview`) REFERENCES `authorreview` (`idauthorreview`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_book1` FOREIGN KEY (`readbook_idbook1`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_book2` FOREIGN KEY (`favoritebook_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_book3` FOREIGN KEY (`wantedbook_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_bookreview1` FOREIGN KEY (`bookreview_idbookreview`) REFERENCES `bookreview` (`idbookreview`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_user1` FOREIGN KEY (`frienduser_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_user2` FOREIGN KEY (`favoriteuser_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -507,6 +549,32 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wantedbook`
+--
+
+DROP TABLE IF EXISTS `wantedbook`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wantedbook` (
+  `user_iduser` int(11) NOT NULL,
+  `wantedbook_idbook` int(11) NOT NULL,
+  PRIMARY KEY (`user_iduser`,`wantedbook_idbook`),
+  KEY `fk_table1_book2_idx` (`wantedbook_idbook`),
+  CONSTRAINT `fk_table1_book2` FOREIGN KEY (`wantedbook_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_table1_user4` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wantedbook`
+--
+
+LOCK TABLES `wantedbook` WRITE;
+/*!40000 ALTER TABLE `wantedbook` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wantedbook` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -526,4 +594,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-04 16:37:22
+-- Dump completed on 2016-12-10 23:37:51

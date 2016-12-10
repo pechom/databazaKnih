@@ -3,18 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.upjs.ics.paz1c.databazaKnih.GUI;
+package sk.upjs.ics.paz1c.GUI;
+
+import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
+import sk.upjs.ics.paz1c.databazaKnih.UserManager;
+
+
+ 
+
+
+
+
 
 /**
  *
  * @author szoplakz
  */
-public class LoginForm extends javax.swing.JFrame {
-
+public  class LoginForm extends javax.swing.JFrame   {
+    
+ //private  UserManager userManager=ObjectFactory.INSTANCE.getUserManager();
     /**
      * Creates new form LoginForm
      */
+   
     public LoginForm() {
+     
         initComponents();
     }
 
@@ -27,55 +40,29 @@ public class LoginForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        WrongUserNameOrPasswordDialog = new javax.swing.JDialog();
-        WrongUserNameOrPassWordLabel = new javax.swing.JLabel();
-        PleaseTryAgainLabel = new javax.swing.JLabel();
-        LoginRetryButton = new javax.swing.JButton();
-        SignInButton = new javax.swing.JButton();
-        UserNameTextField = new javax.swing.JTextField();
         UsernameLabel = new javax.swing.JLabel();
+        UsernameTextField = new javax.swing.JTextField();
         PasswordLabel = new javax.swing.JLabel();
-        UserPasswordField = new javax.swing.JPasswordField();
-        RegistrationInviteLabel = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
+        SignInButton = new javax.swing.JButton();
         SignUpButton = new javax.swing.JButton();
-
-        WrongUserNameOrPassWordLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        WrongUserNameOrPassWordLabel.setText("The username or password you have entered is not valid.");
-
-        PleaseTryAgainLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        PleaseTryAgainLabel.setText("Please try again !");
-
-        LoginRetryButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        LoginRetryButton.setText("OK");
-
-        javax.swing.GroupLayout WrongUserNameOrPasswordDialogLayout = new javax.swing.GroupLayout(WrongUserNameOrPasswordDialog.getContentPane());
-        WrongUserNameOrPasswordDialog.getContentPane().setLayout(WrongUserNameOrPasswordDialogLayout);
-        WrongUserNameOrPasswordDialogLayout.setHorizontalGroup(
-            WrongUserNameOrPasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WrongUserNameOrPasswordDialogLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(WrongUserNameOrPassWordLabel)
-                .addGap(28, 28, 28))
-            .addGroup(WrongUserNameOrPasswordDialogLayout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addGroup(WrongUserNameOrPasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LoginRetryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PleaseTryAgainLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        WrongUserNameOrPasswordDialogLayout.setVerticalGroup(
-            WrongUserNameOrPasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(WrongUserNameOrPasswordDialogLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(WrongUserNameOrPassWordLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PleaseTryAgainLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LoginRetryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
-        );
+        RegistrationInviteLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        UsernameLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        UsernameLabel.setForeground(new java.awt.Color(0, 102, 204));
+        UsernameLabel.setText("Username:");
+
+        UsernameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsernameTextFieldActionPerformed(evt);
+            }
+        });
+
+        PasswordLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        PasswordLabel.setForeground(new java.awt.Color(0, 102, 204));
+        PasswordLabel.setText("Password:");
 
         SignInButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         SignInButton.setText("Sign in");
@@ -85,21 +72,17 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
-        UserNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        SignUpButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SignUpButton.setText("Sign up");
+        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserNameTextFieldActionPerformed(evt);
+                SignUpButtonActionPerformed(evt);
             }
         });
 
-        UsernameLabel.setText("Username:");
-
-        PasswordLabel.setText("Password:");
-
-        RegistrationInviteLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        RegistrationInviteLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        RegistrationInviteLabel.setForeground(new java.awt.Color(0, 102, 204));
         RegistrationInviteLabel.setText("Don't have an account ? Sign up !");
-
-        SignUpButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SignUpButton.setText("Sign up");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,45 +101,63 @@ public class LoginForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(UsernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PasswordLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SignInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138))))
+                        .addGap(77, 77, 77))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(UsernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PasswordLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(SignInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(SignInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addComponent(RegistrationInviteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SignUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UserNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTextFieldActionPerformed
+    private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UserNameTextFieldActionPerformed
+    }//GEN-LAST:event_UsernameTextFieldActionPerformed
 
     private void SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInButtonActionPerformed
-        // TODO add your handling code here:
+        
+        
+        if(true){
+            MyUserProfileForm myuserprofileform = new MyUserProfileForm(this, true,1,"trickster","Zoli","Szoplak","szoplak25gmail.com",false);
+            myuserprofileform.setVisible(true);
+        }
+        else{
+            ErrorForm errorForm = new ErrorForm(this, true,"The username or password you have entered is incorrect. Please try again !");
+            errorForm.setVisible(true);
+        }    
+            
     }//GEN-LAST:event_SignInButtonActionPerformed
+
+    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
+       
+        RegisterForm registerForm = new RegisterForm(this, true);
+        registerForm.setVisible(true);
+    }//GEN-LAST:event_SignUpButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,16 +195,12 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton LoginRetryButton;
+    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordLabel;
-    private javax.swing.JLabel PleaseTryAgainLabel;
     private javax.swing.JLabel RegistrationInviteLabel;
     private javax.swing.JButton SignInButton;
     private javax.swing.JButton SignUpButton;
-    private javax.swing.JTextField UserNameTextField;
-    private javax.swing.JPasswordField UserPasswordField;
     private javax.swing.JLabel UsernameLabel;
-    private javax.swing.JLabel WrongUserNameOrPassWordLabel;
-    private javax.swing.JDialog WrongUserNameOrPasswordDialog;
+    private javax.swing.JTextField UsernameTextField;
     // End of variables declaration//GEN-END:variables
 }

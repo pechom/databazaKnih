@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,10 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlBookDao implements InterfaceBookDao {
 
@@ -58,7 +55,7 @@ public class MysqlBookDao implements InterfaceBookDao {
                         book.setTags(new ArrayList<>());
                         books.add(book);
 
-                        int reviewid = rs.getInt("bookreview_idbookreview");
+                        int reviewid = rs.getInt("bookreview.idbookreview");
                         if (rs.wasNull()) {
                             BookReview review = reviews.get(reviewid);
                             if (review == null) {
@@ -69,7 +66,7 @@ public class MysqlBookDao implements InterfaceBookDao {
                             }
                         }
 
-                        int genreid = rs.getInt("genre_idgenre");
+                        int genreid = rs.getInt("genreofbook.genre_idgenre");
                         if (rs.wasNull()) {
                             Genre genre = genres.get(genreid);
                             if (genre == null) {
@@ -81,7 +78,7 @@ public class MysqlBookDao implements InterfaceBookDao {
                             }
                         }
 
-                        int tagid = rs.getInt("tag_idtag");
+                        int tagid = rs.getInt("tagofbook.tag_idtag");
                         if (rs.wasNull()) {
                             Tag tag = tags.get(tagid);
                             if (tag == null) {
@@ -93,7 +90,7 @@ public class MysqlBookDao implements InterfaceBookDao {
                             }
                         }
 
-                        int authorid = rs.getInt("author_idauthor");
+                        int authorid = rs.getInt("authorofbook.author_idauthor");
                         if (rs.wasNull()) {
                             Author author = authors.get(authorid);
                             if (author == null) {
@@ -158,10 +155,10 @@ public class MysqlBookDao implements InterfaceBookDao {
                         book.setGenres(new ArrayList<>());
                         book.setTags(new ArrayList<>());
 
-                        int genreid = rs.getInt("genre_idgenre");
-                        int reviewid = rs.getInt("bookreview_idbookreview");
-                        int tagid = rs.getInt("tag_idtag");
-                        int authorid = rs.getInt("author_idauthor");
+                        int reviewid = rs.getInt("bookreview.idbookreview");
+                        int genreid = rs.getInt("genreofbook.genre_idgenre");
+                        int tagid = rs.getInt("tagofbook.tag_idtag");
+                        int authorid = rs.getInt("authorofbook.author_idauthor");
                         Genre genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
                         if (genre.isIsActive()) {
                             book.getGenres().add(genre);
