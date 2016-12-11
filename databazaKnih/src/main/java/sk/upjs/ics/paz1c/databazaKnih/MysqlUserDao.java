@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.lang.Integer;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -218,7 +219,8 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public void updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SqlQueries.UPDATE_USER, user.getName(), user.getSurname(),
+                user.getLastLogin(), user.isIsAdmin(), user.isIsActive(), user.getId());
     }
 
     @Override
@@ -265,7 +267,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                     int friendid = rs.getInt("friend.friend");
                     int readid = rs.getInt("readbook.readbook_idbook");
                     int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
-                    
+
                     int noteid = rs.getInt("booknote.booknote_idbook");
                     String note = rs.getString("booknote.note");
                     int readingid = rs.getInt("readingbook.readingbook_idbook");
@@ -325,5 +327,10 @@ public class MysqlUserDao implements InterfaceUserDao {
         User user = findById(id);
         user.setIsActive(true);
         updateUser(user);
+    }
+
+    @Override
+    public void changePassword(User user) {
+        jdbcTemplate.update(SqlQueries.CHANGE_PASSWORD, user.getSalt(), user.getPasswordHash(), user.getId());
     }
 }

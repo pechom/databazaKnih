@@ -90,7 +90,7 @@ public class DefaultUserManager implements UserManager {
                 break;
             }
         }
-        if (checked.equals(null)) {
+        if (checked==null) {
             return false;
         } else {
             return checked.checkPassword(typedPassword);
@@ -98,12 +98,13 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public List<User> getUsersByUsername(String login) {
+    public User getUserByUsername(String login) {
         List<User> users = getAllUsers();
-        List<User> named = new ArrayList<>();
+        User named=null;
         for (User user : users) {
             if ((user.getUserName() != null) && (user.getUserName().equalsIgnoreCase(login))) {
-                named.add(user);
+                named=user;
+                break;
             }
         }
         return named;
@@ -413,5 +414,11 @@ public class DefaultUserManager implements UserManager {
                 updateUser(user);
             }
         }
+    }
+
+    @Override
+    public void changePassword(User user, String typedPassword) {// meni aj salt a passwordHash
+        user.setPassword(typedPassword);
+        userDao.changePassword(user);
     }
 }

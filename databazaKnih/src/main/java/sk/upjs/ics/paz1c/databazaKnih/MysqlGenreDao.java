@@ -86,7 +86,8 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public void updateGenre(Genre genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SqlQueries.UPDATE_GENRE, genre.getName(),
+                genre.isIsActive(), genre.getId());
     }
 
     @Override

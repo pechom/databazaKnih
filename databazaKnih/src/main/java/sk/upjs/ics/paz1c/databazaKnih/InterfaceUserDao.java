@@ -16,4 +16,7 @@ public interface InterfaceUserDao {
 
     User findById(int id);
 
+    void changePassword(User user);
+
+
 }

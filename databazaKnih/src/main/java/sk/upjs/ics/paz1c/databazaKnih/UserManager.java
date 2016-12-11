@@ -13,7 +13,7 @@ public interface UserManager {
 
     Boolean checkNameAndPassword(String userName, String typedPassword);//porovnam to co zadal user s jeho heslom
 
-    List<User> getUsersByUsername(String login);
+    User getUserByUsername(String login);
 
     List<User> getUsersByName(String name);
 
@@ -78,5 +78,7 @@ public interface UserManager {
     void updateUser(User user);
 
     User findById(int id);//z usera sa budu potom podla potrby tahat parametre
+    
+    void changePassword(User user, String typedPassword);
 
 }

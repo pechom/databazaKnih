@@ -85,7 +85,8 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     @Override
     public void updateReview(BookReview review) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SqlQueries.UPDATE_BOOKREVIEW, review.getRating(),
+                review.getReview(), review.isIsActive(), review.getId());
     }
 
     @Override

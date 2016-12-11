@@ -81,7 +81,7 @@ public class MysqlRequestDao implements InterfaceRequestDao {
     @Override
     public void insertRequest(Request request) {
         jdbcTemplate.update(SqlQueries.INSERT_REQUEST, request.getContent(),
-                request.getBook().getId(), request.getAuthor().getId(), 
+                request.getBook().getId(), request.getAuthor().getId(),
                 request.getRequester().getId(), request.isIsActive());
     }
 
@@ -134,7 +134,8 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void updateRequest(Request request) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SqlQueries.UPDATE_REQUEST, request.getContent(),
+                request.isIsActive(), request.getId());
     }
 
 }

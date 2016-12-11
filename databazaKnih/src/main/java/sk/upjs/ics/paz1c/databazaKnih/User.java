@@ -62,9 +62,8 @@ public class User {
     
     
     public void setPassword(String password) {
-        if (Salt == null) {
-            Salt = BCrypt.gensalt();
-        }
+            this.Salt = BCrypt.gensalt();
+
         this.passwordHash = BCrypt.hashpw(password, Salt);
     }
     

@@ -52,7 +52,7 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
                         authors.add(author);
                         int bookid = rs.getInt("authorofbook.book_idbook");
-                        
+
                         if (rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
@@ -111,7 +111,10 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public void updateAuthor(Author author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SqlQueries.UPDATE_AUTHOR, author.getName(),
+                author.getBirth(), author.getDeath(), author.getNationality(),
+                author.getSex(), author.getBiography(), author.isVerificationStatus(),
+                author.isLifeStatus(), author.isIsActive(), author.getId());
     }
 
     @Override

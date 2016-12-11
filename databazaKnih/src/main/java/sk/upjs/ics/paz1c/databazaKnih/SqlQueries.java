@@ -17,6 +17,11 @@ public class SqlQueries {
             + "death, nationality, sex, biography, verificationStatus, "
             + " lifeStatus, isActive) VALUES (?,?,?,?,?,?,?,?,?)";
 
+    public static final String UPDATE_AUTHOR = "UPDATE author SET name=?, birth=?, "
+            + "death=?, nationality=?, sex=?, biography=?, verificationStatus=?, "
+            + " lifeStatus=?, isActive=? "
+            + "WHERE idauthor=?";
+
     public static final String SELECT_AUTHOR_BY_ID = "SELECT author.idauthor, "
             + "author.name, author.birth, author.death, author.nationality, "
             + "author.sex, author.biography, author.isActive, "
@@ -27,6 +32,10 @@ public class SqlQueries {
             + "JOIN genreofauthor ON author.idauthor=genreofauthor.author_idauthor "
             + "JOIN authorreview ON author.idauthor=authorreview.author_idauthor "
             + "WHERE author.isActive=1 and author.idauthor=";
+
+    public static final String SELECT_USER_ID_BY_USERNAME = "SELECT "
+            + "user.iduser FROM user "
+            + "WHERE user.isActive=1 and user.userName=?";
 
     public static final String SELECT_ALL_AUTHORREVIEWS = "SELECT "
             + "authorreview.idauthorreview, authorreview.rating, "
@@ -39,6 +48,10 @@ public class SqlQueries {
 
     public static final String INSERT_AUTHORREVIEW = "INSERT INTO authorreview "
             + "(rating, review, isActive) VALUES (?,?,?)";
+
+    public static final String UPDATE_AUTHORREVIEW = "UPADATE authorreview SET "
+            + "rating=?, review=?, isActive=? "
+            + "WHERE idauthorreview=?";
 
     public static final String SELECT_AUTHORREVIEW_BY_ID = "SELECT "
             + "authorreview.idauthorreview, authorreview.rating, "
@@ -67,6 +80,13 @@ public class SqlQueries {
             + "averageOfReviews, verificationStatus, numberInChart, "
             + "bayesianAverage, isActive) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
+    public static final String UPDATE_BOOK = "UPDATE book SET "
+            + "name=?, year=?, "
+            + "numberOfPages=?, ISBN=?, description=?, numberOfReviews=?, "
+            + "averageOfReviews=?, verificationStatus=?, numberInChart=?, "
+            + "bayesianAverage=?, isActive=? "
+            + "WHERE idbook=?";
+
     public static final String SELECT_BOOK_BY_ID = "SELECT book.idbook, book.name,"
             + "book.year, book.numberOfPages. book.ISBN, book.descroption, "
             + " book.numberOfReviews, book.averageOfReviews, book.verificationStatus,"
@@ -92,6 +112,10 @@ public class SqlQueries {
     public static final String INSERT_BOOKREVIEW = "INSERT INTO bookreview "
             + "(rating, review, isActive) VALUES (?,?,?)";
 
+    public static final String UPDATE_BOOKREVIEW = "UPDATE bookreview SET "
+            + "rating=?, review=?, isActive=? "
+            + "WHERE idbookreview=?";
+
     public static final String SELECT_BOOKREVIEW_BY_ID = "SELECT "
             + "bookreview.idbookreview, bookreview.rating, bookreview.review, "
             + "bookreview.isActive, "
@@ -112,6 +136,10 @@ public class SqlQueries {
     public static final String INSERT_GENRE = "INSERT INTO genre "
             + "(name, isActive) VALUES (?,?)";
 
+    public static final String UPDATE_GENRE = "UPDATE genre SET "
+            + "name=?, isActive=? "
+            + "WHERE idgenre=?";
+
     public static final String SELECT_GENRE_BY_ID = "SELECT "
             + "genre.idgenre, genre.name, genre.isActive, "
             + "genreofbook.book_idbook, genreofauthor.author_idauthor "
@@ -129,9 +157,14 @@ public class SqlQueries {
             + "JOIN user ON request.user_iduser=user.iduser "
             + "WHERE request.isActive=1 ORDER BY request.idrequest";
 
+    //request ma pri inserte aj vztahy
     public static final String INSERT_REQUEST = "INSERT INTO request "
             + "(content, book_idbook, author_idauthor, user_iduser, isActive) "
             + "VALUES (?,?,?,?,?)";
+
+    public static final String UPDATE_REQUEST = "UPDATE genre SET "
+            + "content=?,isActive=? "
+            + "WHERE idrequest=?";
 
     public static final String SELECT_REQUEST_BY_ID = "SELECT request.idrequest, "
             + "request.content, request.isActive, request.book_idbook, "
@@ -150,6 +183,10 @@ public class SqlQueries {
 
     public static final String INSERT_TAG = "INSERT INRO tag "
             + "(name, isActive) VALUES (?,?)";
+
+    public static final String UPDATE_TAG = "UPDATE tag SET "
+            + "name=?, isActive=? "
+            + "WHERE idtag=?";
 
     public static final String SELECT_TAG_BY_ID = "SELECT "
             + "tag.idtag, tag.name, tag.isActive, tagofbook.book_idbook "
@@ -183,6 +220,15 @@ public class SqlQueries {
     public static final String INSERT_USER = "INSERT INTO user "
             + "(username, passwordHash, mail, name, surname, lastLogin, salt, "
             + "isAdmin, isActive) VALUES (?,?,?,?,?,?,?,?,?)";
+
+    public static final String UPDATE_USER = "UPDATE user SET "
+            + " name=?, surname=?, lastLogin=? "
+            + "isAdmin=?, isActive=? "
+            + "WHERE iduser=?";
+
+    public static final String CHANGE_PASSWORD = "UPDATE user SET "
+            + "salt=?, passwordHash=? "
+            + "WHERE iduser=?";
 
     public static final String SELECT_USER_BY_ID = "SELECT "
             + "user.iduser, user.userName, user.passwordHash, user.name, "

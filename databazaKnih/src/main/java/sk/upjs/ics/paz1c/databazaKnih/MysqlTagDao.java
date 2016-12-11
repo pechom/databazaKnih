@@ -59,7 +59,7 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public void insertTag(Tag tag) {
-       jdbcTemplate.update(SqlQueries.INSERT_TAG, tag.getName(), tag.isIsActive());
+        jdbcTemplate.update(SqlQueries.INSERT_TAG, tag.getName(), tag.isIsActive());
     }
 
     @Override
@@ -71,7 +71,8 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public void updateTag(Tag tag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SqlQueries.UPDATE_TAG, tag.getName(),
+                tag.isIsActive(), tag.getId());
     }
 
     @Override
