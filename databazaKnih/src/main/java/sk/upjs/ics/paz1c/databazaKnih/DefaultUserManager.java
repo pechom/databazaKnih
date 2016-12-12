@@ -361,42 +361,36 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public void addReadingBooksToUser(List<Map<Book, Integer>> reading, User user) {
-        for (Map<Book, Integer> map : reading) {
-            if (!user.getReading().contains(map)) {
-                user.getReading().add(map);
-                userDao.addReadingBooksToUser(map, user.getId());
-            }
+    public void addReadingBookToUser(Map<Book, Integer> reading, User user) {
+        if (!user.getReading().contains(reading)) {
+            user.getReading().add(reading);
+            userDao.addReadingBooksToUser(reading, user.getId());
+
         }
     }
 
     @Override
-    public void deleteReadingBooksFromUser(List<Map<Book, Integer>> reading, User user) {
-        for (Map<Book, Integer> map : reading) {
-            if (user.getReading().contains(map)) {
-                user.getReading().remove(map);
-                userDao.deleteReadingBooksFromUser(map, user.getId());
-            }
+    public void deleteReadingBookFromUser(Map<Book, Integer> reading, User user) {
+        if (user.getReading().contains(reading)) {
+            user.getReading().remove(reading);
+            userDao.deleteReadingBooksFromUser(reading, user.getId());
+
         }
     }
 
     @Override
-    public void addNoteBooksToUser(List<Map<Book, String>> notebooks, User user) {
-        for (Map<Book, String> notebook : notebooks) {
-            if (!user.getNote().contains(notebook)) {
-                user.getNote().add(notebook);
-                userDao.addNoteBooksToUser(notebook, user.getId());
-            }
+    public void addNoteBookToUser(Map<Book, String> notebook, User user) {
+        if (!user.getNote().contains(notebook)) {
+            user.getNote().add(notebook);
+            userDao.addNoteBooksToUser(notebook, user.getId());
         }
     }
 
     @Override
-    public void deleteNoteBooksFromUser(List<Map<Book, String>> notebooks, User user) {
-        for (Map<Book, String> notebook : notebooks) {
-            if (user.getNote().contains(notebook)) {
-                user.getNote().remove(notebook);
-                userDao.deleteNoteBooksFromUser(notebook, user.getId());
-            }
+    public void deleteNoteBookFromUser(Map<Book, String> notebook, User user) {
+        if (user.getNote().contains(notebook)) {
+            user.getNote().remove(notebook);
+            userDao.deleteNoteBooksFromUser(notebook, user.getId());
         }
     }
 
@@ -404,5 +398,202 @@ public class DefaultUserManager implements UserManager {
     public void changePassword(User user, String typedPassword) {// meni aj salt a passwordHash
         user.setPassword(typedPassword);
         userDao.changePassword(user);
+    }
+
+    @Override
+    public List<User> getAdmins(List<User> users) {
+
+        List<User> admins = new ArrayList<>();
+        for (User user : users) {
+            if (user.isIsAdmin()) {
+                admins.add(user);
+            }
+        }
+        return admins;
+    }
+
+    @Override
+    public List<User> getNonAdmins(List<User> users) {
+
+        List<User> nonAdmins = new ArrayList<>();
+        for (User user : users) {
+            if (!user.isIsAdmin()) {
+                nonAdmins.add(user);
+            }
+        }
+        return nonAdmins;
+    }
+
+    @Override
+    public List<User> getUsersByUsername(String login, List<User> users) {
+
+        List<User> named = new ArrayList<>();
+        for (User user : users) {
+            if ((user.getUserName() != null) && (user.getUserName().equalsIgnoreCase(login))) {
+                named.add(user);
+            }
+        }
+        return named;
+    }
+
+    @Override
+    public List<User> getUsersByName(String name, List<User> users) {
+
+        List<User> named = new ArrayList<>();
+        for (User user : users) {
+            if ((user.getName() != null) && (user.getName().equalsIgnoreCase(name))) {
+                named.add(user);
+            }
+        }
+        return named;
+    }
+
+    @Override
+    public List<User> getUsersBySurname(String name, List<User> users) {
+
+        List<User> named = new ArrayList<>();
+        for (User user : users) {
+            if ((user.getSurname() != null) && (user.getSurname().equalsIgnoreCase(name))) {
+                named.add(user);
+            }
+        }
+        return named;
+    }
+
+    @Override
+    public User getUserByMail(String mail, List<User> users) {
+
+        User mailUser = null;
+        for (User user : users) {
+            if ((user.getMail() != null) && (user.getMail().equals(mail))) {
+                mailUser = user;
+                break;
+            }
+        }
+        return mailUser;
+    }
+
+    @Override
+    public void addReadBookToUser(Book book, User user) {
+
+        if (!user.getReadBooks().contains(book)) {
+            user.getReadBooks().add(book);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void deleteReadBookFromUser(Book book, User user) {
+
+        if (user.getReadBooks().contains(book)) {
+            user.getReadBooks().remove(book);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addFavoriteBookToUser(Book book, User user) {
+
+        if (!user.getFavoriteBooks().contains(book)) {
+            user.getFavoriteBooks().add(book);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void deleteFavoriteBookFromUser(Book book, User user) {
+
+        if (user.getFavoriteBooks().contains(book)) {
+            user.getFavoriteBooks().remove(book);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addWantedBookToUser(Book book, User user) {
+
+        if (!user.getWantedBooks().contains(book)) {
+            user.getWantedBooks().add(book);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void deleteWantedBookFromUser(Book book, User user) {
+
+        if (user.getWantedBooks().contains(book)) {
+            user.getWantedBooks().remove(book);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addFavoriteAuthorToUser(Author author, User user) {
+
+        if (!user.getFavoriteAuthors().contains(author)) {
+            user.getFavoriteAuthors().add(author);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void deleteFavoriteAuthorFromUser(Author author, User user) {
+
+        if (user.getFavoriteAuthors().contains(author)) {
+            user.getFavoriteAuthors().remove(author);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addFriendToUser(User friend, User user) {
+
+        if (!user.getFriends().contains(friend)) {
+            user.getFriends().add(friend);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void deleteFriendFromUser(User friend, User user) {
+
+        if (user.getFriends().contains(friend)) {
+            user.getFriends().remove(friend);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addFavoriteReviewer(User reviewer, User user) {
+
+        if (!user.getFavoriteReviewers().contains(reviewer)) {
+            user.getFavoriteReviewers().add(reviewer);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void deleteFavoriteReviewer(User reviewer, User user) {
+
+        if (user.getFavoriteReviewers().contains(reviewer)) {
+            user.getFavoriteReviewers().remove(reviewer);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addBookReview(BookReview bookReview, User user) {
+        if (!user.getBookReviews().contains(bookReview)) {
+            user.getBookReviews().add(bookReview);
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public void addAuthorReview(AuthorReview authorReview, User user) {
+        if (!user.getAuthorReviews().contains(authorReview)) {
+            user.getAuthorReviews().add(authorReview);
+            updateUser(user);
+        }
     }
 }

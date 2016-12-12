@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     private JdbcTemplate jdbcTemplate;
-    private BookReviewRowMapper bookReviewRowMapper = new BookReviewRowMapper();
 
     public MysqlBookReviewDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

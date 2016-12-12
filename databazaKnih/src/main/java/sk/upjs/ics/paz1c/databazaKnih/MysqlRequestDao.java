@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlRequestDao implements InterfaceRequestDao {
 
     private JdbcTemplate jdbcTemplate;
-    private RequestRowMapper requestRowMapper = new RequestRowMapper();
 
     public MysqlRequestDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

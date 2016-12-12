@@ -13,8 +13,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     private JdbcTemplate jdbcTemplate;
-    private AuthorReviewRowMapper authorReviewRowMapper = new AuthorReviewRowMapper();
-
+    
     public MysqlAuthorReviewDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

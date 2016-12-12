@@ -79,7 +79,7 @@ public interface BookManager {
     void addReview(BookReview review, Book book);//vypocitat aj avg a cekne rebricek
 
     void removeReview(BookReview review, Book book);//vypocitat aj avg a cekne rebricek
-    
+
     void removeAllReviews(Book book);
 
     void calculateAndInsertBayesian(Book book, int constant);
@@ -93,4 +93,45 @@ public interface BookManager {
     void updateBook(Book book);
 
     Book findById(int id);
+
+    List<Book> GetBooksByName(String name, List<Book> books);
+
+    List<Book> GetBooksByAuthor(Author author, List<Book> books);
+
+    List<Book> getBooksFromYear(int year, List<Book> books);
+
+    List<Book> getBooksToYear(int year, List<Book> books);
+
+    List<Book> getBooksFromToYear(int from, int to, List<Book> books);
+
+    List<Book> GetBooksByGenres(List<Genre> genres, List<Book> books);
+
+    List<Book> GetBooksByAllGenres(List<Genre> genres, List<Book> books);
+
+    List<Book> getBooksFromPages(int pages, List<Book> books);
+
+    List<Book> getBooksToPages(int pages, List<Book> books);
+
+    List<Book> getBooksFromToPages(int from, int to, List<Book> books);
+
+    Book getBookByISBN(int ISBN, List<Book> books);
+
+    List<Book> GetBooksByTags(List<Tag> tags, List<Book> books);
+
+    List<Book> GetBooksByAllTags(List<Tag> tags, List<Book> books);
+
+    List<Book> GetBooksFromReviews(int numberOfReviews, List<Book> books);
+
+    List<Book> getBooksFromAverage(int average, List<Book> books);
+
+    List<Book> getBooksToAverage(int average, List<Book> books);
+
+    List<Book> getBooksFromToAverage(int from, int to, List<Book> books);
+
+    List<Book> getBooksFromBayesian(int average, List<Book> books);
+
+    List<Book> getBooksToBayesian(int average, List<Book> books);
+
+    List<Book> getBooksFromToBayesian(int from, int to, List<Book> books);
+
 }

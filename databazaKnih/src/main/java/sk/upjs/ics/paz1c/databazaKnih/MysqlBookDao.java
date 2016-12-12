@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JButton;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -14,7 +13,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlBookDao implements InterfaceBookDao {
 
     private JdbcTemplate jdbcTemplate;
-    private BookRowMapper bookRowMapper = new BookRowMapper();
 
     public MysqlBookDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

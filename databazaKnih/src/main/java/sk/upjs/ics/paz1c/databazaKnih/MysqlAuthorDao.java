@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     private JdbcTemplate jdbcTemplate;
-    private AuthorRowMapper authorRowMapper = new AuthorRowMapper();
 
     public MysqlAuthorDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -35,10 +34,10 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                     int id = rs.getInt("idauthor");
                     if (author == null || author.getId() != id) {
                         author = new Author();
+                        author.setId(id);
                         author.setBiography(rs.getString("biography"));
                         author.setBirth(rs.getInt("birth"));
                         author.setDeath(rs.getInt("death"));
-                        author.setId(id);
                         author.setLifeStatus(rs.getBoolean("lifeStatus"));
                         author.setName(rs.getString("name"));
                         author.setNationality(rs.getString("nationality"));

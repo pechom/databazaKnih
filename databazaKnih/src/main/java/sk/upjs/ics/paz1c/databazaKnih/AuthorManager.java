@@ -58,4 +58,26 @@ public interface AuthorManager {
     void updateAuthor(Author author);
 
     Author findById(int id);
+
+    List<Author> getAuthorsByName(String name, List<Author> authors);
+
+    List<Author> getAuthorsByGenres(List<Genre> genres, List<Author> authors);
+
+    List<Author> getAuthorsByBook(String bookname, List<Author> authors);
+
+    List<Author> getAuthorsFromBirth(int year, List<Author> authors);
+
+    List<Author> getAuthorsToBirth(int year, List<Author> authors);
+
+    List<Author> getAuthorsFromToBirth(int from, int to, List<Author> authors);
+
+    List<Author> getAuthorsFromDeath(int year, List<Author> authors);
+
+    List<Author> getAuthorsToDeath(int year, List<Author> authors);
+
+    List<Author> getAuthorsFromToDeath(int from, int to, List<Author> authors);
+
+    List<Author> getAuthorsByNationality(String nationality, List<Author> authors);
+
+    List<Author> getAuthorsBySex(String sex, List<Author> authors);
 }

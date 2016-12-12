@@ -16,7 +16,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlUserDao implements InterfaceUserDao {
 
     private JdbcTemplate jdbcTemplate;
-    private UserRowMapper userRowMapper = new UserRowMapper();
 
     public MysqlUserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

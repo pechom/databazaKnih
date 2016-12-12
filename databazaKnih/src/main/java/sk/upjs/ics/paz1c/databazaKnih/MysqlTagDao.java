@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlTagDao implements InterfaceTagDao {
 
     private JdbcTemplate jdbcTemplate;
-    private TagRowMapper tagRowMapper = new TagRowMapper();
 
     public MysqlTagDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

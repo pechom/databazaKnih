@@ -3,8 +3,6 @@ package sk.upjs.ics.paz1c.databazaKnih;
 // tu budu metody na filtre na parametre, overenost.v manageroch po add/remove, average.. dat update. V manageroch je add na vytvaranie vztahov 
 //medzi objektami a remove ak treba odstranit chybny vztah pripadne ak treba prerusit vztahy pred tym ako nieco odstranim (pri realnom odstraneni)
 // u vsetkych manazerov treba urobit vynimky !
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -294,4 +292,145 @@ public class DefaultAuthorManager implements AuthorManager {
         authorDao.removeReviews(author.getId());
     }
 
+    @Override
+    public List<Author> getAuthorsByName(String name, List<Author> authors) {
+
+        List<Author> namedAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getName() != null) && (author.getName().equals(name))) {
+                namedAuthors.add(author);
+            }
+        }
+        return namedAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsByBook(String bookname, List<Author> authors) {
+
+        List<Author> namedAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            List<Book> books = author.getBooks();
+            boolean isThere = false;
+            for (Book book : books) {
+                if ((book.getName() != null) && (book.getName().equals(bookname))) {
+                    isThere = true;
+                }
+
+            }
+            namedAuthors.add(author);
+
+        }
+        return namedAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsByGenres(List<Genre> genres, List<Author> authors) {
+
+        List<Author> genreAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            for (Genre genre : genres) {
+                if ((author.getGenres() != null) && (author.getGenres().contains(genre))) {
+                    genreAuthors.add(author);
+                    break;
+                }
+            }
+        }
+        return genreAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsFromBirth(int year, List<Author> authors) {
+
+        List<Author> birthAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getBirth() != 0) && (author.getBirth() >= year)) {
+                birthAuthors.add(author);
+            }
+        }
+        return birthAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsToBirth(int year, List<Author> authors) {
+
+        List<Author> birthAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getBirth() != 0) && (author.getBirth() <= year)) {
+                birthAuthors.add(author);
+            }
+        }
+        return birthAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsFromToBirth(int from, int to, List<Author> authors) {
+
+        List<Author> birthAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getBirth() != 0) && (author.getBirth() >= from) && (author.getBirth() <= to)) {
+                birthAuthors.add(author);
+            }
+        }
+        return birthAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsFromDeath(int year, List<Author> authors) {
+
+        List<Author> deathAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getDeath() != 0) && (author.getDeath() >= year)) {
+                deathAuthors.add(author);
+            }
+        }
+        return deathAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsToDeath(int year, List<Author> authors) {
+
+        List<Author> deathAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getDeath() != 0) && (author.getDeath() <= year)) {
+                deathAuthors.add(author);
+            }
+        }
+        return deathAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsFromToDeath(int from, int to, List<Author> authors) {
+
+        List<Author> deathAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getDeath() != 0) && (author.getDeath() >= from) && (author.getDeath() <= to)) {
+                deathAuthors.add(author);
+            }
+        }
+        return deathAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsByNationality(String nationality, List<Author> authors) {
+
+        List<Author> nationalityAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getNationality() != null) && (author.getNationality().equals(nationality))) {
+                nationalityAuthors.add(author);
+            }
+        }
+        return nationalityAuthors;
+    }
+
+    @Override
+    public List<Author> getAuthorsBySex(String sex, List<Author> authors) {
+
+        List<Author> sexAuthors = new ArrayList<>();
+        for (Author author : authors) {
+            if ((author.getSex() != null) && (author.getSex().equals(sex))) {
+                sexAuthors.add(author);
+            }
+        }
+        return sexAuthors;
+    }
 }

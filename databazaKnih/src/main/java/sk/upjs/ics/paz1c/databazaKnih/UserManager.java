@@ -55,13 +55,13 @@ public interface UserManager {
 
     void deleteAuthorReview(AuthorReview authorReview, User user);
 
-    void addReadingBooksToUser(List<Map<Book, Integer>> reading, User user);
+    void addReadingBookToUser(Map<Book, Integer> reading, User user);
 
-    void deleteReadingBooksFromUser(List<Map<Book, Integer>> reading, User user);
+    void deleteReadingBookFromUser(Map<Book, Integer> reading, User user);
 
-    void addNoteBooksToUser(List<Map<Book, String>> notebooks, User user);
+    void addNoteBookToUser(Map<Book, String> notebooks, User user);
 
-    void deleteNoteBooksFromUser(List<Map<Book, String>> notebooks, User user);
+    void deleteNoteBookFromUser(Map<Book, String> notebooks, User user);
 
     List<User> removeUser(User user); // odstrani usera zo vsetkych userov
 
@@ -76,5 +76,45 @@ public interface UserManager {
     User findById(int id);//z usera sa budu potom podla potrby tahat parametre
 
     void changePassword(User user, String typedPassword);
+
+    List<User> getAdmins(List<User> users);
+
+    List<User> getNonAdmins(List<User> users);
+
+    List<User> getUsersByUsername(String login, List<User> users);
+
+    List<User> getUsersByName(String name, List<User> users);
+
+    List<User> getUsersBySurname(String name, List<User> users);
+
+    User getUserByMail(String mail, List<User> users);//kazdy user musi mat iny mail
+
+    void addReadBookToUser(Book book, User user);
+
+    void deleteReadBookFromUser(Book book, User user);
+
+    void addFavoriteBookToUser(Book book, User user);
+
+    void deleteFavoriteBookFromUser(Book book, User user);
+
+    void addWantedBookToUser(Book book, User user);
+
+    void deleteWantedBookFromUser(Book book, User user);
+
+    void addFavoriteAuthorToUser(Author author, User user);
+
+    void deleteFavoriteAuthorFromUser(Author author, User user);
+
+    void addFriendToUser(User friend, User user);
+
+    void deleteFriendFromUser(User friend, User user);
+
+    void addFavoriteReviewer(User reviewer, User user);
+
+    void deleteFavoriteReviewer(User reviewer, User user);
+
+    void addBookReview(BookReview bookReview, User user);
+
+    void addAuthorReview(AuthorReview authorReview, User user);
 
 }

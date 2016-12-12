@@ -3,9 +3,10 @@ package sk.upjs.ics.paz1c.databazaKnih;
 public class SqlQueries {
 
     public static final String SELECT_ALL_AUTHORS = "SELECT author.idauthor, "
-            + "author.name, author.birth, author.death, author.nationality, "
+            + "author.name, author.birth, author.death, author.lifeStatus, "
+            + "author.nationality, author.verificationStatus, "
             + "author.sex, author.biography, author.isActive, "
-            + "authorofbook.book_idbook , genreofauthor.genre_idgenre, "
+            + "authorofbook.book_idbook, genreofauthor.genre_idgenre, "
             + "authorreview.idauthorreview "
             + "FROM author "
             + "JOIN authorofbook ON author.idauthor=authorofbook.author_idauthor "
@@ -13,7 +14,7 @@ public class SqlQueries {
             + "JOIN authorreview ON author.idauthor=authorreview.author_idauthor "
             + "WHERE author.isActive=1 ORDER BY author.idauthor";
 
-    public static final String INSERT_AUTHOR = "INSERT INTO author (name, birth,"
+    public static final String INSERT_AUTHOR = "INSERT INTO author (name, birth, "
             + "death, nationality, sex, biography, verificationStatus, "
             + " lifeStatus, isActive) VALUES (?,?,?,?,?,?,?,?,?)";
 
@@ -24,6 +25,7 @@ public class SqlQueries {
 
     public static final String SELECT_AUTHOR_BY_ID = "SELECT author.idauthor, "
             + "author.name, author.birth, author.death, author.nationality, "
+            + "author.lifeStatus, author.verifiactionStatus, "
             + "author.sex, author.biography, author.isActive, "
             + "authorofbook.book_idbook , genreofauthor.genre_idgenre, "
             + "authorreview.idauthorreview "
@@ -100,7 +102,7 @@ public class SqlQueries {
             + "WHERE idauthorreview=?";
 
     public static final String SELECT_ALL_BOOKS = "SELECT book.idbook, book.name,"
-            + "book.year, book.numberOfPages. book.ISBN, book.descroption, "
+            + "book.year, book.numberOfPages, book.ISBN, book.description, "
             + " book.numberOfReviews, book.averageOfReviews, book.verificationStatus,"
             + " book.numberInChart, book.bayesianAverage, book.isActive, "
             + "genreofbook.genre_idgenre, tagofbook.tag_idtag, "
@@ -108,7 +110,7 @@ public class SqlQueries {
             + "FROM book "
             + "JOIN genreofbook ON genreofbook.book_idbook=book.idbook "
             + "JOIN tagofbook ON tagofbook.book_idbook=book.idbook "
-            + "JOIN bookrevoew ON bookreview.book_idbook=book.idbook "
+            + "JOIN bookreview ON bookreview.book_idbook=book.idbook "
             + "JOIN authorofbook ON book.idbook=authorofbook.book_idbook "
             + "WHERE book.isActive=1 ORDER BY book.numberInChart";
 
@@ -133,7 +135,7 @@ public class SqlQueries {
             + "FROM book "
             + "JOIN genreofbook ON genreofbook.book_idbook=book.idbook "
             + "JOIN tagofbook ON tagofbook.book_idbook=book.idbook "
-            + "JOIN bookrevoew ON bookreview.book_idbook=book.idbook "
+            + "JOIN bookreview ON bookreview.book_idbook=book.idbook "
             + "JOIN authorofbook ON book.idbook=authorofbook.book_idbook "
             + "WHERE book.isActive=1 and book.idbook=";
 
@@ -286,7 +288,7 @@ public class SqlQueries {
             + "(content, book_idbook, author_idauthor, user_iduser, isActive) "
             + "VALUES (?,?,?,?,?)";
 
-    public static final String UPDATE_REQUEST = "UPDATE genre SET "
+    public static final String UPDATE_REQUEST = "UPDATE request SET "
             + "content=?,isActive=? "
             + "WHERE idrequest=?";
 
@@ -313,7 +315,7 @@ public class SqlQueries {
 
     public static final String DELETE_REQUEST
             = "DELETE FROM request "
-            + "WHERE idrequestr=?";
+            + "WHERE idrequest=?";
 
     public static final String SELECT_ALL_TAGS = "SELECT "
             + "tag.idtag, tag.name, tag.isActive, tagofbook.book_idbook "
@@ -321,7 +323,7 @@ public class SqlQueries {
             + "JOIN tagofbook ON tagofbook.tag_idtag=tag.idtag "
             + "WHERE tag.isActive=1 ORDER BY tag.idtag";
 
-    public static final String INSERT_TAG = "INSERT INRO tag "
+    public static final String INSERT_TAG = "INSERT INTO tag "
             + "(name, isActive) VALUES (?,?)";
 
     public static final String UPDATE_TAG = "UPDATE tag SET "
@@ -415,14 +417,14 @@ public class SqlQueries {
 
     public static final String REMOVE_READ_BOOK
             = "DELETE FROM readbook "
-            + "WHERE ser_iduser=? AND readbook_idbook=?";
+            + "WHERE user_iduser=? AND readbook_idbook=?";
 
     public static final String REMOVE_FAVORITE_BOOK
             = "DELETE FROM favoritebook "
             + "WHERE user_iduser=? AND favoritebook_idbook=?";
 
     public static final String REMOVE_WANTED_BOOK
-            = "REMOVE FROM wantedbook "
+            = "DELETE FROM wantedbook "
             + "WHERE user_iduser=? AND wantedbook_idbook=?";
 
     public static final String REMOVE_READING_BOOK
@@ -438,7 +440,7 @@ public class SqlQueries {
             + "WHERE favoriteauthor_idauthor=?";
 
     public static final String REMOVE_FAVORITE_AUTHOR
-            = "DELETE FROM faovirteauthor "
+            = "DELETE FROM favoriteauthor "
             + "WHERE user_iduser=? AND favoriteauthor_idauthor=?";
 
     public static final String ADD_READ_BOOK

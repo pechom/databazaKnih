@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `databaza-knih` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `databaza-knih`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: databaza-knih
@@ -27,14 +25,14 @@ DROP TABLE IF EXISTS `author`;
 CREATE TABLE `author` (
   `idauthor` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `birth` int(11) DEFAULT NULL,
-  `death` int(11) DEFAULT NULL,
+  `birth` int(11) DEFAULT '0',
+  `death` int(11) DEFAULT '0',
   `nationality` char(3) DEFAULT NULL,
   `sex` char(1) DEFAULT NULL,
   `biography` varchar(500) DEFAULT NULL,
-  `verificationStatus` binary(1) DEFAULT '0',
-  `lifeStatus` binary(1) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `verificationStatus` bit(1) DEFAULT b'0',
+  `lifeStatus` bit(1) DEFAULT b'0',
+  `isActive` bit(1) DEFAULT b'0',
   PRIMARY KEY (`idauthor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -83,9 +81,9 @@ DROP TABLE IF EXISTS `authorreview`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `authorreview` (
   `idauthorreview` int(11) NOT NULL AUTO_INCREMENT,
-  `rating` int(1) DEFAULT NULL,
+  `rating` int(1) DEFAULT '0',
   `review` varchar(500) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `isActive` bit(1) DEFAULT b'0',
   `author_idauthor` int(11) NOT NULL,
   `user_iduser` int(11) NOT NULL,
   PRIMARY KEY (`idauthorreview`,`author_idauthor`,`user_iduser`),
@@ -115,16 +113,16 @@ DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book` (
   `idbook` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `year` int(11) DEFAULT NULL,
-  `numberOfPages` int(11) DEFAULT NULL,
-  `ISBN` int(11) DEFAULT NULL,
+  `year` int(11) DEFAULT '0',
+  `numberOfPages` int(11) DEFAULT '0',
+  `ISBN` int(11) DEFAULT '0',
   `description` varchar(500) DEFAULT NULL,
   `numberOfReviews` int(11) DEFAULT NULL,
-  `averageOfReviews` double DEFAULT NULL,
-  `verificationStatus` binary(1) DEFAULT '0',
+  `averageOfReviews` float DEFAULT '0',
+  `verificationStatus` bit(1) DEFAULT b'0',
   `numberInChart` int(11) DEFAULT NULL,
-  `bayesianAverage` double DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `bayesianAverage` float DEFAULT '0',
+  `isActive` bit(1) DEFAULT b'0',
   PRIMARY KEY (`idbook`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -175,9 +173,9 @@ DROP TABLE IF EXISTS `bookreview`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bookreview` (
   `idbookreview` int(11) NOT NULL AUTO_INCREMENT,
-  `rating` int(1) DEFAULT NULL,
-  `review` varchar(500) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `rating` int(1) DEFAULT '0',
+  `review` varchar(450) DEFAULT NULL,
+  `isActive` bit(1) DEFAULT b'0',
   `user_iduser` int(11) NOT NULL,
   `book_idbook` int(11) NOT NULL,
   PRIMARY KEY (`idbookreview`,`user_iduser`,`book_idbook`),
@@ -311,7 +309,7 @@ DROP TABLE IF EXISTS `genre`;
 CREATE TABLE `genre` (
   `idgenre` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `isActive` bit(1) DEFAULT b'0',
   PRIMARY KEY (`idgenre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -415,7 +413,7 @@ DROP TABLE IF EXISTS `readingbook`;
 CREATE TABLE `readingbook` (
   `user_iduser` int(11) NOT NULL,
   `readingbook_idbook` int(11) NOT NULL,
-  `numberOfPages` int(11) DEFAULT NULL,
+  `numberOfPages` int(4) DEFAULT '0',
   PRIMARY KEY (`user_iduser`,`readingbook_idbook`),
   KEY `fk_user_has_book_book1_idx` (`readingbook_idbook`),
   KEY `fk_user_has_book_user1_idx` (`user_iduser`),
@@ -443,7 +441,7 @@ DROP TABLE IF EXISTS `request`;
 CREATE TABLE `request` (
   `idrequest` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(200) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `isActive` bit(1) DEFAULT b'0',
   `user_iduser` int(11) DEFAULT NULL,
   `book_idbook` int(11) DEFAULT NULL,
   `author_idauthor` int(11) DEFAULT NULL,
@@ -479,7 +477,7 @@ DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `idtag` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `isActive` bit(1) DEFAULT b'0',
   PRIMARY KEY (`idtag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -536,8 +534,8 @@ CREATE TABLE `user` (
   `surname` varchar(45) DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   `salt` varchar(45) DEFAULT NULL,
-  `isAdmin` binary(1) DEFAULT NULL,
-  `isActive` binary(1) DEFAULT NULL,
+  `isAdmin` bit(1) DEFAULT b'0',
+  `isActive` bit(1) DEFAULT b'0',
   PRIMARY KEY (`iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -594,4 +592,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-10 23:37:51
+-- Dump completed on 2016-12-12 20:36:43

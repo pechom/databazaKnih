@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 public class MysqlGenreDao implements InterfaceGenreDao {
 
     private JdbcTemplate jdbcTemplate;
-    private GenreRowMapper genreRowMapper = new GenreRowMapper();
 
     public MysqlGenreDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
