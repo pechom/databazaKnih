@@ -322,13 +322,13 @@ public class DefaultBookManager implements BookManager {
     @Override
     public void addAuthorToBook(Book book, Author author) {
         book.setAuthor(author);
-        updateBook(book);
+        bookDao.addAuthorToBook(book.getId(), author.getId());
     }
 
     @Override
     public void removeAuthorFromBook(Book book) {
         book.setAuthor(null);
-        updateBook(book);
+        bookDao.removeAuthorFromBook(book.getId());
     }
 
     @Override
@@ -338,10 +338,10 @@ public class DefaultBookManager implements BookManager {
         for (Book book : books) {
             if ((book.getAuthor() != null) && (book.getAuthor().equals(author))) {
                 book.setAuthor(null);
-                updateBook(book);
                 removed.add(book);
             }
         }
+        bookDao.removeAuthor(author.getId());
         return removed;
     }
 
@@ -350,7 +350,7 @@ public class DefaultBookManager implements BookManager {
         for (Genre genre : genres) {
             if (!book.getGenres().contains(genre)) {
                 book.getGenres().add(genre);
-                updateBook(book);
+                bookDao.addGenreToBook(genre.getId(), book.getId());
             }
         }
     }
@@ -360,7 +360,7 @@ public class DefaultBookManager implements BookManager {
         for (Genre genre : genres) {
             if (book.getGenres().contains(genre)) {
                 book.getGenres().remove(genre);
-                updateBook(book);
+                bookDao.removeGenreFromBook(genre.getId(), book.getId());
             }
         }
     }
@@ -373,9 +373,9 @@ public class DefaultBookManager implements BookManager {
             if (book.getGenres().contains(genre)) {
                 book.getGenres().remove(genre);
                 updateBook(book);
-                removed.add(book);
             }
         }
+        bookDao.removeGenre(genre.getId());
         return removed;
     }
 
@@ -384,7 +384,7 @@ public class DefaultBookManager implements BookManager {
         for (Tag tag : tags) {
             if (!book.getTags().contains(tag)) {
                 book.getTags().add(tag);
-                updateBook(book);
+                bookDao.addTagToBook(tag.getId(), book.getId());
             }
         }
     }
@@ -394,7 +394,7 @@ public class DefaultBookManager implements BookManager {
         for (Tag tag : tags) {
             if (book.getTags().contains(tag)) {
                 book.getTags().remove(tag);
-                updateBook(book);
+                bookDao.removeTagFromBook(tag.getId(), book.getId());
             }
         }
     }
@@ -406,10 +406,10 @@ public class DefaultBookManager implements BookManager {
         for (Book book : books) {
             if (book.getTags().contains(tag)) {
                 book.getTags().remove(tag);
-                updateBook(book);
                 removed.add(book);
             }
         }
+        bookDao.removeTag(tag.getId());
         return removed;
     }
 
@@ -420,7 +420,7 @@ public class DefaultBookManager implements BookManager {
         book.setAverageOfReviews((book.getAverageOfReviews() * (book.getNumberOfReviews() - 1) + review.getRating()) / book.getNumberOfReviews());
         calculateAndInsertBayesian(book, 5);
         makeChart();
-        updateBook(book);
+        bookDao.addReviewToBook(review.getId(), book);
     }
 
     @Override
@@ -430,7 +430,7 @@ public class DefaultBookManager implements BookManager {
         book.setAverageOfReviews((book.getAverageOfReviews() * (book.getNumberOfReviews() + 1) - review.getRating()) / book.getNumberOfReviews());
         calculateAndInsertBayesian(book, 5);
         makeChart();
-        updateBook(book);
+        bookDao.removeReviewFromBook(review.getId(), book);
     }
 
     @Override
@@ -507,4 +507,10 @@ public class DefaultBookManager implements BookManager {
             return Double.compare((o2.getBayesianAverage() + (0.001 * o2.getNumberOfReviews())), (o1.getBayesianAverage() + (0.001 * o1.getNumberOfReviews())));
         }
     };
+
+    @Override
+    public void removeAllReviews(Book book) {
+        book.getBookReviews().clear();
+        bookDao.removeReviewsFromBook(book.getId());
+    }
 }

@@ -51,7 +51,7 @@ public class DefaultGenreManager implements GenreManager {
         for (Book book : books) {
             if (!genre.getBooksWithGenre().contains(book)) {
                 genre.getBooksWithGenre().add(book);
-                 updateGenre(genre);
+                 genreDao.addBookToGenre(book.getId(), genre.getId());
             }
         }
     }
@@ -61,7 +61,7 @@ public class DefaultGenreManager implements GenreManager {
         for (Book book : books) {
             if (genre.getBooksWithGenre().contains(book)) {
                 genre.getBooksWithGenre().remove(book);
-                 updateGenre(genre);
+                 genreDao.removeBookFromGenre(book.getId(), genre.getId());
             }
         }
     }
@@ -72,10 +72,10 @@ public class DefaultGenreManager implements GenreManager {
         for (Genre genre : genres) {
             if (genre.getBooksWithGenre().contains(book)) {
                 genre.getBooksWithGenre().remove(book);
-                updateGenre(genre);
                 removed.add(genre);
             }
         }
+        genreDao.removeBook(book.getId());
         return removed;
     }
 
@@ -84,7 +84,7 @@ public class DefaultGenreManager implements GenreManager {
         for (Author author : authors) {
             if (!genre.getAuthorsWithGenre().contains(author)) {
                 genre.getAuthorsWithGenre().add(author);
-                updateGenre(genre);
+                genreDao.addAuthorToGenre(author.getId(), genre.getId());
             }
         }
     }
@@ -94,7 +94,7 @@ public class DefaultGenreManager implements GenreManager {
        for (Author author : authors) {
             if (genre.getAuthorsWithGenre().contains(author)) {
                 genre.getAuthorsWithGenre().remove(author);
-                updateGenre(genre);
+                genreDao.removeAuthorFromGenre(author.getId(), genre.getId());
             }
         }
     }
@@ -107,10 +107,10 @@ public class DefaultGenreManager implements GenreManager {
         for (Genre genre : genres) {
             if (genre.getAuthorsWithGenre().contains(author)) {
                 genre.getAuthorsWithGenre().remove(author);
-                updateGenre(genre);
                 removed.add(genre);
             }
         }
+        genreDao.removeAuthor(author.getId());
         return removed;
     }
 

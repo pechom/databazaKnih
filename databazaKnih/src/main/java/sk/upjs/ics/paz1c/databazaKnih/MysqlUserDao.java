@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.lang.Integer;
+import java.util.Iterator;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -332,5 +333,121 @@ public class MysqlUserDao implements InterfaceUserDao {
     @Override
     public void changePassword(User user) {
         jdbcTemplate.update(SqlQueries.CHANGE_PASSWORD, user.getSalt(), user.getPasswordHash(), user.getId());
+    }
+
+    @Override
+    public void addReadBookToUser(int idbook, int iduser) {
+        jdbcTemplate.update(SqlQueries.ADD_READ_BOOK, iduser, idbook);
+    }
+
+    @Override
+    public void deleteReadBookFromUser(int idbook, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_READ_BOOK, iduser, idbook);
+    }
+
+    @Override
+    public void addFavoriteBookToUser(int idbook, int iduser) {
+        jdbcTemplate.update(SqlQueries.ADD_FAVORITE_BOOK, iduser, idbook);
+    }
+
+    @Override
+    public void deleteFavoriteBookFromUser(int idbook, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_FAVORITE_BOOK, iduser, idbook);
+    }
+
+    @Override
+    public void addWantedBookToUser(int idbook, int iduser) {
+        jdbcTemplate.update(SqlQueries.ADD_WANTED_BOOK, iduser, idbook);
+    }
+
+    @Override
+    public void deleteWantedBookFromUser(int idbook, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_WANTED_BOOK, iduser, idbook);
+    }
+
+    @Override
+    public void removeAuthor(int idauthor) {
+        jdbcTemplate.update(SqlQueries.REMOVE_AUTHOR_FROM_ALL_USERS, idauthor);
+    }
+
+    @Override
+    public void addFavoriteAuthorToUser(int idauthor, int iduser) {
+        jdbcTemplate.update(SqlQueries.ADD_FAVORITE_AUTHOR, iduser, idauthor);
+    }
+
+    @Override
+    public void deleteFavoriteAuthorFromUser(int idauthor, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_FAVORITE_AUTHOR, iduser, idauthor);
+    }
+
+    @Override
+    public void addFriendToUser(int idfriend, int iduser) {
+        jdbcTemplate.update(SqlQueries.ADD_FRIEND, iduser, idfriend);
+    }
+
+    @Override
+    public void deleteFriendFromUser(int idfriend, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_FRIEND, iduser, idfriend);
+    }
+
+    @Override
+    public void addFavoriteReviewerToUser(int idreviewer, int iduser) {
+        jdbcTemplate.update(SqlQueries.ADD_FAVORITE_REVIEWER, iduser, idreviewer);
+    }
+
+    @Override
+    public void deleteFavoriteReviewerFromUser(int idreviewer, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_FAVORITE_REVIEWER, iduser, idreviewer);
+    }
+
+    @Override
+    public void deleteBookReviewFromUser(int idreview, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_BOOKREVIEW, iduser, idreview);
+    }
+
+    @Override
+    public void deleteAuthorReviewFromUser(int idreview, int iduser) {
+        jdbcTemplate.update(SqlQueries.REMOVE_AUTHORREVIEW, iduser, idreview);
+    }
+
+    @Override
+    public void addReadingBooksToUser(Map<Book, Integer> reading, int iduser) {
+        Book book = null;
+        for (Book book1 : reading.keySet()) {
+            book = book1;
+        }
+
+        jdbcTemplate.update(SqlQueries.ADD_READING_BOOK, iduser,
+                book.getId(), reading.get(book));
+    }
+
+    @Override
+    public void deleteReadingBooksFromUser(Map<Book, Integer> reading, int iduser) {
+        Book book = null;
+        for (Book book1 : reading.keySet()) {
+            book = book1;
+        }
+        jdbcTemplate.update(SqlQueries.REMOVE_READING_BOOK, iduser, book.getId());
+    }
+
+    @Override
+    public void addNoteBooksToUser(Map<Book, String> notebook, int iduser) {
+        Book book = null;
+        for (Book book1 : notebook.keySet()) {
+            book = book1;
+        }
+
+        jdbcTemplate.update(SqlQueries.ADD_BOOK_NOTE, iduser,
+                book.getId(), notebook.get(book));
+    }
+
+    @Override
+    public void deleteNoteBooksFromUser(Map<Book, String> notebook, int iduser) {
+        Book book = null;
+        for (Book book1 : notebook.keySet()) {
+            book = book1;
+        }
+
+        jdbcTemplate.update(SqlQueries.REMOVE_BOOK_NOTE, iduser, book.getId());
     }
 }

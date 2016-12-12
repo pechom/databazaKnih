@@ -13,6 +13,18 @@ public interface InterfaceAuthorDao {
     void undeleteAuthor(int id);
 
     void updateAuthor(Author author);
+    
+    void addBookToAuthor(int bookid, int authorid);
+    
+    void removeBookFromAuthor(int bookid, int authorid);
+    
+    void addGenreToAuthor(int genreid, int authorid);
+    
+     void removeGenreFromAuthor(int genreid, int authorid);
+     
+     void removeGenre (int genreid);
+     
+     void removeReviews(int authorid);
 
     Author findById(int id);
 

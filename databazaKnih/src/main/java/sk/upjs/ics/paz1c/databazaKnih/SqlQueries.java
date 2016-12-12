@@ -33,8 +33,32 @@ public class SqlQueries {
             + "JOIN authorreview ON author.idauthor=authorreview.author_idauthor "
             + "WHERE author.isActive=1 and author.idauthor=";
 
-    public static final String SELECT_USER_ID_BY_USERNAME = "SELECT "
-            + "user.iduser FROM user "
+    public static final String ADD_BOOK_TO_AUTHOR
+            = "INSERT INTO authorofbook "
+            + "(book_idbook, author_idauthor) VALUES (?,?)";
+
+    public static final String REMOVE_BOOK_FROM_AUTHOR
+            = "DELETE FROM authorofbook "
+            + "WHERE book_idbook=? AND author_idauthor=?";
+
+    public static final String ADD_GENRE_TO_AUTHOR
+            = "INSERT INTO genreofauthor "
+            + "(genre_idgenre, author_idauthor) VALUES (?,?)";
+
+    public static final String REMOVE_GENRE_FROM_AUTHOR
+            = "DELETE FROM genreofauthor "
+            + "WHERE genre_idgenre=? AND author_idauthor=?";
+
+    public static final String REMOVE_GENRE_FROM_ALL_AUTHORS
+            = "DELETE FROM genreofauthor "
+            + "WHERE genre_idgenre=?";
+
+    public static final String REMOVE_ALL_REVIEWS_FROM_AUTHOR
+            = "DELETE FROM authorreview "
+            + "WHERE author_idauthor=?";
+
+    public static final String SELECT_USER_ID_BY_USERNAME
+            = "SELECT user.iduser FROM user "
             + "WHERE user.isActive=1 and user.userName=?";
 
     public static final String SELECT_ALL_AUTHORREVIEWS = "SELECT "
@@ -47,9 +71,10 @@ public class SqlQueries {
             + " WHERE authorreview.isActive=1 ORDER BY authorreview.idauthorreview";
 
     public static final String INSERT_AUTHORREVIEW = "INSERT INTO authorreview "
-            + "(rating, review, isActive) VALUES (?,?,?)";
+            + "(rating, review, isActive, author_idauthor, user_iduser) "
+            + "VALUES (?,?,?,?,?)";
 
-    public static final String UPDATE_AUTHORREVIEW = "UPADATE authorreview SET "
+    public static final String UPDATE_AUTHORREVIEW = "UPDATE authorreview SET "
             + "rating=?, review=?, isActive=? "
             + "WHERE idauthorreview=?";
 
@@ -61,6 +86,18 @@ public class SqlQueries {
             + "JOIN author ON author.idauthor=authorreview.author_idauthor, "
             + "JOIN user ON user.iduser=authorreview.user_iduser"
             + " WHERE authorreview.isActive=1 and authorreview.idauthorreview=";
+
+    public static final String DELETE_AUTHORREVIEWS_WITH_AUTHOR
+            = "DELETE FROM authorreview "
+            + "WHERE author_idauthor=?";
+
+    public static final String DELETE_AUTHORREVIEWS_WITH_USER
+            = "DELETE FROM authorreview "
+            + "WHERE user_iduser=?";
+
+    public static final String DELETE_AUTHORREVIEW
+            = "DELETE FROM authorreview "
+            + "WHERE idauthorreview=?";
 
     public static final String SELECT_ALL_BOOKS = "SELECT book.idbook, book.name,"
             + "book.year, book.numberOfPages. book.ISBN, book.descroption, "
@@ -100,6 +137,56 @@ public class SqlQueries {
             + "JOIN authorofbook ON book.idbook=authorofbook.book_idbook "
             + "WHERE book.isActive=1 and book.idbook=";
 
+    public static final String ADD_AUTHOR_TO_BOOK
+            = "INSERT INTO authorofbook "
+            + "(book_idbook, author_idauthor) VALUES (?,?)";
+
+    public static final String REMOVE_AUTHOR_FROM_BOOK
+            = "DELETE FROM authorofbook "
+            + "WHERE book_idbook=?";
+
+    public static final String REMOVE_AUTHOR_FROM_ALL_BOOKS
+            = "DELETE FROM authorofbook "
+            + "WHERE author_idauthor=?";
+
+    public static final String ADD_GENRE_TO_BOOK
+            = "INSERT INTO genreofbook "
+            + "(book_idbook, genre_idgenre) VALUES (?,?)";
+
+    public static final String REMOVE_GENRE_FROM_BOOK
+            = "DELETE FROM genreofbook "
+            + "WHERE book_idbook=? AND genre_idgenre=?";
+
+    public static final String REMOVE_GENRE_FROM_ALL_BOOKS
+            = "DELETE FROM genreofbook "
+            + "WHERE genre_idgenre=?";
+
+    public static final String ADD_TAG_TO_BOOK
+            = "INSERT INTO tagofbook "
+            + "(tag_idtag, book_idbook) VALUES (?,?)";
+
+    public static final String REMOVE_TAG_FROM_BOOK
+            = "DELETE FROM tagofbook "
+            + "WHERE book_idbook=? AND tag_idtag=?";
+
+    public static final String REMOVE_TAG_FROM_ALL_BOOKS
+            = "DELETE FROM tagofbook "
+            + "WHERE tag_idtag=?";
+
+    public static final String ADD_REVIEW_TO_BOOK
+            = "UPDATE book SET (numberOfReviews=?, averageOfReviews=?, "
+            + "bayesianAverage=?, numberInChart=?) "
+            + "WHERE idbook=?";
+
+    public static final String REMOVE_REVIEW_FROM_BOOK
+            = "UPDATE book SET (numberOfReviews=?, averageOfReviews=?, "
+            + "bayesianAverage=?, numberInChart=?) "
+            + "WHERE idbook=?";
+
+    public static final String REMOVE_ALL_REVIEWS_FROM_BOOK
+            = "DELETE FROM bookreview "
+            + "WHERE book_idbook=?";
+
     public static final String SELECT_ALL_BOOKREVIEWS = "SELECT "
             + "bookreview.idbookreview, bookreview.rating, bookreview.review, "
             + "bookreview.isActive, "
@@ -110,7 +197,8 @@ public class SqlQueries {
             + "WHERE bookreview.isActive=1 ORDER BY bookreview.idbookreview";
 
     public static final String INSERT_BOOKREVIEW = "INSERT INTO bookreview "
-            + "(rating, review, isActive) VALUES (?,?,?)";
+            + "(rating, review, isActive, book_idbook, user_iduser) "
+            + "VALUES (?,?,?,?,?)";
 
     public static final String UPDATE_BOOKREVIEW = "UPDATE bookreview SET "
             + "rating=?, review=?, isActive=? "
@@ -124,6 +212,18 @@ public class SqlQueries {
             + "JOIN book ON book.idbook=bookreview.book_idbook, "
             + "JOIN user ON user.iduser=bookreview.user_iduser "
             + "WHERE bookreview.isActive=1 and bookreview.idbookreview=";
+
+    public static final String DELETE_BOOKREVIEWS_WITH_BOOK
+            = "DELETE FROM bookreview "
+            + "WHERE book_idbook=?";
+
+    public static final String DELETE_BOOKREVIEWS_WITH_USER
+            = "DELETE FROM bookreview "
+            + "WHERE user_iduser=?";
+
+    public static final String DELETE_BOOKREVIEW
+            = "DELETE FROM bookreview "
+            + "WHERE idbookreview=?";
 
     public static final String SELECT_ALL_GENRES = "SELECT "
             + "genre.idgenre, genre.name, genre.isActive, "
@@ -147,6 +247,30 @@ public class SqlQueries {
             + "JOIN genreofbook ON genreofbook.genre_idgenre=genre.idgenre "
             + "JOIN genreofauthor ON genreofauthor.genre_idgenre=genre.idgenre "
             + "WHERE genre.isActive=1 and genre.idgenre=";
+
+    public static final String ADD_BOOK_TO_GENRE
+            = "INSERT INTO genreofbook "
+            + "(book_idbook, genre_idgenre) VALUES (?,?)";
+
+    public static final String REMOVE_BOOK_FROM_GENRE
+            = "DELETE FROM genreofbook "
+            + "WHERE book_idbook=? AND genre_idgenre=?";
+
+    public static final String REMOVE_BOOK_FROM_ALL_GENRES
+            = "DELETE FROM genreofbook "
+            + "WHERE book_idbook=?";
+
+    public static final String ADD_AUTHOR_TO_GENRE
+            = "INSERT INTO genreofauthor "
+            + "(genre_idgenre, author_idauthor) VALUES (?,?)";
+
+    public static final String REMOVE_AUTHOR_FROM_GENRE
+            = "DELETE FROM genreofauthor "
+            + "WHERE author_idauthor=? AND genre_idgenre=?";
+
+    public static final String REMOVE_AUTHOR_FROM_ALL_GENRES
+            = "DELETE FROM genreofauthor "
+            + "WHERE author_idauthor=?";
 
     public static final String SELECT_ALL_REQUESTS = "SELECT request.idrequest, "
             + "request.content, request.isActive, request.book_idbook, "
@@ -175,6 +299,22 @@ public class SqlQueries {
             + "JOIN user ON request.user_iduser=user.iduser "
             + "WHERE request.isActive=1 and request.idrequest=";
 
+    public static final String DELETE_REQUESTS_WITH_USER
+            = "DELETE FROM request "
+            + "WHERE user_iduser=?";
+
+    public static final String DELETE_REQUESTS_WITH_BOOK
+            = "DELETE FROM request "
+            + "WHERE book_idbook=?";
+
+    public static final String DELETE_REQUESTS_WITH_AUTHOR
+            = "DELETE FROM request "
+            + "WHERE author_idauthor=?";
+
+    public static final String DELETE_REQUEST
+            = "DELETE FROM request "
+            + "WHERE idrequestr=?";
+
     public static final String SELECT_ALL_TAGS = "SELECT "
             + "tag.idtag, tag.name, tag.isActive, tagofbook.book_idbook "
             + "FROM tag "
@@ -193,6 +333,18 @@ public class SqlQueries {
             + "FROM tag "
             + "JOIN tagofbook ON tagofbook.tag_idtag=tag.idtag "
             + "WHERE tag.isActive=1 and tag.idtag=";
+
+    public static final String ADD_BOOK_TO_TAG
+            = "INSERT INTO tagofbook "
+            + "(tag_idtag, book_idbook) VALUES (?,?)";
+
+    public static final String REMOVE_BOOK_FROM_TAG
+            = "DELETE FROM tagofbook "
+            + "WHERE book_idbook=? AND tag_idtag=?";
+
+    public static final String REMOVE_BOOK_FROM_ALL_TAGS
+            = "DELETE FROM tagofbook "
+            + "WHERE book_idbook=?";
 
     public static final String SELECT_ALL_USERS = "SELECT "
             + "user.iduser, user.userName, user.passwordHash, user.name, "
@@ -226,10 +378,6 @@ public class SqlQueries {
             + "isAdmin=?, isActive=? "
             + "WHERE iduser=?";
 
-    public static final String CHANGE_PASSWORD = "UPDATE user SET "
-            + "salt=?, passwordHash=? "
-            + "WHERE iduser=?";
-
     public static final String SELECT_USER_BY_ID = "SELECT "
             + "user.iduser, user.userName, user.passwordHash, user.name, "
             + "user.mail, user.surname, "
@@ -252,4 +400,91 @@ public class SqlQueries {
             + "JOIN bookreview ON bookreview.user_iduser=user.iduser "
             + "JOIN authorreview ON authorreview.user_iduser=user.iduser "
             + "WHERE user.isActive=1 and user.iduser=";
+
+    public static final String CHANGE_PASSWORD = "UPDATE user SET "
+            + "salt=?, passwordHash=? "
+            + "WHERE iduser=?";
+
+    public static final String REMOVE_FRIEND
+            = "DELETE FROM friend "
+            + "WHERE user_iduser=? AND friend=?";
+
+    public static final String REMOVE_FAVORITE_REVIEWER
+            = "DELETE FROM favoriteuser "
+            + "WHERE user_iduser=? AND favoriteuser=?";
+
+    public static final String REMOVE_READ_BOOK
+            = "DELETE FROM readbook "
+            + "WHERE ser_iduser=? AND readbook_idbook=?";
+
+    public static final String REMOVE_FAVORITE_BOOK
+            = "DELETE FROM favoritebook "
+            + "WHERE user_iduser=? AND favoritebook_idbook=?";
+
+    public static final String REMOVE_WANTED_BOOK
+            = "REMOVE FROM wantedbook "
+            + "WHERE user_iduser=? AND wantedbook_idbook=?";
+
+    public static final String REMOVE_READING_BOOK
+            = "DELETE FROM readingbook "
+            + "WHERE user_iduser=? AND readingbook_idbook=?";
+
+    public static final String REMOVE_BOOK_NOTE
+            = "DELETE FROM booknote "
+            + "WHERE user_iduser=? AND readingbook_idbook=?";
+
+    public static final String REMOVE_AUTHOR_FROM_ALL_USERS
+            = "DELETE FROM favoriteauthor "
+            + "WHERE favoriteauthor_idauthor=?";
+
+    public static final String REMOVE_FAVORITE_AUTHOR
+            = "DELETE FROM faovirteauthor "
+            + "WHERE user_iduser=? AND favoriteauthor_idauthor=?";
+
+    public static final String ADD_READ_BOOK
+            = "INSERT INTO readbook "
+            + "(user_iduser, readbook_idbook) VALUES (?,?)";
+
+    public static final String ADD_FAVORITE_BOOK
+            = "INSERT INTO favoritebook "
+            + "(user_iduser, favoritebook_idbook) "
+            + "VALUES (?,?)";
+
+    public static final String ADD_WANTED_BOOK
+            = "INSERT INTO wantedbook "
+            + "(user_iduser, wantedbook_idbook) "
+            + "VALUES (?,?)";
+
+    public static final String ADD_FAVORITE_AUTHOR
+            = "INSERT INTO favoriteauthor "
+            + "(user_iduser, favoriteauthor_idauthor) VALUES (?,?)";
+
+    public static final String ADD_FRIEND
+            = "INSERT INTO friend "
+            + "(user_iduser, friend) "
+            + "VALUES(?,?)";
+
+    public static final String ADD_FAVORITE_REVIEWER
+            = "INSERT INTO favoriteuser "
+            + "(user_iduser, favoriteuser_iduser) "
+            + "VALUES (?,?)";
+
+    public static final String REMOVE_BOOKREVIEW
+            = "DELETE FROM bookreview "
+            + "WHERE user_iduser=? AND book_idbook=?";
+
+    public static final String REMOVE_AUTHORREVIEW
+            = "DELETE FROM authorreview "
+            + "WHERE user_iduser=? AND author_idauthor=?";
+
+    public static final String ADD_READING_BOOK
+            = "INSERT INTO readingbook "
+            + "(user_iduser, readingbook_idbook, numberOfPages) "
+            + "VALUES (?,?,?)";
+
+    public static final String ADD_BOOK_NOTE
+            = "INSERT INTO booknote "
+            + "(user_iduser, booknote_idbook, note) "
+            + "VALUES (?,?,?)";
+
 }

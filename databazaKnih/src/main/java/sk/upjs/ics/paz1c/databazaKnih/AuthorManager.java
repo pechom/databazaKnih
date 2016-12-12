@@ -46,10 +46,6 @@ public interface AuthorManager {
 
     List<Author> removeGenre(Genre genre);//zo vsetkych autorov sa odstrani zaner
 
-    void addReview(AuthorReview review, Author author);
-
-    void removeReview(AuthorReview review, Author author);
-
     void removeAllReviews(Author author);
 
     void insertAuthor(Author author);

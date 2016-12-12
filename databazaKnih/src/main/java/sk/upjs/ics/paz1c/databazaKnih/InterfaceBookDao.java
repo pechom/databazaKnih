@@ -14,6 +14,30 @@ public interface InterfaceBookDao {
 
     void updateBook(Book book);
 
+    void addAuthorToBook(int idauthor, int idbook);
+
+    void removeAuthorFromBook(int idbook);
+
+    void removeAuthor(int idauthor);
+
+    void addGenreToBook(int idgenre, int idbook);
+
+    void removeGenreFromBook(int idgenre, int idbook);
+
+    void removeGenre(int idgenre);
+
+    void addTagToBook(int idtag, int idbook);
+
+    void removeTagFromBook(int idgtag, int idbook);
+
+    void removeTag(int idtag);
+
+    void addReviewToBook(int idreview, Book book);
+
+    void removeReviewFromBook(int idreview, Book book);
+
+    void removeReviewsFromBook(int idbook);
+
     Book findById(int id);
 
 }

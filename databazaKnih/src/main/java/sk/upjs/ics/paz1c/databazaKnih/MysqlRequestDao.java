@@ -90,6 +90,7 @@ public class MysqlRequestDao implements InterfaceRequestDao {
         Request request = findById(id);
         request.setIsActive(false);
         updateRequest(request);
+        jdbcTemplate.update(SqlQueries.DELETE_REQUEST, id);
     }
 
     @Override
@@ -136,6 +137,21 @@ public class MysqlRequestDao implements InterfaceRequestDao {
     public void updateRequest(Request request) {
         jdbcTemplate.update(SqlQueries.UPDATE_REQUEST, request.getContent(),
                 request.isIsActive(), request.getId());
+    }
+
+    @Override
+    public void deleteAllWithRequester(int iduser) {
+        jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_USER, iduser);
+    }
+
+    @Override
+    public void deleteAllWithBook(int idbook) {
+       jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_BOOK, idbook);
+    }
+
+    @Override
+    public void deleteAllWithAuthor(int idauthor) {
+        jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_AUTHOR, idauthor);
     }
 
 }

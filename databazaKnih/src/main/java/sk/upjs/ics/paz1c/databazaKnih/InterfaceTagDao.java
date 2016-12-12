@@ -14,6 +14,12 @@ public interface InterfaceTagDao {
 
     void updateTag(Tag tag);
 
+    void addBookToTag(int idbook, int idtag);
+
+    void removeBookFromTag(int idbook, int idtag);
+
+    void removeBook(int idbook);
+
     Tag findById(int id);
 
 }

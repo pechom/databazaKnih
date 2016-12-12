@@ -51,7 +51,7 @@ public class DefaultTagManager implements TagManager {
         for (Book book : books) {
             if (!tag.getBooksWithTag().contains(book)) {
                 tag.getBooksWithTag().add(book);
-                updateTag(tag);
+                tagDao.addBookToTag(book.getId(), tag.getId());
             }
         }
     }
@@ -61,23 +61,20 @@ public class DefaultTagManager implements TagManager {
         for (Book book : books) {
             if (tag.getBooksWithTag().contains(book)) {
                 tag.getBooksWithTag().remove(book);
-                updateTag(tag);
+                tagDao.removeBookFromTag(book.getId(), tag.getId());
             }
         }
     }
 
     @Override
-    public List<Tag> removeBook(Book book) {
+    public void removeBook(Book book) {
         List<Tag> tags = getAllTags();
-        List<Tag> removed = new ArrayList<>();
         for (Tag tag : tags) {
             if (tag.getBooksWithTag().contains(book)) {
                 tag.getBooksWithTag().remove(book);
-                updateTag(tag);
-                removed.add(tag);
             }
         }
-        return removed;
+        tagDao.removeBook(book.getId());
     }
 
     @Override

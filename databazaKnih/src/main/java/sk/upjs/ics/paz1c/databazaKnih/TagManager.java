@@ -12,7 +12,7 @@ public interface TagManager {
 
     void removeBooksFromTag(List<Book> books, Tag tag);
 
-    List<Tag> removeBook(Book book);//odstrani knihu zo vsetkych vztahov
+    void removeBook(Book book);//odstrani knihu zo vsetkych vztahov
 
     void insertTag(Tag tag);
 

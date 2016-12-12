@@ -12,6 +12,12 @@ public interface InterfaceRequestDao {
 
     void deleteRequest(int id);
 
+    void deleteAllWithRequester(int iduser);
+
+    void deleteAllWithBook(int idbook);
+
+    void deleteAllWithAuthor(int idauthor);
+
     void undeleteRequest(int id);
 
     Request findById(int id);

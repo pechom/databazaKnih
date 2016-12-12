@@ -51,11 +51,7 @@ public interface UserManager {
 
     void deleteFavoriteReviewers(List<User> reviewers, User user);
 
-    void addBookReview(BookReview bookReview, User user);
-
     void deleteBookReview(BookReview bookReview, User user);
-
-    void addAuthorReview(AuthorReview authorReview, User user);
 
     void deleteAuthorReview(AuthorReview authorReview, User user);
 
@@ -78,7 +74,7 @@ public interface UserManager {
     void updateUser(User user);
 
     User findById(int id);//z usera sa budu potom podla potrby tahat parametre
-    
+
     void changePassword(User user, String typedPassword);
 
 }

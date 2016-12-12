@@ -94,43 +94,25 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
     }
 
     @Override
-    public void addAuthor(AuthorReview review, Author author) {
-        review.setAuthor(author);
-        updateReview(review);
-    }
-
-    @Override
-    public void addUser(AuthorReview review, User user) {
-        review.setUser(user);
-        updateReview(review);
-    }
-
-    @Override
-    public List<AuthorReview> DeleteReviewsWithAuthor(Author author) {
+    public void DeleteReviewsWithAuthor(Author author) {
         List<AuthorReview> reviews = getAllReviews();
-        List<AuthorReview> deleted = new ArrayList<>();
         for (AuthorReview review : reviews) {
             if ((review.getAuthor() != null) && (review.getAuthor().equals(author))) {
                 review.setAuthor(null);
-                deleteReview(review.getId());
-                deleted.add(review);
             }
         }
-        return deleted;
+        authorReviewDao.deleteReviewsWithAuthor(author.getId());
     }
 
     @Override
-    public List<AuthorReview> deleteReviewsWithUser(User user) {
+    public void deleteReviewsWithUser(User user) {
         List<AuthorReview> reviews = getAllReviews();
-        List<AuthorReview> deleted = new ArrayList<>();
         for (AuthorReview review : reviews) {
             if ((review.getUser() != null) && (review.getUser().equals(user))) {
                 review.setUser(null);
-                deleteReview(review.getId());
-                deleted.add(review);
             }
         }
-        return deleted;
+        authorReviewDao.deleteReviewsWithUser(user.getId());
     }
 
     @Override
@@ -138,43 +120,4 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
         authorReviewDao.undeleteReview(id);
     }
 
-    @Override
-    public List<AuthorReview> removeAuthor(Author author) {
-        List<AuthorReview> reviews = getAllReviews();
-        List<AuthorReview> removed = new ArrayList<>();
-        for (AuthorReview review : reviews) {
-            if ((review.getAuthor() != null) && (review.getAuthor().equals(author))) {
-                review.setAuthor(null);
-                updateReview(review);
-                removed.add(review);
-            }
-        }
-        return removed;
-    }
-
-    @Override
-    public List<AuthorReview> removeUser(User user) {
-        List<AuthorReview> reviews = getAllReviews();
-        List<AuthorReview> removed = new ArrayList<>();
-        for (AuthorReview review : reviews) {
-            if ((review.getUser()!=null)&&(review.getUser().equals(user))) {
-                review.setUser(null);
-                updateReview(review);
-                removed.add(review);
-            }
-        }
-        return removed;
-    }
-
-    @Override
-    public void removeAuthorFromReview(AuthorReview review) {
-        review.setAuthor(null);
-        updateReview(review);
-    }
-
-    @Override
-    public void removeUserFromReview(AuthorReview review) {
-        review.setUser(null);
-        updateReview(review);
-    }
 }

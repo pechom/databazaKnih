@@ -169,4 +169,34 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
         author.setIsActive(true);
         updateAuthor(author);
     }
+
+    @Override
+    public void addBookToAuthor(int bookid, int authorid) {
+        jdbcTemplate.update(SqlQueries.ADD_BOOK_TO_AUTHOR, bookid, authorid);
+    }
+
+    @Override
+    public void removeBookFromAuthor(int bookid, int authorid) {
+        jdbcTemplate.update(SqlQueries.REMOVE_BOOK_FROM_AUTHOR, bookid, authorid);
+    }
+
+    @Override
+    public void addGenreToAuthor(int genreid, int authorid) {
+        jdbcTemplate.update(SqlQueries.ADD_GENRE_TO_AUTHOR, genreid, authorid);
+    }
+
+    @Override
+    public void removeGenreFromAuthor(int genreid, int authorid) {
+        jdbcTemplate.update(SqlQueries.REMOVE_GENRE_FROM_AUTHOR, genreid, authorid);
+    }
+
+    @Override
+    public void removeGenre(int genreid) {
+        jdbcTemplate.update(SqlQueries.REMOVE_GENRE_FROM_ALL_AUTHORS, genreid);
+    }
+
+    @Override
+    public void removeReviews(int authorid) {
+        jdbcTemplate.update(SqlQueries.REMOVE_ALL_REVIEWS_FROM_AUTHOR, authorid);
+    }
 }

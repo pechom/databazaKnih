@@ -72,7 +72,8 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
     @Override
     public void insertReview(AuthorReview review) {
         jdbcTemplate.update(SqlQueries.INSERT_AUTHORREVIEW, review.getRating(),
-                review.getReview(), review.isIsActive());
+                review.getReview(), review.isIsActive(),
+                review.getAuthor().getId(), review.getUser().getId());
     }
 
     @Override
@@ -80,6 +81,7 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
         AuthorReview authorReview = findById(id);
         authorReview.setIsActive(false);
         updateReview(authorReview);
+         jdbcTemplate.update(SqlQueries.DELETE_AUTHORREVIEW, id);
     }
 
     @Override
@@ -124,5 +126,15 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
         AuthorReview authorReview = findById(id);
         authorReview.setIsActive(true);
         updateReview(authorReview);
+    }
+
+    @Override
+    public void deleteReviewsWithAuthor(int idauthor) {
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHORREVIEWS_WITH_AUTHOR, idauthor);
+    }
+
+    @Override
+    public void deleteReviewsWithUser(int iduser) {
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHORREVIEWS_WITH_USER, iduser);
     }
 }

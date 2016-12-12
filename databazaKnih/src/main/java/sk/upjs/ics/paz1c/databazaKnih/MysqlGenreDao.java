@@ -128,4 +128,34 @@ public class MysqlGenreDao implements InterfaceGenreDao {
         updateGenre(genre);
     }
 
+    @Override
+    public void addBookToGenre(int idbook, int idgenre) {
+        jdbcTemplate.update(SqlQueries.ADD_BOOK_TO_GENRE, idbook, idgenre);
+    }
+
+    @Override
+    public void removeBookFromGenre(int idbook, int idgenre) {
+        jdbcTemplate.update(SqlQueries.REMOVE_BOOK_FROM_GENRE, idbook, idgenre);
+    }
+
+    @Override
+    public void removeBook(int idbook) {
+        jdbcTemplate.update(SqlQueries.REMOVE_BOOK_FROM_ALL_GENRES, idbook);
+    }
+
+    @Override
+    public void addAuthorToGenre(int idauthor, int idgenre) {
+        jdbcTemplate.update(SqlQueries.ADD_AUTHOR_TO_GENRE, idgenre, idauthor);
+    }
+
+    @Override
+    public void removeAuthorFromGenre(int idauthor, int idgenre) {
+        jdbcTemplate.update(SqlQueries.REMOVE_AUTHOR_FROM_GENRE, idauthor, idgenre);
+    }
+
+    @Override
+    public void removeAuthor(int idauthor) {
+        jdbcTemplate.update(SqlQueries.REMOVE_AUTHOR_FROM_ALL_GENRES, idauthor);
+    }
+
 }

@@ -14,6 +14,18 @@ public interface InterfaceGenreDao {
 
     void updateGenre(Genre genre);
 
+    void addBookToGenre(int idbook, int idgenre);
+
+    void removeBookFromGenre(int idbook, int idgenre);
+
+    void removeBook(int idbook);
+
+    void addAuthorToGenre(int idauthor, int idgenre);
+
+    void removeAuthorFromGenre(int idauthor, int idgenre);
+
+    void removeAuthor(int idauthor);
+
     Genre findById(int id);
 
 }

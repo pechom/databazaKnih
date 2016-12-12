@@ -32,14 +32,14 @@ public class DefaultUserManager implements UserManager {
         for (User user1 : users) {
             if (user1.getFriends().contains(user)) {
                 user1.getFriends().remove(user);
-                updateUser(user1);
+                userDao.deleteFriendFromUser(user.getId(), user.getId());
                 if (!removed.contains(user1)) {
                     removed.add(user1);
                 }
             }
             if (user1.getFavoriteReviewers().contains(user)) {
                 user1.getFavoriteReviewers().remove(user);
-                updateUser(user1);
+                userDao.deleteFavoriteReviewerFromUser(user.getId(), user.getId());
                 if (!removed.contains(user1)) {
                     removed.add(user1);
                 }
@@ -90,7 +90,7 @@ public class DefaultUserManager implements UserManager {
                 break;
             }
         }
-        if (checked==null) {
+        if (checked == null) {
             return false;
         } else {
             return checked.checkPassword(typedPassword);
@@ -100,10 +100,10 @@ public class DefaultUserManager implements UserManager {
     @Override
     public User getUserByUsername(String login) {
         List<User> users = getAllUsers();
-        User named=null;
+        User named = null;
         for (User user : users) {
             if ((user.getUserName() != null) && (user.getUserName().equalsIgnoreCase(login))) {
-                named=user;
+                named = user;
                 break;
             }
         }
@@ -164,21 +164,21 @@ public class DefaultUserManager implements UserManager {
         for (User user : users) {
             if (user.getReadBooks().contains(book)) {
                 user.getReadBooks().remove(book);
-                updateUser(user);
+                userDao.deleteReadBookFromUser(book.getId(), user.getId());
                 if (!removed.contains(user)) {
                     removed.add(user);
                 }
             }
             if (user.getFavoriteBooks().contains(book)) {
                 user.getFavoriteBooks().remove(book);
-                updateUser(user);
+                userDao.deleteFavoriteBookFromUser(book.getId(), user.getId());
                 if (!removed.contains(user)) {
                     removed.add(user);
                 }
             }
             if (user.getWantedBooks().contains(book)) {
                 user.getWantedBooks().remove(book);
-                updateUser(user);
+                userDao.deleteWantedBookFromUser(book.getId(), user.getId());
                 if (!removed.contains(user)) {
                     removed.add(user);
                 }
@@ -186,7 +186,7 @@ public class DefaultUserManager implements UserManager {
             for (Map<Book, Integer> reading : user.getReading()) {
                 if (reading.containsKey(book)) {
                     user.getReading().remove(reading);
-                    updateUser(user);
+                    userDao.deleteReadingBooksFromUser(reading, user.getId());
                     if (!removed.contains(user)) {
                         removed.add(user);
                     }
@@ -195,7 +195,7 @@ public class DefaultUserManager implements UserManager {
             for (Map<Book, String> notebook : user.getNote()) {
                 if (notebook.containsKey(book)) {
                     user.getNote().remove(notebook);
-                    updateUser(user);
+                    userDao.deleteNoteBooksFromUser(notebook, user.getId());
                     if (!removed.contains(user)) {
                         removed.add(user);
                     }
@@ -210,7 +210,7 @@ public class DefaultUserManager implements UserManager {
         for (Book book : books) {
             if (!user.getReadBooks().contains(book)) {
                 user.getReadBooks().add(book);
-                updateUser(user);
+                userDao.addReadBookToUser(book.getId(), user.getId());
             }
         }
     }
@@ -220,7 +220,7 @@ public class DefaultUserManager implements UserManager {
         for (Book book : books) {
             if (user.getReadBooks().contains(book)) {
                 user.getReadBooks().remove(book);
-                updateUser(user);
+                userDao.deleteReadBookFromUser(book.getId(), user.getId());
             }
         }
     }
@@ -230,7 +230,7 @@ public class DefaultUserManager implements UserManager {
         for (Book book : books) {
             if (!user.getFavoriteBooks().contains(book)) {
                 user.getFavoriteBooks().add(book);
-                updateUser(user);
+                userDao.addFavoriteBookToUser(book.getId(), user.getId());
             }
         }
     }
@@ -240,7 +240,7 @@ public class DefaultUserManager implements UserManager {
         for (Book book : books) {
             if (user.getFavoriteBooks().contains(book)) {
                 user.getFavoriteBooks().remove(book);
-                updateUser(user);
+                userDao.deleteFavoriteBookFromUser(book.getId(), user.getId());
             }
         }
     }
@@ -250,7 +250,7 @@ public class DefaultUserManager implements UserManager {
         for (Book book : books) {
             if (!user.getWantedBooks().contains(book)) {
                 user.getWantedBooks().add(book);
-                updateUser(user);
+                userDao.addWantedBookToUser(book.getId(), user.getId());
             }
         }
     }
@@ -260,7 +260,7 @@ public class DefaultUserManager implements UserManager {
         for (Book book : books) {
             if (user.getWantedBooks().contains(book)) {
                 user.getWantedBooks().remove(book);
-                updateUser(user);
+                userDao.deleteWantedBookFromUser(book.getId(), user.getId());
             }
         }
     }
@@ -272,10 +272,10 @@ public class DefaultUserManager implements UserManager {
         for (User user : users) {
             if (user.getFavoriteAuthors().contains(author)) {
                 user.getFavoriteAuthors().remove(author);
-                updateUser(user);
                 removed.add(user);
             }
         }
+        userDao.removeAuthor(author.getId());
         return removed;
     }
 
@@ -284,7 +284,7 @@ public class DefaultUserManager implements UserManager {
         for (Author author : authors) {
             if (!user.getFavoriteAuthors().contains(author)) {
                 user.getFavoriteAuthors().add(author);
-                updateUser(user);
+                userDao.addFavoriteAuthorToUser(author.getId(), user.getId());
             }
         }
     }
@@ -294,7 +294,7 @@ public class DefaultUserManager implements UserManager {
         for (Author author : authors) {
             if (user.getFavoriteAuthors().contains(author)) {
                 user.getFavoriteAuthors().remove(author);
-                updateUser(user);
+                userDao.deleteFavoriteAuthorFromUser(author.getId(), user.getId());
             }
         }
     }
@@ -304,7 +304,7 @@ public class DefaultUserManager implements UserManager {
         for (User friend : friends) {
             if (!user.getFriends().contains(friend)) {
                 user.getFriends().add(friend);
-                updateUser(user);
+                userDao.addFriendToUser(friend.getId(), user.getId());
             }
         }
     }
@@ -314,7 +314,7 @@ public class DefaultUserManager implements UserManager {
         for (User friend : friends) {
             if (user.getFriends().contains(friend)) {
                 user.getFriends().remove(friend);
-                updateUser(user);
+                userDao.deleteFriendFromUser(friend.getId(), user.getId());
             }
         }
     }
@@ -324,7 +324,7 @@ public class DefaultUserManager implements UserManager {
         for (User reviewer : reviewers) {
             if (!user.getFavoriteReviewers().contains(reviewer)) {
                 user.getFavoriteReviewers().add(reviewer);
-                updateUser(user);
+                userDao.addFavoriteReviewerToUser(reviewer.getId(), user.getId());
             }
         }
     }
@@ -334,16 +334,8 @@ public class DefaultUserManager implements UserManager {
         for (User reviewer : reviewers) {
             if (user.getFavoriteReviewers().contains(reviewer)) {
                 user.getFavoriteReviewers().remove(reviewer);
-                updateUser(user);
+                userDao.deleteFavoriteReviewerFromUser(reviewer.getId(), user.getId());
             }
-        }
-    }
-
-    @Override
-    public void addBookReview(BookReview bookReview, User user) {
-        if (!user.getBookReviews().contains(bookReview)) {
-            user.getBookReviews().add(bookReview);
-            updateUser(user);
         }
     }
 
@@ -351,15 +343,7 @@ public class DefaultUserManager implements UserManager {
     public void deleteBookReview(BookReview bookReview, User user) {
         if (user.getBookReviews().contains(bookReview)) {
             user.getBookReviews().remove(bookReview);
-            updateUser(user);
-        }
-    }
-
-    @Override
-    public void addAuthorReview(AuthorReview authorReview, User user) {
-        if (!user.getAuthorReviews().contains(authorReview)) {
-            user.getAuthorReviews().add(authorReview);
-            updateUser(user);
+            userDao.deleteBookReviewFromUser(bookReview.getId(), user.getId());
         }
     }
 
@@ -367,7 +351,7 @@ public class DefaultUserManager implements UserManager {
     public void deleteAuthorReview(AuthorReview authorReview, User user) {
         if (user.getAuthorReviews().contains(authorReview)) {
             user.getAuthorReviews().remove(authorReview);
-            updateUser(user);
+            userDao.deleteAuthorReviewFromUser(authorReview.getId(), user.getId());
         }
     }
 
@@ -381,7 +365,7 @@ public class DefaultUserManager implements UserManager {
         for (Map<Book, Integer> map : reading) {
             if (!user.getReading().contains(map)) {
                 user.getReading().add(map);
-                updateUser(user);
+                userDao.addReadingBooksToUser(map, user.getId());
             }
         }
     }
@@ -391,7 +375,7 @@ public class DefaultUserManager implements UserManager {
         for (Map<Book, Integer> map : reading) {
             if (user.getReading().contains(map)) {
                 user.getReading().remove(map);
-                updateUser(user);
+                userDao.deleteReadingBooksFromUser(map, user.getId());
             }
         }
     }
@@ -401,7 +385,7 @@ public class DefaultUserManager implements UserManager {
         for (Map<Book, String> notebook : notebooks) {
             if (!user.getNote().contains(notebook)) {
                 user.getNote().add(notebook);
-                updateUser(user);
+                userDao.addNoteBooksToUser(notebook, user.getId());
             }
         }
     }
@@ -411,7 +395,7 @@ public class DefaultUserManager implements UserManager {
         for (Map<Book, String> notebook : notebooks) {
             if (user.getNote().contains(notebook)) {
                 user.getNote().remove(notebook);
-                updateUser(user);
+                userDao.deleteNoteBooksFromUser(notebook, user.getId());
             }
         }
     }

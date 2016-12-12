@@ -94,23 +94,11 @@ public class DefaultBookReviewManager implements BookReviewManager {
     }
 
     @Override
-    public void addUser(BookReview review, User user) {
-        review.setUser(user);
-        updateReview(review);
-    }
-
-    @Override
-    public void addBook(BookReview review, Book book) {
-        review.setBook(book);
-        updateReview(review);
-    }
-
-    @Override
     public List<BookReview> removeUser(User user) {
         List<BookReview> reviews = getAllReviews();
         List<BookReview> removed = new ArrayList<>();
         for (BookReview review : reviews) {
-            if ((review.getUser()!=null)&&(review.getUser().equals(user))) {
+            if ((review.getUser() != null) && (review.getUser().equals(user))) {
                 review.setUser(null);
                 updateReview(review);
                 removed.add(review);
@@ -120,45 +108,25 @@ public class DefaultBookReviewManager implements BookReviewManager {
     }
 
     @Override
-    public List<BookReview> removeBook(Book book) {
+    public void DeleteReviewsWithBook(Book book) {
         List<BookReview> reviews = getAllReviews();
-        List<BookReview> removed = new ArrayList<>();
-        for (BookReview review : reviews) {
-            if ((review.getBook()!=null)&&(review.getBook().equals(book))) {
-                review.setBook(null);
-                updateReview(review);
-                removed.add(review);
-            }
-        }
-        return removed;
-    }
-
-    @Override
-    public List<BookReview> deleteReviewsWithBook(Book book) {
-        List<BookReview> reviews = getAllReviews();
-        List<BookReview> deleted = new ArrayList<>();
         for (BookReview review : reviews) {
             if ((review.getBook() != null) && (review.getBook().equals(book))) {
                 review.setBook(null);
-                deleteReview(review.getId());
-                deleted.add(review);
             }
         }
-        return deleted;
+        bookReviewDao.deleteReviewsWithBook(book.getId());
     }
 
     @Override
-    public List<BookReview> deleteReviewsWithUser(User user) {
+    public void deleteReviewsWithUser(User user) {
         List<BookReview> reviews = getAllReviews();
-        List<BookReview> deleted = new ArrayList<>();
         for (BookReview review : reviews) {
             if ((review.getUser() != null) && (review.getUser().equals(user))) {
                 review.setUser(null);
-                deleteReview(review.getId());
-                deleted.add(review);
             }
         }
-        return deleted;
+        bookReviewDao.deleteReviewsWithUser(user.getId());
     }
 
     @Override
@@ -167,14 +135,9 @@ public class DefaultBookReviewManager implements BookReviewManager {
     }
 
     @Override
-    public void removeUserFromReview(BookReview review) {
-        review.setUser(null);
-        updateReview(review);
-    }
-
-    @Override
     public void removeBookFromReview(BookReview review) {
         review.setBook(null);
         updateReview(review);
     }
+
 }

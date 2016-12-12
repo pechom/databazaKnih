@@ -79,6 +79,8 @@ public interface BookManager {
     void addReview(BookReview review, Book book);//vypocitat aj avg a cekne rebricek
 
     void removeReview(BookReview review, Book book);//vypocitat aj avg a cekne rebricek
+    
+    void removeAllReviews(Book book);
 
     void calculateAndInsertBayesian(Book book, int constant);
 

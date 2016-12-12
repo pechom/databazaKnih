@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JButton;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -192,6 +193,70 @@ public class MysqlBookDao implements InterfaceBookDao {
         Book book = findById(id);
         book.setIsActive(true);
         updateBook(book);
+    }
+
+    @Override
+    public void addAuthorToBook(int idauthor, int idbook) {
+        jdbcTemplate.update(SqlQueries.ADD_AUTHOR_TO_BOOK, idbook, idauthor);
+    }
+
+    @Override
+    public void removeAuthorFromBook( int idbook) {
+        jdbcTemplate.update(SqlQueries.REMOVE_AUTHOR_FROM_BOOK, idbook);
+    }
+
+    @Override
+    public void removeAuthor(int idauthor) {
+        jdbcTemplate.update(SqlQueries.REMOVE_AUTHOR_FROM_ALL_BOOKS, idauthor);
+    }
+
+    @Override
+    public void addGenreToBook(int idgenre, int idbook) {
+        jdbcTemplate.update(SqlQueries.ADD_GENRE_TO_BOOK, idbook, idgenre);
+    }
+
+    @Override
+    public void removeGenreFromBook(int idgenre, int idbook) {
+        jdbcTemplate.update(SqlQueries.REMOVE_GENRE_FROM_BOOK, idbook, idgenre);
+    }
+
+    @Override
+    public void removeGenre(int idgenre) {
+        jdbcTemplate.update(SqlQueries.REMOVE_GENRE_FROM_ALL_BOOKS, idgenre);
+    }
+
+    @Override
+    public void addTagToBook(int idtag, int idbook) {
+        jdbcTemplate.update(SqlQueries.ADD_TAG_TO_BOOK, idtag, idbook);
+    }
+
+    @Override
+    public void removeTagFromBook(int idtag, int idbook) {
+        jdbcTemplate.update(SqlQueries.REMOVE_TAG_FROM_BOOK, idbook, idtag);
+    }
+
+    @Override
+    public void removeTag(int idtag) {
+        jdbcTemplate.update(SqlQueries.REMOVE_TAG_FROM_ALL_BOOKS, idtag);
+    }
+
+    @Override
+    public void addReviewToBook(int idreview, Book book) {
+        jdbcTemplate.update(SqlQueries.ADD_REVIEW_TO_BOOK, book.getNumberOfReviews(),
+                book.getAverageOfReviews(), book.getBayesianAverage(),
+                book.getNumberInChart(), book.getId());
+    }
+
+    @Override
+    public void removeReviewFromBook(int idreview, Book book) {
+        jdbcTemplate.update(SqlQueries.REMOVE_REVIEW_FROM_BOOK, book.getNumberOfReviews(),
+                book.getAverageOfReviews(), book.getBayesianAverage(),
+                book.getNumberInChart(), book.getId());
+    }
+
+    @Override
+    public void removeReviewsFromBook(int idbook) {
+        jdbcTemplate.update(SqlQueries.REMOVE_TAG_FROM_ALL_BOOKS, idbook);
     }
 
 }

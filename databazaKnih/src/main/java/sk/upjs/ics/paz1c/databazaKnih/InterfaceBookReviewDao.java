@@ -14,5 +14,9 @@ public interface InterfaceBookReviewDao {
 
     void updateReview(BookReview review);
 
+    void deleteReviewsWithBook(int idbook);
+
+    void deleteReviewsWithUser(int iduser);
+
     BookReview findById(int id);
 }
