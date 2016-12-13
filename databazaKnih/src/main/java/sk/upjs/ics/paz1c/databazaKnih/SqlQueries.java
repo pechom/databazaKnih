@@ -353,8 +353,8 @@ public class SqlQueries {
             + "user.mail, user.surname, "
             + "user.lastLogin, user.salt, user.isAdmin, user.isActive, "
             + "readbook.readbook_idbook, wantedbook.wantedbook_idbook, "
-            + "favoritebook.favoritebook_idbook, favoriteuser.favoriteuser_iduser, "
-            + "friend.friend, favoriteauthor.faveriteauthor_idauthor, "
+            + "favoritebook.favoritebook_idbook, favoriteuser.favoriteuser, "
+            + "friend.friend, favoriteauthor.favoriteauthor_idauthor, "
             + "booknote.booknote_idbook, booknote.note, "
             + "readingbook.readingbook_idbook, readingbook.numberOfPages, "
             + "authorreview.idauthorreview, bookreview.idbookreview "
@@ -385,8 +385,8 @@ public class SqlQueries {
             + "user.mail, user.surname, "
             + "user.lastLogin, user.salt, user.isAdmin, user.isActive, "
             + "readbook.readbook_idbook, wantedbook.wantedbook_idbook, "
-            + "favoritebook.favoritebook_idbook, favoriteuser.favoriteuser_iduser, "
-            + "friend.friend, favoriteauthor.faveriteauthor_idauthor, "
+            + "favoritebook.favoritebook_idbook, favoriteuser.favoriteuser, "
+            + "friend.friend, favoriteauthor.favoriteauthor_idauthor, "
             + "booknote.booknote_idbook, booknote.note, "
             + "readingbook.readingbook_idbook, readingbook.numberOfPages, "
             + "authorreview.idauthorreview, bookreview.idbookreview "
@@ -468,7 +468,7 @@ public class SqlQueries {
 
     public static final String ADD_FAVORITE_REVIEWER
             = "INSERT INTO favoriteuser "
-            + "(user_iduser, favoriteuser_iduser) "
+            + "(user_iduser, favoriteuser) "
             + "VALUES (?,?)";
 
     public static final String REMOVE_BOOKREVIEW

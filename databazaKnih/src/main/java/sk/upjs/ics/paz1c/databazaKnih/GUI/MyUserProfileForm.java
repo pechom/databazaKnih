@@ -31,7 +31,7 @@ public class MyUserProfileForm extends javax.swing.JDialog {
     public MyUserProfileForm(java.awt.Frame parent, boolean modal, User user) {
         super(parent, modal);
         initComponents();
-        user=this.user;
+        this.user=user;
         
         WelcomeUsernameLabel.setText("Welcome " + user.getUserName() + " !");
         if(user.getName()!=null){
