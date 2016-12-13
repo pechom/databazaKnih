@@ -42,13 +42,6 @@ public enum ObjectFactory {
         tagDao = new MysqlTagDao(jdbcTemplate);
         requestDao = new MysqlRequestDao(jdbcTemplate);
         genreDao = new MysqlGenreDao(jdbcTemplate);
-        userManager = new DefaultUserManager();
-        authorManager = new DefaultAuthorManager();
-        authorreviewManager = new DefaultAuthorReviewManager();
-        bookManager = new DefaultBookManager();
-        genreManager = new DefaultGenreManager();
-        requestManager = new DefaultRequestManager();
-        tagManager = new DefaultTagManager();
     }
 
     public JdbcTemplate getJdbcTemplate() {
@@ -98,34 +91,58 @@ public enum ObjectFactory {
     }
 
     public UserManager getUserManager() {
+        if (userManager == null) {
+            userManager = new DefaultUserManager();
+        }
         return userManager;
     }
 
     public AuthorManager getAuthorManager() {
+        if (authorManager == null) {
+            authorManager = new DefaultAuthorManager();
+        }
         return authorManager;
     }
 
     public AuthorReviewManager getAuthorReviewManager() {
+        if (authorreviewManager == null) {
+            authorreviewManager = new DefaultAuthorReviewManager();
+        }
         return authorreviewManager;
     }
 
     public BookManager getBookManager() {
+        if (bookManager == null) {
+            bookManager = new DefaultBookManager();
+        }
         return bookManager;
     }
 
     public BookReviewManager getBookReviewManager() {
+        if (bookreviewManager == null) {
+            bookreviewManager = new DefaultBookReviewManager();
+        }
         return bookreviewManager;
     }
 
     public GenreManager getGenreManager() {
+        if (genreManager == null) {
+            genreManager = new DefaultGenreManager();
+        }
         return genreManager;
     }
 
     public RequestManager getRequestManager() {
+        if (requestManager == null) {
+            requestManager = new DefaultRequestManager();
+        }
         return requestManager;
     }
 
     public TagManager getTagManager() {
+        if (tagManager == null) {
+            tagManager = new DefaultTagManager();
+        }
         return tagManager;
     }
 

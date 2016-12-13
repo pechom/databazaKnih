@@ -109,15 +109,15 @@ public class MyRequestForm extends javax.swing.JDialog {
     private void ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmButtonActionPerformed
         if(!isBook){
             Request request = new Request();
-            requestManager.addAuthor(author, request);
-            requestManager.addRequester(user, request);
+            request.setAuthor(author);
+            request.setRequester(user);
             
             request.setContent(MessageTextArea.getText());
             requestManager.insertRequest(request);
         } else {
             Request request = new Request();
-            requestManager.addBook(book, request);
-            requestManager.addRequester(user, request);
+             request.setBook(book);
+            request.setRequester(user);
             request.setContent(MessageTextArea.getText());
             requestManager.insertRequest(request);
         }

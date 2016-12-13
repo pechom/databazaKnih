@@ -124,6 +124,8 @@ public class RequestForm extends javax.swing.JDialog {
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
        requestManager.deleteRequest(request.getId());
        this.setVisible(false);
+       this.getParent().setVisible(false);
+
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
    

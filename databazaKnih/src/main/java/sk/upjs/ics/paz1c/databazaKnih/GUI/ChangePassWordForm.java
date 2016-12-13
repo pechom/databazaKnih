@@ -70,7 +70,7 @@ public class ChangePassWordForm extends javax.swing.JDialog {
 
         EnterOldPasswordLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         EnterOldPasswordLabel.setForeground(new java.awt.Color(0, 102, 255));
-        EnterOldPasswordLabel.setText("Enter New Password:");
+        EnterOldPasswordLabel.setText("Enter Old Password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +124,7 @@ public class ChangePassWordForm extends javax.swing.JDialog {
         return;
        } 
         
-       if(userManager.checkNameAndPassword(user.getUserName(), OldPasswordField.getText())){
+       if(!userManager.checkNameAndPassword(user.getUserName(), OldPasswordField.getText())){
        ErrorForm errorForm = new ErrorForm(this, true,"Your old password is incorrect !");
         errorForm.setVisible(true);
         return;
@@ -143,6 +143,7 @@ public class ChangePassWordForm extends javax.swing.JDialog {
     }
         user.setPassword(PasswordField.getText());
         userManager.updateUser(user);
+        this.setVisible(false);
         
 
     }//GEN-LAST:event_AcceptChangesButtonActionPerformed

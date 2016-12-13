@@ -14,14 +14,14 @@ import sk.upjs.ics.paz1c.databazaKnih.UserManager;
  * @author szoplakz
  */
 public class UpdateForm extends javax.swing.JDialog {
-
+    private User user;
     /**
      * Creates new form RegisterForm
      */
     public UpdateForm(java.awt.Dialog parent, boolean modal,User user) {
         super(parent, modal);
         initComponents();
-        
+        this.user = user;
         NameTextField.setText(user.getName());
         SurnameTextField.setText(user.getSurname());
     }
@@ -97,8 +97,10 @@ public class UpdateForm extends javax.swing.JDialog {
     private void AcceptChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptChangesButtonActionPerformed
        UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
         
-       
-    
+       user.setName(NameTextField.getText());
+       user.setSurname(SurnameTextField.getText());
+       userManager.updateUser(user);
+       this.setVisible(false);
         
         
         

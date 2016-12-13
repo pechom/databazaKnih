@@ -55,7 +55,7 @@ private Author author;
        
        
         NationalityTextField.setText("Nationality: " + author.getNationality());
-        if(author.getSex()=="Female"){
+        if(author.getSex().equals("f")){
         GenderSelectComboBox.setSelectedIndex(1);
         }
         
@@ -255,9 +255,9 @@ private Author author;
         newAuthor.setBirth(Integer.parseInt(DateofBirthTextfield.getText()));
         newAuthor.setDeath(Integer.parseInt(DateofDeathTextField.getText()));
         if(GenderSelectComboBox.getSelectedIndex()==0){
-        newAuthor.setSex("Male");
+        newAuthor.setSex("m");
         } else {
-        newAuthor.setSex("Female");
+        newAuthor.setSex("f");
         }
         GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
@@ -269,6 +269,7 @@ private Author author;
         newAuthor.setGenres(genreList);
         newAuthor.setBiography(BiographyTextArea.getText());
         authorManager.insertAuthor(newAuthor);
+        this.setVisible(false);
     }//GEN-LAST:event_AddAuthorButtonActionPerformed
 
     private void UpdateAuthorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAuthorButtonActionPerformed
@@ -277,9 +278,9 @@ private Author author;
         author.setBirth(Integer.parseInt(DateofBirthTextfield.getText()));
         author.setDeath(Integer.parseInt(DateofDeathTextField.getText()));
         if(GenderSelectComboBox.getSelectedIndex()==0){
-        author.setSex("Male");
+        author.setSex("m");
         } else {
-        author.setSex("Female");
+        author.setSex("f");
         }
         GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
@@ -291,6 +292,7 @@ private Author author;
         author.setGenres(genreList);
         author.setBiography(BiographyTextArea.getText());
         authorManager.updateAuthor(author);
+        this.setVisible(false);
     }//GEN-LAST:event_UpdateAuthorButtonActionPerformed
 
     

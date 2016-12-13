@@ -270,9 +270,12 @@ public class AuthorSearchForm extends javax.swing.JDialog {
         }
         
         int index = GenderComboBox.getSelectedIndex();
-        if(index!=0){    
-        List<Author> newList = authorManager.getAuthorsBySex(GenderComboBox.getItemAt(index), currentList);
-        currentList = newList;
+        if(index==1){    
+        List<Author> maleList = authorManager.getAuthorsBySex("m", currentList);
+        currentList = maleList;
+        if(index==2){    
+        List<Author> femaleList = authorManager.getAuthorsBySex("f", currentList);
+        currentList = femaleList;
         }
         
         if(!NationalityTextField.getText().isEmpty()){
@@ -280,10 +283,7 @@ public class AuthorSearchForm extends javax.swing.JDialog {
         currentList = newList;
         }
         
-        if(!NationalityTextField.getText().isEmpty()){
-        List<Author> newList = authorManager.getAuthorsByNationality(NationalityTextField.getText(), currentList);
-        currentList = newList;
-        }
+        
         
         int[] array = GenreList.getSelectedIndices();
         List<Genre> genreList = new ArrayList<Genre>();
@@ -339,7 +339,7 @@ public class AuthorSearchForm extends javax.swing.JDialog {
              ResultList.setListData(authorNames);
             
         
-        
+        }   
     }//GEN-LAST:event_FilterButtonActionPerformed
 
     private void AuthorSearchViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuthorSearchViewButtonActionPerformed

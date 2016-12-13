@@ -195,6 +195,15 @@ public class UserSearchForm extends javax.swing.JDialog {
         List<User> newList = userManager.getUsersByName(EmailTextField.getText(), currentList);
         currentList = newList;
         }
+        if(StatusComboBox.getSelectedIndex()==1){
+        List<User> newList = userManager.getNonAdmins( currentList);
+        currentList = newList;
+        }
+        if(StatusComboBox.getSelectedIndex()==2){
+        List<User> newList = userManager.getAdmins( currentList);
+        currentList = newList;
+        }
+        
          userNames = new String[currentList.size()];
              userArray= new User[currentList.size()];
              int i = 0;

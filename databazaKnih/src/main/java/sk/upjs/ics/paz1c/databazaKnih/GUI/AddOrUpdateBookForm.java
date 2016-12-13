@@ -335,6 +335,7 @@ private Book book;
        
         book.setDescription(SynopsisTextArea.getText());
         bookManager.updateBook(book);
+        this.setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void AddBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookButtonActionPerformed
@@ -363,6 +364,7 @@ private Book book;
        
         newBook.setDescription(SynopsisTextArea.getText());
         bookManager.insertBook(newBook);
+        this.setVisible(false);
     }//GEN-LAST:event_AddBookButtonActionPerformed
 
    

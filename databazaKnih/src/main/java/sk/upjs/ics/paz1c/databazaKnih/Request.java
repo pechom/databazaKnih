@@ -93,19 +93,4 @@ public class Request {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
-
-    public String toString(boolean isBook) {
-        StringBuilder sb = new StringBuilder();
-        if (isBook) {
-            sb.append(this.author.getName());
-            sb.append(" - ");
-            sb.append(this.requester.getUserName());
-        } else {
-            sb.append(this.book.getName());
-            sb.append(" - ");
-            sb.append(this.requester.getUserName());
-        }
-
-        return sb.toString();
-    }
 }

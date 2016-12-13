@@ -34,8 +34,13 @@ public class MyUserProfileForm extends javax.swing.JDialog {
         user=this.user;
         
         WelcomeUsernameLabel.setText("Welcome " + user.getUserName() + " !");
+        if(user.getName()!=null){
         NameLabel.setText("Name: " + user.getName());
+        }
+        if(user.getSurname()!=null){
         SurnameLabel.setText("Surname: " + user.getSurname());
+        }
+        
         EmailLabel.setText("E-mail: " + user.getMail());
         if(user.isIsAdmin()){
         StatusLabel.setText("Status: Admin");
@@ -468,6 +473,9 @@ public class MyUserProfileForm extends javax.swing.JDialog {
 
     private void DeleteProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteProfileButtonActionPerformed
         userDao.deleteUser(user.getId());
+        this.setVisible(false);
+        LoginForm loginForm = new LoginForm();
+        loginForm.setVisible(true);
     }//GEN-LAST:event_DeleteProfileButtonActionPerformed
 
     private void FavouriteBookIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavouriteBookIconButtonActionPerformed

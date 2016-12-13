@@ -145,7 +145,7 @@ public class ListForm extends javax.swing.JDialog {
             List<AuthorReview> authorReviews = user.getAuthorReviews();
             type = "AuthorReview";
              data = new String[authorReviews.size()];
-             bookreviewarray = new BookReview[authorReviews.size()];
+             authorreviewarray = new AuthorReview[authorReviews.size()];
              int i = 0;
             for (AuthorReview review : authorReviews) {
                data[i]= review.getAuthor().getName();
@@ -175,7 +175,7 @@ public class ListForm extends javax.swing.JDialog {
             List<AuthorReview> authorReviews = currentAuthor.getAuthorReviews();
             type = "AuthorReview";
              data = new String[authorReviews.size()];
-             bookreviewarray = new BookReview[authorReviews.size()];
+             authorreviewarray = new AuthorReview[authorReviews.size()];
              int i = 0;
             for (AuthorReview review : authorReviews) {
                data[i]= review.getUser().getUserName();
@@ -196,7 +196,7 @@ public class ListForm extends javax.swing.JDialog {
              requestarray = new Request[requests.size()];
              int i = 0;
             for (Request request : requests) {
-               data[i]= request.getAuthor().getName();
+               data[i]= request.getRequester().getName();
                requestarray[i] = request;
                i++;
             }
@@ -215,7 +215,7 @@ public class ListForm extends javax.swing.JDialog {
              requestarray = new Request[requests.size()];
              int i = 0;
             for (Request request : requests) {
-               data[i]= request.getBook().getName();
+               data[i]= request.getRequester().getName();
                requestarray[i] = request;
                i++;
             }
@@ -232,7 +232,7 @@ public class ListForm extends javax.swing.JDialog {
              requestarray = new Request[requests.size()];
              int i = 0;
             for (Request request : requests) {
-               data[i]= request.getBook().getName();
+               data[i]= request.getRequester().getName();
                requestarray[i] = request;
                i++;
             }

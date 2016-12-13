@@ -33,26 +33,16 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="NameLabel" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="LifeLabel" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="GenderLabel" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="GenreLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="BooksLable" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jScrollPane2" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
+                              <Component id="BooksLable" alignment="0" pref="236" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="AddtoFavouritesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="AddtoFavouritesButton" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <Component id="AddtoFavouritesLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AddToFavouritesToggleButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -61,47 +51,64 @@
                               </Group>
                           </Group>
                       </Group>
+                      <Component id="LifeLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="NameLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="GenderLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="NationalityLabel" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="NationalityLabel" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="GenreLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
+                  </Group>
               </Group>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="271" max="-2" attributes="0"/>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="BiographyLabel" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="ReviewButton" min="-2" pref="111" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="271" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="ViewRequestsButton" min="-2" pref="116" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SendRequestButton" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="UpdateButton" alignment="1" min="-2" pref="111" max="-2" attributes="0"/>
-                          <Component id="DeleteButton" alignment="1" min="-2" pref="111" max="-2" attributes="0"/>
+                          <Component id="BiographyLabel" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="SendRequestButton" min="-2" pref="111" max="-2" attributes="0"/>
+                          <Component id="ReviewButton" min="-2" pref="111" max="-2" attributes="0"/>
+                          <Component id="DeleteButton" alignment="1" min="-2" pref="111" max="-2" attributes="0"/>
+                          <Component id="UpdateButton" alignment="1" min="-2" pref="111" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Component id="UpdateButton" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="DeleteButton" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="SendRequestButton" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="BiographyLabel" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="ReviewButton" min="-2" pref="38" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="314" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="NameLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LifeLabel" min="-2" max="-2" attributes="0"/>
@@ -110,7 +117,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="GenderLabel" min="-2" pref="16" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="GenreLabel" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="GenreLabel" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="ViewRequestsButton" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -120,41 +130,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="AddtoFavouritesLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="AddtoFavouritesButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="AuthorReviewsLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="AuthorReviewsIconButton" min="-2" pref="66" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="UpdateButton" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="DeleteButton" min="-2" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                              <Component id="BiographyLabel" min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="AddtoFavouritesLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="314" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="SendRequestButton" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="ViewRequestsButton" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ReviewButton" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="AddToFavouritesToggleButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -302,16 +290,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="AddtoFavouritesButton">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Obrazky/FavouriteAuthorsIcon.png"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddtoFavouritesButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="AddtoFavouritesLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -382,6 +360,16 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewRequestsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="AddToFavouritesToggleButton">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Obrazky/FavouriteAuthorsIcon.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddToFavouritesToggleButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

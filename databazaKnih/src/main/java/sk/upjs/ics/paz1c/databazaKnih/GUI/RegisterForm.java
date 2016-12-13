@@ -191,6 +191,7 @@ public class RegisterForm extends javax.swing.JDialog {
     user.setMail(EmailTextField.getText());
     user.setName(NameTextField.getText());
     user.setSurname(SurnameTextField.getText());
+    user.setIsAdmin(false);
     userManager.insertUser(user);
     ErrorForm errorForm = new ErrorForm(this, true,"Your account has been successfully created!");
     errorForm.setVisible(true);

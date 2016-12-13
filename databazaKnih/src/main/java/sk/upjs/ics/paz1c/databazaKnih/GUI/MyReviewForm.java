@@ -101,7 +101,7 @@ public class MyReviewForm extends javax.swing.JDialog {
                             .addComponent(RatingSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(191, 191, 191)
                         .addComponent(ConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(70, Short.MAX_VALUE))))
+                        .addContainerGap(91, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +117,7 @@ public class MyReviewForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RatingSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,16 +127,16 @@ public class MyReviewForm extends javax.swing.JDialog {
         if(!isBook){
             AuthorReview review = new AuthorReview();
             
-            authorReviewManager.addAuthor(review, author);
-            authorReviewManager.addUser(review, user);
+            review.setAuthor(author);
+            review.setUser( user);
             review.setReview(ReviewTextArea.getText());
             review.setRating((int) RatingSpinner.getValue()); 
            userManager.addAuthorReview(review, user);
         
         } else {
         BookReview review = new BookReview();
-            bookReviewManager.addBook(review, book);
-            bookReviewManager.addUser(review, user);
+            review.setBook(book);
+            review.setUser( user);
             
             review.setReview(ReviewTextArea.getText());
             review.setRating((int) RatingSpinner.getValue()); 

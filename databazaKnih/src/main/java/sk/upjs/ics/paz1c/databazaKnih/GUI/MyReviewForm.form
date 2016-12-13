@@ -54,7 +54,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
                       <Component id="ConfirmButton" min="-2" pref="119" max="-2" attributes="0"/>
-                      <EmptySpace pref="70" max="32767" attributes="0"/>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -76,7 +76,7 @@
                   </Group>
                   <Component id="ConfirmButton" min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

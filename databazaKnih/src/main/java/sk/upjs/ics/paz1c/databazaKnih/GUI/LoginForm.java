@@ -150,8 +150,7 @@ public  class LoginForm extends javax.swing.JFrame   {
          
         
         if(userManager.checkNameAndPassword(UsernameTextField.getText(), PasswordField.getText())){
-            int id = 0;
-            User user = userDao.findById(id);
+            User user = userManager.getUserByUsername(UsernameTextField.getText());
             
             MyUserProfileForm myuserprofileform = new MyUserProfileForm(this, true,user);
             myuserprofileform.setVisible(true);
