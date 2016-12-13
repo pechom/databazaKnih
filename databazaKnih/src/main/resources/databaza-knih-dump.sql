@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `databaza-knih` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `databaza-knih`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: databaza-knih
@@ -30,9 +32,9 @@ CREATE TABLE `author` (
   `nationality` char(3) DEFAULT NULL,
   `sex` char(1) DEFAULT NULL,
   `biography` varchar(500) DEFAULT NULL,
-  `verificationStatus` bit(1) DEFAULT b'0',
-  `lifeStatus` bit(1) DEFAULT b'0',
-  `isActive` bit(1) DEFAULT b'0',
+  `verificationStatus` tinyint(1) DEFAULT NULL,
+  `lifeStatus` tinyint(1) DEFAULT NULL,
+  `isActive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idauthor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -83,7 +85,7 @@ CREATE TABLE `authorreview` (
   `idauthorreview` int(11) NOT NULL AUTO_INCREMENT,
   `rating` int(1) DEFAULT '0',
   `review` varchar(500) DEFAULT NULL,
-  `isActive` bit(1) DEFAULT b'0',
+  `isActive` tinyint(1) DEFAULT NULL,
   `author_idauthor` int(11) NOT NULL,
   `user_iduser` int(11) NOT NULL,
   PRIMARY KEY (`idauthorreview`,`author_idauthor`,`user_iduser`),
@@ -119,10 +121,10 @@ CREATE TABLE `book` (
   `description` varchar(500) DEFAULT NULL,
   `numberOfReviews` int(11) DEFAULT NULL,
   `averageOfReviews` float DEFAULT '0',
-  `verificationStatus` bit(1) DEFAULT b'0',
+  `verificationStatus` tinyint(1) DEFAULT NULL,
   `numberInChart` int(11) DEFAULT NULL,
   `bayesianAverage` float DEFAULT '0',
-  `isActive` bit(1) DEFAULT b'0',
+  `isActive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idbook`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -175,7 +177,7 @@ CREATE TABLE `bookreview` (
   `idbookreview` int(11) NOT NULL AUTO_INCREMENT,
   `rating` int(1) DEFAULT '0',
   `review` varchar(450) DEFAULT NULL,
-  `isActive` bit(1) DEFAULT b'0',
+  `isActive` tinyint(1) DEFAULT NULL,
   `user_iduser` int(11) NOT NULL,
   `book_idbook` int(11) NOT NULL,
   PRIMARY KEY (`idbookreview`,`user_iduser`,`book_idbook`),
@@ -309,7 +311,7 @@ DROP TABLE IF EXISTS `genre`;
 CREATE TABLE `genre` (
   `idgenre` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `isActive` bit(1) DEFAULT b'0',
+  `isActive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idgenre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -441,7 +443,7 @@ DROP TABLE IF EXISTS `request`;
 CREATE TABLE `request` (
   `idrequest` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(200) DEFAULT NULL,
-  `isActive` bit(1) DEFAULT b'0',
+  `isActive` tinyint(1) DEFAULT NULL,
   `user_iduser` int(11) DEFAULT NULL,
   `book_idbook` int(11) DEFAULT NULL,
   `author_idauthor` int(11) DEFAULT NULL,
@@ -477,7 +479,7 @@ DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `idtag` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `isActive` bit(1) DEFAULT b'0',
+  `isActive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idtag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -534,8 +536,8 @@ CREATE TABLE `user` (
   `surname` varchar(45) DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   `salt` varchar(45) DEFAULT NULL,
-  `isAdmin` bit(1) DEFAULT b'0',
-  `isActive` bit(1) DEFAULT b'0',
+  `isAdmin` tinyint(1) DEFAULT '0',
+  `isActive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -592,4 +594,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-12 20:36:43
+-- Dump completed on 2016-12-13 20:28:58

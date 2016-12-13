@@ -205,7 +205,7 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public void insertUser(User user) {
-        jdbcTemplate.update(SqlQueries.INSERT_USER, user.getName(), user.getPasswordHash(),
+        jdbcTemplate.update(SqlQueries.INSERT_USER, user.getUserName(), user.getPasswordHash(),
                 user.getMail(), user.getName(), user.getSurname(),
                 user.getLastLogin(), user.getSalt(), user.isIsAdmin(), user.isIsActive());
     }
