@@ -2,6 +2,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 public class Request {
 //request kde je book null sa tyka autora samotneho atd
+
     private int id;
     private User requester;
     private Book book;
@@ -91,5 +92,20 @@ public class Request {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public String toString(boolean isBook) {
+        StringBuilder sb = new StringBuilder();
+        if (isBook) {
+            sb.append(this.author.getName());
+            sb.append(" - ");
+            sb.append(this.requester.getUserName());
+        } else {
+            sb.append(this.book.getName());
+            sb.append(" - ");
+            sb.append(this.requester.getUserName());
+        }
+
+        return sb.toString();
     }
 }
