@@ -118,12 +118,14 @@ public class ChangePassWordForm extends javax.swing.JDialog {
     }//GEN-LAST:event_ConfirmPasswordFieldActionPerformed
 
     private void AcceptChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptChangesButtonActionPerformed
+        String text = String.copyValueOf(OldPasswordField.getPassword());
         if(OldPasswordField.getText().isEmpty()){
             ErrorForm errorForm = new ErrorForm(this, true,"You must enter your old password!");
         errorForm.setVisible(true);
         return;
        } 
-        
+        String psswd = String.copyValueOf(PasswordField.getPassword());
+        String cnfrm = String.copyValueOf(PasswordField.getPassword());
        if(!userManager.checkNameAndPassword(user.getUserName(), OldPasswordField.getText())){
        ErrorForm errorForm = new ErrorForm(this, true,"Your old password is incorrect !");
         errorForm.setVisible(true);
@@ -135,14 +137,14 @@ public class ChangePassWordForm extends javax.swing.JDialog {
         errorForm.setVisible(true);
         return;
        }
-        if(!PasswordField.getText().equals(ConfirmPasswordField.getText())){
+        if(!psswd.equals(cnfrm)){
         ErrorForm errorForm = new ErrorForm(this, true,"Your initial and repeated password do not match !");
         errorForm.setVisible(true); 
         return; 
         
     }
-        user.setPassword(PasswordField.getText());
-        userManager.updateUser(user);
+        
+        userManager.changePassword(user, psswd);
         this.setVisible(false);
         
 

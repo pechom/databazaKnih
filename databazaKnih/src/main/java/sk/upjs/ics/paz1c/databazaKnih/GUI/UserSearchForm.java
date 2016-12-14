@@ -208,7 +208,7 @@ public class UserSearchForm extends javax.swing.JDialog {
              userArray= new User[currentList.size()];
              int i = 0;
             for (User user : currentList) {
-               userNames[i]= user.getName();
+               userNames[i]= user.getUserName();
                userArray[i] = user;
                i++;
             }
@@ -216,10 +216,13 @@ public class UserSearchForm extends javax.swing.JDialog {
             
     }//GEN-LAST:event_FilterButtonActionPerformed
 
+    
     private void BookSearchViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookSearchViewButtonActionPerformed
-       User userProfile=  userArray[ResultList.getSelectedIndex()];
+        if(ResultList.getSelectedIndex()!=-1){
+        User userProfile=  userArray[ResultList.getSelectedIndex()];
            UserProfileForm userForm = new UserProfileForm(this, true, user, userProfile);
             userForm.setVisible(true);
+        }
     }//GEN-LAST:event_BookSearchViewButtonActionPerformed
 
     /**

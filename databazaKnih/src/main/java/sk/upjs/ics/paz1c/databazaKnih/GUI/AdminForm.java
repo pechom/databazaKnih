@@ -42,6 +42,8 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
         TagTextField = new javax.swing.JTextField();
         AddTagButton = new javax.swing.JButton();
         ViewRequestsButton = new javax.swing.JButton();
+        DeleteGenreButton = new javax.swing.JButton();
+        DeleteTagButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,6 +82,20 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
             }
         });
 
+        DeleteGenreButton.setText("Delete Genre");
+        DeleteGenreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteGenreButtonActionPerformed(evt);
+            }
+        });
+
+        DeleteTagButton.setText("Delete Tag");
+        DeleteTagButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteTagButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,8 +112,14 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ViewRequestsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AddTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AddGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(AddTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(DeleteTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(AddGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(DeleteGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -111,11 +133,15 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
                 .addGap(38, 38, 38)
                 .addComponent(GenreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AddGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(TagTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AddTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(ViewRequestsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
@@ -137,19 +163,33 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
     private void AddGenreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddGenreButtonActionPerformed
         Genre genre = new Genre();
         genre.setName(GenreTextField.getText());
+        genre.setIsActive(true);
         genreManager.insertGenre(genre);
+        GenreTextField.setText("");
     }//GEN-LAST:event_AddGenreButtonActionPerformed
 
     private void AddTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTagButtonActionPerformed
        Tag tag = new Tag();
         tag.setName(TagTextField.getText());
+        tag.setIsActive(true);
         tagManager.insertTag(tag);
+        TagTextField.setText("");
     }//GEN-LAST:event_AddTagButtonActionPerformed
 
     private void ViewRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewRequestsButtonActionPerformed
 ListForm authorReviewsList = new ListForm(this, true, "AllRequests", null,null,null);
         authorReviewsList.setVisible(true);        
     }//GEN-LAST:event_ViewRequestsButtonActionPerformed
+
+    private void DeleteGenreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteGenreButtonActionPerformed
+    Genre genre = genreManager.getByName(GenreTextField.getText());
+    genreManager.deleteGenre(genre.getId());
+    }//GEN-LAST:event_DeleteGenreButtonActionPerformed
+
+    private void DeleteTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteTagButtonActionPerformed
+         Tag tag = tagManager.getTagByName(TagTextField.getText());
+    tagManager.deleteTag(tag.getId());
+    }//GEN-LAST:event_DeleteTagButtonActionPerformed
 
    
 
@@ -158,6 +198,8 @@ ListForm authorReviewsList = new ListForm(this, true, "AllRequests", null,null,n
     private javax.swing.JButton AddBookButton;
     private javax.swing.JButton AddGenreButton;
     private javax.swing.JButton AddTagButton;
+    private javax.swing.JButton DeleteGenreButton;
+    private javax.swing.JButton DeleteTagButton;
     private javax.swing.JTextField GenreTextField;
     private javax.swing.JTextField TagTextField;
     private javax.swing.JButton ViewRequestsButton;

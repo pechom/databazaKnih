@@ -12,7 +12,6 @@ import javax.xml.bind.DatatypeConverter;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class User {
-
     private int id;
     private String userName;
     private String passwordHash;
@@ -33,7 +32,6 @@ public class User {
     private List<AuthorReview> authorReviews;
     private boolean isAdmin;
     private boolean isActive;
-
     /**
      * @return the login
      */
@@ -59,21 +57,22 @@ public class User {
      * @param passwordHash the password to set
      */
     public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+        this.passwordHash=passwordHash;
     }
-
+    
+    
     public void setPassword(String password) {
-        if (Salt == null) {
-            this.Salt = BCrypt.gensalt();
-        }
+            
+            
+            Salt = BCrypt.gensalt();
+            
         this.passwordHash = BCrypt.hashpw(password, Salt);
     }
-
+    
     public boolean checkPassword(String password) {
         String result = BCrypt.hashpw(password, Salt);
         return result.equals(passwordHash);
     }
-
     /**
      * @return the mail
      */
@@ -214,6 +213,7 @@ public class User {
         this.favoriteReviewers = favoriteReviewers;
     }
 
+  
     /**
      * @return the Salt
      */
@@ -225,7 +225,7 @@ public class User {
      * @param Salt the Salt to set
      */
     public void setSalt(String Salt) {
-        this.Salt = Salt;
+          this.Salt = Salt;
     }
 
     /**

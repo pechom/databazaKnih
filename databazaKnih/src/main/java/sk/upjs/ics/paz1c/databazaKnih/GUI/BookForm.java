@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.util.ArrayList;
 import java.util.List;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.BookManager;
@@ -50,7 +51,9 @@ public class BookForm extends javax.swing.JDialog {
         }
         
         BookNameLabel.setText("Name: " + book.getName());
-        AuthorNameLabel.setText("Author: " + book.getAuthor());
+        if(book.getAuthor()!=null){
+        AuthorNameLabel.setText("Author: " + book.getAuthor().getName());
+        }
         ISBNLabel.setText("ISBN: " + book.getISBN());
         YearLabel.setText("Year of publication: " + book.getYear());
         RatingLabel.setText("Rating: " + book.getBayesianAverage());
@@ -143,6 +146,8 @@ public class BookForm extends javax.swing.JDialog {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        GenreList.setMaximumSize(new java.awt.Dimension(15, 80));
+        GenreList.setMinimumSize(new java.awt.Dimension(15, 80));
         jScrollPane1.setViewportView(GenreList);
 
         TagsBookLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -158,6 +163,7 @@ public class BookForm extends javax.swing.JDialog {
 
         SynopsisTextArea.setColumns(20);
         SynopsisTextArea.setRows(5);
+        SynopsisTextArea.setMaximumSize(new java.awt.Dimension(500, 250));
         jScrollPane3.setViewportView(SynopsisTextArea);
 
         SynopsisLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -303,16 +309,16 @@ public class BookForm extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(AuthorNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(RatingLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(TagsBookLabel)
-                                        .addComponent(GenreBookLabel)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1))
+                                    .addComponent(TagsBookLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(GenreBookLabel, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LengthLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(YearLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                                     .addComponent(ISBNLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BookNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 44, Short.MAX_VALUE)))
+                                    .addComponent(BookNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addGap(0, 53, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -401,26 +407,41 @@ public class BookForm extends javax.swing.JDialog {
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void AddtoFavouritesToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddtoFavouritesToggleButtonActionPerformed
-        if(AddtoFavouritesToggleButton.isSelected()){
+         if(AddtoFavouritesToggleButton.isSelected()){
+            if(!user.getFavoriteBooks().contains(book)){
+                
         userManager.addFavoriteBookToUser(book, user);
+            }
         } else {
+             if(user.getFavoriteBooks().contains(book)){
         userManager.deleteFavoriteBookFromUser(book, user);
+        }
         }
     }//GEN-LAST:event_AddtoFavouritesToggleButtonActionPerformed
 
     private void AddtoWantedToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddtoWantedToggleButtonActionPerformed
         if(AddtoWantedToggleButton.isSelected()){
+            if(!user.getWantedBooks().contains(book)){
+                
         userManager.addWantedBookToUser(book, user);
+            }
         } else {
+             if(user.getWantedBooks().contains(book)){
         userManager.deleteWantedBookFromUser(book, user);
+        }
         }
     }//GEN-LAST:event_AddtoWantedToggleButtonActionPerformed
 
     private void AddtoReadToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddtoReadToggleButtonActionPerformed
         if(AddtoReadToggleButton.isSelected()){
+            if(!user.getReadBooks().contains(book)){
+                
         userManager.addReadBookToUser(book, user);
+            }
         } else {
+             if(user.getReadBooks().contains(book)){
         userManager.deleteReadBookFromUser(book, user);
+        }
         }
     }//GEN-LAST:event_AddtoReadToggleButtonActionPerformed
 

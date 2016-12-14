@@ -14,7 +14,7 @@ import sk.upjs.ics.paz1c.databazaKnih.UserManager;
  * @author szoplakz
  */
 public class RegisterForm extends javax.swing.JDialog {
-
+ UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
     /**
      * Creates new form RegisterForm
      */
@@ -169,13 +169,22 @@ public class RegisterForm extends javax.swing.JDialog {
        ErrorForm errorForm = new ErrorForm(this, true,"You must enter a username to register !");
         errorForm.setVisible(true); 
         return;
-       }
-        if(PasswordField.getText().isEmpty()){
+       } 
+        
+         if(userManager.getUserByUsername(UsernameTextField.getText())!=null){
+       ErrorForm errorForm = new ErrorForm(this, true,"This Username is already in use  !");
+        errorForm.setVisible(true); 
+        return;
+       } 
+        String text = String.copyValueOf(PasswordField.getPassword());
+        if(text.isEmpty()){
             ErrorForm errorForm = new ErrorForm(this, true,"You must enter a password to register !");
         errorForm.setVisible(true);
         return;
        }
-        if(!PasswordField.getText().equals(ConfirmPasswordField.getText())){
+         String first = String.copyValueOf(PasswordField.getPassword());
+         String second = String.copyValueOf(ConfirmPasswordField.getPassword());
+        if(!first.equals(second)){
         ErrorForm errorForm = new ErrorForm(this, true,"Your initial and repeated password do not match !");
         errorForm.setVisible(true); 
         return;  
@@ -185,13 +194,22 @@ public class RegisterForm extends javax.swing.JDialog {
         errorForm.setVisible(true);  
         return;
     }
+    
+     if(userManager.getUserByMail(EmailTextField.getText())!=null){
+     ErrorForm errorForm = new ErrorForm(this, true,"This e-mail is already in use !");
+        errorForm.setVisible(true);  
+        return;
+    }
+     
     User user = new User();
     user.setUserName(UsernameTextField.getText());
-    user.setPassword(PasswordField.getText());
+    
+    user.setPassword(text);
     user.setMail(EmailTextField.getText());
     user.setName(NameTextField.getText());
     user.setSurname(SurnameTextField.getText());
     user.setIsAdmin(false);
+    user.setIsActive(true);
     userManager.insertUser(user);
     ErrorForm errorForm = new ErrorForm(this, true,"Your account has been successfully created!");
     errorForm.setVisible(true);

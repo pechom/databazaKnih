@@ -315,35 +315,42 @@ public class ListForm extends javax.swing.JDialog {
            
         switch(type) {
             case "Book": 
+            if(ContentList.getSelectedIndex()!=-1){    
             Book book =  bookarray[ContentList.getSelectedIndex()];
             BookForm bookform = new BookForm(this, true, user, book);
             bookform.setVisible(true);
-            
+            }
             case "Author": 
+            if(ContentList.getSelectedIndex()!=-1){    
             Author author =  authorarray[ContentList.getSelectedIndex()];
             AuthorForm authorForm = new AuthorForm(this, true, author, user);
             authorForm.setVisible(true);
+            }
             
              case "User": 
+            if(ContentList.getSelectedIndex()!=-1){      
             User userProfile =  userarray[ContentList.getSelectedIndex()];
             UserProfileForm userForm = new UserProfileForm(this, true, user, userProfile);
             userForm.setVisible(true);
-             
+            } 
              case "BookReview":
+                  if(ContentList.getSelectedIndex()!=-1){  
                  BookReview bookReview = bookreviewarray[ContentList.getSelectedIndex()];
                  ReviewForm bookreviewForm = new ReviewForm(this, true, true,bookReview, null);
                  bookreviewForm.setVisible(true);
-                 
+                  } 
             case "AuthorReview":
+                if(ContentList.getSelectedIndex()!=-1){ 
                  AuthorReview authorReview = authorreviewarray[ContentList.getSelectedIndex()];
                  ReviewForm authorreviewForm = new ReviewForm(this, true, false, null , authorReview);
                  authorreviewForm.setVisible(true);
-            
+                }
             case "Request":
+            if(ContentList.getSelectedIndex()!=-1){
                  Request request = requestarray[ContentList.getSelectedIndex()];
                  RequestForm requestForm = new RequestForm(this, true, request);
                  requestForm.setVisible(true);  
-                 
+            }
                  
                  
         }

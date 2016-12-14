@@ -404,7 +404,7 @@ public class BookSearchForm extends javax.swing.JDialog {
         currentList = ratingList;
         } 
         }
-         
+         if(GenreList.getSelectedIndex()!=-1){
           int[] arrayOfGenres = GenreList.getSelectedIndices();
         List<Genre> genreList = new ArrayList<Genre>();
         for (int i = 0; arrayOfGenres.length < i; i++) {
@@ -413,7 +413,8 @@ public class BookSearchForm extends javax.swing.JDialog {
         }
         List<Book> booksByGenre = bookManager.GetBooksByGenres(genreList, currentList);
         currentList = booksByGenre;
-        
+         }
+         if(TagList.getSelectedIndex()!=-1){
         int[] arrayofTags = TagList.getSelectedIndices();
         List<Tag> tagList = new ArrayList<Tag>();
         for (int i = 0; i < arrayofTags.length; i++) {
@@ -422,7 +423,7 @@ public class BookSearchForm extends javax.swing.JDialog {
         }
         List<Book> booksByTag = bookManager.GetBooksByTags(tagList, currentList);
         currentList = booksByTag;
-         
+         }
         
          bookNames = new String[currentList.size()];
              bookArray= new Book[currentList.size()];
@@ -447,9 +448,11 @@ public class BookSearchForm extends javax.swing.JDialog {
     }//GEN-LAST:event_ISBNTextFieldActionPerformed
 
     private void BookSearchViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookSearchViewButtonActionPerformed
-         Book book=  bookArray[ResultList.getSelectedIndex()];
+if(ResultList.getSelectedIndex()!=-1){
+        Book book=  bookArray[ResultList.getSelectedIndex()];
             BookForm bookForm = new BookForm(this, true, user, book);
             bookForm.setVisible(true);
+}
     }//GEN-LAST:event_BookSearchViewButtonActionPerformed
 
     /**

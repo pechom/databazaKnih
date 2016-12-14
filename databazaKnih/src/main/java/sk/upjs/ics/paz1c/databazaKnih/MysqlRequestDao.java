@@ -38,7 +38,7 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                         requests.add(request);
 
                         int bookid = rs.getInt("book_idbook");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
@@ -50,24 +50,29 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                         }
 
                         int authorid = rs.getInt("author_idauthor");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Author author = authors.get(authorid);
                             if (author == null) {
                                 author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
                             }
-                            if (author.isIsActive()) {
-                                request.setAuthor(author);
+                            if (author != null) {
+                                if (author.isIsActive()) {
+                                    request.setAuthor(author);
+                                }
                             }
                         }
 
                         int userid = rs.getInt("user_iduser");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             User user = users.get(userid);
+
                             if (user == null) {
                                 user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
                             }
-                            if (user.isIsActive()) {
-                                request.setRequester(user);
+                            if (user != null) {
+                                if (user.isIsActive()) {
+                                    request.setRequester(user);
+                                }
                             }
                         }
                     }
@@ -79,9 +84,16 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void insertRequest(Request request) {
-        jdbcTemplate.update(SqlQueries.INSERT_REQUEST, request.getContent(),
-                request.getBook().getId(), request.getAuthor().getId(),
-                request.getRequester().getId(), request.isIsActive());
+        if (request.getBook() == null) {
+            jdbcTemplate.update(SqlQueries.INSERT_REQUEST, request.getContent(),
+                    null, request.getAuthor().getId(),
+                    request.getRequester().getId(), request.isIsActive());
+        } else {
+            jdbcTemplate.update(SqlQueries.INSERT_REQUEST, request.getContent(),
+                    request.getBook().getId(), null,
+                    request.getRequester().getId(), request.isIsActive());
+
+        }
     }
 
     @Override
@@ -104,20 +116,32 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                         request.setId(id);
                         request.setContent(rs.getString("content"));
                     }
-                    int bookid = rs.getInt("book_idbook");
-                    int userid = rs.getInt("user_iduser");
                     int authorid = rs.getInt("author_idauthor");
-                    Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                    User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                    Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                    if (author.isIsActive()) {
-                        request.setAuthor(author);
+                    if (!rs.wasNull()) {
+                        Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
+                        if (author != null) {
+                            if (author.isIsActive()) {
+                                request.setAuthor(author);
+                            }
+                        }
                     }
-                    if (book.isIsActive()) {
-                        request.setBook(book);
+                    int bookid = rs.getInt("book_idbook");
+                    if (!rs.wasNull()) {
+                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
+                        if (book != null) {
+                            if (book.isIsActive()) {
+                                request.setBook(book);
+                            }
+                        }
                     }
-                    if (user.isIsActive()) {
-                        request.setRequester(user);
+                    int userid = rs.getInt("user_iduser");
+                    if (!rs.wasNull()) {
+                        User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
+                        if (user != null) {
+                            if (user.isIsActive()) {
+                                request.setRequester(user);
+                            }
+                        }
                     }
                 }
                 return request;
@@ -145,7 +169,7 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void deleteAllWithBook(int idbook) {
-       jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_BOOK, idbook);
+        jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_BOOK, idbook);
     }
 
     @Override

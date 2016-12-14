@@ -35,10 +35,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="BooksLable" alignment="0" pref="236" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="BooksLable" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="AddtoFavouritesLabel" min="-2" max="-2" attributes="0"/>
@@ -50,16 +47,15 @@
                                   <Component id="AuthorReviewsIconButton" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="jScrollPane3" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
                       </Group>
                       <Component id="LifeLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="NameLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="GenderLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="NationalityLabel" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="GenreLabel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="GenreLabel" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="165" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="18" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -91,9 +87,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Component id="UpdateButton" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="DeleteButton" min="-2" pref="38" max="-2" attributes="0"/>
@@ -107,8 +103,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="314" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="NameLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LifeLabel" min="-2" max="-2" attributes="0"/>
@@ -122,12 +117,12 @@
                           <Component id="ViewRequestsButton" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="125" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BooksLable" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="104" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="AuthorReviewsLabel" min="-2" max="-2" attributes="0"/>

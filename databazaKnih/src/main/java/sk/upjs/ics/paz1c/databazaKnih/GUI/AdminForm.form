@@ -36,8 +36,16 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="ViewRequestsButton" min="-2" pref="104" max="-2" attributes="0"/>
-                          <Component id="AddTagButton" min="-2" pref="104" max="-2" attributes="0"/>
-                          <Component id="AddGenreButton" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="AddTagButton" min="-2" pref="104" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="DeleteTagButton" min="-2" pref="104" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="AddGenreButton" min="-2" pref="104" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="DeleteGenreButton" min="-2" pref="104" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -57,11 +65,17 @@
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="GenreTextField" min="-2" pref="42" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="AddGenreButton" min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="AddGenreButton" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="DeleteGenreButton" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="TagTextField" min="-2" pref="42" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="AddTagButton" min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="AddTagButton" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="DeleteTagButton" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="45" max="32767" attributes="0"/>
               <Component id="ViewRequestsButton" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -112,6 +126,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewRequestsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="DeleteGenreButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Genre"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteGenreButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="DeleteTagButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Tag"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteTagButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

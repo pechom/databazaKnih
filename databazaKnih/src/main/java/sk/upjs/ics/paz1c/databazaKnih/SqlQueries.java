@@ -9,9 +9,9 @@ public class SqlQueries {
             + "authorofbook.book_idbook, genreofauthor.genre_idgenre, "
             + "authorreview.idauthorreview "
             + "FROM author "
-            + "JOIN authorofbook ON author.idauthor=authorofbook.author_idauthor "
-            + "JOIN genreofauthor ON author.idauthor=genreofauthor.author_idauthor "
-            + "JOIN authorreview ON author.idauthor=authorreview.author_idauthor "
+            + "LEFT JOIN authorofbook ON author.idauthor=authorofbook.author_idauthor "
+            + "LEFT JOIN genreofauthor ON author.idauthor=genreofauthor.author_idauthor "
+            + "LEFT JOIN authorreview ON author.idauthor=authorreview.author_idauthor "
             + "WHERE author.isActive=1 ORDER BY author.idauthor";
 
     public static final String INSERT_AUTHOR = "INSERT INTO author (name, birth, "
@@ -25,14 +25,14 @@ public class SqlQueries {
 
     public static final String SELECT_AUTHOR_BY_ID = "SELECT author.idauthor, "
             + "author.name, author.birth, author.death, author.nationality, "
-            + "author.lifeStatus, author.verifiactionStatus, "
+            + "author.lifeStatus, author.verificationStatus, "
             + "author.sex, author.biography, author.isActive, "
             + "authorofbook.book_idbook , genreofauthor.genre_idgenre, "
             + "authorreview.idauthorreview "
             + "FROM author "
-            + "JOIN authorofbook ON author.idauthor=authorofbook.author_idauthor "
-            + "JOIN genreofauthor ON author.idauthor=genreofauthor.author_idauthor "
-            + "JOIN authorreview ON author.idauthor=authorreview.author_idauthor "
+            + "LEFT JOIN authorofbook ON author.idauthor=authorofbook.author_idauthor "
+            + "LEFT JOIN genreofauthor ON author.idauthor=genreofauthor.author_idauthor "
+            + "LEFT JOIN authorreview ON author.idauthor=authorreview.author_idauthor "
             + "WHERE author.isActive=1 and author.idauthor=";
 
     public static final String ADD_BOOK_TO_AUTHOR
@@ -68,8 +68,8 @@ public class SqlQueries {
             + "authorreview.isActive, "
             + "authorreview.author_idauthor, authorreview.user_iduser "
             + "FROM authorreview "
-            + "JOIN author ON author.idauthor=authorreview.author_idauthor, "
-            + "JOIN user ON user.iduser=authorreview.user_iduser"
+            + "LEFT JOIN author ON author.idauthor=authorreview.author_idauthor "
+            + "LEFT JOIN user ON user.iduser=authorreview.user_iduser"
             + " WHERE authorreview.isActive=1 ORDER BY authorreview.idauthorreview";
 
     public static final String INSERT_AUTHORREVIEW = "INSERT INTO authorreview "
@@ -85,8 +85,8 @@ public class SqlQueries {
             + "authorreview.isActive, "
             + "authorreview.author_idauthor, authorreview.user_iduser "
             + "FROM authorreview "
-            + "JOIN author ON author.idauthor=authorreview.author_idauthor, "
-            + "JOIN user ON user.iduser=authorreview.user_iduser"
+            + "LEFT JOIN author ON author.idauthor=authorreview.author_idauthor "
+            + "LEFT JOIN user ON user.iduser=authorreview.user_iduser"
             + " WHERE authorreview.isActive=1 and authorreview.idauthorreview=";
 
     public static final String DELETE_AUTHORREVIEWS_WITH_AUTHOR
@@ -108,10 +108,10 @@ public class SqlQueries {
             + "genreofbook.genre_idgenre, tagofbook.tag_idtag, "
             + "bookreview.idbookreview, authorofbook.author_idauthor "
             + "FROM book "
-            + "JOIN genreofbook ON genreofbook.book_idbook=book.idbook "
-            + "JOIN tagofbook ON tagofbook.book_idbook=book.idbook "
-            + "JOIN bookreview ON bookreview.book_idbook=book.idbook "
-            + "JOIN authorofbook ON book.idbook=authorofbook.book_idbook "
+            + "LEFT JOIN genreofbook ON genreofbook.book_idbook=book.idbook "
+            + "LEFT JOIN tagofbook ON tagofbook.book_idbook=book.idbook "
+            + "LEFT JOIN bookreview ON bookreview.book_idbook=book.idbook "
+            + "LEFT JOIN authorofbook ON book.idbook=authorofbook.book_idbook "
             + "WHERE book.isActive=1 ORDER BY book.numberInChart";
 
     public static final String INSERT_BOOK = "INSERT INTO book (name, year, "
@@ -127,16 +127,16 @@ public class SqlQueries {
             + "WHERE idbook=?";
 
     public static final String SELECT_BOOK_BY_ID = "SELECT book.idbook, book.name,"
-            + "book.year, book.numberOfPages. book.ISBN, book.descroption, "
+            + "book.year, book.numberOfPages, book.ISBN, book.description, "
             + " book.numberOfReviews, book.averageOfReviews, book.verificationStatus,"
             + " book.numberInChart, book.bayesianAverage, book.isActive, "
             + "genreofbook.genre_idgenre, tagofbook.tag_idtag, "
             + "bookreview.idbookreview, authorofbook.author_idauthor "
             + "FROM book "
-            + "JOIN genreofbook ON genreofbook.book_idbook=book.idbook "
-            + "JOIN tagofbook ON tagofbook.book_idbook=book.idbook "
-            + "JOIN bookreview ON bookreview.book_idbook=book.idbook "
-            + "JOIN authorofbook ON book.idbook=authorofbook.book_idbook "
+            + "LEFT JOIN genreofbook ON genreofbook.book_idbook=book.idbook "
+            + "LEFT JOIN tagofbook ON tagofbook.book_idbook=book.idbook "
+            + "LEFT JOIN bookreview ON bookreview.book_idbook=book.idbook "
+            + "LEFT JOIN authorofbook ON book.idbook=authorofbook.book_idbook "
             + "WHERE book.isActive=1 and book.idbook=";
 
     public static final String ADD_AUTHOR_TO_BOOK
@@ -194,8 +194,8 @@ public class SqlQueries {
             + "bookreview.isActive, "
             + "bookreview.book_idbook, bookreview.user_iduser "
             + "FROM bookreview "
-            + "JOIN book ON book.idbook=bookreview.book_idbook, "
-            + "JOIN user ON user.iduser=bookreview.user_iduser "
+            + "LEFT JOIN book ON book.idbook=bookreview.book_idbook "
+            + "LEFT JOIN user ON user.iduser=bookreview.user_iduser "
             + "WHERE bookreview.isActive=1 ORDER BY bookreview.idbookreview";
 
     public static final String INSERT_BOOKREVIEW = "INSERT INTO bookreview "
@@ -211,8 +211,8 @@ public class SqlQueries {
             + "bookreview.isActive, "
             + "bookreview.book_idbook, bookreview.user_iduser "
             + "FROM bookreview "
-            + "JOIN book ON book.idbook=bookreview.book_idbook, "
-            + "JOIN user ON user.iduser=bookreview.user_iduser "
+            + "LEFT JOIN book ON book.idbook=bookreview.book_idbook "
+            + "LEFT JOIN user ON user.iduser=bookreview.user_iduser "
             + "WHERE bookreview.isActive=1 and bookreview.idbookreview=";
 
     public static final String DELETE_BOOKREVIEWS_WITH_BOOK
@@ -231,8 +231,8 @@ public class SqlQueries {
             + "genre.idgenre, genre.name, genre.isActive, "
             + "genreofbook.book_idbook, genreofauthor.author_idauthor "
             + "FROM genre "
-            + "JOIN genreofbook ON genreofbook.genre_idgenre=genre.idgenre "
-            + "JOIN genreofauthor ON genreofauthor.genre_idgenre=genre.idgenre "
+            + "LEFT JOIN genreofbook ON genreofbook.genre_idgenre=genre.idgenre "
+            + "LEFT JOIN genreofauthor ON genreofauthor.genre_idgenre=genre.idgenre "
             + "WHERE genre.isActive=1 ORDER BY genre.idgenre";
 
     public static final String INSERT_GENRE = "INSERT INTO genre "
@@ -246,8 +246,8 @@ public class SqlQueries {
             + "genre.idgenre, genre.name, genre.isActive, "
             + "genreofbook.book_idbook, genreofauthor.author_idauthor "
             + "FROM genre "
-            + "JOIN genreofbook ON genreofbook.genre_idgenre=genre.idgenre "
-            + "JOIN genreofauthor ON genreofauthor.genre_idgenre=genre.idgenre "
+            + "LEFT JOIN genreofbook ON genreofbook.genre_idgenre=genre.idgenre "
+            + "LEFT JOIN genreofauthor ON genreofauthor.genre_idgenre=genre.idgenre "
             + "WHERE genre.isActive=1 and genre.idgenre=";
 
     public static final String ADD_BOOK_TO_GENRE
@@ -278,13 +278,14 @@ public class SqlQueries {
             + "request.content, request.isActive, request.book_idbook, "
             + "request.author_idauthor, request.user_iduser "
             + "FROM request "
-            + "JOIN book ON request.book_idbook=book.idbook "
-            + "JOIN author ON request.author_idauthor=author.idauthor "
-            + "JOIN user ON request.user_iduser=user.iduser "
+            + "LEFT JOIN book ON request.book_idbook=book.idbook "
+            + "LEFT JOIN author ON request.author_idauthor=author.idauthor "
+            + "LEFT JOIN user ON request.user_iduser=user.iduser "
             + "WHERE request.isActive=1 ORDER BY request.idrequest";
 
     //request ma pri inserte aj vztahy
-    public static final String INSERT_REQUEST = "INSERT INTO request "
+    public static final String INSERT_REQUEST = "SET FOREIGN_KEY_CHECKS=0; INSERT INTO request "
+            
             + "(content, book_idbook, author_idauthor, user_iduser, isActive) "
             + "VALUES (?,?,?,?,?)";
 
@@ -296,9 +297,9 @@ public class SqlQueries {
             + "request.content, request.isActive, request.book_idbook, "
             + "request.author_idauthor, request.user_iduser "
             + "FROM request "
-            + "JOIN book ON request.book_idbook=book.idbook "
-            + "JOIN author ON request.author_idauthor=author.idauthor "
-            + "JOIN user ON request.user_iduser=user.iduser "
+            + "LEFT JOIN book ON request.book_idbook=book.idbook "
+            + "LEFT JOIN author ON request.author_idauthor=author.idauthor "
+            + "LEFT JOIN user ON request.user_iduser=user.iduser "
             + "WHERE request.isActive=1 and request.idrequest=";
 
     public static final String DELETE_REQUESTS_WITH_USER
@@ -320,7 +321,7 @@ public class SqlQueries {
     public static final String SELECT_ALL_TAGS = "SELECT "
             + "tag.idtag, tag.name, tag.isActive, tagofbook.book_idbook "
             + "FROM tag "
-            + "JOIN tagofbook ON tagofbook.tag_idtag=tag.idtag "
+            + "LEFT JOIN tagofbook ON tagofbook.tag_idtag=tag.idtag "
             + "WHERE tag.isActive=1 ORDER BY tag.idtag";
 
     public static final String INSERT_TAG = "INSERT INTO tag "
@@ -333,7 +334,7 @@ public class SqlQueries {
     public static final String SELECT_TAG_BY_ID = "SELECT "
             + "tag.idtag, tag.name, tag.isActive, tagofbook.book_idbook "
             + "FROM tag "
-            + "JOIN tagofbook ON tagofbook.tag_idtag=tag.idtag "
+            + "LEFT JOIN tagofbook ON tagofbook.tag_idtag=tag.idtag "
             + "WHERE tag.isActive=1 and tag.idtag=";
 
     public static final String ADD_BOOK_TO_TAG
@@ -359,16 +360,16 @@ public class SqlQueries {
             + "readingbook.readingbook_idbook, readingbook.numberOfPages, "
             + "authorreview.idauthorreview, bookreview.idbookreview "
             + "FROM user "
-            + "JOIN readbook ON readbook.user_iduser=user.iduser "
-            + "JOIN wantedbook ON wantedbook.user_iduser=user.iduser "
-            + "JOIN favoritebook ON favoritebook.user_iduser=user.iduser "
-            + "JOIN favoriteuser ON favoriteuser.user_iduser=user.iduser "
-            + "JOIN friend ON friend.user_iduser=user.iduser "
-            + "JOIN favoriteauthor ON favoriteauthor.user_iduser=user.iduser "
-            + "JOIN booknote ON booknote.user_iduser=user.iduser "
-            + "JOIN readingbook ON readingbook.user_iduser=user.iduser "
-            + "JOIN bookreview ON bookreview.user_iduser=user.iduser "
-            + "JOIN authorreview ON authorreview.user_iduser=user.iduser "
+            + "LEFT JOIN readbook ON readbook.user_iduser=user.iduser "
+            + "LEFT JOIN wantedbook ON wantedbook.user_iduser=user.iduser "
+            + "LEFT JOIN favoritebook ON favoritebook.user_iduser=user.iduser "
+            + "LEFT JOIN favoriteuser ON favoriteuser.user_iduser=user.iduser "
+            + "LEFT JOIN friend ON friend.user_iduser=user.iduser "
+            + "LEFT JOIN favoriteauthor ON favoriteauthor.user_iduser=user.iduser "
+            + "LEFT JOIN booknote ON booknote.user_iduser=user.iduser "
+            + "LEFT JOIN readingbook ON readingbook.user_iduser=user.iduser "
+            + "LEFT JOIN bookreview ON bookreview.user_iduser=user.iduser "
+            + "LEFT JOIN authorreview ON authorreview.user_iduser=user.iduser "
             + "WHERE user.isActive=1 ORDER BY user.iduser";
 
     public static final String INSERT_USER = "INSERT INTO user "
@@ -376,7 +377,7 @@ public class SqlQueries {
             + "isAdmin, isActive) VALUES (?,?,?,?,?,?,?,?,?)";
 
     public static final String UPDATE_USER = "UPDATE user SET "
-            + " name=?, surname=?, lastLogin=? "
+            + " name=?, surname=?, lastLogin=?, "
             + "isAdmin=?, isActive=? "
             + "WHERE iduser=?";
 
@@ -391,16 +392,16 @@ public class SqlQueries {
             + "readingbook.readingbook_idbook, readingbook.numberOfPages, "
             + "authorreview.idauthorreview, bookreview.idbookreview "
             + "FROM user "
-            + "JOIN readbook ON readbook.user_iduser=user.iduser "
-            + "JOIN wantedbook ON wantedbook.user_iduser=user.iduser "
-            + "JOIN favoritebook ON favoritebook.user_iduser=user.iduser "
-            + "JOIN favoriteuser ON favoriteuser.user_iduser=user.iduser "
-            + "JOIN friend ON friend.user_iduser=user.iduser "
-            + "JOIN favoriteauthor ON favoriteauthor.user_iduser=user.iduser "
-            + "JOIN booknote ON booknote.user_iduser=user.iduser "
-            + "JOIN readingbook ON readingbook.user_iduser=user.iduser "
-            + "JOIN bookreview ON bookreview.user_iduser=user.iduser "
-            + "JOIN authorreview ON authorreview.user_iduser=user.iduser "
+            + "LEFT JOIN readbook ON readbook.user_iduser=user.iduser "
+            + "LEFT JOIN wantedbook ON wantedbook.user_iduser=user.iduser "
+            + "LEFT JOIN favoritebook ON favoritebook.user_iduser=user.iduser "
+            + "LEFT JOIN favoriteuser ON favoriteuser.user_iduser=user.iduser "
+            + "LEFT JOIN friend ON friend.user_iduser=user.iduser "
+            + "LEFT JOIN favoriteauthor ON favoriteauthor.user_iduser=user.iduser "
+            + "LEFT JOIN booknote ON booknote.user_iduser=user.iduser "
+            + "LEFT JOIN readingbook ON readingbook.user_iduser=user.iduser "
+            + "LEFT JOIN bookreview ON bookreview.user_iduser=user.iduser "
+            + "LEFT JOIN authorreview ON authorreview.user_iduser=user.iduser "
             + "WHERE user.isActive=1 and user.iduser=";
 
     public static final String CHANGE_PASSWORD = "UPDATE user SET "

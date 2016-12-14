@@ -40,26 +40,32 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         reviews.add(bookReview);
 
                         int bookid = rs.getInt("book_idbook");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                                books.put(bookid, book);
                             }
-                            if (book.isIsActive()) {
-                                bookReview.setBook(book);
+                            if (book != null) {
+                                books.put(bookid, book);
+
+                                if (book.isIsActive()) {
+                                    bookReview.setBook(book);
+                                }
                             }
                         }
 
                         int userid = rs.getInt("user_iduser");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             User user = users.get(userid);
                             if (user == null) {
                                 user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                                users.put(userid, user);
                             }
-                            if (user.isIsActive()) {
-                                bookReview.setUser(user);
+                            if (user != null) {
+                                users.put(userid, user);
+
+                                if (user.isIsActive()) {
+                                    bookReview.setUser(user);
+                                }
                             }
                         }
                     }
@@ -106,14 +112,22 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
                     }
                     int bookid = rs.getInt("book_idbook");
-                    int userid = rs.getInt("user_iduser");
-                    Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                    if (book.isIsActive()) {
-                        bookReview.setBook(book);
+                    if (!rs.wasNull()) {
+                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
+                        if (book != null) {
+                            if (book.isIsActive()) {
+                                bookReview.setBook(book);
+                            }
+                        }
                     }
-                    User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                    if (user.isIsActive()) {
-                        bookReview.setUser(user);
+                    int userid = rs.getInt("user_iduser");
+                    if (!rs.wasNull()) {
+                        User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
+                        if (user != null) {
+                            if (user.isIsActive()) {
+                                bookReview.setUser(user);
+                            }
+                        }
                     }
                 }
 

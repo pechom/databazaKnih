@@ -55,54 +55,66 @@ public class MysqlBookDao implements InterfaceBookDao {
                         books.add(book);
 
                         int reviewid = rs.getInt("bookreview.idbookreview");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             BookReview review = reviews.get(reviewid);
                             if (review == null) {
                                 review = ObjectFactory.INSTANCE.getBookReviewDao().findById(reviewid);
                             }
-                            if (review.isIsActive()) {
-                                book.getBookReviews().add(review);
+                            if (review != null) {
+                                if (review.isIsActive()) {
+                                    book.getBookReviews().add(review);
+                                }
                             }
                         }
-
                         int genreid = rs.getInt("genreofbook.genre_idgenre");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Genre genre = genres.get(genreid);
                             if (genre == null) {
                                 genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
-                                genres.put(genreid, genre);
                             }
-                            if (genre.isIsActive()) {
-                                book.getGenres().add(genre);
+                            if (genre != null) {
+                                genres.put(genreid, genre);
+
+                                if (genre.isIsActive()) {
+                                    book.getGenres().add(genre);
+                                }
                             }
                         }
 
                         int tagid = rs.getInt("tagofbook.tag_idtag");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Tag tag = tags.get(tagid);
                             if (tag == null) {
                                 tag = ObjectFactory.INSTANCE.getTagDao().findById(tagid);
-                                tags.put(tagid, tag);
                             }
-                            if (tag.isIsActive()) {
-                                book.getTags().add(tag);
+                            if (tag != null) {
+                                tags.put(tagid, tag);
+
+                                if (tag.isIsActive()) {
+                                    book.getTags().add(tag);
+                                }
                             }
                         }
 
                         int authorid = rs.getInt("authorofbook.author_idauthor");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Author author = authors.get(authorid);
                             if (author == null) {
                                 author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                                authors.put(authorid, author);
                             }
-                            if (author.isIsActive()) {
-                                book.setAuthor(author);
+                            if (author != null) {
+                                authors.put(authorid, author);
+
+                                if (author.isIsActive()) {
+                                    book.setAuthor(author);
+                                }
                             }
                         }
+
                     }
                 }
                 return books;
+
             }
         });
     }
@@ -158,27 +170,42 @@ public class MysqlBookDao implements InterfaceBookDao {
                         book.setGenres(new ArrayList<>());
                         book.setTags(new ArrayList<>());
 
-                        int reviewid = rs.getInt("bookreview.idbookreview");
                         int genreid = rs.getInt("genreofbook.genre_idgenre");
+                        if (!rs.wasNull()) {
+                            Genre genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
+                            if (genre != null) {
+                                if (genre.isIsActive()) {
+                                    book.getGenres().add(genre);
+                                }
+                            }
+                        }
+                        int reviewid = rs.getInt("bookreview.idbookreview");
+                        if (!rs.wasNull()) {
+                            BookReview review = ObjectFactory.INSTANCE.getBookReviewDao().findById(reviewid);
+                            if (review != null) {
+                                if (review.isIsActive()) {
+                                    book.getBookReviews().add(review);
+                                }
+                            }
+                        }
                         int tagid = rs.getInt("tagofbook.tag_idtag");
+                        if (!rs.wasNull()) {
+                            Tag tag = ObjectFactory.INSTANCE.getTagDao().findById(tagid);
+                            if (tag != null) {
+                                if (tag.isIsActive()) {
+                                    book.getTags().add(tag);
+                                }
+                            }
+                        }
                         int authorid = rs.getInt("authorofbook.author_idauthor");
-                        Genre genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
-                        if (genre.isIsActive()) {
-                            book.getGenres().add(genre);
+                        if (!rs.wasNull()) {
+                            Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
+                            if (author != null) {
+                                if (author.isIsActive()) {
+                                    book.setAuthor(author);
+                                }
+                            }
                         }
-                        BookReview review = ObjectFactory.INSTANCE.getBookReviewDao().findById(reviewid);
-                        if (review.isIsActive()) {
-                            book.getBookReviews().add(review);
-                        }
-                        Tag tag = ObjectFactory.INSTANCE.getTagDao().findById(tagid);
-                        if (tag.isIsActive()) {
-                            book.getTags().add(tag);
-                        }
-                        Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                        if (author.isIsActive()) {
-                            book.setAuthor(author);
-                        }
-
                     }
                 }
                 return book;
@@ -199,7 +226,7 @@ public class MysqlBookDao implements InterfaceBookDao {
     }
 
     @Override
-    public void removeAuthorFromBook( int idbook) {
+    public void removeAuthorFromBook(int idbook) {
         jdbcTemplate.update(SqlQueries.REMOVE_AUTHOR_FROM_BOOK, idbook);
     }
 

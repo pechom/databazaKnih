@@ -7,8 +7,11 @@ package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JList;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
+import sk.upjs.ics.paz1c.databazaKnih.Book;
+import sk.upjs.ics.paz1c.databazaKnih.BookManager;
 import sk.upjs.ics.paz1c.databazaKnih.Genre;
 import sk.upjs.ics.paz1c.databazaKnih.GenreManager;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
@@ -20,9 +23,13 @@ import sk.upjs.ics.paz1c.databazaKnih.User;
 public class AddOrUpdateAuthorForm extends javax.swing.JDialog {
 GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
 AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
+BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
 private String[] genreNames;
 private Genre[] genreArray;
+private String[] bookNames;
+private Book[] bookArray;
 private Author author;
+
     /**
      * Creates new form AuthorRequestForm
      */
@@ -41,6 +48,18 @@ private Author author;
                i++;
             }
              GenreList.setListData(genreNames);
+             
+             List<Book> books = bookManager.getAllBooks();
+             
+             bookNames = new String[books.size()];
+             bookArray= new Book[books.size()];
+             int j = 0;
+            for (Book book : books) {
+               bookNames[j]= book.getName();
+               bookArray[j] = book;
+               j++;
+            }
+             BookList.setListData(bookNames);
             
         if(isUpdate){
         AddAuthorButton.enable(false);
@@ -54,7 +73,7 @@ private Author author;
         }
        
        
-        NationalityTextField.setText("Nationality: " + author.getNationality());
+       
         if(author.getSex().equals("f")){
         GenderSelectComboBox.setSelectedIndex(1);
         }
@@ -89,7 +108,7 @@ private Author author;
         DateofBirthLabel = new javax.swing.JLabel();
         GenderSearchLabel = new javax.swing.JLabel();
         GenderSelectComboBox = new javax.swing.JComboBox<>();
-        GenreLabel = new javax.swing.JLabel();
+        BookLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         GenreList = new javax.swing.JList<>();
         AddAuthorButton = new javax.swing.JButton();
@@ -97,6 +116,9 @@ private Author author;
         BiographyTextArea = new javax.swing.JTextArea();
         BiographyLabel = new javax.swing.JLabel();
         UpdateAuthorButton = new javax.swing.JButton();
+        GenreLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        BookList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,15 +149,16 @@ private Author author;
             }
         });
 
-        GenreLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        GenreLabel.setForeground(new java.awt.Color(0, 102, 204));
-        GenreLabel.setText("Genres:");
+        BookLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BookLabel.setForeground(new java.awt.Color(0, 102, 204));
+        BookLabel.setText("Books:");
 
         GenreList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        GenreList.setName(""); // NOI18N
         jScrollPane2.setViewportView(GenreList);
 
         AddAuthorButton.setText("Add Author");
@@ -160,14 +183,42 @@ private Author author;
             }
         });
 
+        GenreLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        GenreLabel1.setForeground(new java.awt.Color(0, 102, 204));
+        GenreLabel1.setText("Genres:");
+
+        BookList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        BookList.setName(""); // NOI18N
+        jScrollPane3.setViewportView(BookList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(UpdateAuthorButton)
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(UpdateAuthorButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BookLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(NationalityTextField)
+                    .addComponent(BiographyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DateofDeathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(DateofDeathTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(NationalityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -176,69 +227,67 @@ private Author author;
                             .addComponent(AuthorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NameTextField)
                             .addComponent(DateofBirthTextfield)
-                            .addComponent(GenreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(AddAuthorButton))
+                            .addComponent(AddAuthorButton)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(GenderSelectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(GenderSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(DateofBirthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(22, 22, 22)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(NationalityTextField)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(BiographyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(DateofDeathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                                    .addComponent(DateofDeathTextField, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addComponent(NationalityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(7, 7, 7)))
-                    .addContainerGap()))
+                    .addContainerGap(380, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(GenreLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(326, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(555, Short.MAX_VALUE)
-                .addComponent(UpdateAuthorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(NationalityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NationalityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(DateofDeathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DateofDeathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BiographyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BookLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(UpdateAuthorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(64, 64, 64)
-                            .addComponent(NationalityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(NationalityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(AuthorNameLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(DateofDeathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(DateofBirthLabel))
+                    .addGap(65, 65, 65)
+                    .addComponent(AuthorNameLabel)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(DateofBirthTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(DateofDeathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(27, 27, 27)
+                    .addComponent(DateofBirthLabel)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(GenderSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BiographyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DateofBirthTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(GenderSelectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(GenreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AddAuthorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1))
+                    .addComponent(GenderSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(GenderSelectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(35, 35, 35)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
+                    .addComponent(AddAuthorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(256, 256, 256)
+                    .addComponent(GenreLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(397, Short.MAX_VALUE)))
         );
 
         pack();
@@ -253,12 +302,15 @@ private Author author;
         newAuthor.setName(NameTextField.getText());
         newAuthor.setNationality(NationalityTextField.getText());
         newAuthor.setBirth(Integer.parseInt(DateofBirthTextfield.getText()));
+        if(!DateofDeathTextField.getText().isEmpty()){
         newAuthor.setDeath(Integer.parseInt(DateofDeathTextField.getText()));
+        }
         if(GenderSelectComboBox.getSelectedIndex()==0){
         newAuthor.setSex("m");
         } else {
         newAuthor.setSex("f");
         }
+       
         GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
         List<Genre> genreList = new ArrayList<Genre>();
@@ -266,22 +318,38 @@ private Author author;
             genreList.add(genreArray[genreIndeces[i]]);
             
         }
+        
+        BookList.getSelectedIndices();
+        int[] bookIndeces = BookList.getSelectedIndices();
+        List<Book> bookList = new ArrayList<Book>();
+        for (int i = 0; i < bookIndeces.length; i++) {
+            bookList.add(bookArray[genreIndeces[i]]);
+            
+        }
+        newAuthor.setVerificationStatus(true);
         newAuthor.setGenres(genreList);
+        authorManager.addGenresToAuthor(genreList, newAuthor);
+        authorManager.addBooksToAuthor(bookList, newAuthor);
         newAuthor.setBiography(BiographyTextArea.getText());
+        newAuthor.setIsActive(true);
         authorManager.insertAuthor(newAuthor);
         this.setVisible(false);
     }//GEN-LAST:event_AddAuthorButtonActionPerformed
 
     private void UpdateAuthorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAuthorButtonActionPerformed
-       author.setName(NameTextField.getText());
+     
+        author.setName(NameTextField.getText());
         author.setNationality(NationalityTextField.getText());
         author.setBirth(Integer.parseInt(DateofBirthTextfield.getText()));
+        if(!DateofDeathTextField.getText().isEmpty()){
         author.setDeath(Integer.parseInt(DateofDeathTextField.getText()));
+        }
         if(GenderSelectComboBox.getSelectedIndex()==0){
         author.setSex("m");
         } else {
         author.setSex("f");
         }
+       
         GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
         List<Genre> genreList = new ArrayList<Genre>();
@@ -289,9 +357,21 @@ private Author author;
             genreList.add(genreArray[genreIndeces[i]]);
             
         }
+        
+        BookList.getSelectedIndices();
+        int[] bookIndeces = BookList.getSelectedIndices();
+        List<Book> bookList = new ArrayList<Book>();
+        for (int i = 0; i < bookIndeces.length; i++) {
+            bookList.add(bookArray[genreIndeces[i]]);
+            
+        }
+        author.setVerificationStatus(true);
         author.setGenres(genreList);
+        authorManager.addGenresToAuthor(genreList, author);
+        authorManager.addBooksToAuthor(bookList, author);
         author.setBiography(BiographyTextArea.getText());
-        authorManager.updateAuthor(author);
+        author.setIsActive(true);
+        authorManager.insertAuthor(author);
         this.setVisible(false);
     }//GEN-LAST:event_UpdateAuthorButtonActionPerformed
 
@@ -303,13 +383,15 @@ private Author author;
     private javax.swing.JLabel AuthorNameLabel;
     private javax.swing.JLabel BiographyLabel;
     private javax.swing.JTextArea BiographyTextArea;
+    private javax.swing.JLabel BookLabel;
+    private javax.swing.JList<String> BookList;
     private javax.swing.JLabel DateofBirthLabel;
     private javax.swing.JTextField DateofBirthTextfield;
     private javax.swing.JLabel DateofDeathLabel;
     private javax.swing.JTextField DateofDeathTextField;
     private javax.swing.JLabel GenderSearchLabel;
     private javax.swing.JComboBox<String> GenderSelectComboBox;
-    private javax.swing.JLabel GenreLabel;
+    private javax.swing.JLabel GenreLabel1;
     private javax.swing.JList<String> GenreList;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JLabel NationalityLabel;
@@ -317,5 +399,6 @@ private Author author;
     private javax.swing.JButton UpdateAuthorButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

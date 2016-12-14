@@ -71,67 +71,79 @@ public class MysqlUserDao implements InterfaceUserDao {
                         users.add(user);
 
                         int areviewid = rs.getInt("authorreview.idauthorreview");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             AuthorReview authorreview = authorreviews.get(areviewid);
                             if (authorreview == null) {
                                 authorreview = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(areviewid);
                                 authorreviews.put(areviewid, authorreview);
                             }
-                            if (authorreview.isIsActive()) {
-                                user.getAuthorReviews().add(authorreview);
+                            if (authorreview != null) {
+                                if (authorreview.isIsActive()) {
+                                    user.getAuthorReviews().add(authorreview);
+                                }
                             }
                         }
 
                         int breviewid = rs.getInt("bookreview.idbookreview");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             BookReview bookReview = bookreviews.get(breviewid);
                             if (bookReview == null) {
                                 bookReview = ObjectFactory.INSTANCE.getBookReviewDao().findById(breviewid);
                                 bookreviews.put(breviewid, bookReview);
                             }
-                            if (bookReview.isIsActive()) {
-                                user.getBookReviews().add(bookReview);
+                            if (bookReview != null) {
+                                if (bookReview.isIsActive()) {
+                                    user.getBookReviews().add(bookReview);
+                                }
                             }
                         }
 
-                        int favauthorid = rs.getInt("favoriteauthor.faveriteauthor_idauthor");
-                        if (rs.wasNull()) {
+                        int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
+                        if (!rs.wasNull()) {
                             Author author = favauthors.get(favauthorid);
                             if (author == null) {
                                 author = ObjectFactory.INSTANCE.getAuthorDao().findById(favauthorid);
-                                favauthors.put(favauthorid, author);
                             }
-                            if (author.isIsActive()) {
-                                user.getFavoriteAuthors().add(author);
+                            if (author != null) {
+                                favauthors.put(favauthorid, author);
+
+                                if (author.isIsActive()) {
+                                    user.getFavoriteAuthors().add(author);
+                                }
                             }
                         }
 
                         int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book book = favbooks.get(favbookid);
                             if (book == null) {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(favbookid);
-                                favbooks.put(favbookid, book);
-                            }
-                            if (book.isIsActive()) {
-                                user.getFavoriteBooks().add(book);
+                                if (favbooks != null) {
+                                    favbooks.put(favbookid, book);
+                                }
+                                if (book.isIsActive()) {
+                                    user.getFavoriteBooks().add(book);
+                                }
                             }
                         }
 
-                        int favuserid = rs.getInt("favoriteuser.favoriteuser_iduser");
-                        if (rs.wasNull()) {
+                        int favuserid = rs.getInt("favoriteuser.favoriteuser");
+                        if (!rs.wasNull()) {
                             User favuser = favusers.get(favuserid);
                             if (favuser == null) {
                                 favuser = ObjectFactory.INSTANCE.getUserDao().findById(favuserid);
-                                favusers.put(favuserid, favuser);
-                            }
-                            if (favuser.isIsActive()) {
-                                user.getFavoriteReviewers().add(favuser);
+                                if (favusers != null) {
+                                    favusers.put(favuserid, favuser);
+
+                                    if (favuser.isIsActive()) {
+                                        user.getFavoriteReviewers().add(favuser);
+                                    }
+                                }
                             }
                         }
 
                         int friendid = rs.getInt("friend.friend");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             User frienduser = friends.get(friendid);
                             if (frienduser == null) {
                                 frienduser = ObjectFactory.INSTANCE.getUserDao().findById(friendid);
@@ -143,59 +155,70 @@ public class MysqlUserDao implements InterfaceUserDao {
                         }
 
                         int readid = rs.getInt("readbook.readbook_idbook");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book readbook = readbooks.get(readid);
                             if (readbook == null) {
                                 readbook = ObjectFactory.INSTANCE.getBookDao().findById(readid);
-                                readbooks.put(readid, readbook);
                             }
-                            if (readbook.isIsActive()) {
-                                user.getReadBooks().add(readbook);
+                            if (readbook != null) {
+                                readbooks.put(readid, readbook);
+
+                                if (readbook.isIsActive()) {
+                                    user.getReadBooks().add(readbook);
+                                }
                             }
                         }
 
                         int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book wantedbook = wantedbooks.get(wantedid);
                             if (wantedbook == null) {
                                 wantedbook = ObjectFactory.INSTANCE.getBookDao().findById(wantedid);
-                                wantedbooks.put(wantedid, wantedbook);
-                            }
-                            if (wantedbook.isIsActive()) {
-                                user.getWantedBooks().add(wantedbook);
+                                if (wantedbooks != null) {
+                                    wantedbooks.put(wantedid, wantedbook);
+                                }
+                                if (wantedbook.isIsActive()) {
+                                    user.getWantedBooks().add(wantedbook);
+                                }
                             }
                         }
 
                         int noteid = rs.getInt("booknote.booknote_idbook");
                         String note = rs.getString("booknote.note");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book notebook = notes.get(noteid);
                             if (notebook == null) {
                                 notebook = ObjectFactory.INSTANCE.getBookDao().findById(noteid);
-                                notes.put(noteid, notebook);
-                            }
-                            Map<Book, String> bookWithNote = new HashMap<>();
-                            bookWithNote.put(notebook, note);
-                            if (notebook.isIsActive()) {
-                                user.getNote().add(bookWithNote);
+                                if (notebook != null) {
+                                    notes.put(noteid, notebook);
+
+                                    Map<Book, String> bookWithNote = new HashMap<>();
+                                    bookWithNote.put(notebook, note);
+                                    if (notebook.isIsActive()) {
+                                        user.getNote().add(bookWithNote);
+                                    }
+                                }
                             }
                         }
 
                         int readingid = rs.getInt("readingbook.readingbook_idbook");
                         int pocetReading = rs.getInt("readingbook.numberOfPages");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book readingBook = reading.get(readingid);
                             if (readingBook == null) {
                                 readingBook = ObjectFactory.INSTANCE.getBookDao().findById(readingid);
+                            }
+                            if (readingBook != null) {
                                 reading.put(readingid, readingBook);
-                            }
-                            Map<Book, Integer> readingWithPage = new HashMap<>();
-                            readingWithPage.put(readingBook, pocetReading);
-                            if (readingBook.isIsActive()) {
-                                user.getReading().add(readingWithPage);
-                            }
-                        }
 
+                                Map<Book, Integer> readingWithPage = new HashMap<>();
+                                readingWithPage.put(readingBook, pocetReading);
+                                if (readingBook.isIsActive()) {
+                                    user.getReading().add(readingWithPage);
+                                }
+                            }
+
+                        }
                     }
                 }
                 return users;
@@ -235,6 +258,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                     if (user == null || user.getId() != id) {
                         user = new User();
                         user.setId(rs.getInt(id));
+
                         user.setIsAdmin(rs.getBoolean("isAdmin"));
                         Timestamp timestamp = rs.getTimestamp("lastLogin");
                         if (timestamp != null) {
@@ -258,63 +282,104 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setReadBooks(new ArrayList<>());
                         user.setReading(new ArrayList<>());
                         user.setWantedBooks(new ArrayList<>());
-                    }
-                    int areviewid = rs.getInt("authorreview.idauthorreview");
-                    int breviewid = rs.getInt("bookreview.idbookreview");
-                    int favauthorid = rs.getInt("favoriteauthor.faveriteauthor_idauthor");
-                    int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
-                    int favuserid = rs.getInt("favoriteuser.favoriteuser_iduser");
-                    int friendid = rs.getInt("friend.friend");
-                    int readid = rs.getInt("readbook.readbook_idbook");
-                    int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
+                        // }
+                        int areviewid = rs.getInt("authorreview.idauthorreview");
+                        if (!rs.wasNull()) {
+                            AuthorReview authorreview = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(areviewid);
+                            if (authorreview != null) {
+                                if (authorreview.isIsActive()) {
+                                    user.getAuthorReviews().add(authorreview);
+                                }
+                            }
+                        }
+                        int breviewid = rs.getInt("bookreview.idbookreview");
+                        if (!rs.wasNull()) {
+                            BookReview bookReview = ObjectFactory.INSTANCE.getBookReviewDao().findById(breviewid);
+                            if (bookReview != null) {
+                                if (bookReview.isIsActive()) {
+                                    user.getBookReviews().add(bookReview);
+                                }
+                            }
+                        }
+                        int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
+                        if (!rs.wasNull()) {
+                            Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(favauthorid);
+                            if (author != author) {
+                                if (author.isIsActive()) {
+                                    user.getFavoriteAuthors().add(author);
+                                }
+                            }
+                        }
+                        int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
+                        if (!rs.wasNull()) {
+                            Book book = ObjectFactory.INSTANCE.getBookDao().findById(favbookid);
+                            if (book != null) {
+                                if (book.isIsActive()) {
+                                    user.getFavoriteBooks().add(book);
+                                }
+                            }
+                        }
+                        int favuserid = rs.getInt("favoriteuser.favoriteuser");
+                        if (!rs.wasNull()) {
+                            User favuser = ObjectFactory.INSTANCE.getUserDao().findById(favuserid);
+                            if (favuser != null) {
+                                if (favuser.isIsActive()) {
+                                    user.getFavoriteReviewers().add(favuser);
+                                }
+                            }
+                        }
 
-                    int noteid = rs.getInt("booknote.booknote_idbook");
-                    String note = rs.getString("booknote.note");
-                    int readingid = rs.getInt("readingbook.readingbook_idbook");
-                    int pocetReading = rs.getInt("readingbook.numberOfPages");
-                    AuthorReview authorreview = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(areviewid);
-                    if (authorreview.isIsActive()) {
-                        user.getAuthorReviews().add(authorreview);
-                    }
-                    BookReview bookReview = ObjectFactory.INSTANCE.getBookReviewDao().findById(breviewid);
-                    if (bookReview.isIsActive()) {
-                        user.getBookReviews().add(bookReview);
-                    }
-                    Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(favauthorid);
-                    if (author.isIsActive()) {
-                        user.getFavoriteAuthors().add(author);
-                    }
-                    Book book = ObjectFactory.INSTANCE.getBookDao().findById(favbookid);
-                    if (book.isIsActive()) {
-                        user.getFavoriteBooks().add(book);
-                    }
-                    User favuser = ObjectFactory.INSTANCE.getUserDao().findById(favuserid);
-                    if (favuser.isIsActive()) {
-                        user.getFavoriteReviewers().add(favuser);
-                    }
-                    User frienduser = ObjectFactory.INSTANCE.getUserDao().findById(friendid);
-                    if (frienduser.isIsActive()) {
-                        user.getFriends().add(frienduser);
-                    }
-                    Book readbook = ObjectFactory.INSTANCE.getBookDao().findById(readid);
-                    if (readbook.isIsActive()) {
-                        user.getReadBooks().add(readbook);
-                    }
-                    Book wantedbook = ObjectFactory.INSTANCE.getBookDao().findById(wantedid);
-                    if (wantedbook.isIsActive()) {
-                        user.getWantedBooks().add(wantedbook);
-                    }
-                    Book notebook = ObjectFactory.INSTANCE.getBookDao().findById(noteid);
-                    if (notebook.isIsActive()) {
-                        Map<Book, String> bookWithNote = new HashMap<>();
-                        bookWithNote.put(notebook, note);
-                        user.getNote().add(bookWithNote);
-                    }
-                    Book readingBook = ObjectFactory.INSTANCE.getBookDao().findById(readingid);
-                    if (readingBook.isIsActive()) {
-                        Map<Book, Integer> readingWithPage = new HashMap<>();
-                        readingWithPage.put(readingBook, pocetReading);
-                        user.getReading().add(readingWithPage);
+                        int friendid = rs.getInt("friend.friend");
+                        if (!rs.wasNull()) {
+                            User frienduser = ObjectFactory.INSTANCE.getUserDao().findById(friendid);
+                            if (frienduser != null) {
+                                if (frienduser.isIsActive()) {
+                                    user.getFriends().add(frienduser);
+                                }
+                            }
+                        }
+                        int readid = rs.getInt("readbook.readbook_idbook");
+                        if (!rs.wasNull()) {
+                            Book readbook = ObjectFactory.INSTANCE.getBookDao().findById(readid);
+                            if (readbook != null) {
+                                if (readbook.isIsActive()) {
+                                    user.getReadBooks().add(readbook);
+                                }
+                            }
+                        }
+                        int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
+                        if (!rs.wasNull()) {
+                            Book wantedbook = ObjectFactory.INSTANCE.getBookDao().findById(wantedid);
+                            if (wantedbook != null) {
+                                if (wantedbook.isIsActive()) {
+                                    user.getWantedBooks().add(wantedbook);
+                                }
+                            }
+                        }
+                        int noteid = rs.getInt("booknote.booknote_idbook");
+                        String note = rs.getString("booknote.note");
+                        if (!rs.wasNull()) {
+                            Book notebook = ObjectFactory.INSTANCE.getBookDao().findById(noteid);
+                            if (notebook != null) {
+                                if (notebook.isIsActive()) {
+                                    Map<Book, String> bookWithNote = new HashMap<>();
+                                    bookWithNote.put(notebook, note);
+                                    user.getNote().add(bookWithNote);
+                                }
+                            }
+                        }
+                        int readingid = rs.getInt("readingbook.readingbook_idbook");
+                        int pocetReading = rs.getInt("readingbook.numberOfPages");
+                        if (!rs.wasNull()) {
+                            Book readingBook = ObjectFactory.INSTANCE.getBookDao().findById(readingid);
+                            if (readingBook != null) {
+                                if (readingBook.isIsActive()) {
+                                    Map<Book, Integer> readingWithPage = new HashMap<>();
+                                    readingWithPage.put(readingBook, pocetReading);
+                                    user.getReading().add(readingWithPage);
+                                }
+                            }
+                        }
                     }
                 }
                 return user;

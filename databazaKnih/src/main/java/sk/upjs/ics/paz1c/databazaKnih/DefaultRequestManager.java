@@ -5,33 +5,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultRequestManager implements RequestManager {
-    
+
     private InterfaceRequestDao requestDao = ObjectFactory.INSTANCE.getRequestDao();
-    
+
     @Override
     public List<Request> getAllRequests() {
         return requestDao.getAllRequests();
     }
-    
+
     @Override
     public void insertRequest(Request request) {
         requestDao.insertRequest(request);
     }
-    
+
     @Override
     public void deleteRequest(int id) {
         requestDao.deleteRequest(id);
     }
-    
+
     @Override
     public Request findById(int id) {
         return requestDao.findById(id);
     }
-    
+
     public void updateRequest(Request request) {
         requestDao.updateRequest(request);
     }
-    
+
     @Override
     public List<Request> getRequestsByRequester(User user) {
         List<Request> requests = getAllRequests();
@@ -43,7 +43,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         return userRequests;
     }
-    
+
     @Override
     public List<Request> getRequestsByAuthor(Author author) {
         List<Request> requests = getAllRequests();
@@ -55,7 +55,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         return authorRequests;
     }
-    
+
     @Override
     public List<Request> getRequestsByBook(Book book) {
         List<Request> requests = getAllRequests();
@@ -67,7 +67,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         return bookRequests;
     }
-    
+
     @Override
     public List<Request> getRequestsWhereAuthorIsNull() {
         List<Request> requests = getAllRequests();
@@ -79,7 +79,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         return authorRequests;
     }
-    
+
     @Override
     public List<Request> getRequestsWhereBookIsNull() {
         List<Request> requests = getAllRequests();
@@ -91,7 +91,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         return authorRequests;
     }
-    
+
     @Override
     public List<Request> getRequestsWhereBothAreNull() {
         List<Request> requests = getAllRequests();
@@ -103,7 +103,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         return authorRequests;
     }
-    
+
     @Override
     public void deleteAllWithRequester(User user) {
         List<Request> requests = getAllRequests();
@@ -113,7 +113,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         requestDao.deleteAllWithRequester(user.getId());
     }
-    
+
     @Override
     public void deleteAllWithBook(Book book) {
         List<Request> requests = getAllRequests();
@@ -123,7 +123,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         requestDao.deleteAllWithBook(book.getId());
     }
-    
+
     @Override
     public void deleteAllWithAuthor(Author author) {
         List<Request> requests = getAllRequests();
@@ -133,7 +133,7 @@ public class DefaultRequestManager implements RequestManager {
         }
         requestDao.deleteAllWithAuthor(author.getId());
     }
-    
+
     @Override
     public void undeleteRequest(int id) {
         requestDao.undeleteRequest(id);

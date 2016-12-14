@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.awt.Frame;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.UserManager;
@@ -101,7 +102,9 @@ public class UpdateForm extends javax.swing.JDialog {
        user.setSurname(SurnameTextField.getText());
        userManager.updateUser(user);
        this.setVisible(false);
-        
+       this.getParent().setVisible(false);
+       MyUserProfileForm myuserprofileform = new MyUserProfileForm((Frame) this.getParent().getParent(), true,user);
+            myuserprofileform.setVisible(true);
         
         
          

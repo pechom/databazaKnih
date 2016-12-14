@@ -42,26 +42,32 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                         genres.add(genre);
 
                         int authorid = rs.getInt("genreofauthor.author_idauthor");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Author author = authors.get(authorid);
                             if (author == null) {
                                 author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                                authors.put(authorid, author);
                             }
-                            if (author.isIsActive()) {
-                                genre.getAuthorsWithGenre().add(author);
+                            if (author != null) {
+                                authors.put(authorid, author);
+
+                                if (author.isIsActive()) {
+                                    genre.getAuthorsWithGenre().add(author);
+                                }
                             }
                         }
 
                         int bookid = rs.getInt("genreofbook.book_idbook");
-                        if (rs.wasNull()) {
+                        if (!rs.wasNull()) {
                             Book book = books.get(bookid);
                             if (book == null) {
                                 book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                                books.put(bookid, book);
                             }
-                            if (book.isIsActive()) {
-                                genre.getBooksWithGenre().add(book);
+                            if (book != null) {
+                                books.put(bookid, book);
+
+                                if (book.isIsActive()) {
+                                    genre.getBooksWithGenre().add(book);
+                                }
                             }
                         }
                     }
@@ -105,14 +111,23 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                         genre.setBooksWithGenre(new ArrayList<>());
                     }
                     int authorid = rs.getInt("genreofauthor.author_idauthor");
-                    Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                    int bookid = rs.getInt("genreofbook.book_idbook");
-                    Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                    if (author.isIsActive()) {
-                        genre.getAuthorsWithGenre().add(author);
+                    if (!rs.wasNull()) {
+                        Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
+
+                        if (author != null) {
+                            if (author.isIsActive()) {
+                                genre.getAuthorsWithGenre().add(author);
+                            }
+                        }
                     }
-                    if (book.isIsActive()) {
-                        genre.getBooksWithGenre().add(book);
+                    int bookid = rs.getInt("genreofbook.book_idbook");
+                    if (!rs.wasNull()) {
+                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
+                        if (book != null) {
+                            if (book.isIsActive()) {
+                                genre.getBooksWithGenre().add(book);
+                            }
+                        }
                     }
                 }
                 return genre;

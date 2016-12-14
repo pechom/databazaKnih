@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.awt.Dialog;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.User;
@@ -35,23 +36,18 @@ public class UserProfileForm extends javax.swing.JDialog {
         if(userProfile.isIsAdmin()){
         StatusLabel.setText("Status: Admin");
         } else {
-        StatusLabel.setText("Status: User");    
-        if(currentUser.isIsAdmin()){
+        StatusLabel.setText("Status: User"); 
+        }
+        if(userProfile.isIsAdmin() || !currentUser.isIsAdmin()){
         PromoteToAdminButton.enable(false);
          PromoteToAdminButton.setVisible(false);
          PromoteLabel.setVisible(false);
-        }
-        } 
-            
-       
-        
-        if(currentUser.isIsAdmin()){
         DeleteUserButton.setVisible(false);
         DeleteUserButton.enable(false);
         DeleteUserLabel.setVisible(false);
         }
         ReviewsLabel.setText(userProfile.getUserName() + "'s reviews");
-    }
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -442,6 +438,9 @@ public class UserProfileForm extends javax.swing.JDialog {
     private void PromoteToAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PromoteToAdminButtonActionPerformed
        userProfile.setIsAdmin(true);
        userManager.updateUser(userProfile);
+       this.setVisible(false);
+       UserProfileForm userProfileForm = new UserProfileForm((Dialog) this.getParent(), true, currentUser,  userProfile);
+       
     }//GEN-LAST:event_PromoteToAdminButtonActionPerformed
 
     private void AddToFriendsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToFriendsToggleButtonActionPerformed

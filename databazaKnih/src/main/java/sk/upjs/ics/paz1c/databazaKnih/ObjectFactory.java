@@ -30,7 +30,7 @@ public enum ObjectFactory {
         dataSource.setDatabaseName("databaza-knih");
         dataSource.setUrl("jdbc:mysql://localhost/databaza-knih");
         dataSource.setUser("root");
-        dataSource.setPassword("yareyare");
+        dataSource.setPassword("Kope1234");
 
         jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -50,9 +50,8 @@ public enum ObjectFactory {
         } else {
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setDatabaseName("databaza-knih");
-            dataSource.setUrl("jdbc:mysql://localhost/databaza-knih?serverTimezone=Europe/Bratislava");
             dataSource.setUser("root");
-            dataSource.setPassword("yareyare");
+            dataSource.setPassword("Kope1234");
 
             jdbcTemplate = new JdbcTemplate(dataSource);
             return jdbcTemplate;

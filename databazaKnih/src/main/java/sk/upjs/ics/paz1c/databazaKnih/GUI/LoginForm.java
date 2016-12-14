@@ -11,23 +11,31 @@ import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.UserManager;
 
+
+ 
+
+
+
+
+
 /**
  *
  * @author szoplakz
  */
-public class LoginForm extends javax.swing.JFrame {
+public  class LoginForm extends javax.swing.JFrame   {
 
     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
-    InterfaceUserDao userDao = ObjectFactory.INSTANCE.getUserDao();
-
-    //private  UserManager userManager=ObjectFactory.INSTANCE.getUserManager();
+        InterfaceUserDao userDao = ObjectFactory.INSTANCE.getUserDao();
+    
+ //private  UserManager userManager=ObjectFactory.INSTANCE.getUserManager();
     /**
      * Creates new form LoginForm
      */
+   
     public LoginForm() {
-
+     
         initComponents();
-
+       
     }
 
     /**
@@ -139,22 +147,26 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_UsernameTextFieldActionPerformed
 
     private void SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInButtonActionPerformed
-
+       
+         
         String text = String.copyValueOf(PasswordField.getPassword());
-        if (userManager.checkNameAndPassword(UsernameTextField.getText(), text)) {
+      if(userManager.checkNameAndPassword(UsernameTextField.getText(), text)){
             User user = userManager.getUserByUsername(UsernameTextField.getText());
-
-            MyUserProfileForm myuserprofileform = new MyUserProfileForm(this, true, user);
+            
+            MyUserProfileForm myuserprofileform = new MyUserProfileForm(this, true,user);
             myuserprofileform.setVisible(true);
-        } else {
-            ErrorForm errorForm = new ErrorForm(this, true, "The username or password you have entered is incorrect. Please try again !");
-            errorForm.setVisible(true);
         }
-
+        
+     
+        else{
+            ErrorForm errorForm = new ErrorForm(this, true,"The username or password you have entered is incorrect. Please try again !");
+            errorForm.setVisible(true);
+        }   
+            
     }//GEN-LAST:event_SignInButtonActionPerformed
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
-
+       
         RegisterForm registerForm = new RegisterForm(this, true);
         registerForm.setVisible(true);
     }//GEN-LAST:event_SignUpButtonActionPerformed
@@ -204,4 +216,5 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField UsernameTextField;
     // End of variables declaration//GEN-END:variables
 
+    
 }

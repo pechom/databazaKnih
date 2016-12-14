@@ -315,7 +315,11 @@ private Book book;
          book.setISBN(Integer.parseInt(ISBNTextField.getText()));
          book.setNumberOfPages(Integer.parseInt(LengthTextField.getText()));
          book.setYear(Integer.parseInt(YearTextField.getText()));
+         if(AuthorList.getSelectedIndex()!=-1){
          book.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
+         }
+         bookManager.addAuthorToBook(book, book.getAuthor());
+         
          
           GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
@@ -324,6 +328,7 @@ private Book book;
             genreList.add(genreArray[genreIndeces[i]]); 
         }
         book.setGenres(genreList);
+         bookManager.addGenresToBook(genreList, book);
          
         TagList.getSelectedIndices();
         int[] tagIndeces = TagList.getSelectedIndices();
@@ -332,10 +337,13 @@ private Book book;
             tagList.add(tagArray[tagIndeces[i]]);    
         }
         book.setTags(tagList);
-       
+       bookManager.addTagsToBook(tagList, book);
         book.setDescription(SynopsisTextArea.getText());
+        book.setVerificationStatus(true);
+         book.setIsActive(true);
         bookManager.updateBook(book);
         this.setVisible(false);
+        
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void AddBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookButtonActionPerformed
@@ -344,8 +352,13 @@ private Book book;
          newBook.setISBN(Integer.parseInt(ISBNTextField.getText()));
          newBook.setNumberOfPages(Integer.parseInt(LengthTextField.getText()));
          newBook.setYear(Integer.parseInt(YearTextField.getText()));
+         if(AuthorList.getSelectedIndex()!=-1){
          newBook.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
+          bookManager.addAuthorToBook(newBook, newBook.getAuthor());
+         }
+        
          
+         if(AuthorList.getSelectedIndex()!=-1){
           GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
         List<Genre> genreList = new ArrayList<Genre>();
@@ -353,7 +366,9 @@ private Book book;
             genreList.add(genreArray[genreIndeces[i]]); 
         }
         newBook.setGenres(genreList);
-         
+            bookManager.addGenresToBook(genreList, newBook);    
+         }
+        if(AuthorList.getSelectedIndex()!=-1){ 
         TagList.getSelectedIndices();
         int[] tagIndeces = TagList.getSelectedIndices();
         List<Tag> tagList = new ArrayList<Tag>();
@@ -361,7 +376,11 @@ private Book book;
             tagList.add(tagArray[tagIndeces[i]]);    
         }
         newBook.setTags(tagList);
-       
+        bookManager.addTagsToBook(tagList, newBook); 
+        }
+          
+        newBook.setVerificationStatus(true);
+       newBook.setIsActive(true);
         newBook.setDescription(SynopsisTextArea.getText());
         bookManager.insertBook(newBook);
         this.setVisible(false);
