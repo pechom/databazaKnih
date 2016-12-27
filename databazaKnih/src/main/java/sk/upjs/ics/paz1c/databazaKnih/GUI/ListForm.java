@@ -12,9 +12,9 @@ import sk.upjs.ics.paz1c.databazaKnih.AuthorReview;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.BookReview;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
-import sk.upjs.ics.paz1c.databazaKnih.Request;
-import sk.upjs.ics.paz1c.databazaKnih.RequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorRequest;
 import sk.upjs.ics.paz1c.databazaKnih.User;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorRequestManager;
 
 /**
  *
@@ -28,11 +28,11 @@ public class ListForm extends javax.swing.JDialog {
     private Book[] bookarray;
     private Author[] authorarray;
     private User[] userarray;
-    private Request[] requestarray;
+    private AuthorRequest[] requestarray;
     private BookReview[] bookreviewarray;
     private AuthorReview[] authorreviewarray;
     
-    RequestManager requestManager = ObjectFactory.INSTANCE.getRequestManager();
+    AuthorRequestManager requestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
     /**
      * Creates new form ReviewsForm
      */
@@ -190,12 +190,12 @@ public class ListForm extends javax.swing.JDialog {
       
       
       if(content.equals("RequestsByAuthor")){
-            List<Request> requests = requestManager.getRequestsByAuthor(currentAuthor);
+            List<AuthorRequest> requests = requestManager.getRequestsByAuthor(currentAuthor);
             type = "Request";
              data = new String[requests.size()];
-             requestarray = new Request[requests.size()];
+             requestarray = new AuthorRequest[requests.size()];
              int i = 0;
-            for (Request request : requests) {
+            for (AuthorRequest request : requests) {
                data[i]= request.getRequester().getName();
                requestarray[i] = request;
                i++;
@@ -209,12 +209,12 @@ public class ListForm extends javax.swing.JDialog {
       
        
       if(content.equals("RequestsbyBook")){
-            List<Request> requests = requestManager.getRequestsByBook(currentBook);
+            List<AuthorRequest> requests = requestManager.getRequestsByBook(currentBook);
             type = "Request";
              data = new String[requests.size()];
-             requestarray = new Request[requests.size()];
+             requestarray = new AuthorRequest[requests.size()];
              int i = 0;
-            for (Request request : requests) {
+            for (AuthorRequest request : requests) {
                data[i]= request.getRequester().getName();
                requestarray[i] = request;
                i++;
@@ -226,12 +226,12 @@ public class ListForm extends javax.swing.JDialog {
       
       
        if(content.equals("AllRequests")){
-            List<Request> requests = requestManager.getAllRequests();
+            List<AuthorRequest> requests = requestManager.getAllRequests();
             type = "Request";
              data = new String[requests.size()];
-             requestarray = new Request[requests.size()];
+             requestarray = new AuthorRequest[requests.size()];
              int i = 0;
-            for (Request request : requests) {
+            for (AuthorRequest request : requests) {
                data[i]= request.getRequester().getName();
                requestarray[i] = request;
                i++;
@@ -347,7 +347,7 @@ public class ListForm extends javax.swing.JDialog {
                 }
             case "Request":
             if(ContentList.getSelectedIndex()!=-1){
-                 Request request = requestarray[ContentList.getSelectedIndex()];
+                 AuthorRequest request = requestarray[ContentList.getSelectedIndex()];
                  RequestForm requestForm = new RequestForm(this, true, request);
                  requestForm.setVisible(true);  
             }

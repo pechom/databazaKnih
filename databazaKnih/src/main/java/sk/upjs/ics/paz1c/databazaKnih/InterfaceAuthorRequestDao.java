@@ -2,24 +2,21 @@ package sk.upjs.ics.paz1c.databazaKnih;
 
 import java.util.List;
 
-public interface InterfaceRequestDao {
+public interface InterfaceAuthorRequestDao {
 
-    List<Request> getAllRequests();
+    List<AuthorRequest> getAllRequests();
 
-    void insertRequest(Request request);
+    void insertRequest(AuthorRequest request);
 
-    void updateRequest(Request request);
+    void updateRequest(AuthorRequest request);
 
     void deleteRequest(int id);
 
     void deleteAllWithRequester(int iduser);
 
-    void deleteAllWithBook(int idbook);
-
     void deleteAllWithAuthor(int idauthor);
 
     void undeleteRequest(int id);
 
-    Request findById(int id);
-
+    AuthorRequest findById(int id);
 }

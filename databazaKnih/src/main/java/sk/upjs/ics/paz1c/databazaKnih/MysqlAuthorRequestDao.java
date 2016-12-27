@@ -10,44 +10,30 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-public class MysqlRequestDao implements InterfaceRequestDao {
+public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public MysqlRequestDao(JdbcTemplate jdbcTemplate) {
+    public MysqlAuthorRequestDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public List<Request> getAllRequests() {
-//        return jdbcTemplate.query(SqlQueries.SELECT_ALL_REQUESTS, requestRowMapper);
-        return jdbcTemplate.query(SqlQueries.SELECT_ALL_REQUESTS, new ResultSetExtractor<List<Request>>() {
+    public List<AuthorRequest> getAllRequests() {
+        return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHOR_REQUESTS, new ResultSetExtractor<List<AuthorRequest>>() {
             @Override
-            public List<Request> extractData(ResultSet rs) throws SQLException, DataAccessException {
-                List<Request> requests = new ArrayList<>();
-                Map<Integer, Book> books = new HashMap<>();
+            public List<AuthorRequest> extractData(ResultSet rs) throws SQLException, DataAccessException {
+                List<AuthorRequest> requests = new ArrayList<>();
                 Map<Integer, Author> authors = new HashMap<>();
                 Map<Integer, User> users = new HashMap<>();
-                Request request = null;
+                AuthorRequest request = null;
                 while (rs.next()) {
-                    int id = rs.getInt("idrequest");
+                    int id = rs.getInt("idauthorrequest");
                     if (request == null || request.getId() != id) {
-                        request = new Request();
+                        request = new AuthorRequest();
                         request.setContent(rs.getString("content"));
                         request.setId(id);
                         requests.add(request);
-
-                        int bookid = rs.getInt("book_idbook");
-                        if (!rs.wasNull()) {
-                            Book book = books.get(bookid);
-                            if (book == null) {
-                                book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                                books.put(bookid, book);
-                            }
-                            if (book.isIsActive()) {
-                                request.setBook(book);
-                            }
-                        }
 
                         int authorid = rs.getInt("author_idauthor");
                         if (!rs.wasNull()) {
@@ -83,36 +69,30 @@ public class MysqlRequestDao implements InterfaceRequestDao {
     }
 
     @Override
-    public void insertRequest(Request request) {
-        if (request.getBook() == null) {
-            jdbcTemplate.update(SqlQueries.INSERT_REQUEST, request.getContent(),
-                    null, request.getAuthor().getId(),
-                    request.getRequester().getId(), request.isIsActive());
-        } else {
-            jdbcTemplate.update(SqlQueries.INSERT_REQUEST, request.getContent(),
-                    request.getBook().getId(), null,
+    public void insertRequest(AuthorRequest request) {
+            jdbcTemplate.update(SqlQueries.INSERT_AUTHOR_REQUEST, 
+                    request.getContent(), request.getAuthor().getId(),
                     request.getRequester().getId(), request.isIsActive());
 
-        }
     }
 
     @Override
     public void deleteRequest(int id) {
-        Request request = findById(id);
+        AuthorRequest request = findById(id);
         request.setIsActive(false);
         updateRequest(request);
-        jdbcTemplate.update(SqlQueries.DELETE_REQUEST, id);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR_REQUEST, id);
     }
 
     @Override
-    public Request findById(int id) {
-        return jdbcTemplate.query(SqlQueries.SELECT_REQUEST_BY_ID + id, new ResultSetExtractor<Request>() {
+    public AuthorRequest findById(int id) {
+        return jdbcTemplate.query(SqlQueries.SELECT_AUTHOR_REQUEST_BY_ID + id, new ResultSetExtractor<AuthorRequest>() {
             @Override
-            public Request extractData(ResultSet rs) throws SQLException, DataAccessException {
-                Request request = null;
+            public AuthorRequest extractData(ResultSet rs) throws SQLException, DataAccessException {
+                AuthorRequest request = null;
                 while (rs.next()) {
                     if (request == null || request.getId() != id) {
-                        request = new Request();
+                        request = new AuthorRequest();
                         request.setId(id);
                         request.setContent(rs.getString("content"));
                     }
@@ -122,15 +102,6 @@ public class MysqlRequestDao implements InterfaceRequestDao {
                         if (author != null) {
                             if (author.isIsActive()) {
                                 request.setAuthor(author);
-                            }
-                        }
-                    }
-                    int bookid = rs.getInt("book_idbook");
-                    if (!rs.wasNull()) {
-                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                        if (book != null) {
-                            if (book.isIsActive()) {
-                                request.setBook(book);
                             }
                         }
                     }
@@ -151,30 +122,24 @@ public class MysqlRequestDao implements InterfaceRequestDao {
 
     @Override
     public void undeleteRequest(int id) {
-        Request request = findById(id);
+        AuthorRequest request = findById(id);
         request.setIsActive(true);
         updateRequest(request);
     }
 
     @Override
-    public void updateRequest(Request request) {
-        jdbcTemplate.update(SqlQueries.UPDATE_REQUEST, request.getContent(),
+    public void updateRequest(AuthorRequest request) {
+        jdbcTemplate.update(SqlQueries.UPDATE_AUTHOR_REQUEST, request.getContent(),
                 request.isIsActive(), request.getId());
     }
 
     @Override
     public void deleteAllWithRequester(int iduser) {
-        jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_USER, iduser);
-    }
-
-    @Override
-    public void deleteAllWithBook(int idbook) {
-        jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_BOOK, idbook);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR_REQUESTS_WITH_USER, iduser);
     }
 
     @Override
     public void deleteAllWithAuthor(int idauthor) {
-        jdbcTemplate.update(SqlQueries.DELETE_REQUESTS_WITH_AUTHOR, idauthor);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR_REQUESTS_WITH_AUTHOR, idauthor);
     }
-
 }

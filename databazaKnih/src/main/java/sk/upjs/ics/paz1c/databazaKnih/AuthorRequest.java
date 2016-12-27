@@ -1,11 +1,10 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-public class Request {
+public class AuthorRequest {
 //request kde je book null sa tyka autora samotneho atd
 
     private int id;
     private User requester;
-    private Book book;
     private Author author;
     private String content;
     private boolean isActive;
@@ -36,20 +35,6 @@ public class Request {
      */
     public void setContent(String content) {
         this.content = content;
-    }
-
-    /**
-     * @return the book
-     */
-    public Book getBook() {
-        return book;
-    }
-
-    /**
-     * @param book the book to set
-     */
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     /**

@@ -8,23 +8,23 @@ package sk.upjs.ics.paz1c.databazaKnih.GUI;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
-import sk.upjs.ics.paz1c.databazaKnih.Request;
-import sk.upjs.ics.paz1c.databazaKnih.RequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorRequest;
 import sk.upjs.ics.paz1c.databazaKnih.User;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorRequestManager;
 
 /**
  *
  * @author szoplakz
  */
 public class RequestForm extends javax.swing.JDialog {
-    RequestManager requestManager = ObjectFactory.INSTANCE.getRequestManager();
-    private Request request;
+    AuthorRequestManager requestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
+    private AuthorRequest request;
     private boolean isBook;
 
     /**
      * Creates new form RequestForm
      */
-    public RequestForm(java.awt.Dialog parent, boolean modal, Request request ) {
+    public RequestForm(java.awt.Dialog parent, boolean modal, AuthorRequest request ) {
         super(parent, modal);
         initComponents();
         this.request= request;

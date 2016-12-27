@@ -1,6 +1,7 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import static java.time.ZoneOffset.UTC;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public enum ObjectFactory {
@@ -13,7 +14,8 @@ public enum ObjectFactory {
     private InterfaceBookReviewDao bookReviewDao;
     private InterfaceAuthorReviewDao authorReviewDao;
     private InterfaceTagDao tagDao;
-    private InterfaceRequestDao requestDao;
+    private InterfaceAuthorRequestDao authorRequestDao;
+    private InterfaceBookRequestDao bookRequestDao;
     private InterfaceGenreDao genreDao;
     private JdbcTemplate jdbcTemplate;
     private UserManager userManager;
@@ -22,15 +24,16 @@ public enum ObjectFactory {
     private BookManager bookManager;
     private BookReviewManager bookreviewManager;
     private GenreManager genreManager;
-    private RequestManager requestManager;
+    private AuthorRequestManager authorRequestManager;
+    private BookRequestManager bookRequestManager;
     private TagManager tagManager;
 
     private ObjectFactory() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setDatabaseName("databaza-knih");
-        dataSource.setUrl("jdbc:mysql://localhost/databaza-knih");
+        dataSource.setURL("jdbc:mysql://localhost/databaza-knih?serverTimezone=Europe/Bratislava");
         dataSource.setUser("root");
-        dataSource.setPassword("Kope1234");
+        dataSource.setPassword("yareyare");
 
         jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -40,7 +43,8 @@ public enum ObjectFactory {
         bookReviewDao = new MysqlBookReviewDao(jdbcTemplate);
         authorReviewDao = new MysqlAuthorReviewDao(jdbcTemplate);
         tagDao = new MysqlTagDao(jdbcTemplate);
-        requestDao = new MysqlRequestDao(jdbcTemplate);
+        authorRequestDao = new MysqlAuthorRequestDao(jdbcTemplate);
+        bookRequestDao=new MysqlBookRequestDao(jdbcTemplate);
         genreDao = new MysqlGenreDao(jdbcTemplate);
     }
 
@@ -82,8 +86,12 @@ public enum ObjectFactory {
         return tagDao;
     }
 
-    public InterfaceRequestDao getRequestDao() {
-        return requestDao;
+    public InterfaceAuthorRequestDao getAuthorRequestDao() {
+        return authorRequestDao;
+    }
+    
+      public InterfaceBookRequestDao getBookRequestDao() {
+        return bookRequestDao;
     }
 
     public InterfaceGenreDao getGenreDao() {
@@ -132,11 +140,11 @@ public enum ObjectFactory {
         return genreManager;
     }
 
-    public RequestManager getRequestManager() {
-        if (requestManager == null) {
-            requestManager = new DefaultRequestManager();
+    public AuthorRequestManager getAuthorRequestManager() {
+        if (authorRequestManager == null) {
+            authorRequestManager = new DefaultAuthorRequestManager();
         }
-        return requestManager;
+        return authorRequestManager;
     }
 
     public TagManager getTagManager() {

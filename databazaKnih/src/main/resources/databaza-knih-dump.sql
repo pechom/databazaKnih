@@ -75,6 +75,36 @@ LOCK TABLES `authorofbook` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `authorrequest`
+--
+
+DROP TABLE IF EXISTS `authorrequest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authorrequest` (
+  `idauthorrequest` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(200) DEFAULT NULL,
+  `isActive` tinyint(1) DEFAULT NULL,
+  `author_idauthor` int(11) NOT NULL,
+  `user_iduser` int(11) NOT NULL,
+  PRIMARY KEY (`idauthorrequest`,`author_idauthor`,`user_iduser`),
+  KEY `fk_authorrequest_author1_idx` (`author_idauthor`),
+  KEY `fk_authorrequest_user1_idx` (`user_iduser`),
+  CONSTRAINT `fk_authorrequest_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_authorrequest_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `authorrequest`
+--
+
+LOCK TABLES `authorrequest` WRITE;
+/*!40000 ALTER TABLE `authorrequest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `authorrequest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `authorreview`
 --
 
@@ -164,6 +194,36 @@ CREATE TABLE `booknote` (
 LOCK TABLES `booknote` WRITE;
 /*!40000 ALTER TABLE `booknote` DISABLE KEYS */;
 /*!40000 ALTER TABLE `booknote` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bookrequest`
+--
+
+DROP TABLE IF EXISTS `bookrequest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bookrequest` (
+  `idbookrequest` int(11) NOT NULL,
+  `content` varchar(300) DEFAULT 'null',
+  `isActive` tinyint(1) DEFAULT NULL,
+  `book_idbook` int(11) NOT NULL,
+  `user_iduser` int(11) NOT NULL,
+  PRIMARY KEY (`idbookrequest`,`book_idbook`,`user_iduser`),
+  KEY `fk_bookrequest_book1_idx` (`book_idbook`),
+  KEY `fk_bookrequest_user1_idx` (`user_iduser`),
+  CONSTRAINT `fk_bookrequest_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bookrequest_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bookrequest`
+--
+
+LOCK TABLES `bookrequest` WRITE;
+/*!40000 ALTER TABLE `bookrequest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bookrequest` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -434,42 +494,6 @@ LOCK TABLES `readingbook` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `request`
---
-
-DROP TABLE IF EXISTS `request`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `request` (
-  `idrequest` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(200) DEFAULT NULL,
-  `isActive` tinyint(1) DEFAULT NULL,
-  `user_iduser` int(11) DEFAULT NULL,
-  `book_idbook` int(11) DEFAULT NULL,
-  `author_idauthor` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idrequest`),
-  UNIQUE KEY `user_iduser_UNIQUE` (`user_iduser`),
-  UNIQUE KEY `book_idbook_UNIQUE` (`book_idbook`),
-  UNIQUE KEY `author_idauthor_UNIQUE` (`author_idauthor`),
-  KEY `fk_request_user1_idx` (`user_iduser`),
-  KEY `fk_request_book1_idx` (`book_idbook`),
-  KEY `fk_request_author1_idx` (`author_idauthor`),
-  CONSTRAINT `fk_request_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_request_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_request_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `request`
---
-
-LOCK TABLES `request` WRITE;
-/*!40000 ALTER TABLE `request` DISABLE KEYS */;
-/*!40000 ALTER TABLE `request` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tag`
 --
 
@@ -535,11 +559,11 @@ CREATE TABLE `user` (
   `name` varchar(45) DEFAULT NULL,
   `surname` varchar(45) DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
-  `salt` varchar(45) DEFAULT NULL,
+  `salt` varchar(90) DEFAULT NULL,
   `isAdmin` tinyint(1) DEFAULT '0',
   `isActive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,6 +572,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Peto','$2a$10$pH5/RlfGMOEfKNpbDQaDYuNhDbwH6Jah4gC8NejW4wFFqV6inOolq','peto@peto','peto','peto',NULL,'$2a$10$pH5/RlfGMOEfKNpbDQaDYu',0,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -594,4 +619,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-13 20:28:58
+-- Dump completed on 2016-12-27 18:56:00

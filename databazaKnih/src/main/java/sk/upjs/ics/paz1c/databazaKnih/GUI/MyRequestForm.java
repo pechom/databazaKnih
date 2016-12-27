@@ -8,9 +8,9 @@ package sk.upjs.ics.paz1c.databazaKnih.GUI;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
-import sk.upjs.ics.paz1c.databazaKnih.Request;
-import sk.upjs.ics.paz1c.databazaKnih.RequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorRequest;
 import sk.upjs.ics.paz1c.databazaKnih.User;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorRequestManager;
 
 /**
  *
@@ -18,7 +18,7 @@ import sk.upjs.ics.paz1c.databazaKnih.User;
  */
 public class MyRequestForm extends javax.swing.JDialog {
 
-    RequestManager requestManager = ObjectFactory.INSTANCE.getRequestManager();
+    AuthorRequestManager requestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
      private static User user;
      private static Book book;
      private static Author author;
@@ -108,14 +108,14 @@ public class MyRequestForm extends javax.swing.JDialog {
 
     private void ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmButtonActionPerformed
         if(!isBook){
-            Request request = new Request();
+            AuthorRequest request = new AuthorRequest();
             request.setAuthor(author);
             request.setRequester(user);
             
             request.setContent(MessageTextArea.getText());
             requestManager.insertRequest(request);
         } else {
-            Request request = new Request();
+            AuthorRequest request = new AuthorRequest();
              request.setBook(book);
             request.setRequester(user);
             request.setContent(MessageTextArea.getText());
