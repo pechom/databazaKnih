@@ -3,24 +3,10 @@ package sk.upjs.ics.paz1c.databazaKnih;
 public class BookRequest {
 
     private int id;
-    private User requester;
-    private Book book;
+    private int requester;
+    private int book;
     private String content;
     private boolean isActive;
-
-    /**
-     * @return the author
-     */
-    public User getRequester() {
-        return requester;
-    }
-
-    /**
-     * @param requester the author to set
-     */
-    public void setRequester(User requester) {
-        this.requester = requester;
-    }
 
     /**
      * @return the content
@@ -65,16 +51,31 @@ public class BookRequest {
     }
 
     /**
+     * @return the requester
+     */
+    public int getRequester() {
+        return requester;
+    }
+
+    /**
+     * @param requester the requester to set
+     */
+    public void setRequester(int requester) {
+        this.requester = requester;
+    }
+
+    /**
      * @return the book
      */
-    public Book getBook() {
+    public int getBook() {
         return book;
     }
 
     /**
      * @param book the book to set
      */
-    public void setBook(Book book) {
+    public void setBook(int book) {
         this.book = book;
     }
+
 }

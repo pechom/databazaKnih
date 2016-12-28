@@ -61,193 +61,6 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public List<Book> GetBooksByName(String name) {
-        List<Book> books = getAllBooks();
-        List<Book> nameBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getName() != null) && (book.getName().equals(name))) {
-                nameBooks.add(book);
-            }
-        }
-        return nameBooks;
-    }
-
-    @Override
-    public List<Book> GetBooksByAuthor(Author author) {
-        List<Book> books = getAllBooks();
-        List<Book> authorBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getAuthor() != null) && (book.getAuthor().equals(author))) {
-                authorBooks.add(book);
-            }
-        }
-        return authorBooks;
-    }
-
-    @Override
-    public List<Book> getBooksFromYear(int year) {
-        List<Book> books = getAllBooks();
-        List<Book> ageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getYear() != 0) && (book.getYear() >= year)) {
-                ageBooks.add(book);
-            }
-        }
-        return ageBooks;
-    }
-
-    @Override
-    public List<Book> getBooksToYear(int year) {
-        List<Book> books = getAllBooks();
-        List<Book> ageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getYear() != 0) && (book.getYear() <= year)) {
-                ageBooks.add(book);
-            }
-        }
-        return ageBooks;
-    }
-
-    @Override
-    public List<Book> getBooksFromToYear(int from, int to) {
-        List<Book> books = getAllBooks();
-        List<Book> ageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getYear() != 0) && (book.getYear() >= from) && (book.getYear() <= to)) {
-                ageBooks.add(book);
-            }
-        }
-        return ageBooks;
-    }
-
-    @Override
-    public List<Book> GetBooksByGenres(List<Genre> genres) {
-        List<Book> books = getAllBooks();
-        List<Book> genreBooks = new ArrayList<>();
-        for (Book book : books) {
-            for (Genre genre : genres) {
-                if ((book.getGenres() != null) && (book.getGenres().contains(genre))) {
-                    genreBooks.add(book);
-                    break;
-                }
-            }
-        }
-        return genreBooks;
-    }
-
-    @Override
-    public List<Book> getBooksFromPages(int pages) {
-        List<Book> books = getAllBooks();
-        List<Book> pageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getNumberOfPages() != 0) && (book.getNumberOfPages() >= pages)) {
-                pageBooks.add(book);
-            }
-        }
-        return pageBooks;
-    }
-
-    @Override
-    public List<Book> getBooksToPages(int pages) {
-        List<Book> books = getAllBooks();
-        List<Book> pageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getNumberOfPages() != 0) && (book.getNumberOfPages() <= pages)) {
-                pageBooks.add(book);
-            }
-        }
-        return pageBooks;
-    }
-
-    @Override
-    public List<Book> getBooksFromToPages(int from, int to) {
-        List<Book> books = getAllBooks();
-        List<Book> pageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getNumberOfPages() != 0) && (book.getNumberOfPages() >= from) && (book.getNumberOfPages() <= to)) {
-                pageBooks.add(book);
-            }
-        }
-        return pageBooks;
-    }
-
-    @Override
-    public Book getBookByISBN(int ISBN) {
-        List<Book> books = getAllBooks();
-        Book ISBNBook = null;
-        for (Book book : books) {
-            if ((book.getISBN() != 0) && (book.getISBN() == ISBN)) {
-                ISBNBook = book;
-                break;
-            }
-        }
-        return ISBNBook;
-    }
-
-    @Override
-    public List<Book> GetBooksByTags(List<Tag> tags) {
-        List<Book> books = getAllBooks();
-        List<Book> tagBooks = new ArrayList<>();
-        for (Book book : books) {
-            for (Tag tag : tags) {
-                if ((book.getTags() != null) && (book.getTags().contains(tag))) {
-                    tagBooks.add(book);
-                    break;
-                }
-            }
-        }
-        return tagBooks;
-    }
-
-    @Override
-    public List<Book> GetBooksFromReviews(int numberOfReviews) {
-        List<Book> books = getAllBooks();
-        List<Book> reviewBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getNumberOfReviews() != 0) && (book.getNumberOfReviews() >= numberOfReviews)) {
-                reviewBooks.add(book);
-            }
-        }
-        return reviewBooks;
-    }
-
-    @Override
-    public List<Book> getBooksFromAverage(int average) {
-        List<Book> books = getAllBooks();
-        List<Book> averageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getAverageOfReviews() != 0) && (book.getAverageOfReviews() >= average)) {
-                averageBooks.add(book);
-            }
-        }
-        return averageBooks;
-    }
-
-    @Override
-    public List<Book> getBooksToAverage(int average) {
-        List<Book> books = getAllBooks();
-        List<Book> averageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getAverageOfReviews() != 0) && (book.getAverageOfReviews() <= average)) {
-                averageBooks.add(book);
-            }
-        }
-        return averageBooks;
-    }
-
-    @Override
-    public List<Book> getBooksFromToAverage(int from, int to) {
-        List<Book> books = getAllBooks();
-        List<Book> averageBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getAverageOfReviews() != 0) && (book.getAverageOfReviews() >= from) && (book.getAverageOfReviews() <= to)) {
-                averageBooks.add(book);
-            }
-        }
-        return averageBooks;
-    }
-
-    @Override
     public List<Book> getBooksFromChart(int chart) {
         List<Book> books = getAllBooks();
         List<Book> chartBooks = new ArrayList<>();
@@ -284,50 +97,14 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public List<Book> getBooksFromBayesian(int average) {
-        List<Book> books = getAllBooks();
-        List<Book> bayesianBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getBayesianAverage() != 0) && (book.getBayesianAverage() >= average)) {
-                bayesianBooks.add(book);
-            }
-        }
-        return bayesianBooks;
-    }
-
-    @Override
-    public List<Book> getBooksToBayesian(int average) {
-        List<Book> books = getAllBooks();
-        List<Book> bayesianBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getBayesianAverage() != 0) && (book.getBayesianAverage() <= average)) {
-                bayesianBooks.add(book);
-            }
-        }
-        return bayesianBooks;
-    }
-
-    @Override
-    public List<Book> getBooksFromToBayesian(int from, int to) {
-        List<Book> books = getAllBooks();
-        List<Book> bayesianBooks = new ArrayList<>();
-        for (Book book : books) {
-            if ((book.getBayesianAverage() != 0) && (book.getBayesianAverage() >= from) && (book.getBayesianAverage() <= to)) {
-                bayesianBooks.add(book);
-            }
-        }
-        return bayesianBooks;
-    }
-
-    @Override
     public void addAuthorToBook(Book book, Author author) {
-        book.setAuthor(author);
+        book.setAuthor(author.getId());
         bookDao.addAuthorToBook(book.getId(), author.getId());
     }
 
     @Override
     public void removeAuthorFromBook(Book book) {
-        book.setAuthor(null);
+        book.setAuthor(0);
         bookDao.removeAuthorFromBook(book.getId());
     }
 
@@ -336,8 +113,8 @@ public class DefaultBookManager implements BookManager {
         List<Book> books = getAllBooks();
         List<Book> removed = new ArrayList<>();
         for (Book book : books) {
-            if ((book.getAuthor() != null) && (book.getAuthor().equals(author))) {
-                book.setAuthor(null);
+            if ((book.getAuthor() != 0) && (book.getAuthor()==(author.getId()))) {
+                book.setAuthor(0);
                 removed.add(book);
             }
         }
@@ -346,21 +123,21 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public void addGenresToBook(List<Genre> genres, Book book) {
-        for (Genre genre : genres) {
+    public void addGenresToBook(List<Integer> genres, Book book) {
+        for (int genre : genres) {
             if (!book.getGenres().contains(genre)) {
                 book.getGenres().add(genre);
-                bookDao.addGenreToBook(genre.getId(), book.getId());
+                bookDao.addGenreToBook(genre, book.getId());
             }
         }
     }
 
     @Override
-    public void removeGenresFromBook(List<Genre> genres, Book book) {
-        for (Genre genre : genres) {
+    public void removeGenresFromBook(List<Integer> genres, Book book) {
+        for (int genre : genres) {
             if (book.getGenres().contains(genre)) {
                 book.getGenres().remove(genre);
-                bookDao.removeGenreFromBook(genre.getId(), book.getId());
+                bookDao.removeGenreFromBook(genre, book.getId());
             }
         }
     }
@@ -370,8 +147,8 @@ public class DefaultBookManager implements BookManager {
         List<Book> books = getAllBooks();
         List<Book> removed = new ArrayList<>();
         for (Book book : books) {
-            if (book.getGenres().contains(genre)) {
-                book.getGenres().remove(genre);
+            if (book.getGenres().contains(genre.getId())) {
+                book.getGenres().remove(genre.getId());
                 updateBook(book);
             }
         }
@@ -380,21 +157,21 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public void addTagsToBook(List<Tag> tags, Book book) {
-        for (Tag tag : tags) {
+    public void addTagsToBook(List<Integer> tags, Book book) {
+        for (int tag : tags) {
             if (!book.getTags().contains(tag)) {
                 book.getTags().add(tag);
-                bookDao.addTagToBook(tag.getId(), book.getId());
+                bookDao.addTagToBook(tag, book.getId());
             }
         }
     }
 
     @Override
-    public void removeTagsFromBook(List<Tag> tags, Book book) {
-        for (Tag tag : tags) {
+    public void removeTagsFromBook(List<Integer> tags, Book book) {
+        for (int tag : tags) {
             if (book.getTags().contains(tag)) {
                 book.getTags().remove(tag);
-                bookDao.removeTagFromBook(tag.getId(), book.getId());
+                bookDao.removeTagFromBook(tag, book.getId());
             }
         }
     }
@@ -404,8 +181,8 @@ public class DefaultBookManager implements BookManager {
         List<Book> books = getAllBooks();
         List<Book> removed = new ArrayList<>();
         for (Book book : books) {
-            if (book.getTags().contains(tag)) {
-                book.getTags().remove(tag);
+            if (book.getTags().contains(tag.getId())) {
+                book.getTags().remove(tag.getId());
                 removed.add(book);
             }
         }
@@ -415,7 +192,7 @@ public class DefaultBookManager implements BookManager {
 
     @Override
     public void addReview(BookReview review, Book book) {
-        book.getBookReviews().add(review);
+        book.getBookReviews().add(review.getId());
         book.setNumberOfReviews(book.getNumberOfReviews() + 1);
         book.setAverageOfReviews((book.getAverageOfReviews() * (book.getNumberOfReviews() - 1) + review.getRating()) / book.getNumberOfReviews());
         calculateAndInsertBayesian(book, 5);
@@ -425,7 +202,7 @@ public class DefaultBookManager implements BookManager {
 
     @Override
     public void removeReview(BookReview review, Book book) {
-        book.getBookReviews().remove(review);
+        book.getBookReviews().remove(review.getId());
         book.setNumberOfReviews(book.getNumberOfReviews() - 1);
         book.setAverageOfReviews((book.getAverageOfReviews() * (book.getNumberOfReviews() + 1) - review.getRating()) / book.getNumberOfReviews());
         calculateAndInsertBayesian(book, 5);
@@ -458,7 +235,7 @@ public class DefaultBookManager implements BookManager {
         for (Book book : books) {
             boolean gotThemAll = true;
             for (Genre genre : genres) {
-                if (!book.getGenres().contains(genre)) {
+                if (!book.getGenres().contains(genre.getId())) {
                     gotThemAll = false;
                     break;
                 }
@@ -477,7 +254,7 @@ public class DefaultBookManager implements BookManager {
         for (Book book : books) {
             boolean gotThemAll = true;
             for (Tag tag : tags) {
-                if (!book.getTags().contains(tag)) {
+                if (!book.getTags().contains(tag.getId())) {
                     gotThemAll = false;
                     break;
                 }
@@ -531,7 +308,7 @@ public class DefaultBookManager implements BookManager {
 
         List<Book> authorBooks = new ArrayList<>();
         for (Book book : books) {
-            if ((book.getAuthor() != null) && (book.getAuthor().equals(author))) {
+            if ((book.getAuthor() != 0) && (book.getAuthor()==(author.getId()))) {
                 authorBooks.add(book);
             }
         }
@@ -580,7 +357,7 @@ public class DefaultBookManager implements BookManager {
         List<Book> genreBooks = new ArrayList<>();
         for (Book book : books) {
             for (Genre genre : genres) {
-                if ((book.getGenres() != null) && (book.getGenres().contains(genre))) {
+                if ((book.getGenres() != null) && (book.getGenres().contains(genre.getId()))) {
                     genreBooks.add(book);
                     break;
                 }
@@ -644,7 +421,7 @@ public class DefaultBookManager implements BookManager {
         List<Book> tagBooks = new ArrayList<>();
         for (Book book : books) {
             for (Tag tag : tags) {
-                if ((book.getTags() != null) && (book.getTags().contains(tag))) {
+                if ((book.getTags() != null) && (book.getTags().contains(tag.getId()))) {
                     tagBooks.add(book);
                     break;
                 }
@@ -744,7 +521,7 @@ public class DefaultBookManager implements BookManager {
         for (Book book : books) {
             boolean gotThemAll = true;
             for (Genre genre : genres) {
-                if (!book.getGenres().contains(genre)) {
+                if (!book.getGenres().contains(genre.getId())) {
                     gotThemAll = false;
                     break;
                 }
@@ -763,7 +540,7 @@ public class DefaultBookManager implements BookManager {
         for (Book book : books) {
             boolean gotThemAll = true;
             for (Tag tag : tags) {
-                if (!book.getTags().contains(tag)) {
+                if (!book.getTags().contains(tag.getId())) {
                     gotThemAll = false;
                     break;
                 }

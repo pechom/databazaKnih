@@ -20,15 +20,12 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public List<Author> getAllAuthors() {
-//        return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORS, authorRowMapper);
 
         return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORS, new ResultSetExtractor<List<Author>>() {
             @Override
             public List<Author> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<Author> authors = new ArrayList<>();
-                Map<Integer, Book> books = new HashMap<>();
-                Map<Integer, Genre> genres = new HashMap<>();
-                Map<Integer, AuthorReview> reviews = new HashMap<>();
+
                 Author author = null;
                 while (rs.next()) {
                     int id = rs.getInt("idauthor");
@@ -50,47 +47,18 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                         author.setGenres(new ArrayList<>());
 
                         authors.add(author);
+                        
                         int bookid = rs.getInt("authorofbook.book_idbook");
                         if (!rs.wasNull()) {
-                            Book book = books.get(bookid);
-                            if (book == null) {
-                                book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                            }
-                            if (book != null) {
-                                books.put(bookid, book);
-
-                                if (book.isIsActive()) {
-                                    author.getBooks().add(book);
-                                }
-                            }
+                            author.getBooks().add(bookid);
                         }
                         int genreid = rs.getInt("genreofauthor.genre_idgenre");
                         if (!rs.wasNull()) {
-                            Genre genre = genres.get(genreid);
-                            if (genre == null) {
-                                genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
-                            }
-                            if (genre != null) {
-                                genres.put(genreid, genre);
-
-                                if (genre.isIsActive()) {
-                                    author.getGenres().add(genre);
-                                }
-                            }
+                            author.getGenres().add(genreid);
                         }
                         int reviewid = rs.getInt("authorreview.idauthorreview");
                         if (!rs.wasNull()) {
-                            AuthorReview review = reviews.get(reviewid);
-                            if (review == null) {
-                                review = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(reviewid);
-                            }
-                            if (review != null) {
-                                reviews.put(reviewid, review);
-
-                                if (review.isIsActive()) {
-                                    author.getAuthorReviews().add(review);
-                                }
-                            }
+                            author.getAuthorReviews().add(reviewid);
                         }
 
                     }
@@ -151,31 +119,16 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
                     }
                     int bookid = rs.getInt("authorofbook.book_idbook");
-                    if (!rs.wasNull()) {
-                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                        if (book != null) {
-                            if (book.isIsActive()) {
-                                author.getBooks().add(book);
-                            }
+                        if (!rs.wasNull()) {
+                            author.getBooks().add(bookid);
                         }
-                    }
-                    int genreid = rs.getInt("genreofauthor.genre_idgenre");
-                    if (!rs.wasNull()) {
-                        Genre genre = ObjectFactory.INSTANCE.getGenreDao().findById(genreid);
-                        if (genre != null) {
-                            if (genre.isIsActive()) {
-                                author.getGenres().add(genre);
-                            }
+                        int genreid = rs.getInt("genreofauthor.genre_idgenre");
+                        if (!rs.wasNull()) {
+                            author.getGenres().add(genreid);
                         }
-                    }
-                    int reviewid = rs.getInt("authorreview.idauthorreview");
-                    if (!rs.wasNull()) {
-                        AuthorReview review = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(reviewid);
-                        if (review != null) {
-                            if (review.isIsActive()) {
-                                author.getAuthorReviews().add(review);
-                            }
-                        }
+                        int reviewid = rs.getInt("authorreview.idauthorreview");
+                        if (!rs.wasNull()) {
+                            author.getAuthorReviews().add(reviewid);
                     }
                 }
                 return author;

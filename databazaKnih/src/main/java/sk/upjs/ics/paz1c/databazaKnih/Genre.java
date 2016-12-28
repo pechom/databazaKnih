@@ -6,8 +6,8 @@ public class Genre {
 
     private int id;
     private String name;
-    private List<Book>booksWithGenre;
-    private List<Author>authorsWithGenre;
+    private List<Integer>booksWithGenre;
+    private List<Integer>authorsWithGenre;
     private boolean isActive;
 
     /**
@@ -38,34 +38,7 @@ public class Genre {
         this.name = name;
     }
 
-    /**
-     * @return the bookWithGenre
-     */
-    public List<Book> getBooksWithGenre() {
-        return booksWithGenre;
-    }
-
-    /**
-     * @param booksWithGenre the bookWithGenre to set
-     */
-    public void setBooksWithGenre(List<Book> booksWithGenre) {
-        this.booksWithGenre = booksWithGenre;
-    }
-
-    /**
-     * @return the authorsWithGenre
-     */
-    public List<Author> getAuthorsWithGenre() {
-        return authorsWithGenre;
-    }
-
-    /**
-     * @param authorsWithGenre the authorsWithGenre to set
-     */
-    public void setAuthorsWithGenre(List<Author> authorsWithGenre) {
-        this.authorsWithGenre = authorsWithGenre;
-    }
-
+ 
     /**
      * @return the isActive
      */
@@ -78,5 +51,33 @@ public class Genre {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the booksWithGenre
+     */
+    public List<Integer> getBooksWithGenre() {
+        return booksWithGenre;
+    }
+
+    /**
+     * @param booksWithGenre the booksWithGenre to set
+     */
+    public void setBooksWithGenre(List<Integer> booksWithGenre) {
+        this.booksWithGenre = booksWithGenre;
+    }
+
+    /**
+     * @return the authorsWithGenre
+     */
+    public List<Integer> getAuthorsWithGenre() {
+        return authorsWithGenre;
+    }
+
+    /**
+     * @param authorsWithGenre the authorsWithGenre to set
+     */
+    public void setAuthorsWithGenre(List<Integer> authorsWithGenre) {
+        this.authorsWithGenre = authorsWithGenre;
     }
 }

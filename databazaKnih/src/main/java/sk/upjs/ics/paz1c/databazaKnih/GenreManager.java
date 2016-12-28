@@ -10,15 +10,15 @@ public interface GenreManager {
 
     void insertGenre(Genre genre);
 
-    void addBooksToGenre(Genre genre, List<Book> books);//zanru sa pridaju knihy/a
+    void addBooksToGenre(Genre genre, List<Integer> books);//zanru sa pridaju knihy/a
 
-    void removeBooksFromGenre(Genre genre, List<Book> books);//zanru sa odoberu knihy/a
+    void removeBooksFromGenre(Genre genre, List<Integer> books);//zanru sa odoberu knihy/a
 
     List<Genre> removeBook(Book book);//odstrani sa kniha zo vsetkych zanrov
 
-    void addAuthorsToGenre(Genre genre, List<Author> authors);//zanru sa pridaju autori
+    void addAuthorsToGenre(Genre genre, List<Integer> authors);//zanru sa pridaju autori
 
-    void removeAuthorsFromGenre(Genre genre, List<Author> authors);//zanru sa odoberu autori
+    void removeAuthorsFromGenre(Genre genre, List<Integer> authors);//zanru sa odoberu autori
 
     List<Genre> removeAuthor(Author author);//zo vsetkych zanrov sa odstrani autor
 

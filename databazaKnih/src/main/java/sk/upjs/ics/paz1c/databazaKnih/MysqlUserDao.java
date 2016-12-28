@@ -23,22 +23,11 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public List<User> getAllUsers() {
-//        return jdbcTemplate.query(SqlQueries.SELECT_ALL_USERS, userRowMapper);
 
         return jdbcTemplate.query(SqlQueries.SELECT_ALL_USERS, new ResultSetExtractor<List<User>>() {
             @Override
             public List<User> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<User> users = new ArrayList<>();
-                Map<Integer, User> friends = new HashMap<>();
-                Map<Integer, User> favusers = new HashMap<>();
-                Map<Integer, BookReview> bookreviews = new HashMap<>();
-                Map<Integer, AuthorReview> authorreviews = new HashMap<>();
-                Map<Integer, Book> readbooks = new HashMap<>();
-                Map<Integer, Book> favbooks = new HashMap<>();
-                Map<Integer, Book> wantedbooks = new HashMap<>();
-                Map<Integer, Author> favauthors = new HashMap<>();
-                Map<Integer, Book> reading = new HashMap<>();
-                Map<Integer, Book> notes = new HashMap<>();
                 User user = null;
                 while (rs.next()) {
                     int id = rs.getInt("iduser");
@@ -72,152 +61,58 @@ public class MysqlUserDao implements InterfaceUserDao {
 
                         int areviewid = rs.getInt("authorreview.idauthorreview");
                         if (!rs.wasNull()) {
-                            AuthorReview authorreview = authorreviews.get(areviewid);
-                            if (authorreview == null) {
-                                authorreview = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(areviewid);
-                                authorreviews.put(areviewid, authorreview);
-                            }
-                            if (authorreview != null) {
-                                if (authorreview.isIsActive()) {
-                                    user.getAuthorReviews().add(authorreview);
-                                }
-                            }
+                            user.getAuthorReviews().add(areviewid);
                         }
 
                         int breviewid = rs.getInt("bookreview.idbookreview");
                         if (!rs.wasNull()) {
-                            BookReview bookReview = bookreviews.get(breviewid);
-                            if (bookReview == null) {
-                                bookReview = ObjectFactory.INSTANCE.getBookReviewDao().findById(breviewid);
-                                bookreviews.put(breviewid, bookReview);
-                            }
-                            if (bookReview != null) {
-                                if (bookReview.isIsActive()) {
-                                    user.getBookReviews().add(bookReview);
-                                }
-                            }
+                            user.getBookReviews().add(breviewid);
                         }
 
                         int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
                         if (!rs.wasNull()) {
-                            Author author = favauthors.get(favauthorid);
-                            if (author == null) {
-                                author = ObjectFactory.INSTANCE.getAuthorDao().findById(favauthorid);
-                            }
-                            if (author != null) {
-                                favauthors.put(favauthorid, author);
-
-                                if (author.isIsActive()) {
-                                    user.getFavoriteAuthors().add(author);
-                                }
-                            }
+                            user.getFavoriteAuthors().add(favauthorid);
                         }
 
                         int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
                         if (!rs.wasNull()) {
-                            Book book = favbooks.get(favbookid);
-                            if (book == null) {
-                                book = ObjectFactory.INSTANCE.getBookDao().findById(favbookid);
-                                if (favbooks != null) {
-                                    favbooks.put(favbookid, book);
-                                }
-                                if (book.isIsActive()) {
-                                    user.getFavoriteBooks().add(book);
-                                }
-                            }
+                            user.getFavoriteBooks().add(favbookid);
                         }
 
                         int favuserid = rs.getInt("favoriteuser.favoriteuser");
                         if (!rs.wasNull()) {
-                            User favuser = favusers.get(favuserid);
-                            if (favuser == null) {
-                                favuser = ObjectFactory.INSTANCE.getUserDao().findById(favuserid);
-                                if (favusers != null) {
-                                    favusers.put(favuserid, favuser);
-
-                                    if (favuser.isIsActive()) {
-                                        user.getFavoriteReviewers().add(favuser);
-                                    }
-                                }
-                            }
+                            user.getFavoriteReviewers().add(favuserid);
                         }
 
                         int friendid = rs.getInt("friend.friend");
                         if (!rs.wasNull()) {
-                            User frienduser = friends.get(friendid);
-                            if (frienduser == null) {
-                                frienduser = ObjectFactory.INSTANCE.getUserDao().findById(friendid);
-                                friends.put(friendid, frienduser);
-                            }
-                            if (frienduser.isIsActive()) {
-                                user.getFriends().add(frienduser);
-                            }
+                            user.getFriends().add(friendid);
                         }
 
                         int readid = rs.getInt("readbook.readbook_idbook");
                         if (!rs.wasNull()) {
-                            Book readbook = readbooks.get(readid);
-                            if (readbook == null) {
-                                readbook = ObjectFactory.INSTANCE.getBookDao().findById(readid);
-                            }
-                            if (readbook != null) {
-                                readbooks.put(readid, readbook);
-
-                                if (readbook.isIsActive()) {
-                                    user.getReadBooks().add(readbook);
-                                }
-                            }
+                            user.getReadBooks().add(readid);
                         }
 
                         int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
                         if (!rs.wasNull()) {
-                            Book wantedbook = wantedbooks.get(wantedid);
-                            if (wantedbook == null) {
-                                wantedbook = ObjectFactory.INSTANCE.getBookDao().findById(wantedid);
-                                if (wantedbooks != null) {
-                                    wantedbooks.put(wantedid, wantedbook);
-                                }
-                                if (wantedbook.isIsActive()) {
-                                    user.getWantedBooks().add(wantedbook);
-                                }
-                            }
+                            user.getWantedBooks().add(wantedid);
                         }
 
                         int noteid = rs.getInt("booknote.booknote_idbook");
                         String note = rs.getString("booknote.note");
                         if (!rs.wasNull()) {
-                            Book notebook = notes.get(noteid);
-                            if (notebook == null) {
-                                notebook = ObjectFactory.INSTANCE.getBookDao().findById(noteid);
-                                if (notebook != null) {
-                                    notes.put(noteid, notebook);
-
-                                    Map<Book, String> bookWithNote = new HashMap<>();
-                                    bookWithNote.put(notebook, note);
-                                    if (notebook.isIsActive()) {
-                                        user.getNote().add(bookWithNote);
-                                    }
-                                }
-                            }
+                            Map<Integer, String> bookWithNote = new HashMap<>();
+                            bookWithNote.put(noteid, note);
+                            user.getNote().add(bookWithNote);
                         }
 
                         int readingid = rs.getInt("readingbook.readingbook_idbook");
                         int pocetReading = rs.getInt("readingbook.numberOfPages");
                         if (!rs.wasNull()) {
-                            Book readingBook = reading.get(readingid);
-                            if (readingBook == null) {
-                                readingBook = ObjectFactory.INSTANCE.getBookDao().findById(readingid);
-                            }
-                            if (readingBook != null) {
-                                reading.put(readingid, readingBook);
-
-                                Map<Book, Integer> readingWithPage = new HashMap<>();
-                                readingWithPage.put(readingBook, pocetReading);
-                                if (readingBook.isIsActive()) {
-                                    user.getReading().add(readingWithPage);
-                                }
-                            }
-
+                            Map<Integer, Integer> readingWithPage = new HashMap<>();
+                            readingWithPage.put(readingid, pocetReading);
+                            user.getReading().add(readingWithPage);
                         }
                     }
                 }
@@ -285,100 +180,58 @@ public class MysqlUserDao implements InterfaceUserDao {
                         // }
                         int areviewid = rs.getInt("authorreview.idauthorreview");
                         if (!rs.wasNull()) {
-                            AuthorReview authorreview = ObjectFactory.INSTANCE.getAuthorReviewDao().findById(areviewid);
-                            if (authorreview != null) {
-                                if (authorreview.isIsActive()) {
-                                    user.getAuthorReviews().add(authorreview);
-                                }
-                            }
+                            user.getAuthorReviews().add(areviewid);
                         }
+
                         int breviewid = rs.getInt("bookreview.idbookreview");
                         if (!rs.wasNull()) {
-                            BookReview bookReview = ObjectFactory.INSTANCE.getBookReviewDao().findById(breviewid);
-                            if (bookReview != null) {
-                                if (bookReview.isIsActive()) {
-                                    user.getBookReviews().add(bookReview);
-                                }
-                            }
+                            user.getBookReviews().add(breviewid);
                         }
+
                         int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
                         if (!rs.wasNull()) {
-                            Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(favauthorid);
-                            if (author != author) {
-                                if (author.isIsActive()) {
-                                    user.getFavoriteAuthors().add(author);
-                                }
-                            }
+                            user.getFavoriteAuthors().add(favauthorid);
                         }
+
                         int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
                         if (!rs.wasNull()) {
-                            Book book = ObjectFactory.INSTANCE.getBookDao().findById(favbookid);
-                            if (book != null) {
-                                if (book.isIsActive()) {
-                                    user.getFavoriteBooks().add(book);
-                                }
-                            }
+                            user.getFavoriteBooks().add(favbookid);
                         }
+
                         int favuserid = rs.getInt("favoriteuser.favoriteuser");
                         if (!rs.wasNull()) {
-                            User favuser = ObjectFactory.INSTANCE.getUserDao().findById(favuserid);
-                            if (favuser != null) {
-                                if (favuser.isIsActive()) {
-                                    user.getFavoriteReviewers().add(favuser);
-                                }
-                            }
+                            user.getFavoriteReviewers().add(favuserid);
                         }
 
                         int friendid = rs.getInt("friend.friend");
                         if (!rs.wasNull()) {
-                            User frienduser = ObjectFactory.INSTANCE.getUserDao().findById(friendid);
-                            if (frienduser != null) {
-                                if (frienduser.isIsActive()) {
-                                    user.getFriends().add(frienduser);
-                                }
-                            }
+                            user.getFriends().add(friendid);
                         }
+
                         int readid = rs.getInt("readbook.readbook_idbook");
                         if (!rs.wasNull()) {
-                            Book readbook = ObjectFactory.INSTANCE.getBookDao().findById(readid);
-                            if (readbook != null) {
-                                if (readbook.isIsActive()) {
-                                    user.getReadBooks().add(readbook);
-                                }
-                            }
+                            user.getReadBooks().add(readid);
                         }
+
                         int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
                         if (!rs.wasNull()) {
-                            Book wantedbook = ObjectFactory.INSTANCE.getBookDao().findById(wantedid);
-                            if (wantedbook != null) {
-                                if (wantedbook.isIsActive()) {
-                                    user.getWantedBooks().add(wantedbook);
-                                }
-                            }
+                            user.getWantedBooks().add(wantedid);
                         }
+
                         int noteid = rs.getInt("booknote.booknote_idbook");
                         String note = rs.getString("booknote.note");
                         if (!rs.wasNull()) {
-                            Book notebook = ObjectFactory.INSTANCE.getBookDao().findById(noteid);
-                            if (notebook != null) {
-                                if (notebook.isIsActive()) {
-                                    Map<Book, String> bookWithNote = new HashMap<>();
-                                    bookWithNote.put(notebook, note);
-                                    user.getNote().add(bookWithNote);
-                                }
-                            }
+                            Map<Integer, String> bookWithNote = new HashMap<>();
+                            bookWithNote.put(noteid, note);
+                            user.getNote().add(bookWithNote);
                         }
+
                         int readingid = rs.getInt("readingbook.readingbook_idbook");
                         int pocetReading = rs.getInt("readingbook.numberOfPages");
                         if (!rs.wasNull()) {
-                            Book readingBook = ObjectFactory.INSTANCE.getBookDao().findById(readingid);
-                            if (readingBook != null) {
-                                if (readingBook.isIsActive()) {
-                                    Map<Book, Integer> readingWithPage = new HashMap<>();
-                                    readingWithPage.put(readingBook, pocetReading);
-                                    user.getReading().add(readingWithPage);
-                                }
-                            }
+                            Map<Integer, Integer> readingWithPage = new HashMap<>();
+                            readingWithPage.put(readingid, pocetReading);
+                            user.getReading().add(readingWithPage);
                         }
                     }
                 }
@@ -475,43 +328,41 @@ public class MysqlUserDao implements InterfaceUserDao {
     }
 
     @Override
-    public void addReadingBooksToUser(Map<Book, Integer> reading, int iduser) {
-        Book book = null;
-        for (Book book1 : reading.keySet()) {
+    public void addReadingBooksToUser(Map<Integer, Integer> reading, int iduser) {
+        int book = 0;
+        for (int book1 : reading.keySet()) {
             book = book1;
+            jdbcTemplate.update(SqlQueries.ADD_READING_BOOK, iduser,
+                    book, reading.get(book));
         }
-
-        jdbcTemplate.update(SqlQueries.ADD_READING_BOOK, iduser,
-                book.getId(), reading.get(book));
     }
 
     @Override
-    public void deleteReadingBooksFromUser(Map<Book, Integer> reading, int iduser) {
-        Book book = null;
-        for (Book book1 : reading.keySet()) {
+    public void deleteReadingBooksFromUser(Map<Integer, Integer> reading, int iduser) {
+        int book = 0;
+        for (int book1 : reading.keySet()) {
             book = book1;
+            jdbcTemplate.update(SqlQueries.REMOVE_READING_BOOK, iduser, book);
         }
-        jdbcTemplate.update(SqlQueries.REMOVE_READING_BOOK, iduser, book.getId());
     }
 
     @Override
-    public void addNoteBooksToUser(Map<Book, String> notebook, int iduser) {
-        Book book = null;
-        for (Book book1 : notebook.keySet()) {
+    public void addNoteBooksToUser(Map<Integer, String> notebook, int iduser) {
+        int book = 0;
+        for (int book1 : notebook.keySet()) {
             book = book1;
+            jdbcTemplate.update(SqlQueries.ADD_BOOK_NOTE, iduser,
+                    book, notebook.get(book));
         }
 
-        jdbcTemplate.update(SqlQueries.ADD_BOOK_NOTE, iduser,
-                book.getId(), notebook.get(book));
     }
 
     @Override
-    public void deleteNoteBooksFromUser(Map<Book, String> notebook, int iduser) {
-        Book book = null;
-        for (Book book1 : notebook.keySet()) {
+    public void deleteNoteBooksFromUser(Map<Integer, String> notebook, int iduser) {
+        int book = 0;
+        for (int book1 : notebook.keySet()) {
             book = book1;
+            jdbcTemplate.update(SqlQueries.REMOVE_BOOK_NOTE, iduser, book);
         }
-
-        jdbcTemplate.update(SqlQueries.REMOVE_BOOK_NOTE, iduser, book.getId());
     }
 }

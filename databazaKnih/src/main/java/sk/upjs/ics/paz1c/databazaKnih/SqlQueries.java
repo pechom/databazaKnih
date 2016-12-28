@@ -10,7 +10,7 @@ public class SqlQueries {
             + "authorofbook.book_idbook, genreofauthor.genre_idgenre, "
             + "authorreview.idauthorreview "
             + "FROM author "
-            + "LEFT JOIN authorofbook ON "
+            + "LEFT JOIN authorofbook ON  "
             + "author.idauthor=authorofbook.author_idauthor "
             + "LEFT JOIN genreofauthor ON "
             + "author.idauthor=genreofauthor.author_idauthor "

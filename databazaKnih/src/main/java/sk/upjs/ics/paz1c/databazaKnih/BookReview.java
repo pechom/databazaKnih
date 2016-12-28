@@ -3,40 +3,13 @@ package sk.upjs.ics.paz1c.databazaKnih;
 public class BookReview {
 
     private int id;
-    private Book book;
-    private User user;
+    private int book;
+    private int user;
     private int rating;
     private String review;
     private boolean isActive;
 
-    /**
-     * @return the book
-     */
-    public Book getBook() {
-        return book;
-    }
-
-    /**
-     * @param book the book to set
-     */
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    /**
-     * @return the user
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    
     /**
      * @return the value
      */
@@ -91,5 +64,33 @@ public class BookReview {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the book
+     */
+    public int getBook() {
+        return book;
+    }
+
+    /**
+     * @param book the book to set
+     */
+    public void setBook(int book) {
+        this.book = book;
+    }
+
+    /**
+     * @return the user
+     */
+    public int getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(int user) {
+        this.user = user;
     }
 }

@@ -47,13 +47,13 @@ public interface InterfaceUserDao {
 
     void deleteAuthorReviewFromUser(int idreview, int iduser);
 
-    void addReadingBooksToUser(Map<Book, Integer> reading, int iduser);
+    void addReadingBooksToUser(Map<Integer, Integer> reading, int iduser);
 
-    void deleteReadingBooksFromUser(Map<Book, Integer> reading, int iduser);
+    void deleteReadingBooksFromUser(Map<Integer, Integer> reading, int iduser);
 
-    void addNoteBooksToUser(Map<Book, String> notebook, int iduser);
+    void addNoteBooksToUser(Map<Integer, String> notebook, int iduser);
 
-    void deleteNoteBooksFromUser(Map<Book, String> notebook, int iduser);
+    void deleteNoteBooksFromUser(Map<Integer, String> notebook, int iduser);
 
     void changePassword(User user);
 

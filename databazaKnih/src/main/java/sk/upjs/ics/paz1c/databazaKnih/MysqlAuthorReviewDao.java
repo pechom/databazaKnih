@@ -20,12 +20,10 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public List<AuthorReview> getAllReviews() {
-//        return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORREVIEWS, authorReviewRowMapper);
 
         return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORREVIEWS, (ResultSet rs) -> {
             List<AuthorReview> reviews = new ArrayList<>();
-            Map<Integer, Author> authors = new HashMap<>();
-            Map<Integer, User> users = new HashMap<>();
+
             AuthorReview authorReview = null;
             while (rs.next()) {
                 int id = rs.getInt("idauthorreview");
@@ -38,32 +36,12 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
                     int authorid = rs.getInt("author_idauthor");
                     if (!rs.wasNull()) {
-                        Author author = authors.get(authorid);
-                        if (author == null) {
-                            author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                        }
-                        if (author != null) {
-                            authors.put(authorid, author);
-
-                            if (author.isIsActive()) {
-                                authorReview.setAuthor(author);
-                            }
-                        }
+                        authorReview.setAuthor(authorid);
                     }
 
                     int userid = rs.getInt("user_iduser");
                     if (!rs.wasNull()) {
-                        User user = users.get(userid);
-                        if (user == null) {
-                            user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                        }
-                        if (user != null) {
-                            users.put(userid, user);
-
-                            if (user.isIsActive()) {
-                                authorReview.setUser(user);
-                            }
-                        }
+                        authorReview.setUser(userid);
 
                     }
                 }
@@ -76,7 +54,7 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
     public void insertReview(AuthorReview review) {
         jdbcTemplate.update(SqlQueries.INSERT_AUTHORREVIEW, review.getRating(),
                 review.getReview(), review.isIsActive(),
-                review.getAuthor().getId(), review.getUser().getId());
+                review.getAuthor(), review.getUser());
     }
 
     @Override
@@ -108,23 +86,14 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
                     }
                     int authorid = rs.getInt("author_idauthor");
-                     if (!rs.wasNull()) {
-                    Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                    if (author != null) {
-                        if (author.isIsActive()) {
-                            authorReview.setAuthor(author);
-                        }
+                    if (!rs.wasNull()) {
+                        authorReview.setAuthor(authorid);
                     }
-                     }
+
                     int userid = rs.getInt("user_iduser");
-                     if (!rs.wasNull()) {
-                    User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                    if (user != null) {
-                        if (user.isIsActive()) {
-                            authorReview.setUser(user);
-                        }
+                    if (!rs.wasNull()) {
+                        authorReview.setUser(userid);
                     }
-                     }
                 }
                 return authorReview;
             }

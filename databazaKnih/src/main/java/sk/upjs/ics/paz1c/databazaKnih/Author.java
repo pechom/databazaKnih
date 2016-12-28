@@ -7,14 +7,14 @@ public class Author {
 
     private int id;
     private String name;
-    private List<Book> books;
-    private List<Genre> genres;
+    private List<Integer> books;
+    private List<Integer> genres;
     private int birth;
     private int death;
     private String nationality;
     private String sex;
     private String biography;
-    private List<AuthorReview> authorReviews;
+    private List<Integer> authorReviews;
     private boolean verificationStatus;
     private boolean lifeStatus; //0-zivy alebo 1-mrtvy;
     private boolean isActive;
@@ -32,16 +32,6 @@ public class Author {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
-
-//    public enum allNationalities {
-//        CZE, SVK, GBR, USA, HUN, AUT, CAN, DEU, DNK, ESP, FIN, FRA, GRC, IRL, ITA, JPN, NOR, POL,
-//        PRT, RUS
-//    }
-//
-//    public enum allGenres { //.name by malo vratit string takze netreba case
-//        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
-//        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTALE, WESTERN
-//    }
 
     /**
      * @return the id
@@ -69,34 +59,6 @@ public class Author {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the books
-     */
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    /**
-     * @param books the books to set
-     */
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
-    /**
-     * @return the genres
-     */
-    public List<Genre> getGenres() {
-        return genres;
-    }
-
-    /**
-     * @param genres the genres to set
-     */
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
     }
 
 
@@ -142,19 +104,6 @@ public class Author {
         this.biography = biography;
     }
 
-    /**
-     * @return the authorReviews
-     */
-    public List<AuthorReview> getAuthorReviews() {
-        return authorReviews;
-    }
-
-    /**
-     * @param authorReviews the authorReviews to set
-     */
-    public void setAuthorReviews(List<AuthorReview> authorReviews) {
-        this.authorReviews = authorReviews;
-    }
 
     /**
      * @return the verificationStatus
@@ -210,6 +159,48 @@ public class Author {
      */
     public void setDeath(int death) {
         this.death = death;
+    }
+
+    /**
+     * @return the books
+     */
+    public List<Integer> getBooks() {
+        return books;
+    }
+
+    /**
+     * @param books the books to set
+     */
+    public void setBooks(List<Integer> books) {
+        this.books = books;
+    }
+
+    /**
+     * @return the genres
+     */
+    public List<Integer> getGenres() {
+        return genres;
+    }
+
+    /**
+     * @param genres the genres to set
+     */
+    public void setGenres(List<Integer> genres) {
+        this.genres = genres;
+    }
+
+    /**
+     * @return the authorReviews
+     */
+    public List<Integer> getAuthorReviews() {
+        return authorReviews;
+    }
+
+    /**
+     * @param authorReviews the authorReviews to set
+     */
+    public void setAuthorReviews(List<Integer> authorReviews) {
+        this.authorReviews = authorReviews;
     }
 
 }

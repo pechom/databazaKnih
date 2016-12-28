@@ -12,6 +12,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class User {
+
     private int id;
     private String userName;
     private String passwordHash;
@@ -19,19 +20,20 @@ public class User {
     private String name;
     private String surname;
     private LocalDateTime lastLogin;
-    private List<Book> readBooks;
-    private List<Book> favoriteBooks;
-    private List<Book> wantedBooks;
-    private List<Author> favoriteAuthors;
-    private List<User> friends;
-    private List<User> favoriteReviewers;
-    private List<Map<Book, Integer>> reading; // kniha, strana kde sa skoncilo
-    private List<Map<Book, String>> note; //poznamka ku knihe;
+    private List<Integer> readBooks;
+    private List<Integer> favoriteBooks;
+    private List<Integer> wantedBooks;
+    private List<Integer> favoriteAuthors;
+    private List<Integer> friends;
+    private List<Integer> favoriteReviewers;
+    private List<Map<Integer, Integer>> reading; // kniha, strana kde sa skoncilo
+    private List<Map<Integer, String>> note; //poznamka ku knihe;
     private String Salt;
-    private List<BookReview> bookReviews;
-    private List<AuthorReview> authorReviews;
+    private List<Integer> bookReviews;
+    private List<Integer> authorReviews;
     private boolean isAdmin;
     private boolean isActive;
+
     /**
      * @return the login
      */
@@ -57,22 +59,21 @@ public class User {
      * @param passwordHash the password to set
      */
     public void setPasswordHash(String passwordHash) {
-        this.passwordHash=passwordHash;
+        this.passwordHash = passwordHash;
     }
-    
-    
+
     public void setPassword(String password) {
-            
-            
-            Salt = BCrypt.gensalt();
-            
+
+        Salt = BCrypt.gensalt();
+
         this.passwordHash = BCrypt.hashpw(password, Salt);
     }
-    
+
     public boolean checkPassword(String password) {
         String result = BCrypt.hashpw(password, Salt);
         return result.equals(passwordHash);
     }
+
     /**
      * @return the mail
      */
@@ -130,91 +131,6 @@ public class User {
     }
 
     /**
-     * @return the readBooks
-     */
-    public List<Book> getReadBooks() {
-        return readBooks;
-    }
-
-    /**
-     * @param readBooks the readBooks to set
-     */
-    public void setReadBooks(List<Book> readBooks) {
-        this.readBooks = readBooks;
-    }
-
-    /**
-     * @return the favoriteBooks
-     */
-    public List<Book> getFavoriteBooks() {
-        return favoriteBooks;
-    }
-
-    /**
-     * @param favoriteBooks the favoriteBooks to set
-     */
-    public void setFavoriteBooks(List<Book> favoriteBooks) {
-        this.favoriteBooks = favoriteBooks;
-    }
-
-    /**
-     * @return the wantedBooks
-     */
-    public List<Book> getWantedBooks() {
-        return wantedBooks;
-    }
-
-    /**
-     * @param wantedBooks the wantedBooks to set
-     */
-    public void setWantedBooks(List<Book> wantedBooks) {
-        this.wantedBooks = wantedBooks;
-    }
-
-    /**
-     * @return the favoriteAuthors
-     */
-    public List<Author> getFavoriteAuthors() {
-        return favoriteAuthors;
-    }
-
-    /**
-     * @param favoriteAuthors the favoriteAuthors to set
-     */
-    public void setFavoriteAuthors(List<Author> favoriteAuthors) {
-        this.favoriteAuthors = favoriteAuthors;
-    }
-
-    /**
-     * @return the friends
-     */
-    public List<User> getFriends() {
-        return friends;
-    }
-
-    /**
-     * @param friends the friends to set
-     */
-    public void setFriends(List<User> friends) {
-        this.friends = friends;
-    }
-
-    /**
-     * @return the favoriteReviewers
-     */
-    public List<User> getFavoriteReviewers() {
-        return favoriteReviewers;
-    }
-
-    /**
-     * @param favoriteReviewers the favoriteReviewers to set
-     */
-    public void setFavoriteReviewers(List<User> favoriteReviewers) {
-        this.favoriteReviewers = favoriteReviewers;
-    }
-
-  
-    /**
      * @return the Salt
      */
     public String getSalt() {
@@ -225,7 +141,7 @@ public class User {
      * @param Salt the Salt to set
      */
     public void setSalt(String Salt) {
-          this.Salt = Salt;
+        this.Salt = Salt;
     }
 
     /**
@@ -240,34 +156,6 @@ public class User {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * @return the bookReviews
-     */
-    public List<BookReview> getBookReviews() {
-        return bookReviews;
-    }
-
-    /**
-     * @param bookReviews the bookReviews to set
-     */
-    public void setBookReviews(List<BookReview> bookReviews) {
-        this.bookReviews = bookReviews;
-    }
-
-    /**
-     * @return the authorReviews
-     */
-    public List<AuthorReview> getAuthorReviews() {
-        return authorReviews;
-    }
-
-    /**
-     * @param authorReviews the authorReviews to set
-     */
-    public void setAuthorReviews(List<AuthorReview> authorReviews) {
-        this.authorReviews = authorReviews;
     }
 
     /**
@@ -299,31 +187,143 @@ public class User {
     }
 
     /**
+     * @return the readBooks
+     */
+    public List<Integer> getReadBooks() {
+        return readBooks;
+    }
+
+    /**
+     * @param readBooks the readBooks to set
+     */
+    public void setReadBooks(List<Integer> readBooks) {
+        this.readBooks = readBooks;
+    }
+
+    /**
+     * @return the favoriteBooks
+     */
+    public List<Integer> getFavoriteBooks() {
+        return favoriteBooks;
+    }
+
+    /**
+     * @param favoriteBooks the favoriteBooks to set
+     */
+    public void setFavoriteBooks(List<Integer> favoriteBooks) {
+        this.favoriteBooks = favoriteBooks;
+    }
+
+    /**
+     * @return the wantedBooks
+     */
+    public List<Integer> getWantedBooks() {
+        return wantedBooks;
+    }
+
+    /**
+     * @param wantedBooks the wantedBooks to set
+     */
+    public void setWantedBooks(List<Integer> wantedBooks) {
+        this.wantedBooks = wantedBooks;
+    }
+
+    /**
+     * @return the favoriteAuthors
+     */
+    public List<Integer> getFavoriteAuthors() {
+        return favoriteAuthors;
+    }
+
+    /**
+     * @param favoriteAuthors the favoriteAuthors to set
+     */
+    public void setFavoriteAuthors(List<Integer> favoriteAuthors) {
+        this.favoriteAuthors = favoriteAuthors;
+    }
+
+    /**
+     * @return the friends
+     */
+    public List<Integer> getFriends() {
+        return friends;
+    }
+
+    /**
+     * @param friends the friends to set
+     */
+    public void setFriends(List<Integer> friends) {
+        this.friends = friends;
+    }
+
+    /**
+     * @return the favoriteReviewers
+     */
+    public List<Integer> getFavoriteReviewers() {
+        return favoriteReviewers;
+    }
+
+    /**
+     * @param favoriteReviewers the favoriteReviewers to set
+     */
+    public void setFavoriteReviewers(List<Integer> favoriteReviewers) {
+        this.favoriteReviewers = favoriteReviewers;
+    }
+
+    /**
      * @return the reading
      */
-    public List<Map<Book, Integer>> getReading() {
+    public List<Map<Integer, Integer>> getReading() {
         return reading;
     }
 
     /**
      * @param reading the reading to set
      */
-    public void setReading(List<Map<Book, Integer>> reading) {
+    public void setReading(List<Map<Integer, Integer>> reading) {
         this.reading = reading;
     }
 
     /**
      * @return the note
      */
-    public List<Map<Book, String>> getNote() {
+    public List<Map<Integer, String>> getNote() {
         return note;
     }
 
     /**
      * @param note the note to set
      */
-    public void setNote(List<Map<Book, String>> note) {
+    public void setNote(List<Map<Integer, String>> note) {
         this.note = note;
+    }
+
+    /**
+     * @return the bookReviews
+     */
+    public List<Integer> getBookReviews() {
+        return bookReviews;
+    }
+
+    /**
+     * @param bookReviews the bookReviews to set
+     */
+    public void setBookReviews(List<Integer> bookReviews) {
+        this.bookReviews = bookReviews;
+    }
+
+    /**
+     * @return the authorReviews
+     */
+    public List<Integer> getAuthorReviews() {
+        return authorReviews;
+    }
+
+    /**
+     * @param authorReviews the authorReviews to set
+     */
+    public void setAuthorReviews(List<Integer> authorReviews) {
+        this.authorReviews = authorReviews;
     }
 
 }

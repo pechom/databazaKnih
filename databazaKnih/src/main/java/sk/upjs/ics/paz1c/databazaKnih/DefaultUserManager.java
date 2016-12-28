@@ -30,15 +30,15 @@ public class DefaultUserManager implements UserManager {
         List<User> removed = new ArrayList<>();
         List<User> users = getAllUsers();
         for (User user1 : users) {
-            if (user1.getFriends().contains(user)) {
-                user1.getFriends().remove(user);
+            if (user1.getFriends().contains(user.getId())) {
+                user1.getFriends().remove(user.getId());
                 userDao.deleteFriendFromUser(user.getId(), user.getId());
                 if (!removed.contains(user1)) {
                     removed.add(user1);
                 }
             }
-            if (user1.getFavoriteReviewers().contains(user)) {
-                user1.getFavoriteReviewers().remove(user);
+            if (user1.getFavoriteReviewers().contains(user.getId())) {
+                user1.getFavoriteReviewers().remove(user.getId());
                 userDao.deleteFavoriteReviewerFromUser(user.getId(), user.getId());
                 if (!removed.contains(user1)) {
                     removed.add(user1);
@@ -48,6 +48,7 @@ public class DefaultUserManager implements UserManager {
         return removed;
     }
 
+    @Override
     public User findById(int id) {
         return userDao.findById(id);
     }
@@ -55,30 +56,6 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void updateUser(User user) {
         userDao.updateUser(user);
-    }
-
-    @Override
-    public List<User> getAdmins() {
-        List<User> users = getAllUsers();
-        List<User> admins = new ArrayList<>();
-        for (User user : users) {
-            if (user.isIsAdmin()) {
-                admins.add(user);
-            }
-        }
-        return admins;
-    }
-
-    @Override
-    public List<User> getNonAdmins() {
-        List<User> users = getAllUsers();
-        List<User> nonAdmins = new ArrayList<>();
-        for (User user : users) {
-            if (!user.isIsAdmin()) {
-                nonAdmins.add(user);
-            }
-        }
-        return nonAdmins;
     }
 
     @Override
@@ -98,56 +75,6 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public User getUserByUsername(String login) {
-        List<User> users = getAllUsers();
-        User named = null;
-        for (User user : users) {
-            if ((user.getUserName() != null) && (user.getUserName().equalsIgnoreCase(login))) {
-                named = user;
-                break;
-            }
-        }
-        return named;
-    }
-
-    @Override
-    public List<User> getUsersByName(String name) {
-        List<User> users = getAllUsers();
-        List<User> named = new ArrayList<>();
-        for (User user : users) {
-            if ((user.getName() != null) && (user.getName().equalsIgnoreCase(name))) {
-                named.add(user);
-            }
-        }
-        return named;
-    }
-
-    @Override
-    public List<User> getUsersBySurname(String name) {
-        List<User> users = getAllUsers();
-        List<User> named = new ArrayList<>();
-        for (User user : users) {
-            if ((user.getSurname() != null) && (user.getSurname().equalsIgnoreCase(name))) {
-                named.add(user);
-            }
-        }
-        return named;
-    }
-
-    @Override
-    public User getUserByMail(String mail) {
-        List<User> users = getAllUsers();
-        User mailUser = null;
-        for (User user : users) {
-            if ((user.getMail() != null) && (user.getMail().equals(mail))) {
-                mailUser = user;
-                break;
-            }
-        }
-        return mailUser;
-    }
-
-    @Override
     public void DeleteInactiveUsers() {
         List<User> users = getAllUsers();
         for (User user : users) {
@@ -162,29 +89,29 @@ public class DefaultUserManager implements UserManager {
         List<User> users = getAllUsers();
         List<User> removed = new ArrayList<>();
         for (User user : users) {
-            if (user.getReadBooks().contains(book)) {
-                user.getReadBooks().remove(book);
+            if (user.getReadBooks().contains(book.getId())) {
+                user.getReadBooks().remove(book.getId());
                 userDao.deleteReadBookFromUser(book.getId(), user.getId());
                 if (!removed.contains(user)) {
                     removed.add(user);
                 }
             }
-            if (user.getFavoriteBooks().contains(book)) {
-                user.getFavoriteBooks().remove(book);
+            if (user.getFavoriteBooks().contains(book.getId())) {
+                user.getFavoriteBooks().remove(book.getId());
                 userDao.deleteFavoriteBookFromUser(book.getId(), user.getId());
                 if (!removed.contains(user)) {
                     removed.add(user);
                 }
             }
-            if (user.getWantedBooks().contains(book)) {
-                user.getWantedBooks().remove(book);
+            if (user.getWantedBooks().contains(book.getId())) {
+                user.getWantedBooks().remove(book.getId());
                 userDao.deleteWantedBookFromUser(book.getId(), user.getId());
                 if (!removed.contains(user)) {
                     removed.add(user);
                 }
             }
-            for (Map<Book, Integer> reading : user.getReading()) {
-                if (reading.containsKey(book)) {
+            for (Map<Integer, Integer> reading : user.getReading()) {
+                if (reading.containsKey(book.getId())) {
                     user.getReading().remove(reading);
                     userDao.deleteReadingBooksFromUser(reading, user.getId());
                     if (!removed.contains(user)) {
@@ -192,8 +119,8 @@ public class DefaultUserManager implements UserManager {
                     }
                 }
             }
-            for (Map<Book, String> notebook : user.getNote()) {
-                if (notebook.containsKey(book)) {
+            for (Map<Integer, String> notebook : user.getNote()) {
+                if (notebook.containsKey(book.getId())) {
                     user.getNote().remove(notebook);
                     userDao.deleteNoteBooksFromUser(notebook, user.getId());
                     if (!removed.contains(user)) {
@@ -206,61 +133,61 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public void addReadBooksToUser(List<Book> books, User user) {
-        for (Book book : books) {
+    public void addReadBooksToUser(List<Integer> books, User user) {
+        for (int book : books) {
             if (!user.getReadBooks().contains(book)) {
                 user.getReadBooks().add(book);
-                userDao.addReadBookToUser(book.getId(), user.getId());
+                userDao.addReadBookToUser(book, user.getId());
             }
         }
     }
 
     @Override
-    public void deleteReadBooksFromUser(List<Book> books, User user) {
-        for (Book book : books) {
+    public void deleteReadBooksFromUser(List<Integer> books, User user) {
+        for (int book : books) {
             if (user.getReadBooks().contains(book)) {
                 user.getReadBooks().remove(book);
-                userDao.deleteReadBookFromUser(book.getId(), user.getId());
+                userDao.deleteReadBookFromUser(book, user.getId());
             }
         }
     }
 
     @Override
-    public void addFavoriteBooksToUser(List<Book> books, User user) {
-        for (Book book : books) {
+    public void addFavoriteBooksToUser(List<Integer> books, User user) {
+        for (int book : books) {
             if (!user.getFavoriteBooks().contains(book)) {
                 user.getFavoriteBooks().add(book);
-                userDao.addFavoriteBookToUser(book.getId(), user.getId());
+                userDao.addFavoriteBookToUser(book, user.getId());
             }
         }
     }
 
     @Override
-    public void deleteFavoriteBooksFromUser(List<Book> books, User user) {
-        for (Book book : books) {
+    public void deleteFavoriteBooksFromUser(List<Integer> books, User user) {
+        for (int book : books) {
             if (user.getFavoriteBooks().contains(book)) {
                 user.getFavoriteBooks().remove(book);
-                userDao.deleteFavoriteBookFromUser(book.getId(), user.getId());
+                userDao.deleteFavoriteBookFromUser(book, user.getId());
             }
         }
     }
 
     @Override
-    public void addWantedBooksToUser(List<Book> books, User user) {
-        for (Book book : books) {
+    public void addWantedBooksToUser(List<Integer> books, User user) {
+        for (int book : books) {
             if (!user.getWantedBooks().contains(book)) {
                 user.getWantedBooks().add(book);
-                userDao.addWantedBookToUser(book.getId(), user.getId());
+                userDao.addWantedBookToUser(book, user.getId());
             }
         }
     }
 
     @Override
-    public void deleteWantedBooksFromUser(List<Book> books, User user) {
-        for (Book book : books) {
+    public void deleteWantedBooksFromUser(List<Integer> books, User user) {
+        for (int book : books) {
             if (user.getWantedBooks().contains(book)) {
                 user.getWantedBooks().remove(book);
-                userDao.deleteWantedBookFromUser(book.getId(), user.getId());
+                userDao.deleteWantedBookFromUser(book, user.getId());
             }
         }
     }
@@ -270,8 +197,8 @@ public class DefaultUserManager implements UserManager {
         List<User> users = getAllUsers();
         List<User> removed = new ArrayList<>();
         for (User user : users) {
-            if (user.getFavoriteAuthors().contains(author)) {
-                user.getFavoriteAuthors().remove(author);
+            if (user.getFavoriteAuthors().contains(author.getId())) {
+                user.getFavoriteAuthors().remove(author.getId());
                 removed.add(user);
             }
         }
@@ -280,77 +207,77 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public void addFavoriteAuthorsToUser(List<Author> authors, User user) {
-        for (Author author : authors) {
+    public void addFavoriteAuthorsToUser(List<Integer> authors, User user) {
+        for (int author : authors) {
             if (!user.getFavoriteAuthors().contains(author)) {
                 user.getFavoriteAuthors().add(author);
-                userDao.addFavoriteAuthorToUser(author.getId(), user.getId());
+                userDao.addFavoriteAuthorToUser(author, user.getId());
             }
         }
     }
 
     @Override
-    public void deleteFavoriteAuthorsFromUser(List<Author> authors, User user) {
-        for (Author author : authors) {
+    public void deleteFavoriteAuthorsFromUser(List<Integer> authors, User user) {
+        for (int author : authors) {
             if (user.getFavoriteAuthors().contains(author)) {
                 user.getFavoriteAuthors().remove(author);
-                userDao.deleteFavoriteAuthorFromUser(author.getId(), user.getId());
+                userDao.deleteFavoriteAuthorFromUser(author, user.getId());
             }
         }
     }
 
     @Override
-    public void addFriendsToUser(List<User> friends, User user) {
-        for (User friend : friends) {
+    public void addFriendsToUser(List<Integer> friends, User user) {
+        for (int friend : friends) {
             if (!user.getFriends().contains(friend)) {
                 user.getFriends().add(friend);
-                userDao.addFriendToUser(friend.getId(), user.getId());
+                userDao.addFriendToUser(friend, user.getId());
             }
         }
     }
 
     @Override
-    public void deleteFriendsFromUser(List<User> friends, User user) {
-        for (User friend : friends) {
+    public void deleteFriendsFromUser(List<Integer> friends, User user) {
+        for (int friend : friends) {
             if (user.getFriends().contains(friend)) {
                 user.getFriends().remove(friend);
-                userDao.deleteFriendFromUser(friend.getId(), user.getId());
+                userDao.deleteFriendFromUser(friend, user.getId());
             }
         }
     }
 
     @Override
-    public void addFavoriteReviewers(List<User> reviewers, User user) {
-        for (User reviewer : reviewers) {
+    public void addFavoriteReviewers(List<Integer> reviewers, User user) {
+        for (int reviewer : reviewers) {
             if (!user.getFavoriteReviewers().contains(reviewer)) {
                 user.getFavoriteReviewers().add(reviewer);
-                userDao.addFavoriteReviewerToUser(reviewer.getId(), user.getId());
+                userDao.addFavoriteReviewerToUser(reviewer, user.getId());
             }
         }
     }
 
     @Override
-    public void deleteFavoriteReviewers(List<User> reviewers, User user) {
-        for (User reviewer : reviewers) {
+    public void deleteFavoriteReviewers(List<Integer> reviewers, User user) {
+        for (int reviewer : reviewers) {
             if (user.getFavoriteReviewers().contains(reviewer)) {
                 user.getFavoriteReviewers().remove(reviewer);
-                userDao.deleteFavoriteReviewerFromUser(reviewer.getId(), user.getId());
+                userDao.deleteFavoriteReviewerFromUser(reviewer, user.getId());
             }
         }
     }
 
     @Override
     public void deleteBookReview(BookReview bookReview, User user) {
-        if (user.getBookReviews().contains(bookReview)) {
-            user.getBookReviews().remove(bookReview);
+        if (user.getBookReviews().contains(bookReview.getId())) {
+            user.getBookReviews().remove(bookReview.getId());
             userDao.deleteBookReviewFromUser(bookReview.getId(), user.getId());
         }
     }
 
     @Override
     public void deleteAuthorReview(AuthorReview authorReview, User user) {
-        if (user.getAuthorReviews().contains(authorReview)) {
-            user.getAuthorReviews().remove(authorReview);
+        if (user.getAuthorReviews().contains(authorReview.getId())) {
+            user.getAuthorReviews().remove(authorReview.getId());
             userDao.deleteAuthorReviewFromUser(authorReview.getId(), user.getId());
         }
     }
@@ -361,7 +288,7 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public void addReadingBookToUser(Map<Book, Integer> reading, User user) {
+    public void addReadingBookToUser(Map<Integer, Integer> reading, User user) {
         if (!user.getReading().contains(reading)) {
             user.getReading().add(reading);
             userDao.addReadingBooksToUser(reading, user.getId());
@@ -370,7 +297,7 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public void deleteReadingBookFromUser(Map<Book, Integer> reading, User user) {
+    public void deleteReadingBookFromUser(Map<Integer, Integer> reading, User user) {
         if (user.getReading().contains(reading)) {
             user.getReading().remove(reading);
             userDao.deleteReadingBooksFromUser(reading, user.getId());
@@ -379,7 +306,7 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public void addNoteBookToUser(Map<Book, String> notebook, User user) {
+    public void addNoteBookToUser(Map<Integer, String> notebook, User user) {
         if (!user.getNote().contains(notebook)) {
             user.getNote().add(notebook);
             userDao.addNoteBooksToUser(notebook, user.getId());
@@ -387,7 +314,7 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public void deleteNoteBookFromUser(Map<Book, String> notebook, User user) {
+    public void deleteNoteBookFromUser(Map<Integer, String> notebook, User user) {
         if (user.getNote().contains(notebook)) {
             user.getNote().remove(notebook);
             userDao.deleteNoteBooksFromUser(notebook, user.getId());
@@ -476,8 +403,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void addReadBookToUser(Book book, User user) {
 
-        if (!user.getReadBooks().contains(book)) {
-            user.getReadBooks().add(book);
+        if (!user.getReadBooks().contains(book.getId())) {
+            user.getReadBooks().add(book.getId());
             updateUser(user);
         }
     }
@@ -485,8 +412,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void deleteReadBookFromUser(Book book, User user) {
 
-        if (user.getReadBooks().contains(book)) {
-            user.getReadBooks().remove(book);
+        if (user.getReadBooks().contains(book.getId())) {
+            user.getReadBooks().remove(book.getId());
             updateUser(user);
         }
     }
@@ -494,8 +421,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void addFavoriteBookToUser(Book book, User user) {
 
-        if (!user.getFavoriteBooks().contains(book)) {
-            user.getFavoriteBooks().add(book);
+        if (!user.getFavoriteBooks().contains(book.getId())) {
+            user.getFavoriteBooks().add(book.getId());
             updateUser(user);
         }
     }
@@ -503,8 +430,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void deleteFavoriteBookFromUser(Book book, User user) {
 
-        if (user.getFavoriteBooks().contains(book)) {
-            user.getFavoriteBooks().remove(book);
+        if (user.getFavoriteBooks().contains(book.getId())) {
+            user.getFavoriteBooks().remove(book.getId());
             updateUser(user);
         }
     }
@@ -512,8 +439,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void addWantedBookToUser(Book book, User user) {
 
-        if (!user.getWantedBooks().contains(book)) {
-            user.getWantedBooks().add(book);
+        if (!user.getWantedBooks().contains(book.getId())) {
+            user.getWantedBooks().add(book.getId());
             updateUser(user);
         }
     }
@@ -521,8 +448,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void deleteWantedBookFromUser(Book book, User user) {
 
-        if (user.getWantedBooks().contains(book)) {
-            user.getWantedBooks().remove(book);
+        if (user.getWantedBooks().contains(book.getId())) {
+            user.getWantedBooks().remove(book.getId());
             updateUser(user);
         }
     }
@@ -530,8 +457,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void addFavoriteAuthorToUser(Author author, User user) {
 
-        if (!user.getFavoriteAuthors().contains(author)) {
-            user.getFavoriteAuthors().add(author);
+        if (!user.getFavoriteAuthors().contains(author.getId())) {
+            user.getFavoriteAuthors().add(author.getId());
             updateUser(user);
         }
     }
@@ -539,8 +466,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void deleteFavoriteAuthorFromUser(Author author, User user) {
 
-        if (user.getFavoriteAuthors().contains(author)) {
-            user.getFavoriteAuthors().remove(author);
+        if (user.getFavoriteAuthors().contains(author.getId())) {
+            user.getFavoriteAuthors().remove(author.getId());
             updateUser(user);
         }
     }
@@ -548,8 +475,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void addFriendToUser(User friend, User user) {
 
-        if (!user.getFriends().contains(friend)) {
-            user.getFriends().add(friend);
+        if (!user.getFriends().contains(friend.getId())) {
+            user.getFriends().add(friend.getId());
             updateUser(user);
         }
     }
@@ -557,8 +484,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void deleteFriendFromUser(User friend, User user) {
 
-        if (user.getFriends().contains(friend)) {
-            user.getFriends().remove(friend);
+        if (user.getFriends().contains(friend.getId())) {
+            user.getFriends().remove(friend.getId());
             updateUser(user);
         }
     }
@@ -566,8 +493,8 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void addFavoriteReviewer(User reviewer, User user) {
 
-        if (!user.getFavoriteReviewers().contains(reviewer)) {
-            user.getFavoriteReviewers().add(reviewer);
+        if (!user.getFavoriteReviewers().contains(reviewer.getId())) {
+            user.getFavoriteReviewers().add(reviewer.getId());
             updateUser(user);
         }
     }
@@ -575,24 +502,24 @@ public class DefaultUserManager implements UserManager {
     @Override
     public void deleteFavoriteReviewer(User reviewer, User user) {
 
-        if (user.getFavoriteReviewers().contains(reviewer)) {
-            user.getFavoriteReviewers().remove(reviewer);
+        if (user.getFavoriteReviewers().contains(reviewer.getId())) {
+            user.getFavoriteReviewers().remove(reviewer.getId());
             updateUser(user);
         }
     }
 
     @Override
     public void addBookReview(BookReview bookReview, User user) {
-        if (!user.getBookReviews().contains(bookReview)) {
-            user.getBookReviews().add(bookReview);
+        if (!user.getBookReviews().contains(bookReview.getId())) {
+            user.getBookReviews().add(bookReview.getId());
             updateUser(user);
         }
     }
 
     @Override
     public void addAuthorReview(AuthorReview authorReview, User user) {
-        if (!user.getAuthorReviews().contains(authorReview)) {
-            user.getAuthorReviews().add(authorReview);
+        if (!user.getAuthorReviews().contains(authorReview.getId())) {
+            user.getAuthorReviews().add(authorReview.getId());
             updateUser(user);
         }
     }

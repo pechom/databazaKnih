@@ -27,6 +27,7 @@ public class DefaultAuthorRequestManager implements AuthorRequestManager {
         return requestDao.findById(id);
     }
 
+    @Override
     public void updateRequest(AuthorRequest request) {
         requestDao.updateRequest(request);
     }
@@ -36,7 +37,7 @@ public class DefaultAuthorRequestManager implements AuthorRequestManager {
         List<AuthorRequest> requests = getAllRequests();
         List<AuthorRequest> userRequests = new ArrayList<>();
         for (AuthorRequest request : requests) {
-            if ((request.getRequester() != null) && (request.getRequester().equals(user))) {
+            if ((request.getRequester() != 0) && (request.getRequester()==(user.getId()))) {
                 userRequests.add(request);
             }
         }
@@ -48,7 +49,7 @@ public class DefaultAuthorRequestManager implements AuthorRequestManager {
         List<AuthorRequest> requests = getAllRequests();
         List<AuthorRequest> authorRequests = new ArrayList<>();
         for (AuthorRequest request : requests) {
-            if ((request.getAuthor() != null) && (request.getAuthor().equals(author))) {
+            if ((request.getAuthor() != 0) && (request.getAuthor()==(author.getId()))) {
                 authorRequests.add(request);
             }
         }
@@ -60,7 +61,7 @@ public class DefaultAuthorRequestManager implements AuthorRequestManager {
         List<AuthorRequest> requests = getAllRequests();
         List<AuthorRequest> authorRequests = new ArrayList<>();
         for (AuthorRequest request : requests) {
-            if (request.getAuthor() == null) {
+            if (request.getAuthor() == 0) {
                 authorRequests.add(request);
             }
         }
@@ -71,7 +72,7 @@ public class DefaultAuthorRequestManager implements AuthorRequestManager {
     public void deleteAllWithRequester(User user) {
         List<AuthorRequest> requests = getAllRequests();
         for (AuthorRequest request : requests) {
-            if ((request.getRequester() != null) && (request.getRequester().equals(user))) {
+            if ((request.getRequester() != 0) && (request.getRequester()==(user.getId()))) {
             }
         }
         requestDao.deleteAllWithRequester(user.getId());
@@ -81,7 +82,7 @@ public class DefaultAuthorRequestManager implements AuthorRequestManager {
     public void deleteAllWithAuthor(Author author) {
         List<AuthorRequest> requests = getAllRequests();
         for (AuthorRequest request : requests) {
-            if ((request.getAuthor() != null) && (request.getAuthor().equals(author))) {
+            if ((request.getAuthor() != 0) && (request.getAuthor()==(author.getId()))) {
             }
         }
         requestDao.deleteAllWithAuthor(author.getId());

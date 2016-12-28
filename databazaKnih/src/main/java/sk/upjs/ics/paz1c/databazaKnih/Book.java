@@ -7,25 +7,20 @@ public class Book {
 
     private int id;
     private String name;
-    private Author author;
+    private int author;
     private int year;
-    private List<Genre> genres;
+    private List<Integer> genres;
     private int numberOfPages;
     private int ISBN;
-    private List<Tag> tags;
+    private List<Integer> tags;
     private String description;
     private int numberOfReviews;
     private double averageOfReviews;
     private int numberInChart;
     private boolean verificationStatus; // 0-neoverena, 1-overena
-    private List<BookReview> bookReviews;
+    private List<Integer> bookReviews;
     private double bayesianAverage;
     private boolean isActive;
-
-//    public enum allGenres { //.name by malo vratit string takze netreba case
-//        ACTION, HORROR, ROMANTIC, COMEDY, THRILLER, PSYCHOLOGYCAL, SPORT, FANTASY, SCIFI,
-//        FICTION, ADVENTURE, HISTORIC, DETECTIVE, FAIRYTAIL, WESTERN
-//    }
 
     /**
      * @return the id
@@ -56,20 +51,6 @@ public class Book {
     }
 
     /**
-     * @return the author
-     */
-    public Author getAuthor() {
-        return author;
-    }
-
-    /**
-     * @param author the author to set
-     */
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    /**
      * @return the year
      */
     public int getYear() {
@@ -81,20 +62,6 @@ public class Book {
      */
     public void setYear(int year) {
         this.year = year;
-    }
-
-    /**
-     * @return the genres
-     */
-    public List<Genre> getGenres() {
-        return genres;
-    }
-
-    /**
-     * @param genres the genres to set
-     */
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
     }
 
     /**
@@ -123,20 +90,6 @@ public class Book {
      */
     public void setISBN(int ISBN) {
         this.ISBN = ISBN;
-    }
-
-    /**
-     * @return the tags
-     */
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    /**
-     * @param tags the tags to set
-     */
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
     }
 
     /**
@@ -210,20 +163,6 @@ public class Book {
     }
 
     /**
-     * @return the bookReviews
-     */
-    public List<BookReview> getBookReviews() {
-        return bookReviews;
-    }
-
-    /**
-     * @param bookReviews the bookReviews to set
-     */
-    public void setBookReviews(List<BookReview> bookReviews) {
-        this.bookReviews = bookReviews;
-    }
-
-    /**
      * @return the bayesianAverage
      */
     public double getBayesianAverage() {
@@ -249,6 +188,62 @@ public class Book {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the author
+     */
+    public int getAuthor() {
+        return author;
+    }
+
+    /**
+     * @param author the author to set
+     */
+    public void setAuthor(int author) {
+        this.author = author;
+    }
+
+    /**
+     * @return the genres
+     */
+    public List<Integer> getGenres() {
+        return genres;
+    }
+
+    /**
+     * @param genres the genres to set
+     */
+    public void setGenres(List<Integer> genres) {
+        this.genres = genres;
+    }
+
+    /**
+     * @return the tags
+     */
+    public List<Integer> getTags() {
+        return tags;
+    }
+
+    /**
+     * @param tags the tags to set
+     */
+    public void setTags(List<Integer> tags) {
+        this.tags = tags;
+    }
+
+    /**
+     * @return the bookReviews
+     */
+    public List<Integer> getBookReviews() {
+        return bookReviews;
+    }
+
+    /**
+     * @param bookReviews the bookReviews to set
+     */
+    public void setBookReviews(List<Integer> bookReviews) {
+        this.bookReviews = bookReviews;
     }
 
 }

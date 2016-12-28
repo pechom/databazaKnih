@@ -24,8 +24,6 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
             @Override
             public List<BookRequest> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<BookRequest> requests = new ArrayList<>();
-                Map<Integer, Book> books = new HashMap<>();
-                Map<Integer, User> users = new HashMap<>();
                 BookRequest request = null;
                 while (rs.next()) {
                     int id = rs.getInt("idbookrequest");
@@ -37,28 +35,12 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
 
                         int bookid = rs.getInt("book_idbook");
                         if (!rs.wasNull()) {
-                            Book book = books.get(bookid);
-                            if (book == null) {
-                                book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                                books.put(bookid, book);
-                            }
-                            if (book.isIsActive()) {
-                                request.setBook(book);
-                            }
+                            request.setBook(bookid);
                         }
 
                         int userid = rs.getInt("user_iduser");
                         if (!rs.wasNull()) {
-                            User user = users.get(userid);
-
-                            if (user == null) {
-                                user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                            }
-                            if (user != null) {
-                                if (user.isIsActive()) {
-                                    request.setRequester(user);
-                                }
-                            }
+                            request.setRequester(userid);
                         }
                     }
                 }
@@ -70,8 +52,8 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
     @Override
     public void insertRequest(BookRequest request) {
         jdbcTemplate.update(SqlQueries.INSERT_BOOK_REQUEST,
-                request.getContent(), request.getBook().getId(),
-                request.getRequester().getId(), request.isIsActive());
+                request.getContent(), request.getBook(),
+                request.getRequester(), request.isIsActive());
     }
 
     @Override
@@ -95,7 +77,7 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
 
     @Override
     public void deleteAllWithBook(int idbook) {
-       jdbcTemplate.update(SqlQueries.DELETE_BOOK_REQUESTS_WITH_BOOK, idbook);
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK_REQUESTS_WITH_BOOK, idbook);
     }
 
     @Override
@@ -119,21 +101,12 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
                     }
                     int bookid = rs.getInt("book_idbook");
                     if (!rs.wasNull()) {
-                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                        if (book != null) {
-                            if (book.isIsActive()) {
-                                request.setBook(book);
-                            }
-                        }
+                        request.setBook(bookid);
                     }
+
                     int userid = rs.getInt("user_iduser");
                     if (!rs.wasNull()) {
-                        User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                        if (user != null) {
-                            if (user.isIsActive()) {
-                                request.setRequester(user);
-                            }
-                        }
+                        request.setRequester(userid);
                     }
                 }
                 return request;

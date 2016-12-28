@@ -6,7 +6,7 @@ public class Tag {
 
     private int id;
     private String name;
-    private List<Book> booksWithTag;
+    private List<Integer> booksWithTag;
     private boolean isActive;
 
     /**
@@ -23,19 +23,6 @@ public class Tag {
         this.name = name;
     }
 
-    /**
-     * @return the booksWithTag
-     */
-    public List<Book> getBooksWithTag() {
-        return booksWithTag;
-    }
-
-    /**
-     * @param booksWithTag the booksWithTag to set
-     */
-    public void setBooksWithTag(List<Book> booksWithTag) {
-        this.booksWithTag = booksWithTag;
-    }
 
     /**
      * @return the id
@@ -63,5 +50,19 @@ public class Tag {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the booksWithTag
+     */
+    public List<Integer> getBooksWithTag() {
+        return booksWithTag;
+    }
+
+    /**
+     * @param booksWithTag the booksWithTag to set
+     */
+    public void setBooksWithTag(List<Integer> booksWithTag) {
+        this.booksWithTag = booksWithTag;
     }
 }

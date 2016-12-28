@@ -7,61 +7,49 @@ public interface UserManager {
 
     List<User> getAllUsers();
 
-    List<User> getAdmins();
-
-    List<User> getNonAdmins();
-
     Boolean checkNameAndPassword(String userName, String typedPassword);//porovnam to co zadal user s jeho heslom
-
-    User getUserByUsername(String login);
-
-    List<User> getUsersByName(String name);
-
-    List<User> getUsersBySurname(String name);
-
-    User getUserByMail(String mail);//kazdy user musi mat iny mail
 
     void DeleteInactiveUsers();//ti ktori sa neprihlasili viac ako rok
 
     List<User> deleteBook(Book book);//vymaze knihu zo vsetkych tabuliek vsetkych uivatelov
 
-    void addReadBooksToUser(List<Book> books, User user);
+    void addReadBooksToUser(List<Integer> books, User user);
 
-    void deleteReadBooksFromUser(List<Book> books, User user);
+    void deleteReadBooksFromUser(List<Integer> books, User user);
 
-    void addFavoriteBooksToUser(List<Book> books, User user);
+    void addFavoriteBooksToUser(List<Integer> books, User user);
 
-    void deleteFavoriteBooksFromUser(List<Book> books, User user);
+    void deleteFavoriteBooksFromUser(List<Integer> books, User user);
 
-    void addWantedBooksToUser(List<Book> books, User user);
+    void addWantedBooksToUser(List<Integer> books, User user);
 
-    void deleteWantedBooksFromUser(List<Book> books, User user);
+    void deleteWantedBooksFromUser(List<Integer> books, User user);
 
     List<User> removeAuthor(Author author);//odstrani autora zo vsetkych userov
 
-    void addFavoriteAuthorsToUser(List<Author> authors, User user);
+    void addFavoriteAuthorsToUser(List<Integer> authors, User user);
 
-    void deleteFavoriteAuthorsFromUser(List<Author> authors, User user);
+    void deleteFavoriteAuthorsFromUser(List<Integer> authors, User user);
 
-    void addFriendsToUser(List<User> friends, User user);
+    void addFriendsToUser(List<Integer> friends, User user);
 
-    void deleteFriendsFromUser(List<User> friends, User user);
+    void deleteFriendsFromUser(List<Integer> friends, User user);
 
-    void addFavoriteReviewers(List<User> reviewers, User user);
+    void addFavoriteReviewers(List<Integer> reviewers, User user);
 
-    void deleteFavoriteReviewers(List<User> reviewers, User user);
+    void deleteFavoriteReviewers(List<Integer> reviewers, User user);
 
     void deleteBookReview(BookReview bookReview, User user);
 
     void deleteAuthorReview(AuthorReview authorReview, User user);
 
-    void addReadingBookToUser(Map<Book, Integer> reading, User user);
+    void addReadingBookToUser(Map<Integer, Integer> reading, User user);
 
-    void deleteReadingBookFromUser(Map<Book, Integer> reading, User user);
+    void deleteReadingBookFromUser(Map<Integer, Integer> reading, User user);
 
-    void addNoteBookToUser(Map<Book, String> notebooks, User user);
+    void addNoteBookToUser(Map<Integer, String> notebooks, User user);
 
-    void deleteNoteBookFromUser(Map<Book, String> notebooks, User user);
+    void deleteNoteBookFromUser(Map<Integer, String> notebooks, User user);
 
     List<User> removeUser(User user); // odstrani usera zo vsetkych userov
 
@@ -73,7 +61,7 @@ public interface UserManager {
 
     void updateUser(User user);
 
-    User findById(int id);//z usera sa budu potom podla potrby tahat parametre
+    User findById(int id);//z usera sa budu potom podla potreby tahat parametre
 
     void changePassword(User user, String typedPassword);
 

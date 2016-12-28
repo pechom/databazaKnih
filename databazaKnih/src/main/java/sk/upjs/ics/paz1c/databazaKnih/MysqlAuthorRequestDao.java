@@ -24,8 +24,7 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
             @Override
             public List<AuthorRequest> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<AuthorRequest> requests = new ArrayList<>();
-                Map<Integer, Author> authors = new HashMap<>();
-                Map<Integer, User> users = new HashMap<>();
+
                 AuthorRequest request = null;
                 while (rs.next()) {
                     int id = rs.getInt("idauthorrequest");
@@ -37,29 +36,13 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
 
                         int authorid = rs.getInt("author_idauthor");
                         if (!rs.wasNull()) {
-                            Author author = authors.get(authorid);
-                            if (author == null) {
-                                author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                            }
-                            if (author != null) {
-                                if (author.isIsActive()) {
-                                    request.setAuthor(author);
-                                }
-                            }
+                            request.setAuthor(authorid);
                         }
 
                         int userid = rs.getInt("user_iduser");
                         if (!rs.wasNull()) {
-                            User user = users.get(userid);
+                            request.setRequester(userid);
 
-                            if (user == null) {
-                                user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                            }
-                            if (user != null) {
-                                if (user.isIsActive()) {
-                                    request.setRequester(user);
-                                }
-                            }
                         }
                     }
                 }
@@ -70,9 +53,9 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
 
     @Override
     public void insertRequest(AuthorRequest request) {
-            jdbcTemplate.update(SqlQueries.INSERT_AUTHOR_REQUEST, 
-                    request.getContent(), request.getAuthor().getId(),
-                    request.getRequester().getId(), request.isIsActive());
+        jdbcTemplate.update(SqlQueries.INSERT_AUTHOR_REQUEST,
+                request.getContent(), request.getAuthor(),
+                request.getRequester(), request.isIsActive());
 
     }
 
@@ -98,21 +81,12 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
                     }
                     int authorid = rs.getInt("author_idauthor");
                     if (!rs.wasNull()) {
-                        Author author = ObjectFactory.INSTANCE.getAuthorDao().findById(authorid);
-                        if (author != null) {
-                            if (author.isIsActive()) {
-                                request.setAuthor(author);
-                            }
-                        }
+                        request.setAuthor(authorid);
                     }
+
                     int userid = rs.getInt("user_iduser");
                     if (!rs.wasNull()) {
-                        User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                        if (user != null) {
-                            if (user.isIsActive()) {
-                                request.setRequester(user);
-                            }
-                        }
+                        request.setRequester(userid);
                     }
                 }
                 return request;

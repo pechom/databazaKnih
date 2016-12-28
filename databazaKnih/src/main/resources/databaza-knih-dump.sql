@@ -90,8 +90,8 @@ CREATE TABLE `authorrequest` (
   PRIMARY KEY (`idauthorrequest`,`author_idauthor`,`user_iduser`),
   KEY `fk_authorrequest_author1_idx` (`author_idauthor`),
   KEY `fk_authorrequest_user1_idx` (`user_iduser`),
-  CONSTRAINT `fk_authorrequest_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_authorrequest_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_authorrequest_author1` FOREIGN KEY (`author_idauthor`) REFERENCES `author` (`idauthor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_authorrequest_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -212,8 +212,8 @@ CREATE TABLE `bookrequest` (
   PRIMARY KEY (`idbookrequest`,`book_idbook`,`user_iduser`),
   KEY `fk_bookrequest_book1_idx` (`book_idbook`),
   KEY `fk_bookrequest_user1_idx` (`user_iduser`),
-  CONSTRAINT `fk_bookrequest_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bookrequest_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_bookrequest_book1` FOREIGN KEY (`book_idbook`) REFERENCES `book` (`idbook`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_bookrequest_user1` FOREIGN KEY (`user_iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -619,4 +619,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-27 18:56:00
+-- Dump completed on 2016-12-27 20:18:15

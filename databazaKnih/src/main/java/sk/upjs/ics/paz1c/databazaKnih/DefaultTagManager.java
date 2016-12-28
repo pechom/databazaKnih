@@ -47,21 +47,21 @@ public class DefaultTagManager implements TagManager {
     }
 
     @Override
-    public void addBooksToTag(List<Book> books, Tag tag) {
-        for (Book book : books) {
+    public void addBooksToTag(List<Integer> books, Tag tag) {
+        for (int book : books) {
             if (!tag.getBooksWithTag().contains(book)) {
                 tag.getBooksWithTag().add(book);
-                tagDao.addBookToTag(book.getId(), tag.getId());
+                tagDao.addBookToTag(book, tag.getId());
             }
         }
     }
 
     @Override
-    public void removeBooksFromTag(List<Book> books, Tag tag) {
-        for (Book book : books) {
+    public void removeBooksFromTag(List<Integer> books, Tag tag) {
+        for (int book : books) {
             if (tag.getBooksWithTag().contains(book)) {
                 tag.getBooksWithTag().remove(book);
-                tagDao.removeBookFromTag(book.getId(), tag.getId());
+                tagDao.removeBookFromTag(book, tag.getId());
             }
         }
     }
@@ -70,8 +70,8 @@ public class DefaultTagManager implements TagManager {
     public void removeBook(Book book) {
         List<Tag> tags = getAllTags();
         for (Tag tag : tags) {
-            if (tag.getBooksWithTag().contains(book)) {
-                tag.getBooksWithTag().remove(book);
+            if (tag.getBooksWithTag().contains(book.getId())) {
+                tag.getBooksWithTag().remove(book.getId());
             }
         }
         tagDao.removeBook(book.getId());

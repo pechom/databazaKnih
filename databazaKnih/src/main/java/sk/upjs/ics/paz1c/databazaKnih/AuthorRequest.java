@@ -4,25 +4,12 @@ public class AuthorRequest {
 //request kde je book null sa tyka autora samotneho atd
 
     private int id;
-    private User requester;
-    private Author author;
+    private int requester;
+    private int author;
     private String content;
     private boolean isActive;
 
-    /**
-     * @return the author
-     */
-    public User getRequester() {
-        return requester;
-    }
-
-    /**
-     * @param requester the author to set
-     */
-    public void setRequester(User requester) {
-        this.requester = requester;
-    }
-
+    
     /**
      * @return the content
      */
@@ -51,19 +38,6 @@ public class AuthorRequest {
         this.id = id;
     }
 
-    /**
-     * @return the author
-     */
-    public Author getAuthor() {
-        return author;
-    }
-
-    /**
-     * @param author the author to set
-     */
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
 
     /**
      * @return the isActive
@@ -77,5 +51,33 @@ public class AuthorRequest {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the requester
+     */
+    public int getRequester() {
+        return requester;
+    }
+
+    /**
+     * @param requester the requester to set
+     */
+    public void setRequester(int requester) {
+        this.requester = requester;
+    }
+
+    /**
+     * @return the author
+     */
+    public int getAuthor() {
+        return author;
+    }
+
+    /**
+     * @param author the author to set
+     */
+    public void setAuthor(int author) {
+        this.author = author;
     }
 }

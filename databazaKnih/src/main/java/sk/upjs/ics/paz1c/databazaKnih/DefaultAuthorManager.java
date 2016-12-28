@@ -9,6 +9,7 @@ import java.util.List;
 public class DefaultAuthorManager implements AuthorManager {
 
     private InterfaceAuthorDao authorDao = ObjectFactory.INSTANCE.getAuthorDao();
+    private InterfaceBookDao bookDao = ObjectFactory.INSTANCE.getBookDao();
 
     @Override
     public List<Author> getAllAuthors() {
@@ -62,164 +63,41 @@ public class DefaultAuthorManager implements AuthorManager {
     }
 
     @Override
-    public List<Author> getAuthorsByName(String name) {
-        List<Author> authors = getAllAuthors();
-        List<Author> namedAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getName() != null) && (author.getName().equals(name))) {
-                namedAuthors.add(author);
-            }
-        }
-        return namedAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsByGenres(List<Genre> genres) {
-        List<Author> authors = getAllAuthors();
-        List<Author> genreAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            for (Genre genre : genres) {
-                if ((author.getGenres() != null) && (author.getGenres().contains(genre))) {
-                    genreAuthors.add(author);
-                    break;
-                }
-            }
-        }
-        return genreAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsFromBirth(int year) {
-        List<Author> authors = getAllAuthors();
-        List<Author> birthAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getBirth() != 0) && (author.getBirth() >= year)) {
-                birthAuthors.add(author);
-            }
-        }
-        return birthAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsToBirth(int year) {
-        List<Author> authors = getAllAuthors();
-        List<Author> birthAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getBirth() != 0) && (author.getBirth() <= year)) {
-                birthAuthors.add(author);
-            }
-        }
-        return birthAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsFromToBirth(int from, int to) {
-        List<Author> authors = getAllAuthors();
-        List<Author> birthAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getBirth() != 0) && (author.getBirth() >= from) && (author.getBirth() <= to)) {
-                birthAuthors.add(author);
-            }
-        }
-        return birthAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsFromDeath(int year) {
-        List<Author> authors = getAllAuthors();
-        List<Author> deathAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getDeath() != 0) && (author.getDeath() >= year)) {
-                deathAuthors.add(author);
-            }
-        }
-        return deathAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsToDeath(int year) {
-        List<Author> authors = getAllAuthors();
-        List<Author> deathAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getDeath() != 0) && (author.getDeath() <= year)) {
-                deathAuthors.add(author);
-            }
-        }
-        return deathAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsFromToDeath(int from, int to) {
-        List<Author> authors = getAllAuthors();
-        List<Author> deathAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getDeath() != 0) && (author.getDeath() >= from) && (author.getDeath() <= to)) {
-                deathAuthors.add(author);
-            }
-        }
-        return deathAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsByNationality(String nationality) {
-        List<Author> authors = getAllAuthors();
-        List<Author> nationalityAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getNationality() != null) && (author.getNationality().equals(nationality))) {
-                nationalityAuthors.add(author);
-            }
-        }
-        return nationalityAuthors;
-    }
-
-    @Override
-    public List<Author> getAuthorsBySex(String sex) {
-        List<Author> authors = getAllAuthors();
-        List<Author> sexAuthors = new ArrayList<>();
-        for (Author author : authors) {
-            if ((author.getSex() != null) && (author.getSex().equals(sex))) {
-                sexAuthors.add(author);
-            }
-        }
-        return sexAuthors;
-    }
-
-    @Override
-    public void addBooksToAuthor(List<Book> books, Author author) {
-        for (Book book : books) {
+    public void addBooksToAuthor(List<Integer> books, Author author) {
+        for (int book : books) {
             if (!author.getBooks().contains(book)) {
                 author.getBooks().add(book);
-                authorDao.addBookToAuthor(book.getId(), author.getId());
+                authorDao.addBookToAuthor(book, author.getId());
             }
         }
     }
 
     @Override
-    public void removeBooksFromAuthor(List<Book> books, Author author) {
-        for (Book book : books) {
+    public void removeBooksFromAuthor(List<Integer> books, Author author) {
+        for (int book : books) {
             if (author.getBooks().contains(book)) {
                 author.getBooks().remove(book);
-                authorDao.removeBookFromAuthor(book.getId(), author.getId());
+                authorDao.removeBookFromAuthor(book, author.getId());
             }
         }
     }
 
     @Override
-    public void addGenresToAuthor(List<Genre> genres, Author author) {
-        for (Genre genre : genres) {
+    public void addGenresToAuthor(List<Integer> genres, Author author) {
+        for (int genre : genres) {
             if (!author.getGenres().contains(genre)) {
                 author.getGenres().add(genre);
-                authorDao.addGenreToAuthor(genre.getId(), author.getId());
+                authorDao.addGenreToAuthor(genre, author.getId());
             }
         }
     }
 
     @Override
-    public void removeGenresFromAuthor(List<Genre> genres, Author author) {
-        for (Genre genre : genres) {
+    public void removeGenresFromAuthor(List<Integer> genres, Author author) {
+        for (int genre : genres) {
             if (author.getGenres().contains(genre)) {
                 author.getGenres().remove(genre);
-                authorDao.removeGenreFromAuthor(genre.getId(), author.getId());
+                authorDao.removeGenreFromAuthor(genre, author.getId());
             }
         }
     }
@@ -229,8 +107,8 @@ public class DefaultAuthorManager implements AuthorManager {
         List<Author> authors = getAllAuthors();
         List<Author> removed = new ArrayList<>();
         for (Author author : authors) {
-            if (author.getGenres().contains(genre)) {
-                author.getGenres().remove(genre);
+            if (author.getGenres().contains(genre.getId())) {
+                author.getGenres().remove(genre.getId());
                 removed.add(author);
             }
         }
@@ -250,7 +128,7 @@ public class DefaultAuthorManager implements AuthorManager {
         for (Author author : authors) {
             boolean gotThemAll = true;
             for (Genre genre : genres) {
-                if (!author.getGenres().contains(genre)) {
+                if (!author.getGenres().contains(genre.getId())) {
                     gotThemAll = false;
                     break;
                 }
@@ -306,19 +184,19 @@ public class DefaultAuthorManager implements AuthorManager {
 
     @Override
     public List<Author> getAuthorsByBook(String bookname, List<Author> authors) {
-
         List<Author> namedAuthors = new ArrayList<>();
         for (Author author : authors) {
-            List<Book> books = author.getBooks();
-            boolean isThere = false;
+            List<Book> books = new ArrayList<>();
+            for (int book : author.getBooks()) {
+                books.add(bookDao.findById(book));
+            }
             for (Book book : books) {
+                boolean isThere = false;
                 if ((book.getName() != null) && (book.getName().equals(bookname))) {
                     isThere = true;
+                     namedAuthors.add(author);
                 }
-
             }
-            namedAuthors.add(author);
-
         }
         return namedAuthors;
     }
@@ -329,7 +207,7 @@ public class DefaultAuthorManager implements AuthorManager {
         List<Author> genreAuthors = new ArrayList<>();
         for (Author author : authors) {
             for (Genre genre : genres) {
-                if ((author.getGenres() != null) && (author.getGenres().contains(genre))) {
+                if ((author.getGenres() != null) && (author.getGenres().contains(genre.getId()))) {
                     genreAuthors.add(author);
                     break;
                 }

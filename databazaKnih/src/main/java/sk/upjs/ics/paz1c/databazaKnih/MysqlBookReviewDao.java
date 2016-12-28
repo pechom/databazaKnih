@@ -20,15 +20,12 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     @Override
     public List<BookReview> getAllReviews() {
-//        return jdbcTemplate.query(SqlQueries.SELECT_ALL_BOOKREVIEWS, bookReviewRowMapper);
 
         return jdbcTemplate.query(SqlQueries.SELECT_ALL_BOOKREVIEWS, new ResultSetExtractor<List<BookReview>>() {
 
             @Override
             public List<BookReview> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<BookReview> reviews = new ArrayList<>();
-                Map<Integer, Book> books = new HashMap<>();
-                Map<Integer, User> users = new HashMap<>();
                 BookReview bookReview = null;
                 while (rs.next()) {
                     int id = rs.getInt("bookreview");
@@ -41,32 +38,12 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
                         int bookid = rs.getInt("book_idbook");
                         if (!rs.wasNull()) {
-                            Book book = books.get(bookid);
-                            if (book == null) {
-                                book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                            }
-                            if (book != null) {
-                                books.put(bookid, book);
-
-                                if (book.isIsActive()) {
-                                    bookReview.setBook(book);
-                                }
-                            }
+                            bookReview.setBook(bookid);
                         }
 
                         int userid = rs.getInt("user_iduser");
                         if (!rs.wasNull()) {
-                            User user = users.get(userid);
-                            if (user == null) {
-                                user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                            }
-                            if (user != null) {
-                                users.put(userid, user);
-
-                                if (user.isIsActive()) {
-                                    bookReview.setUser(user);
-                                }
-                            }
+                            bookReview.setUser(userid);
                         }
                     }
                 }
@@ -79,7 +56,7 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
     public void insertReview(BookReview review) {
         jdbcTemplate.update(SqlQueries.INSERT_BOOKREVIEW, review.getRating(),
                 review.getReview(), review.isIsActive(),
-                review.getBook().getId(), review.getUser().getId());
+                review.getBook(), review.getUser());
     }
 
     @Override
@@ -111,23 +88,14 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         bookReview.setReview(rs.getString("review"));
 
                     }
-                    int bookid = rs.getInt("book_idbook");
-                    if (!rs.wasNull()) {
-                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                        if (book != null) {
-                            if (book.isIsActive()) {
-                                bookReview.setBook(book);
-                            }
+                           int bookid = rs.getInt("book_idbook");
+                        if (!rs.wasNull()) {
+                            bookReview.setBook(bookid);
                         }
-                    }
-                    int userid = rs.getInt("user_iduser");
-                    if (!rs.wasNull()) {
-                        User user = ObjectFactory.INSTANCE.getUserDao().findById(userid);
-                        if (user != null) {
-                            if (user.isIsActive()) {
-                                bookReview.setUser(user);
-                            }
-                        }
+
+                        int userid = rs.getInt("user_iduser");
+                        if (!rs.wasNull()) {
+                            bookReview.setUser(userid);
                     }
                 }
 

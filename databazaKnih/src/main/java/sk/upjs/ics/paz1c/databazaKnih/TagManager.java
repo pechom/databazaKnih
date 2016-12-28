@@ -8,9 +8,9 @@ public interface TagManager {
 
     Tag getTagByName(String name);
 
-    void addBooksToTag(List<Book> books, Tag tag);
+    void addBooksToTag(List<Integer> books, Tag tag);
 
-    void removeBooksFromTag(List<Book> books, Tag tag);
+    void removeBooksFromTag(List<Integer> books, Tag tag);
 
     void removeBook(Book book);//odstrani knihu zo vsetkych vztahov
 

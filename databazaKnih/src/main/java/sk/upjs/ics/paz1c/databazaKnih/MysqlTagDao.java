@@ -20,7 +20,6 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public List<Tag> getAllTag() {
-//        return jdbcTemplate.query(SqlQueries.SELECT_ALL_TAGS, tagRowMapper);
         return jdbcTemplate.query(SqlQueries.SELECT_ALL_TAGS, new ResultSetExtractor<List<Tag>>() {
             @Override
             public List<Tag> extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -39,17 +38,7 @@ public class MysqlTagDao implements InterfaceTagDao {
 
                         int bookid = rs.getInt("tagofbook.book_idbook");
                         if (!rs.wasNull()) {
-                            Book book = books.get(bookid);
-                            if (book == null) {
-                                book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                            }
-                            if (book != null) {
-                                books.put(bookid, book);
-
-                                if (book.isIsActive()) {
-                                    tag.getBooksWithTag().add(book);
-                                }
-                            }
+                            tag.getBooksWithTag().add(bookid);
                         }
                     }
                 }
@@ -93,12 +82,7 @@ public class MysqlTagDao implements InterfaceTagDao {
                     }
                     int bookid = rs.getInt("tagofbook.book_idbook");
                     if (!rs.wasNull()) {
-                        Book book = ObjectFactory.INSTANCE.getBookDao().findById(bookid);
-                        if (book != null) {
-                            if (book.isIsActive()) {
-                                tag.getBooksWithTag().add(book);
-                            }
-                        }
+                        tag.getBooksWithTag().add(bookid);
                     }
                 }
                 return tag;

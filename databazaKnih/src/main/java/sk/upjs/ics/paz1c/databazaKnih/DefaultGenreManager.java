@@ -47,21 +47,21 @@ public class DefaultGenreManager implements GenreManager {
     }
 
     @Override
-    public void addBooksToGenre(Genre genre, List<Book> books) {
-        for (Book book : books) {
+    public void addBooksToGenre(Genre genre, List<Integer> books) {
+        for (int book : books) {
             if (!genre.getBooksWithGenre().contains(book)) {
                 genre.getBooksWithGenre().add(book);
-                 genreDao.addBookToGenre(book.getId(), genre.getId());
+                 genreDao.addBookToGenre(book, genre.getId());
             }
         }
     }
 
     @Override
-    public void removeBooksFromGenre(Genre genre, List<Book> books) {
-        for (Book book : books) {
+    public void removeBooksFromGenre(Genre genre, List<Integer> books) {
+        for (int book : books) {
             if (genre.getBooksWithGenre().contains(book)) {
                 genre.getBooksWithGenre().remove(book);
-                 genreDao.removeBookFromGenre(book.getId(), genre.getId());
+                 genreDao.removeBookFromGenre(book, genre.getId());
             }
         }
     }
@@ -70,8 +70,8 @@ public class DefaultGenreManager implements GenreManager {
         List<Genre> genres = getAllGenres();
         List<Genre> removed = new ArrayList<>();
         for (Genre genre : genres) {
-            if (genre.getBooksWithGenre().contains(book)) {
-                genre.getBooksWithGenre().remove(book);
+            if (genre.getBooksWithGenre().contains(book.getId())) {
+                genre.getBooksWithGenre().remove(book.getId());
                 removed.add(genre);
             }
         }
@@ -80,21 +80,21 @@ public class DefaultGenreManager implements GenreManager {
     }
 
     @Override
-    public void addAuthorsToGenre(Genre genre, List<Author> authors) {
-        for (Author author : authors) {
+    public void addAuthorsToGenre(Genre genre, List<Integer> authors) {
+        for (int author : authors) {
             if (!genre.getAuthorsWithGenre().contains(author)) {
                 genre.getAuthorsWithGenre().add(author);
-                genreDao.addAuthorToGenre(author.getId(), genre.getId());
+                genreDao.addAuthorToGenre(author, genre.getId());
             }
         }
     }
 
     @Override
-    public void removeAuthorsFromGenre(Genre genre, List<Author> authors) {
-       for (Author author : authors) {
+    public void removeAuthorsFromGenre(Genre genre, List<Integer> authors) {
+       for (int author : authors) {
             if (genre.getAuthorsWithGenre().contains(author)) {
                 genre.getAuthorsWithGenre().remove(author);
-                genreDao.removeAuthorFromGenre(author.getId(), genre.getId());
+                genreDao.removeAuthorFromGenre(author, genre.getId());
             }
         }
     }
@@ -105,8 +105,8 @@ public class DefaultGenreManager implements GenreManager {
         List<Genre> genres = getAllGenres();
         List<Genre> removed = new ArrayList<>();
         for (Genre genre : genres) {
-            if (genre.getAuthorsWithGenre().contains(author)) {
-                genre.getAuthorsWithGenre().remove(author);
+            if (genre.getAuthorsWithGenre().contains(author.getId())) {
+                genre.getAuthorsWithGenre().remove(author.getId());
                 removed.add(genre);
             }
         }
