@@ -113,7 +113,7 @@ public class DefaultBookManager implements BookManager {
         List<Book> books = getAllBooks();
         List<Book> removed = new ArrayList<>();
         for (Book book : books) {
-            if ((book.getAuthor() != 0) && (book.getAuthor()==(author.getId()))) {
+            if ((book.getAuthor() != 0) && (book.getAuthor() == (author.getId()))) {
                 book.setAuthor(0);
                 removed.add(book);
             }
@@ -229,44 +229,6 @@ public class DefaultBookManager implements BookManager {
     }
 
     @Override
-    public List<Book> GetBooksByAllGenres(List<Genre> genres) {
-        List<Book> books = getAllBooks();
-        List<Book> genreBooks = new ArrayList<>();
-        for (Book book : books) {
-            boolean gotThemAll = true;
-            for (Genre genre : genres) {
-                if (!book.getGenres().contains(genre.getId())) {
-                    gotThemAll = false;
-                    break;
-                }
-            }
-            if (gotThemAll) {
-                genreBooks.add(book);
-            }
-        }
-        return genreBooks;
-    }
-
-    @Override
-    public List<Book> GetBooksByAllTags(List<Tag> tags) {
-        List<Book> books = getAllBooks();
-        List<Book> tagBooks = new ArrayList<>();
-        for (Book book : books) {
-            boolean gotThemAll = true;
-            for (Tag tag : tags) {
-                if (!book.getTags().contains(tag.getId())) {
-                    gotThemAll = false;
-                    break;
-                }
-            }
-            if (gotThemAll) {
-                tagBooks.add(book);
-            }
-        }
-        return tagBooks;
-    }
-
-    @Override
     public void makeChart() {
         List<Book> books = getAllBooks();
         Collections.sort(books, BookComparator);
@@ -308,7 +270,7 @@ public class DefaultBookManager implements BookManager {
 
         List<Book> authorBooks = new ArrayList<>();
         for (Book book : books) {
-            if ((book.getAuthor() != 0) && (book.getAuthor()==(author.getId()))) {
+            if ((book.getAuthor() != 0) && (book.getAuthor() == (author.getId()))) {
                 authorBooks.add(book);
             }
         }

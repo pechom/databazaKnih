@@ -23,7 +23,6 @@ public class AuthorReview {
         this.id = id;
     }
 
-   
     /**
      * @return the value
      */

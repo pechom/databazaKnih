@@ -17,7 +17,7 @@ public interface TagManager {
     void insertTag(Tag tag);
 
     void deleteTag(int id);
-    
+
     void undeleteTag(int id);
 
     void updateTag(Tag tag);

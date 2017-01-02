@@ -3,9 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -37,12 +35,16 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                     int authorid = rs.getInt("author_idauthor");
                     if (!rs.wasNull()) {
                         authorReview.setAuthor(authorid);
+                    } else {
+                        authorReview.setAuthor(0);
                     }
 
                     int userid = rs.getInt("user_iduser");
                     if (!rs.wasNull()) {
                         authorReview.setUser(userid);
 
+                    } else {
+                        authorReview.setUser(0);
                     }
                 }
             }
@@ -59,9 +61,9 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public void deleteReview(int id) {
-        AuthorReview authorReview = findById(id);
-        authorReview.setIsActive(false);
-        updateReview(authorReview);
+//        AuthorReview authorReview = findById(id);
+//        authorReview.setIsActive(false);
+//        updateReview(authorReview);
         jdbcTemplate.update(SqlQueries.DELETE_AUTHORREVIEW, id);
     }
 
@@ -85,14 +87,20 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                         authorReview.setReview(rs.getString("review"));
 
                     }
+
                     int authorid = rs.getInt("author_idauthor");
                     if (!rs.wasNull()) {
                         authorReview.setAuthor(authorid);
+                    } else {
+                        authorReview.setAuthor(0);
                     }
 
                     int userid = rs.getInt("user_iduser");
                     if (!rs.wasNull()) {
                         authorReview.setUser(userid);
+
+                    } else {
+                        authorReview.setUser(0);
                     }
                 }
                 return authorReview;

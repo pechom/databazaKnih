@@ -38,7 +38,7 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
         List<AuthorReview> reviews = getAllReviews();
         List<AuthorReview> authorReviews = new ArrayList<>();
         for (AuthorReview review : reviews) {
-            if ((review.getAuthor() != 0) && (review.getAuthor()==(author.getId()))) {
+            if ((review.getAuthor() != 0) && (review.getAuthor() == (author.getId()))) {
                 authorReviews.add(review);
             }
         }
@@ -50,7 +50,7 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
         List<AuthorReview> reviews = getAllReviews();
         List<AuthorReview> userReviews = new ArrayList<>();
         for (AuthorReview review : reviews) {
-            if ((review.getUser() != 0) && (review.getUser()==(user.getId()))) {
+            if ((review.getUser() != 0) && (review.getUser() == (user.getId()))) {
                 userReviews.add(review);
             }
         }
@@ -97,7 +97,7 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
     public void DeleteReviewsWithAuthor(Author author) {
         List<AuthorReview> reviews = getAllReviews();
         for (AuthorReview review : reviews) {
-            if ((review.getAuthor() != 0) && (review.getAuthor()==(author.getId()))) {
+            if ((review.getAuthor() != 0) && (review.getAuthor() == (author.getId()))) {
                 review.setAuthor(0);
             }
         }
@@ -108,7 +108,7 @@ public class DefaultAuthorReviewManager implements AuthorReviewManager {
     public void deleteReviewsWithUser(User user) {
         List<AuthorReview> reviews = getAllReviews();
         for (AuthorReview review : reviews) {
-            if ((review.getUser() != 0) && (review.getUser()==(user.getId()))) {
+            if ((review.getUser() != 0) && (review.getUser() == (user.getId()))) {
                 review.setUser(0);
             }
         }

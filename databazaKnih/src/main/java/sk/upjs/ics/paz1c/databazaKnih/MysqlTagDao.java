@@ -55,9 +55,10 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public void deleteTag(int id) {
-        Tag tag = findById(id);
-        tag.setIsActive(false);
-        updateTag(tag);
+//        Tag tag = findById(id);
+//        tag.setIsActive(false);
+//        updateTag(tag);
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, id);
     }
 
     @Override

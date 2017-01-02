@@ -3,9 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -39,11 +37,15 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         int bookid = rs.getInt("book_idbook");
                         if (!rs.wasNull()) {
                             bookReview.setBook(bookid);
+                        } else {
+                            bookReview.setBook(0);
                         }
 
                         int userid = rs.getInt("user_iduser");
                         if (!rs.wasNull()) {
                             bookReview.setUser(userid);
+                        } else {
+                            bookReview.setUser(0);
                         }
                     }
                 }
@@ -61,9 +63,9 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
 
     @Override
     public void deleteReview(int id) {
-        BookReview bookReview = findById(id);
-        bookReview.setIsActive(false);
-        updateReview(bookReview);
+//        BookReview bookReview = findById(id);
+//        bookReview.setIsActive(false);
+//        updateReview(bookReview);
         jdbcTemplate.update(SqlQueries.DELETE_BOOKREVIEW, id);
     }
 
@@ -88,14 +90,18 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         bookReview.setReview(rs.getString("review"));
 
                     }
-                           int bookid = rs.getInt("book_idbook");
-                        if (!rs.wasNull()) {
-                            bookReview.setBook(bookid);
-                        }
+                    int bookid = rs.getInt("book_idbook");
+                    if (!rs.wasNull()) {
+                        bookReview.setBook(bookid);
+                    } else {
+                        bookReview.setBook(0);
+                    }
 
-                        int userid = rs.getInt("user_iduser");
-                        if (!rs.wasNull()) {
-                            bookReview.setUser(userid);
+                    int userid = rs.getInt("user_iduser");
+                    if (!rs.wasNull()) {
+                        bookReview.setUser(userid);
+                    } else {
+                        bookReview.setUser(0);
                     }
                 }
 

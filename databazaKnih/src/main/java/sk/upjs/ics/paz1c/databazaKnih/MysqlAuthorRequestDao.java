@@ -3,9 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -37,12 +35,15 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
                         int authorid = rs.getInt("author_idauthor");
                         if (!rs.wasNull()) {
                             request.setAuthor(authorid);
+                        } else {
+                            request.setAuthor(0);
                         }
 
                         int userid = rs.getInt("user_iduser");
                         if (!rs.wasNull()) {
                             request.setRequester(userid);
-
+                        } else {
+                            request.setRequester(0);
                         }
                     }
                 }
@@ -61,9 +62,9 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
 
     @Override
     public void deleteRequest(int id) {
-        AuthorRequest request = findById(id);
-        request.setIsActive(false);
-        updateRequest(request);
+//        AuthorRequest request = findById(id);
+//        request.setIsActive(false);
+//        updateRequest(request);
         jdbcTemplate.update(SqlQueries.DELETE_AUTHOR_REQUEST, id);
     }
 
@@ -82,11 +83,15 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
                     int authorid = rs.getInt("author_idauthor");
                     if (!rs.wasNull()) {
                         request.setAuthor(authorid);
+                    } else {
+                        request.setAuthor(0);
                     }
 
                     int userid = rs.getInt("user_iduser");
                     if (!rs.wasNull()) {
                         request.setRequester(userid);
+                    } else {
+                        request.setRequester(0);
                     }
                 }
                 return request;

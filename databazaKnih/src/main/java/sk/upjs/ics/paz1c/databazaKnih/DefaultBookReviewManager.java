@@ -38,7 +38,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
         List<BookReview> reviews = getAllReviews();
         List<BookReview> bookReviews = new ArrayList<>();
         for (BookReview review : reviews) {
-            if ((review.getBook() != 0) && (review.getBook()==(book.getId()))) {
+            if ((review.getBook() != 0) && (review.getBook() == (book.getId()))) {
                 bookReviews.add(review);
             }
         }
@@ -50,7 +50,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
         List<BookReview> reviews = getAllReviews();
         List<BookReview> userReviews = new ArrayList<>();
         for (BookReview review : reviews) {
-            if ((review.getUser() != 0) && (review.getUser()==(user.getId()))) {
+            if ((review.getUser() != 0) && (review.getUser() == (user.getId()))) {
                 userReviews.add(review);
             }
         }
@@ -98,7 +98,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
         List<BookReview> reviews = getAllReviews();
         List<BookReview> removed = new ArrayList<>();
         for (BookReview review : reviews) {
-            if ((review.getUser() != 0) && (review.getUser()==(user.getId()))) {
+            if ((review.getUser() != 0) && (review.getUser() == (user.getId()))) {
                 review.setUser(0);
                 updateReview(review);
                 removed.add(review);
@@ -111,7 +111,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
     public void DeleteReviewsWithBook(Book book) {
         List<BookReview> reviews = getAllReviews();
         for (BookReview review : reviews) {
-            if ((review.getBook() != 0) && (review.getBook()==(book.getId()))) {
+            if ((review.getBook() != 0) && (review.getBook() == (book.getId()))) {
                 review.setBook(0);
             }
         }
@@ -122,7 +122,7 @@ public class DefaultBookReviewManager implements BookReviewManager {
     public void deleteReviewsWithUser(User user) {
         List<BookReview> reviews = getAllReviews();
         for (BookReview review : reviews) {
-            if ((review.getUser() != 0) && (review.getUser()==(user.getId()))) {
+            if ((review.getUser() != 0) && (review.getUser() == (user.getId()))) {
                 review.setUser(0);
             }
         }

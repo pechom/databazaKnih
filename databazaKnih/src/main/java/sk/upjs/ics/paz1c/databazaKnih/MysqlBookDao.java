@@ -3,9 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -68,6 +66,8 @@ public class MysqlBookDao implements InterfaceBookDao {
                         int authorid = rs.getInt("authorofbook.author_idauthor");
                         if (!rs.wasNull()) {
                             book.setAuthor(authorid);
+                        } else {
+                            book.setAuthor(0);
                         }
                     }
                 }
@@ -88,9 +88,10 @@ public class MysqlBookDao implements InterfaceBookDao {
 
     @Override
     public void deleteBook(int id) {
-        Book book = findById(id);
-        book.setIsActive(false);
-        updateBook(book);
+//        Book book = findById(id);
+//        book.setIsActive(false);
+//        updateBook(book);
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, id);
     }
 
     @Override
@@ -128,7 +129,7 @@ public class MysqlBookDao implements InterfaceBookDao {
                         book.setGenres(new ArrayList<>());
                         book.setTags(new ArrayList<>());
 
-                       int reviewid = rs.getInt("bookreview.idbookreview");
+                        int reviewid = rs.getInt("bookreview.idbookreview");
                         if (!rs.wasNull()) {
                             book.getBookReviews().add(reviewid);
                         }
@@ -147,6 +148,8 @@ public class MysqlBookDao implements InterfaceBookDao {
                         int authorid = rs.getInt("authorofbook.author_idauthor");
                         if (!rs.wasNull()) {
                             book.setAuthor(authorid);
+                        } else {
+                            book.setAuthor(0);
                         }
                     }
                 }

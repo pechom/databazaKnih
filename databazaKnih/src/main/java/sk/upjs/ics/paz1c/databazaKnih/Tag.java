@@ -23,7 +23,6 @@ public class Tag {
         this.name = name;
     }
 
-
     /**
      * @return the id
      */

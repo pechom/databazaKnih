@@ -44,7 +44,7 @@ public enum ObjectFactory {
         authorReviewDao = new MysqlAuthorReviewDao(jdbcTemplate);
         tagDao = new MysqlTagDao(jdbcTemplate);
         authorRequestDao = new MysqlAuthorRequestDao(jdbcTemplate);
-        bookRequestDao=new MysqlBookRequestDao(jdbcTemplate);
+        bookRequestDao = new MysqlBookRequestDao(jdbcTemplate);
         genreDao = new MysqlGenreDao(jdbcTemplate);
     }
 
@@ -89,8 +89,8 @@ public enum ObjectFactory {
     public InterfaceAuthorRequestDao getAuthorRequestDao() {
         return authorRequestDao;
     }
-    
-      public InterfaceBookRequestDao getBookRequestDao() {
+
+    public InterfaceBookRequestDao getBookRequestDao() {
         return bookRequestDao;
     }
 

@@ -194,7 +194,7 @@ public class DefaultAuthorManager implements AuthorManager {
                 boolean isThere = false;
                 if ((book.getName() != null) && (book.getName().equals(bookname))) {
                     isThere = true;
-                     namedAuthors.add(author);
+                    namedAuthors.add(author);
                 }
             }
         }

@@ -9,7 +9,6 @@ public class BookReview {
     private String review;
     private boolean isActive;
 
-    
     /**
      * @return the value
      */

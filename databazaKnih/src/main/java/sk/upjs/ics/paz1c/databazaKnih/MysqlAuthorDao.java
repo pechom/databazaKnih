@@ -3,9 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -47,7 +45,7 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                         author.setGenres(new ArrayList<>());
 
                         authors.add(author);
-                        
+
                         int bookid = rs.getInt("authorofbook.book_idbook");
                         if (!rs.wasNull()) {
                             author.getBooks().add(bookid);
@@ -80,9 +78,10 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public void deleteAuthor(int id) {
-        Author author = findById(id);
-        author.setIsActive(false);
-        updateAuthor(author);
+//        Author author = findById(id);
+//        author.setIsActive(false);
+//        updateAuthor(author);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, id);
     }
 
     @Override
@@ -119,16 +118,16 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
                     }
                     int bookid = rs.getInt("authorofbook.book_idbook");
-                        if (!rs.wasNull()) {
-                            author.getBooks().add(bookid);
-                        }
-                        int genreid = rs.getInt("genreofauthor.genre_idgenre");
-                        if (!rs.wasNull()) {
-                            author.getGenres().add(genreid);
-                        }
-                        int reviewid = rs.getInt("authorreview.idauthorreview");
-                        if (!rs.wasNull()) {
-                            author.getAuthorReviews().add(reviewid);
+                    if (!rs.wasNull()) {
+                        author.getBooks().add(bookid);
+                    }
+                    int genreid = rs.getInt("genreofauthor.genre_idgenre");
+                    if (!rs.wasNull()) {
+                        author.getGenres().add(genreid);
+                    }
+                    int reviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!rs.wasNull()) {
+                        author.getAuthorReviews().add(reviewid);
                     }
                 }
                 return author;

@@ -6,8 +6,8 @@ public class Genre {
 
     private int id;
     private String name;
-    private List<Integer>booksWithGenre;
-    private List<Integer>authorsWithGenre;
+    private List<Integer> booksWithGenre;
+    private List<Integer> authorsWithGenre;
     private boolean isActive;
 
     /**
@@ -38,7 +38,6 @@ public class Genre {
         this.name = name;
     }
 
- 
     /**
      * @return the isActive
      */

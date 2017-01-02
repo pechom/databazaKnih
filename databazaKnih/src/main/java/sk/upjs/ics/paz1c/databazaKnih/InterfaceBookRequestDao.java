@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.util.List;
 
 public interface InterfaceBookRequestDao {
-    
+
     List<BookRequest> getAllRequests();
 
     void insertRequest(BookRequest request);

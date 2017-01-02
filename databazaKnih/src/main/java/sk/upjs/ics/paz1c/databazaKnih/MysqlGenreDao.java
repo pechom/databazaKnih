@@ -3,9 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -61,9 +59,10 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public void deleteGenre(int id) {
-        Genre genre = findById(id);
-        genre.setIsActive(false);
-        updateGenre(genre);
+//        Genre genre = findById(id);
+//        genre.setIsActive(false);
+//        updateGenre(genre);
+        jdbcTemplate.update(SqlQueries.UPDATE_GENRE, id);
     }
 
     @Override
@@ -87,14 +86,14 @@ public class MysqlGenreDao implements InterfaceGenreDao {
                         genre.setAuthorsWithGenre(new ArrayList<>());
                         genre.setBooksWithGenre(new ArrayList<>());
                     }
-                     int authorid = rs.getInt("genreofauthor.author_idauthor");
-                        if (!rs.wasNull()) {
-                            genre.getAuthorsWithGenre().add(authorid);
-                        }
+                    int authorid = rs.getInt("genreofauthor.author_idauthor");
+                    if (!rs.wasNull()) {
+                        genre.getAuthorsWithGenre().add(authorid);
+                    }
 
-                        int bookid = rs.getInt("genreofbook.book_idbook");
-                        if (!rs.wasNull()) {
-                            genre.getBooksWithGenre().add(bookid);
+                    int bookid = rs.getInt("genreofbook.book_idbook");
+                    if (!rs.wasNull()) {
+                        genre.getBooksWithGenre().add(bookid);
 
                     }
                 }

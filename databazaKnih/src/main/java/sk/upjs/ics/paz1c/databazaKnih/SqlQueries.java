@@ -112,10 +112,6 @@ public class SqlQueries {
             = "DELETE FROM authorreview "
             + "WHERE user_iduser=?";
 
-    public static final String DELETE_AUTHORREVIEW
-            = "DELETE FROM authorreview "
-            + "WHERE idauthorreview=?";
-
     public static final String SELECT_ALL_BOOKS
             = "SELECT book.idbook, book.name,"
             + "book.year, book.numberOfPages, book.ISBN, book.description, "
@@ -258,10 +254,6 @@ public class SqlQueries {
             = "DELETE FROM bookreview "
             + "WHERE user_iduser=?";
 
-    public static final String DELETE_BOOKREVIEW
-            = "DELETE FROM bookreview "
-            + "WHERE idbookreview=?";
-
     public static final String SELECT_ALL_GENRES = "SELECT "
             + "genre.idgenre, genre.name, genre.isActive, "
             + "genreofbook.book_idbook, genreofauthor.author_idauthor "
@@ -392,10 +384,6 @@ public class SqlQueries {
             = "DELETE FROM authorrequest "
             + "WHERE author_idauthor=?";
 
-    public static final String DELETE_AUTHOR_REQUEST
-            = "DELETE FROM authorrequest "
-            + "WHERE idauthorrequest=?";
-
     public static final String DELETE_BOOK_REQUESTS_WITH_USER
             = "DELETE FROM bookrequest "
             + "WHERE user_iduser=?";
@@ -403,10 +391,6 @@ public class SqlQueries {
     public static final String DELETE_BOOK_REQUESTS_WITH_BOOK
             = "DELETE FROM bookrequest "
             + "WHERE book_idbook=?";
-
-    public static final String DELETE_BOOK_REQUEST
-            = "DELETE FROM bookrequest "
-            + "WHERE idbookrequest=?";
 
     public static final String SELECT_ALL_TAGS = "SELECT "
             + "tag.idtag, tag.name, tag.isActive, tagofbook.book_idbook "
@@ -607,5 +591,41 @@ public class SqlQueries {
             = "INSERT INTO booknote "
             + "(user_iduser, booknote_idbook, note) "
             + "VALUES (?,?,?)";
+
+    public static final String DELETE_AUTHOR_REQUEST
+            = "DELETE FROM authorrequest "
+            + "WHERE idauthorrequest=?";
+
+    public static final String DELETE_BOOK_REQUEST
+            = "DELETE FROM bookrequest "
+            + "WHERE idbookrequest=?";
+
+    public static final String DELETE_BOOKREVIEW
+            = "DELETE FROM bookreview "
+            + "WHERE idbookreview=?";
+
+    public static final String DELETE_AUTHORREVIEW
+            = "DELETE FROM authorreview "
+            + "WHERE idauthorreview=?";
+
+    public static final String DELETE_AUTHOR
+            = "DELETE FROM author "
+            + "WHERE idauthor=?";
+
+    public static final String DELETE_BOOK
+            = "DELETE FROM book "
+            + "WHERE idbook=?";
+
+    public static final String DELETE_GENRE
+            = "DELETE FROM genre "
+            + "WHERE idgenre=?";
+
+    public static final String DELETE_TAG
+            = "DELETE FROM tag "
+            + "WHERE idtag=?";
+
+    public static final String DELETE_USER
+            = "DELETE FROM user "
+            + "WHERE iduser=?";
 
 }

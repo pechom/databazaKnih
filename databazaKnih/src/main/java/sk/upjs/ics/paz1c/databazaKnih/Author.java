@@ -61,7 +61,6 @@ public class Author {
         this.name = name;
     }
 
-
     /**
      * @return the nationality
      */
@@ -103,7 +102,6 @@ public class Author {
     public void setBiography(String biography) {
         this.biography = biography;
     }
-
 
     /**
      * @return the verificationStatus

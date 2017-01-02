@@ -17,7 +17,7 @@ public class DefaultBookRequestManager implements BookRequestManager {
         List<BookRequest> requests = getAllRequests();
         List<BookRequest> userRequests = new ArrayList<>();
         for (BookRequest request : requests) {
-            if ((request.getRequester() != 0) && (request.getRequester()==(user.getId()))) {
+            if ((request.getRequester() != 0) && (request.getRequester() == (user.getId()))) {
                 userRequests.add(request);
             }
         }
@@ -54,7 +54,7 @@ public class DefaultBookRequestManager implements BookRequestManager {
         List<BookRequest> requests = getAllRequests();
         List<BookRequest> bookRequests = new ArrayList<>();
         for (BookRequest request : requests) {
-            if ((request.getBook() != 0) && (request.getBook()==(book.getId()))) {
+            if ((request.getBook() != 0) && (request.getBook() == (book.getId()))) {
                 bookRequests.add(request);
             }
         }
@@ -77,7 +77,7 @@ public class DefaultBookRequestManager implements BookRequestManager {
     public void deleteAllWithRequester(User user) {
         List<BookRequest> requests = getAllRequests();
         for (BookRequest request : requests) {
-            if ((request.getRequester() != 0) && (request.getRequester()==(user.getId()))) {
+            if ((request.getRequester() != 0) && (request.getRequester() == (user.getId()))) {
             }
         }
         requestDao.deleteAllWithRequester(user.getId());
@@ -87,7 +87,7 @@ public class DefaultBookRequestManager implements BookRequestManager {
     public void deleteAllWithBook(Book book) {
         List<BookRequest> requests = getAllRequests();
         for (BookRequest request : requests) {
-            if ((request.getBook() != 0) && (request.getBook()==(book.getId()))) {
+            if ((request.getBook() != 0) && (request.getBook() == (book.getId()))) {
             }
         }
         requestDao.deleteAllWithBook(book.getId());

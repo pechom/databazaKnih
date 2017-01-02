@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.lang.Integer;
-import java.util.Iterator;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -130,9 +128,10 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public void deleteUser(int id) {
-        User user = findById(id);
-        user.setIsActive(false);
-        updateUser(user);
+//        User user = findById(id);
+//        user.setIsActive(false);
+//        updateUser(user);
+        jdbcTemplate.update(SqlQueries.DELETE_USER, id);
     }
 
     @Override

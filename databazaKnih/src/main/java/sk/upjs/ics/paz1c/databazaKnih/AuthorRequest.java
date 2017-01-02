@@ -9,7 +9,6 @@ public class AuthorRequest {
     private String content;
     private boolean isActive;
 
-    
     /**
      * @return the content
      */
@@ -37,7 +36,6 @@ public class AuthorRequest {
     public void setId(int id) {
         this.id = id;
     }
-
 
     /**
      * @return the isActive

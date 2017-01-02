@@ -21,8 +21,8 @@ public interface BookReviewManager {
     void DeleteReviewsWithBook(Book book);
 
     void deleteReviewsWithUser(User user);
-    
-     List<BookReview> removeUser(User user);
+
+    List<BookReview> removeUser(User user);
 
     void insertReview(BookReview review);
 

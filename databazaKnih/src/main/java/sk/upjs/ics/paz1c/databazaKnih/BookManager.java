@@ -10,10 +10,6 @@ public interface BookManager {
 
     List<Book> getNotVerificatedBooks();
 
-    List<Book> GetBooksByAllGenres(List<Genre> genres);
-
-    List<Book> GetBooksByAllTags(List<Tag> tags);
-
     List<Book> getBooksFromChart(int chart);
 
     List<Book> getBooksToChart(int chart);

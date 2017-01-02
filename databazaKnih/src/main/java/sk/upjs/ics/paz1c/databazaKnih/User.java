@@ -1,14 +1,8 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.bind.DatatypeConverter;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class User {
