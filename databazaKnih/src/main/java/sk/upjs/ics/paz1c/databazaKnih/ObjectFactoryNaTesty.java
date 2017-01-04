@@ -3,7 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public enum ObjectFactory {
+public enum ObjectFactoryNaTesty {
 
     INSTANCE;
 
@@ -27,10 +27,10 @@ public enum ObjectFactory {
     private BookRequestManager bookRequestManager;
     private TagManager tagManager;
 
-    private ObjectFactory() {
+    private ObjectFactoryNaTesty() {
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName("databaza-knih");
-        dataSource.setURL("jdbc:mysql://localhost/databaza-knih?serverTimezone=Europe/Bratislava");
+        dataSource.setDatabaseName("databaza-knih-test");
+        dataSource.setURL("jdbc:mysql://localhost/databaza-knih-test?serverTimezone=Europe/Bratislava");
         dataSource.setUser("root");
         dataSource.setPassword("yareyare");
 
@@ -52,8 +52,8 @@ public enum ObjectFactory {
             return jdbcTemplate;
         } else {
             MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setDatabaseName("databaza-knih");
-            dataSource.setURL("jdbc:mysql://localhost/databaza-knih?serverTimezone=Europe/Bratislava");
+            dataSource.setDatabaseName("databaza-knih-test");
+            dataSource.setURL("jdbc:mysql://localhost/databaza-knih-test?serverTimezone=Europe/Bratislava");
             dataSource.setUser("root");
             dataSource.setPassword("yareyare");
 
