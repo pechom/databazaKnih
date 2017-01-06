@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -20,6 +22,7 @@ import static org.junit.Assert.*;
 public class MysqlAuthorDaoTest {
 
     private InterfaceAuthorDao authorDao;
+    private JdbcTemplate jdbcTemplate;
 
     public MysqlAuthorDaoTest() {
 
@@ -36,7 +39,8 @@ public class MysqlAuthorDaoTest {
 
     @Before
     public void setUp() {
-        authorDao = ObjectFactory.INSTANCE.getAuthorDao();
+        authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        jdbcTemplate = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
     }
 
     @After
@@ -49,12 +53,20 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testGetAllAuthors() {
         System.out.println("getAllAuthors");
-        MysqlAuthorDao instance = null;
-        List<Author> expResult = null;
-        List<Author> result = instance.getAllAuthors();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Author> expResult = new ArrayList<>();
+        Author jano = new Author();
+        Author pali = new Author();
+        jano.setName("Jano");
+        pali.setName("Pali");
+        expResult.add(pali);
+        expResult.add(jano);
+        authorDao.insertAuthor(jano);
+        authorDao.insertAuthor(pali);
+        List<Author> result = authorDao.getAllAuthors();
+        assertEquals(expResult.size(), result.size());
+        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_0);
+        jdbcTemplate.update(SqlQueries.TRUNCATE_AUTHOR);
+        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_1);
     }
 
     /**
@@ -63,11 +75,18 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testInsertAuthor() {
         System.out.println("insertAuthor");
-        Author author = null;
-        MysqlAuthorDao instance = null;
-        instance.insertAuthor(author);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        JdbcTemplate template = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
+        MysqlAuthorDao dao = new MysqlAuthorDao(template);
+        //authorDao.insertAuthor(jano);
+        dao.insertAuthor(jano);
+        //Author author = authorDao.findById(1); // kedze je jediny v databaze musi mat id 1
+        Author author = dao.findById(1);
+        assertEquals(jano.getName(), author.getName());
+//        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_0);
+//        jdbcTemplate.update(SqlQueries.TRUNCATE_AUTHOR);
+//        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_1);
     }
 
     /**
@@ -75,12 +94,14 @@ public class MysqlAuthorDaoTest {
      */
     @Test
     public void testDeleteAuthor() {
+        // tu som skoncil
         System.out.println("deleteAuthor");
-        int id = 0;
-        MysqlAuthorDao instance = null;
-        instance.deleteAuthor(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        authorDao.insertAuthor(jano);
+        authorDao.deleteAuthor(1);
+        List<Author> autori = new ArrayList<>();
+
     }
 
     /**

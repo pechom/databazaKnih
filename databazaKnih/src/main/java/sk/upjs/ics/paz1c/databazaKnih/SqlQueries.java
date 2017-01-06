@@ -628,4 +628,38 @@ public class SqlQueries {
             = "DELETE FROM user "
             + "WHERE iduser=?";
 
+    public static final String TRUNCATE_AUTHOR
+            = "TRUNCATE TABLE author";
+
+    public static final String TRUNCATE_AUTHORREQUEST
+            = "TRUNCATE TABLE authorrequest";
+
+    public static final String TRUNCATE_AUTHORREVIEW
+            = "TRUNCATE TABLE authorreview";
+
+    public static final String TRUNCATE_BOOK
+            = "TRUNCATE TABLE book";
+
+    public static final String TRUNCATE_BOOKREQUEST
+            = "TRUNCATE TABLE bookrequest";
+
+    public static final String TRUNCATE_BOOKREVIEW
+            = "TRUNCATE TABLE bookreview";
+
+    public static final String TRUNCATE_GENRE
+            = "TRUNCATE TABLE genre";
+
+    public static final String TRUNCATE_TAG
+            = "TRUNCATE TABLE tag";
+
+    public static final String TRUNCATE_USER
+            = "TRUNCATE TABLE user";
+
+    public static final String SET_FOREIGN_KEY_CHECKS_0
+            = "SET FOREIGN_KEY_CHECKS = 0";
+    
+    public static final String SET_FOREIGN_KEY_CHECKS_1
+            = "SET FOREIGN_KEY_CHECKS = 1";
+
+    
 }

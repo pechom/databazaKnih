@@ -12,31 +12,34 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
  * @author Peťo Chomič
  */
 public class MysqlBookDaoTest {
-    
-     private InterfaceBookDao bookDao;
-    
+
+    private InterfaceBookDao bookDao;
+    private JdbcTemplate jdbcTemplate;
+
     public MysqlBookDaoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        bookDao = ObjectFactory.INSTANCE.getBookDao();
+        bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        jdbcTemplate = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -284,5 +287,5 @@ public class MysqlBookDaoTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
 public class MysqlGenreDaoTest {
 
     private InterfaceGenreDao genreDao;
+    private JdbcTemplate jdbcTemplate;
 
     public MysqlGenreDaoTest() {
     }
@@ -34,7 +36,8 @@ public class MysqlGenreDaoTest {
 
     @Before
     public void setUp() {
-        genreDao = ObjectFactory.INSTANCE.getGenreDao();
+        genreDao = ObjectFactoryNaTesty.INSTANCE.getGenreDao();
+        jdbcTemplate = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
     }
 
     @After

@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
 public class MysqlBookReviewDaoTest {
     
     private InterfaceBookReviewDao bookReviewDao;
+    private JdbcTemplate jdbcTemplate;
     
     public MysqlBookReviewDaoTest() {
     }
@@ -34,7 +36,8 @@ public class MysqlBookReviewDaoTest {
     
     @Before
     public void setUp() {
-        bookReviewDao = ObjectFactory.INSTANCE.getBookReviewDao();
+        bookReviewDao = ObjectFactoryNaTesty.INSTANCE.getBookReviewDao();
+        jdbcTemplate = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
     }
     
     @After

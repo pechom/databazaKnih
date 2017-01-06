@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -21,6 +22,7 @@ import static org.junit.Assert.*;
 public class MysqlUserDaoTest {
 
     private InterfaceUserDao userDao;
+    private JdbcTemplate jdbcTemplate;
 
     public MysqlUserDaoTest() {
         
@@ -36,7 +38,8 @@ public class MysqlUserDaoTest {
 
     @Before
     public void setUp() {
-        userDao = ObjectFactory.INSTANCE.getUserDao();
+        userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        jdbcTemplate = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
     }
 
     @After
