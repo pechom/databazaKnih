@@ -31,7 +31,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                     int id = rs.getInt("iduser");
                     if (user == null || user.getId() != id) {
                         user = new User();
-                        user.setId(rs.getInt(id));
+                        user.setId(id);
                         user.setIsAdmin(rs.getBoolean("isAdmin"));
                         Timestamp timestamp = rs.getTimestamp("lastLogin");
                         if (timestamp != null) {
@@ -151,7 +151,7 @@ public class MysqlUserDao implements InterfaceUserDao {
                 while (rs.next()) {
                     if (user == null || user.getId() != id) {
                         user = new User();
-                        user.setId(rs.getInt(id));
+                        user.setId(id);
 
                         user.setIsAdmin(rs.getBoolean("isAdmin"));
                         Timestamp timestamp = rs.getTimestamp("lastLogin");
