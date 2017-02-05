@@ -9,7 +9,9 @@ import java.util.List;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
+import sk.upjs.ics.paz1c.databazaKnih.BookManager;
 import sk.upjs.ics.paz1c.databazaKnih.Genre;
+import sk.upjs.ics.paz1c.databazaKnih.GenreManager;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.Tag;
 import sk.upjs.ics.paz1c.databazaKnih.User;
@@ -22,6 +24,8 @@ import sk.upjs.ics.paz1c.databazaKnih.UserManager;
 public class AuthorForm extends javax.swing.JDialog {
      AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
      UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
+      GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
+       BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
      private Author author;
      private User user;
      
@@ -51,19 +55,23 @@ public class AuthorForm extends javax.swing.JDialog {
         NationalityLabel.setText("Nationality: " + author.getNationality());
         GenderLabel.setText("Gender: " + author.getSex());
         
-        List<Genre> genres = author.getGenres();
+        List<Integer> genres = author.getGenres();
         String[] genreNames = new String[genres.size()];
         int i = 0;
-            for (Genre genre : genres) {
+        Genre genre;
+            for (Integer genreId : genres) {
+                genre = genreManager.findById(genreId);
                genreNames[i]= genre.getName();
         i++;
     }
       GenreList.setListData(genreNames);
      
-      List<Book> books = author.getBooks();
+      List<Integer> books = author.getBooks();
         String[] bookNames= new String[books.size()];
         int j = 0;
-            for (Book book : books) {
+        Book book;;
+            for (Integer bookId : books) {
+                book = bookManager.findById(bookId);
                bookNames[j]= book.getName();
         
         j++;

@@ -7,11 +7,14 @@ package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.BookManager;
 import sk.upjs.ics.paz1c.databazaKnih.Genre;
+import sk.upjs.ics.paz1c.databazaKnih.GenreManager;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.Tag;
+import sk.upjs.ics.paz1c.databazaKnih.TagManager;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.UserManager;
 
@@ -23,6 +26,9 @@ public class BookForm extends javax.swing.JDialog {
     
     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
     BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
+       AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
+        GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
+         TagManager tagManager = ObjectFactory.INSTANCE.getTagManager();
     private Book book;
     private User user;
 
@@ -51,27 +57,27 @@ public class BookForm extends javax.swing.JDialog {
         }
         
         BookNameLabel.setText("Name: " + book.getName());
-        if(book.getAuthor()!=null){
-        AuthorNameLabel.setText("Author: " + book.getAuthor().getName());
+        if(book.getAuthor()!=0){
+        AuthorNameLabel.setText("Author: " + authorManager.findById(book.getAuthor()).getName());
         }
         ISBNLabel.setText("ISBN: " + book.getISBN());
         YearLabel.setText("Year of publication: " + book.getYear());
         RatingLabel.setText("Rating: " + book.getBayesianAverage());
         
-        List<Genre> genres = book.getGenres();
+        List<Integer> genres = book.getGenres();
         String[] genreNames = new String[genres.size()];
         int i = 0;
-            for (Genre genre : genres) {
-               genreNames[i]= genre.getName();
+            for (Integer genreId : genres) {
+               genreNames[i]= genreManager.findById(genreId).getName();
         i++;
     }
       GenreList.setListData(genreNames);
      
-      List<Tag> tags = book.getTags();
+      List<Integer> tags = book.getTags();
         String[] tagNames = new String[tags.size()];
         int j = 0;
-            for (Tag tag : tags) {
-               tagNames[j]= tag.getName();
+            for (Integer tagId : tags) {
+               tagNames[j]= tagManager.findById(tagId).getName();
         
         j++;
     }
@@ -120,26 +126,37 @@ public class BookForm extends javax.swing.JDialog {
         ViewRequestsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         AuthorNameLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         AuthorNameLabel.setForeground(new java.awt.Color(0, 102, 255));
         AuthorNameLabel.setText("Author:");
+        getContentPane().add(AuthorNameLabel);
+        AuthorNameLabel.setBounds(10, 32, 513, 15);
 
         ISBNLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ISBNLabel.setForeground(new java.awt.Color(0, 102, 255));
         ISBNLabel.setText("ISBN:");
+        getContentPane().add(ISBNLabel);
+        ISBNLabel.setBounds(10, 53, 513, 15);
 
         LengthLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         LengthLabel.setForeground(new java.awt.Color(0, 102, 255));
         LengthLabel.setText("Number of Pages:");
+        getContentPane().add(LengthLabel);
+        LengthLabel.setBounds(10, 74, 513, 15);
 
         YearLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         YearLabel.setForeground(new java.awt.Color(0, 102, 255));
         YearLabel.setText("Year of publication:");
+        getContentPane().add(YearLabel);
+        YearLabel.setBounds(10, 95, 513, 15);
 
         GenreBookLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         GenreBookLabel.setForeground(new java.awt.Color(0, 102, 255));
         GenreBookLabel.setText("Genres:");
+        getContentPane().add(GenreBookLabel);
+        GenreBookLabel.setBounds(10, 137, 45, 15);
 
         GenreList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -150,9 +167,14 @@ public class BookForm extends javax.swing.JDialog {
         GenreList.setMinimumSize(new java.awt.Dimension(15, 80));
         jScrollPane1.setViewportView(GenreList);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 158, 170, 130);
+
         TagsBookLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TagsBookLabel.setForeground(new java.awt.Color(0, 102, 255));
         TagsBookLabel.setText("Tags:");
+        getContentPane().add(TagsBookLabel);
+        TagsBookLabel.setBounds(10, 294, 32, 15);
 
         TagList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -161,14 +183,22 @@ public class BookForm extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(TagList);
 
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(10, 315, 170, 130);
+
         SynopsisTextArea.setColumns(20);
         SynopsisTextArea.setRows(5);
         SynopsisTextArea.setMaximumSize(new java.awt.Dimension(500, 250));
         jScrollPane3.setViewportView(SynopsisTextArea);
 
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(188, 270, 388, 249);
+
         SynopsisLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         SynopsisLabel.setForeground(new java.awt.Color(0, 102, 255));
         SynopsisLabel.setText("Synopsis: ");
+        getContentPane().add(SynopsisLabel);
+        SynopsisLabel.setBounds(190, 237, 62, 15);
 
         ReviewButton.setText("Review");
         ReviewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -176,22 +206,32 @@ public class BookForm extends javax.swing.JDialog {
                 ReviewButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(ReviewButton);
+        ReviewButton.setBounds(465, 227, 107, 36);
 
         AddToFavoriteBooksLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         AddToFavoriteBooksLabel.setForeground(new java.awt.Color(0, 102, 255));
         AddToFavoriteBooksLabel.setText(" Add to Favourites:");
+        getContentPane().add(AddToFavoriteBooksLabel);
+        AddToFavoriteBooksLabel.setBounds(458, 525, 118, 21);
 
         AddToReadBooksLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         AddToReadBooksLabel.setForeground(new java.awt.Color(0, 102, 255));
         AddToReadBooksLabel.setText("Add to Read:");
+        getContentPane().add(AddToReadBooksLabel);
+        AddToReadBooksLabel.setBounds(188, 532, 82, 15);
 
         AddToWantedBooksLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         AddToWantedBooksLabel.setForeground(new java.awt.Color(0, 102, 255));
         AddToWantedBooksLabel.setText("Add to Wanted:");
+        getContentPane().add(AddToWantedBooksLabel);
+        AddToWantedBooksLabel.setBounds(332, 528, 99, 15);
 
         ReviewsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ReviewsLabel.setForeground(new java.awt.Color(0, 102, 255));
         ReviewsLabel.setText("Reviews:");
+        getContentPane().add(ReviewsLabel);
+        ReviewsLabel.setBounds(10, 531, 54, 15);
 
         BookReviewsIconButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/BookReviewsIcon.png"))); // NOI18N
         BookReviewsIconButton.addActionListener(new java.awt.event.ActionListener() {
@@ -199,14 +239,20 @@ public class BookForm extends javax.swing.JDialog {
                 BookReviewsIconButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(BookReviewsIconButton);
+        BookReviewsIconButton.setBounds(10, 552, 92, 85);
 
         BookNameLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BookNameLabel.setForeground(new java.awt.Color(0, 102, 255));
         BookNameLabel.setText("Name: (bookname)");
+        getContentPane().add(BookNameLabel);
+        BookNameLabel.setBounds(10, 11, 513, 15);
 
         RatingLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         RatingLabel.setForeground(new java.awt.Color(0, 102, 255));
         RatingLabel.setText("Ratings:");
+        getContentPane().add(RatingLabel);
+        RatingLabel.setBounds(10, 116, 513, 15);
 
         SendRequestButton.setText("Send Request");
         SendRequestButton.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +260,8 @@ public class BookForm extends javax.swing.JDialog {
                 SendRequestButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(SendRequestButton);
+        SendRequestButton.setBounds(321, 226, 111, 38);
 
         UpdateButton.setText("Update");
         UpdateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +269,8 @@ public class BookForm extends javax.swing.JDialog {
                 UpdateButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(UpdateButton);
+        UpdateButton.setBounds(321, 170, 111, 38);
 
         DeleteButton.setText("Delete");
         DeleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -228,6 +278,8 @@ public class BookForm extends javax.swing.JDialog {
                 DeleteButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(DeleteButton);
+        DeleteButton.setBounds(465, 170, 107, 38);
 
         AddtoFavouritesToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/FavouriteIcon.png"))); // NOI18N
         AddtoFavouritesToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +287,8 @@ public class BookForm extends javax.swing.JDialog {
                 AddtoFavouritesToggleButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(AddtoFavouritesToggleButton);
+        AddtoFavouritesToggleButton.setBounds(495, 552, 81, 85);
 
         AddtoWantedToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/WantedBookIcon.png"))); // NOI18N
         AddtoWantedToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +296,8 @@ public class BookForm extends javax.swing.JDialog {
                 AddtoWantedToggleButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(AddtoWantedToggleButton);
+        AddtoWantedToggleButton.setBounds(332, 552, 91, 85);
 
         AddtoReadToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/TickIcon.png"))); // NOI18N
         AddtoReadToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +305,8 @@ public class BookForm extends javax.swing.JDialog {
                 AddtoReadToggleButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(AddtoReadToggleButton);
+        AddtoReadToggleButton.setBounds(188, 558, 97, 79);
 
         ViewRequestsButton.setText("View Requests");
         ViewRequestsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -256,128 +314,8 @@ public class BookForm extends javax.swing.JDialog {
                 ViewRequestsButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane3)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(SynopsisLabel)
-                                        .addGap(39, 39, 39))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(ViewRequestsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(SendRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ReviewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(14, 14, 14))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BookReviewsIconButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ReviewsLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AddToReadBooksLabel)
-                                    .addComponent(AddtoReadToggleButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AddToWantedBooksLabel)
-                                    .addComponent(AddtoWantedToggleButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AddToFavoriteBooksLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(AddtoFavouritesToggleButton)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(AuthorNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(RatingLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TagsBookLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(GenreBookLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LengthLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(YearLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
-                                    .addComponent(ISBNLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BookNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
-                                .addGap(0, 53, Short.MAX_VALUE)))
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BookNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AuthorNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ISBNLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LengthLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(YearLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RatingLabel)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GenreBookLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TagsBookLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ViewRequestsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ReviewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SendRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SynopsisLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(AddToReadBooksLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AddtoReadToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(AddToWantedBooksLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(AddtoWantedToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(AddToFavoriteBooksLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(AddtoFavouritesToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(ReviewsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BookReviewsIconButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
+        getContentPane().add(ViewRequestsButton);
+        ViewRequestsButton.setBounds(202, 170, 109, 38);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

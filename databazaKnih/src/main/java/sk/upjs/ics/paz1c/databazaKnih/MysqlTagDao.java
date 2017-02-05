@@ -3,9 +3,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -24,7 +22,6 @@ public class MysqlTagDao implements InterfaceTagDao {
             @Override
             public List<Tag> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<Tag> tags = new ArrayList<>();
-                Map<Integer, Book> books = new HashMap<>();
                 Tag tag = null;
                 while (rs.next()) {
                     int id = rs.getInt("idtag");
@@ -55,9 +52,6 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public void deleteTag(int id) {
-//        Tag tag = findById(id);
-//        tag.setIsActive(false);
-//        updateTag(tag);
         jdbcTemplate.update(SqlQueries.DELETE_TAG, id);
     }
 

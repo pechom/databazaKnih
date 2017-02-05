@@ -6,41 +6,50 @@
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
 import sk.upjs.ics.paz1c.databazaKnih.Author;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorRequest;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorRequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.BookManager;
+import sk.upjs.ics.paz1c.databazaKnih.BookRequest;
+import sk.upjs.ics.paz1c.databazaKnih.BookRequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.UserManager;
 
 /**
  *
  * @author szoplakz
  */
 public class RequestForm extends javax.swing.JDialog {
-    AuthorRequestManager requestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
-    private AuthorRequest request;
+    AuthorRequestManager authorrequestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
+    BookRequestManager bookrequestManager = ObjectFactory.INSTANCE.getBookRequestManager();
+    private AuthorRequest authorRequest;
+    private BookRequest bookRequest;
+     AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
+     BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
+     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
     private boolean isBook;
 
     /**
      * Creates new form RequestForm
      */
-    public RequestForm(java.awt.Dialog parent, boolean modal, AuthorRequest request ) {
+    public RequestForm(java.awt.Dialog parent, boolean modal, AuthorRequest authorRequest, BookRequest bookRequest, boolean isBook) {
         super(parent, modal);
         initComponents();
-        this.request= request;
-        if(request.getBook()==null){
-        isBook=true;
-        }
+        this.authorRequest= authorRequest;
+        this.bookRequest= bookRequest;
         
          if(!isBook){
-        SubjectLabel.setText("Subject(Author): " + request.getAuthor().getName());
-        
+        SubjectLabel.setText("Subject(Author): " + authorManager.findById(authorRequest.getAuthor()).getName());
+        UserLabel.setText("by: " + userManager.findById(authorRequest.getRequester()).getUserName());
+        MessageTextArea.setText(authorRequest.getContent());
         
     } else {
-        SubjectLabel.setText("Subject(Book): " + request.getBook().getName());
-        }
-        UserLabel.setText(request.getRequester().getUserName());
-        MessageTextArea.setText(request.getContent());
+        SubjectLabel.setText("Subject(Author): " + bookManager.findById(bookRequest.getBook()).getName());
+        UserLabel.setText("by: " + userManager.findById(bookRequest.getRequester()).getUserName());
+        MessageTextArea.setText(bookRequest.getContent());
+    }
     }
 
     /**
@@ -122,7 +131,11 @@ public class RequestForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-       requestManager.deleteRequest(request.getId());
+       if(!isBook){
+        authorrequestManager.deleteRequest(authorRequest.getId());
+       } else {
+          bookrequestManager.deleteRequest(bookRequest.getId());
+       }
        this.setVisible(false);
        this.getParent().setVisible(false);
 

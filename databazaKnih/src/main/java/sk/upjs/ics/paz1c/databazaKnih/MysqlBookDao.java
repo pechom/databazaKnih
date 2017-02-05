@@ -88,9 +88,6 @@ public class MysqlBookDao implements InterfaceBookDao {
 
     @Override
     public void deleteBook(int id) {
-//        Book book = findById(id);
-//        book.setIsActive(false);
-//        updateBook(book);
         jdbcTemplate.update(SqlQueries.DELETE_BOOK, id);
     }
 

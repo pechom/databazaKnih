@@ -127,16 +127,16 @@ public class MyReviewForm extends javax.swing.JDialog {
         if(!isBook){
             AuthorReview review = new AuthorReview();
             
-            review.setAuthor(author);
-            review.setUser( user);
+            review.setAuthor(author.getId());
+            review.setUser( user.getId());
             review.setReview(ReviewTextArea.getText());
             review.setRating((int) RatingSpinner.getValue()); 
            userManager.addAuthorReview(review, user);
         
         } else {
         BookReview review = new BookReview();
-            review.setBook(book);
-            review.setUser( user);
+            review.setBook(book.getId());
+            review.setUser( user.getId());
             
             review.setReview(ReviewTextArea.getText());
             review.setRating((int) RatingSpinner.getValue()); 

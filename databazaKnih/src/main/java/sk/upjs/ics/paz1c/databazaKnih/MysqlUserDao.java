@@ -128,9 +128,6 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public void deleteUser(int id) {
-//        User user = findById(id);
-//        user.setIsActive(false);
-//        updateUser(user);
         jdbcTemplate.update(SqlQueries.DELETE_USER, id);
     }
 
@@ -142,8 +139,6 @@ public class MysqlUserDao implements InterfaceUserDao {
 
     @Override
     public User findById(int id) {
-//            return jdbcTemplate.queryForObject(SqlQueries.SELECT_USER_BY_ID, userRowMapper, id);
-
         return jdbcTemplate.query(SqlQueries.SELECT_USER_BY_ID + id, new ResultSetExtractor<User>() {
             @Override
             public User extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -176,7 +171,6 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setReadBooks(new ArrayList<>());
                         user.setReading(new ArrayList<>());
                         user.setWantedBooks(new ArrayList<>());
-                        // }
                         int areviewid = rs.getInt("authorreview.idauthorreview");
                         if (!rs.wasNull()) {
                             user.getAuthorReviews().add(areviewid);

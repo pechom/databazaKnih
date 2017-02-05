@@ -78,9 +78,6 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
     @Override
     public void deleteAuthor(int id) {
-//        Author author = findById(id);
-//        author.setIsActive(false);
-//        updateAuthor(author);
         jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, id);
     }
 

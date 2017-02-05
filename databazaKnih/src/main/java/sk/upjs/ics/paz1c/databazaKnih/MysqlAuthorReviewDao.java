@@ -61,9 +61,6 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
 
     @Override
     public void deleteReview(int id) {
-//        AuthorReview authorReview = findById(id);
-//        authorReview.setIsActive(false);
-//        updateReview(authorReview);
         jdbcTemplate.update(SqlQueries.DELETE_AUTHORREVIEW, id);
     }
 

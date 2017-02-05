@@ -11,6 +11,8 @@ import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorRequest;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorRequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.BookRequest;
+import sk.upjs.ics.paz1c.databazaKnih.BookRequestManager;
 
 /**
  *
@@ -18,7 +20,8 @@ import sk.upjs.ics.paz1c.databazaKnih.AuthorRequestManager;
  */
 public class MyRequestForm extends javax.swing.JDialog {
 
-    AuthorRequestManager requestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
+    AuthorRequestManager authorrequestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
+    BookRequestManager bookrequestManager = ObjectFactory.INSTANCE.getBookRequestManager();
      private static User user;
      private static Book book;
      private static Author author;
@@ -109,17 +112,17 @@ public class MyRequestForm extends javax.swing.JDialog {
     private void ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmButtonActionPerformed
         if(!isBook){
             AuthorRequest request = new AuthorRequest();
-            request.setAuthor(author);
-            request.setRequester(user);
+            request.setAuthor(author.getId());
+            request.setRequester(user.getId());
             
             request.setContent(MessageTextArea.getText());
-            requestManager.insertRequest(request);
+            authorrequestManager.insertRequest(request);
         } else {
-            AuthorRequest request = new AuthorRequest();
-             request.setBook(book);
-            request.setRequester(user);
+            BookRequest request = new BookRequest();
+             request.setBook(book.getId());
+            request.setRequester(user.getId());
             request.setContent(MessageTextArea.getText());
-            requestManager.insertRequest(request);
+            bookrequestManager.insertRequest(request);
         }
     }//GEN-LAST:event_ConfirmButtonActionPerformed
 

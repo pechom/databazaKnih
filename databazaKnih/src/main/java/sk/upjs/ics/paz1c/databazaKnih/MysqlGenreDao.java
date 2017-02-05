@@ -59,9 +59,6 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public void deleteGenre(int id) {
-//        Genre genre = findById(id);
-//        genre.setIsActive(false);
-//        updateGenre(genre);
         jdbcTemplate.update(SqlQueries.UPDATE_GENRE, id);
     }
 

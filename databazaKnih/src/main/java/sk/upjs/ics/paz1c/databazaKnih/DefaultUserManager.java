@@ -523,4 +523,29 @@ public class DefaultUserManager implements UserManager {
             updateUser(user);
         }
     }
+        @Override
+    public User getUserByUsername(String login) {
+        List<User> users = getAllUsers();
+        User named = null;
+        for (User user : users) {
+            if ((user.getUserName() != null) && (user.getUserName().equalsIgnoreCase(login))) {
+                named = user;
+                break;
+            }
+        }
+        return named;
+    }
+    
+    @Override
+    public User getUserByMail(String mail) {
+List<User> users = getAllUsers();
+        User mailUser = null;
+        for (User user : users) {
+            if ((user.getMail() != null) && (user.getMail().equals(mail))) {
+                mailUser = user;
+                break;
+            }
+        }
+        return mailUser;
+    }
 }

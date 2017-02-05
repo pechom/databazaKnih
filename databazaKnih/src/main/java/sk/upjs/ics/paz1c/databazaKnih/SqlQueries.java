@@ -660,6 +660,4 @@ public class SqlQueries {
     
     public static final String SET_FOREIGN_KEY_CHECKS_1
             = "SET FOREIGN_KEY_CHECKS = 1";
-
-    
 }

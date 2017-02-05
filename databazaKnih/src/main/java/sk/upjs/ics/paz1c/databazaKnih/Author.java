@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import java.sql.Date;
 import java.util.List;
 
 public class Author {
@@ -200,5 +199,4 @@ public class Author {
     public void setAuthorReviews(List<Integer> authorReviews) {
         this.authorReviews = authorReviews;
     }
-
 }

@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz1c.databazaKnih;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -245,5 +244,4 @@ public class Book {
     public void setBookReviews(List<Integer> bookReviews) {
         this.bookReviews = bookReviews;
     }
-
 }

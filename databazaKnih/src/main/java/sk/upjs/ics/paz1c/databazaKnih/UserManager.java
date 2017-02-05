@@ -105,4 +105,7 @@ public interface UserManager {
 
     void addAuthorReview(AuthorReview authorReview, User user);
 
+    public User getUserByUsername(String login);
+
+    public User getUserByMail(String text);
 }

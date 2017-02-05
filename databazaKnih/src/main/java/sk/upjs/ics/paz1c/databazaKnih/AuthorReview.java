@@ -92,5 +92,4 @@ public class AuthorReview {
     public void setUser(int user) {
         this.user = user;
     }
-
 }

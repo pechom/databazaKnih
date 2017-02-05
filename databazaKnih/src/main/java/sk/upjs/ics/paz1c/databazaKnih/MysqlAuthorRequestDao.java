@@ -62,9 +62,6 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
 
     @Override
     public void deleteRequest(int id) {
-//        AuthorRequest request = findById(id);
-//        request.setIsActive(false);
-//        updateRequest(request);
         jdbcTemplate.update(SqlQueries.DELETE_AUTHOR_REQUEST, id);
     }
 

@@ -29,10 +29,10 @@ AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
 BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
 private String[] genreNames;
 private String[] tagNames;
-private Genre[] genreArray;
-private Tag[] tagArray;
+private int[] genreArray;
+private int[] tagArray;
 private String[] authorNames;
-private Author[] authorArray;
+private int[] authorArray;
 private Book book;
 
     /**
@@ -45,22 +45,22 @@ private Book book;
         List<Genre> genres = genreManager.getAllGenres();
              
              genreNames = new String[genres.size()];
-             genreArray= new Genre[genres.size()];
+             genreArray= new int[genres.size()];
              int i = 0;
             for (Genre genre : genres) {
                genreNames[i]= genre.getName();
-               genreArray[i] = genre;
+               genreArray[i] = genre.getId();
                i++;
             }
              GenreList.setListData(genreNames);
              
              List<Tag> tags = tagManager.getAllTags();
              tagNames = new String[tags.size()];
-             tagArray= new Tag[tags.size()];
+             tagArray= new int[tags.size()];
              int j = 0;
             for (Tag tag : tags) {
                tagNames[j]= tag.getName();
-               tagArray[j] = tag;
+               tagArray[j] = tag.getId();
                j++;
             }
              TagList.setListData(tagNames);
@@ -69,11 +69,11 @@ private Book book;
              
              List<Author> authors = authorManager.getAllAuthors();
              authorNames = new String[authors.size()];
-             authorArray= new Author[authors.size()];
+             authorArray= new int[authors.size()];
              int k = 0;
             for (Author author : authors) {
                authorNames[k]= author.getName();
-               authorArray[k] = author;
+               authorArray[k] = author.getId();
                k++;
             }
              AuthorList.setListData(authorNames);
@@ -318,12 +318,12 @@ private Book book;
          if(AuthorList.getSelectedIndex()!=-1){
          book.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
          }
-         bookManager.addAuthorToBook(book, book.getAuthor());
+         bookManager.addAuthorToBook(book, authorManager.findById(book.getAuthor()));
          
          
           GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
-        List<Genre> genreList = new ArrayList<Genre>();
+        List<Integer> genreList = new ArrayList<Integer>();
         for (int i = 0; i < genreIndeces.length; i++) {
             genreList.add(genreArray[genreIndeces[i]]); 
         }
@@ -332,7 +332,7 @@ private Book book;
          
         TagList.getSelectedIndices();
         int[] tagIndeces = TagList.getSelectedIndices();
-        List<Tag> tagList = new ArrayList<Tag>();
+        List<Integer> tagList = new ArrayList<Integer>();
         for (int i = 0; i < tagIndeces.length; i++) {
             tagList.add(tagArray[tagIndeces[i]]);    
         }
@@ -354,14 +354,14 @@ private Book book;
          newBook.setYear(Integer.parseInt(YearTextField.getText()));
          if(AuthorList.getSelectedIndex()!=-1){
          newBook.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
-          bookManager.addAuthorToBook(newBook, newBook.getAuthor());
+          bookManager.addAuthorToBook(newBook, authorManager.findById(book.getAuthor()));
          }
         
          
          if(AuthorList.getSelectedIndex()!=-1){
           GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
-        List<Genre> genreList = new ArrayList<Genre>();
+        List<Integer> genreList = new ArrayList<Integer>();
         for (int i = 0; i < genreIndeces.length; i++) {
             genreList.add(genreArray[genreIndeces[i]]); 
         }
@@ -371,7 +371,7 @@ private Book book;
         if(AuthorList.getSelectedIndex()!=-1){ 
         TagList.getSelectedIndices();
         int[] tagIndeces = TagList.getSelectedIndices();
-        List<Tag> tagList = new ArrayList<Tag>();
+        List<Integer> tagList = new ArrayList<Integer>();
         for (int i = 0; i < tagIndeces.length; i++) {
             tagList.add(tagArray[tagIndeces[i]]);    
         }

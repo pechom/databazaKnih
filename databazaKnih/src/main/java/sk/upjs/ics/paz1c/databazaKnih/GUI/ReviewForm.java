@@ -6,9 +6,11 @@
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
 import sk.upjs.ics.paz1c.databazaKnih.Author;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorReview;
 import sk.upjs.ics.paz1c.databazaKnih.BookReview;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
+import sk.upjs.ics.paz1c.databazaKnih.BookManager;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.UserManager;
@@ -19,8 +21,9 @@ import sk.upjs.ics.paz1c.databazaKnih.UserManager;
  */
 public class ReviewForm extends javax.swing.JDialog {
 
-     
-     
+     AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
+BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
+     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
     /**
      * Creates new form ReviewForm
      */
@@ -31,13 +34,17 @@ public class ReviewForm extends javax.swing.JDialog {
         
         
         if(!isBook){
-    ReviewLabel.setText("Review of " + authorreview.getAuthor().getName());
-    UserLabel.setText("by: " + authorreview.getUser().getUserName());
+    Author author = authorManager.findById(authorreview.getAuthor());
+    User user = userManager.findById(authorreview.getUser());
+    ReviewLabel.setText("Review of " + author.getName());
+    UserLabel.setText("by: " + user.getUserName());
     RatingLabel.setText("Rating " + authorreview.getRating());
     ReviewTextArea.setText(authorreview.getReview());
     } else {
-        ReviewLabel.setText("Review of " + bookreview.getBook().getName());
-    UserLabel.setText("by: " + bookreview.getUser().getName());
+        Book book = bookManager.findById(bookreview.getBook());
+    User user = userManager.findById(bookreview.getUser());    
+        ReviewLabel.setText("Review of " + book.getName());
+    UserLabel.setText("by: " + user.getUserName());
     RatingLabel.setText("Rating " + bookreview.getRating());
     ReviewTextArea.setText(bookreview.getReview());
         }

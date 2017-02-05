@@ -66,9 +66,6 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
 
     @Override
     public void deleteRequest(int id) {
-//        BookRequest request = findById(id);
-//        request.setIsActive(false);
-//        updateRequest(request);
         jdbcTemplate.update(SqlQueries.DELETE_BOOK_REQUEST, id);
     }
 

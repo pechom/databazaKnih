@@ -77,5 +77,4 @@ public class BookRequest {
     public void setBook(int book) {
         this.book = book;
     }
-
 }
