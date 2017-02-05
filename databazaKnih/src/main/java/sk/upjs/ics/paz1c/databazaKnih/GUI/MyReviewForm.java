@@ -7,12 +7,14 @@ package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
 
 import sk.upjs.ics.paz1c.databazaKnih.Author;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.UserManager;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorReview;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorReviewManager;
+import sk.upjs.ics.paz1c.databazaKnih.BookManager;
 import sk.upjs.ics.paz1c.databazaKnih.BookReview;
 import sk.upjs.ics.paz1c.databazaKnih.BookReviewManager;
 
@@ -22,6 +24,8 @@ import sk.upjs.ics.paz1c.databazaKnih.BookReviewManager;
  */
 public class MyReviewForm extends javax.swing.JDialog {
      UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
+     BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
+     AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
      AuthorReviewManager authorReviewManager = ObjectFactory.INSTANCE.getAuthorReviewManager();
      BookReviewManager bookReviewManager = ObjectFactory.INSTANCE.getBookReviewManager();
      private static User user;
@@ -130,7 +134,8 @@ public class MyReviewForm extends javax.swing.JDialog {
             review.setAuthor(author.getId());
             review.setUser( user.getId());
             review.setReview(ReviewTextArea.getText());
-            review.setRating((int) RatingSpinner.getValue()); 
+            review.setRating((int) RatingSpinner.getValue());
+            authorReviewManager.insertReview(review);
            userManager.addAuthorReview(review, user);
         
         } else {
@@ -140,6 +145,8 @@ public class MyReviewForm extends javax.swing.JDialog {
             
             review.setReview(ReviewTextArea.getText());
             review.setRating((int) RatingSpinner.getValue()); 
+            bookReviewManager.insertReview(review);
+            bookManager.addReview(review, book);
            userManager.addBookReview(review, user);
         }
     }//GEN-LAST:event_ConfirmButtonActionPerformed

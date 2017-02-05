@@ -6,6 +6,8 @@
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
 import java.awt.Dialog;
+import java.util.ArrayList;
+import java.util.List;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.User;
@@ -20,34 +22,34 @@ public class UserProfileForm extends javax.swing.JDialog {
     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
     private User userProfile;
     private User currentUser;
-    
+
     /**
      * Creates new form UserProfileForm
      */
-    public UserProfileForm(java.awt.Dialog parent, boolean modal,User currentUser, User userProfile) {
+    public UserProfileForm(java.awt.Dialog parent, boolean modal, User currentUser, User userProfile) {
         super(parent, modal);
         initComponents();
         this.currentUser = currentUser;
-        this.userProfile = userProfile; 
-        UserNameLabel.setText( userProfile.getUserName() + "'s profile");
+        this.userProfile = userProfile;
+        UserNameLabel.setText(userProfile.getUserName() + "'s profile");
         NameLabel.setText("Name: " + userProfile.getName());
         SurnameLabel.setText("Surname: " + userProfile.getSurname());
         MailLabel.setText("E-mail: " + userProfile.getMail());
-        if(userProfile.isIsAdmin()){
-        StatusLabel.setText("Status: Admin");
+        if (userProfile.isIsAdmin()) {
+            StatusLabel.setText("Status: Admin");
         } else {
-        StatusLabel.setText("Status: User"); 
+            StatusLabel.setText("Status: User");
         }
-        if(userProfile.isIsAdmin() || !currentUser.isIsAdmin()){
-        PromoteToAdminButton.enable(false);
-         PromoteToAdminButton.setVisible(false);
-         PromoteLabel.setVisible(false);
-        DeleteUserButton.setVisible(false);
-        DeleteUserButton.enable(false);
-        DeleteUserLabel.setVisible(false);
+        if (userProfile.isIsAdmin() || !currentUser.isIsAdmin()) {
+            PromoteToAdminButton.enable(false);
+            PromoteToAdminButton.setVisible(false);
+            PromoteLabel.setVisible(false);
+            DeleteUserButton.setVisible(false);
+            DeleteUserButton.enable(false);
+            DeleteUserLabel.setVisible(false);
         }
         ReviewsLabel.setText(userProfile.getUserName() + "'s reviews");
-    } 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -391,37 +393,37 @@ public class UserProfileForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FriendsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FriendsIconButtonActionPerformed
-       ListForm favouriteBooksList = new ListForm(this, true, "Friends", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "Friends", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_FriendsIconButtonActionPerformed
 
     private void FavouriteBookIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavouriteBookIconButtonActionPerformed
-       ListForm favouriteBooksList = new ListForm(this, true, "FavouriteBooks", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteBooks", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_FavouriteBookIconButtonActionPerformed
 
     private void ReadBooksIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadBooksIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "ReadBooks", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "ReadBooks", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_ReadBooksIconButtonActionPerformed
 
     private void WantedBooksIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WantedBooksIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "WantedBooks", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "WantedBooks", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_WantedBooksIconButtonActionPerformed
 
     private void FavouriteAuthorsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavouriteAuthorsIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteAuthors", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteAuthors", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_FavouriteAuthorsIconButtonActionPerformed
 
     private void FavouriteReviewersIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavouriteReviewersIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteReviewers", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteReviewers", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_FavouriteReviewersIconButtonActionPerformed
 
     private void BookReviewsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookReviewsIconButtonActionPerformed
-       ListForm favouriteBooksList = new ListForm(this, true, "MyAuthorReviews", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "MyAuthorReviews", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_BookReviewsIconButtonActionPerformed
 
@@ -431,34 +433,33 @@ public class UserProfileForm extends javax.swing.JDialog {
     }//GEN-LAST:event_DeleteUserButtonActionPerformed
 
     private void AuthorReviewIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuthorReviewIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "MyBookReviews", userProfile,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "MyBookReviews", userProfile, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_AuthorReviewIconButtonActionPerformed
 
     private void PromoteToAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PromoteToAdminButtonActionPerformed
-       userProfile.setIsAdmin(true);
-       userManager.updateUser(userProfile);
-       this.setVisible(false);
-       UserProfileForm userProfileForm = new UserProfileForm((Dialog) this.getParent(), true, currentUser,  userProfile);
-       
+        userProfile.setIsAdmin(true);
+        userManager.updateUser(userProfile);
+        this.setVisible(false);
+        UserProfileForm userProfileForm = new UserProfileForm((Dialog) this.getParent(), true, currentUser, userProfile);
+
     }//GEN-LAST:event_PromoteToAdminButtonActionPerformed
 
     private void AddToFriendsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToFriendsToggleButtonActionPerformed
-         if(AddToFriendsToggleButton.isSelected()){
-        userManager.addFriendToUser(userProfile, currentUser);
-        } else {
-        userManager.deleteFriendFromUser(userProfile, currentUser);
+        if (AddToFriendsToggleButton.isSelected()) {
+            List<Integer> users = new ArrayList<>();
+            users.add(userProfile.getId());
+            userManager.addFriendsToUser(users, currentUser);
         }
     }//GEN-LAST:event_AddToFriendsToggleButtonActionPerformed
 
     private void AddFavouriteReviewerToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFavouriteReviewerToggleButtonActionPerformed
-         if(AddFavouriteReviewerToggleButton.isSelected()){
-        userManager.addFavoriteReviewer(userProfile, currentUser);
-        } else {
-        userManager.deleteFavoriteReviewer(userProfile, currentUser);
+        if (AddFavouriteReviewerToggleButton.isSelected()) {
+            List<Integer> users = new ArrayList<>();
+            users.add(userProfile.getId());
+            userManager.addFavoriteReviewers(users, currentUser);
         }
     }//GEN-LAST:event_AddFavouriteReviewerToggleButtonActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

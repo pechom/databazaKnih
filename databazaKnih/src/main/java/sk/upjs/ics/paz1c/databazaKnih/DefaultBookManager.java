@@ -195,6 +195,7 @@ public class DefaultBookManager implements BookManager {
         book.getBookReviews().add(review.getId());
         book.setNumberOfReviews(book.getNumberOfReviews() + 1);
         book.setAverageOfReviews((book.getAverageOfReviews() * (book.getNumberOfReviews() - 1) + review.getRating()) / book.getNumberOfReviews());
+        bookDao.updateBook(book);
         calculateAndInsertBayesian(book, 5);
         makeChart();
         bookDao.addReviewToBook(review.getId(), book);

@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.util.ArrayList;
 import java.util.List;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
@@ -22,13 +23,14 @@ import sk.upjs.ics.paz1c.databazaKnih.UserManager;
  * @author szoplakz
  */
 public class AuthorForm extends javax.swing.JDialog {
-     AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
-     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
-      GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
-       BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
-     private Author author;
-     private User user;
-     
+
+    AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
+    UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
+    GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
+    BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
+    private Author author;
+    private User user;
+
     /**
      * Creates new form AuthorForm
      */
@@ -36,51 +38,50 @@ public class AuthorForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.author = author;
-        this.user = user; 
-        if(!user.isIsAdmin()){
-        UpdateButton.enable(false);
-        UpdateButton.setVisible(false);
-        DeleteButton.enable(false);
-        DeleteButton.setVisible(false);
-        ViewRequestsButton.enable(false);
-        ViewRequestsButton.setVisible(false);
+        this.user = user;
+        if (!user.isIsAdmin()) {
+            UpdateButton.enable(false);
+            UpdateButton.setVisible(false);
+            DeleteButton.enable(false);
+            DeleteButton.setVisible(false);
+            ViewRequestsButton.enable(false);
+            ViewRequestsButton.setVisible(false);
         }
         NameLabel.setText("Name: " + author.getName());
-        if(author.getDeath()==0){
-         LifeLabel.setText(author.getBirth() + " - ");
-         
+        if (author.getDeath() == 0) {
+            LifeLabel.setText(author.getBirth() + " - ");
+
         } else {
-        LifeLabel.setText(author.getBirth() + " - " + author.getDeath());
+            LifeLabel.setText(author.getBirth() + " - " + author.getDeath());
         }
         NationalityLabel.setText("Nationality: " + author.getNationality());
         GenderLabel.setText("Gender: " + author.getSex());
-        
+
         List<Integer> genres = author.getGenres();
         String[] genreNames = new String[genres.size()];
         int i = 0;
         Genre genre;
-            for (Integer genreId : genres) {
-                genre = genreManager.findById(genreId);
-               genreNames[i]= genre.getName();
-        i++;
-    }
-      GenreList.setListData(genreNames);
-     
-      List<Integer> books = author.getBooks();
-        String[] bookNames= new String[books.size()];
+        for (Integer genreId : genres) {
+            genre = genreManager.findById(genreId);
+            genreNames[i] = genre.getName();
+            i++;
+        }
+        GenreList.setListData(genreNames);
+
+        List<Integer> books = author.getBooks();
+        String[] bookNames = new String[books.size()];
         int j = 0;
         Book book;;
-            for (Integer bookId : books) {
-                book = bookManager.findById(bookId);
-               bookNames[j]= book.getName();
-        
-        j++;
-    }
-     BookList.setListData(bookNames); 
-     
-     
-     BiographyTextArea.setText(author.getBiography());
-     
+        for (Integer bookId : books) {
+            book = bookManager.findById(bookId);
+            bookNames[j] = book.getName();
+
+            j++;
+        }
+        BookList.setListData(bookNames);
+
+        BiographyTextArea.setText(author.getBiography());
+
     }
 
     /**
@@ -319,19 +320,19 @@ public class AuthorForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AuthorReviewsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuthorReviewsIconButtonActionPerformed
-        ListForm authorReviewsList = new ListForm(this, true, "AuthorReviews", null,null,author);
+        ListForm authorReviewsList = new ListForm(this, true, "AuthorReviews", null, null, author);
         authorReviewsList.setVisible(true);
     }//GEN-LAST:event_AuthorReviewsIconButtonActionPerformed
 
     private void ReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReviewButtonActionPerformed
-       
-                 MyReviewForm reviewForm = new MyReviewForm(this, true, false, user, null , author);
-                 reviewForm.setVisible(true);
+
+        MyReviewForm reviewForm = new MyReviewForm(this, true, false, user, null, author);
+        reviewForm.setVisible(true);
     }//GEN-LAST:event_ReviewButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         AddOrUpdateAuthorForm updateAuthorForm = new AddOrUpdateAuthorForm(this, true, author, true);
-                 updateAuthorForm.setVisible(true);
+        updateAuthorForm.setVisible(true);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -340,32 +341,27 @@ public class AuthorForm extends javax.swing.JDialog {
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void SendRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendRequestButtonActionPerformed
-        MyRequestForm requestForm = new MyRequestForm(this, true, false, user, null , author);
-                 requestForm.setVisible(true);
+        MyRequestForm requestForm = new MyRequestForm(this, true, false, user, null, author);
+        requestForm.setVisible(true);
     }//GEN-LAST:event_SendRequestButtonActionPerformed
 
     private void ViewRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewRequestsButtonActionPerformed
-        ListForm authorReviewsList = new ListForm(this, true, "RequestsByAuthor", null,null,author);
-        authorReviewsList.setVisible(true);   
-        
+        ListForm authorReviewsList = new ListForm(this, true, "RequestsByAuthor", null, null, author);
+        authorReviewsList.setVisible(true);
+
     }//GEN-LAST:event_ViewRequestsButtonActionPerformed
 
     private void AddToFavouritesToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToFavouritesToggleButtonActionPerformed
-        if(AddToFavouritesToggleButton.isSelected()){
-            if(!user.getFavoriteAuthors().contains(author)){
-        userManager.addFavoriteAuthorToUser(author, user);
-            }
-        } else {
-             if(user.getFavoriteAuthors().contains(author)){
-        userManager.deleteFavoriteAuthorFromUser(author, user);
-        }
+        if (AddToFavouritesToggleButton.isSelected()) {
+            List<Integer> authors = new ArrayList<>();
+            authors.add(author.getId());
+            userManager.addFavoriteAuthorsToUser(authors, user);
         }
     }//GEN-LAST:event_AddToFavouritesToggleButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton AddToFavouritesToggleButton;

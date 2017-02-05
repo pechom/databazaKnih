@@ -23,12 +23,12 @@ import sk.upjs.ics.paz1c.databazaKnih.UserManager;
  * @author szoplakz
  */
 public class BookForm extends javax.swing.JDialog {
-    
+
     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
     BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
-       AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
-        GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
-         TagManager tagManager = ObjectFactory.INSTANCE.getTagManager();
+    AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
+    GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
+    TagManager tagManager = ObjectFactory.INSTANCE.getTagManager();
     private Book book;
     private User user;
 
@@ -40,51 +40,51 @@ public class BookForm extends javax.swing.JDialog {
         initComponents();
         this.book = book;
         this.user = user;
-        if(!user.isIsAdmin()){
-        UpdateButton.enable(false);
-        UpdateButton.setVisible(false);
-        DeleteButton.enable(false);
-        DeleteButton.setVisible(false);
-        }  
-        if(user.getFavoriteBooks().contains(book)){
-        AddtoFavouritesToggleButton.setSelected(true);
+        if (!user.isIsAdmin()) {
+            UpdateButton.enable(false);
+            UpdateButton.setVisible(false);
+            DeleteButton.enable(false);
+            DeleteButton.setVisible(false);
         }
-        if(user.getReadBooks().contains(book)){
-        AddtoReadToggleButton.setSelected(true);
+        if (user.getFavoriteBooks().contains(book)) {
+            AddtoFavouritesToggleButton.setSelected(true);
         }
-        if(user.getWantedBooks().contains(book)){
-        AddtoWantedToggleButton.setSelected(true);
+        if (user.getReadBooks().contains(book)) {
+            AddtoReadToggleButton.setSelected(true);
         }
-        
+        if (user.getWantedBooks().contains(book)) {
+            AddtoWantedToggleButton.setSelected(true);
+        }
+
         BookNameLabel.setText("Name: " + book.getName());
-        if(book.getAuthor()!=0){
-        AuthorNameLabel.setText("Author: " + authorManager.findById(book.getAuthor()).getName());
+        if (book.getAuthor() != 0) {
+            AuthorNameLabel.setText("Author: " + authorManager.findById(book.getAuthor()).getName());
         }
         ISBNLabel.setText("ISBN: " + book.getISBN());
         YearLabel.setText("Year of publication: " + book.getYear());
         RatingLabel.setText("Rating: " + book.getBayesianAverage());
-        
+
         List<Integer> genres = book.getGenres();
         String[] genreNames = new String[genres.size()];
         int i = 0;
-            for (Integer genreId : genres) {
-               genreNames[i]= genreManager.findById(genreId).getName();
-        i++;
-    }
-      GenreList.setListData(genreNames);
-     
-      List<Integer> tags = book.getTags();
+        for (Integer genreId : genres) {
+            genreNames[i] = genreManager.findById(genreId).getName();
+            i++;
+        }
+        GenreList.setListData(genreNames);
+
+        List<Integer> tags = book.getTags();
         String[] tagNames = new String[tags.size()];
         int j = 0;
-            for (Integer tagId : tags) {
-               tagNames[j]= tagManager.findById(tagId).getName();
-        
-        j++;
-    }
-     TagList.setListData(tagNames); 
-     
-     SynopsisTextArea.setText(book.getDescription());
-     
+        for (Integer tagId : tags) {
+            tagNames[j] = tagManager.findById(tagId).getName();
+
+            j++;
+        }
+        TagList.setListData(tagNames);
+
+        SynopsisTextArea.setText(book.getDescription());
+
     }
 
     /**
@@ -168,7 +168,7 @@ public class BookForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(GenreList);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 158, 170, 130);
+        jScrollPane1.setBounds(10, 158, 170, 139);
 
         TagsBookLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TagsBookLabel.setForeground(new java.awt.Color(0, 102, 255));
@@ -184,7 +184,7 @@ public class BookForm extends javax.swing.JDialog {
         jScrollPane2.setViewportView(TagList);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 315, 170, 130);
+        jScrollPane2.setBounds(10, 315, 170, 139);
 
         SynopsisTextArea.setColumns(20);
         SynopsisTextArea.setRows(5);
@@ -288,7 +288,7 @@ public class BookForm extends javax.swing.JDialog {
             }
         });
         getContentPane().add(AddtoFavouritesToggleButton);
-        AddtoFavouritesToggleButton.setBounds(495, 552, 81, 85);
+        AddtoFavouritesToggleButton.setBounds(495, 552, 82, 85);
 
         AddtoWantedToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/WantedBookIcon.png"))); // NOI18N
         AddtoWantedToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -297,7 +297,7 @@ public class BookForm extends javax.swing.JDialog {
             }
         });
         getContentPane().add(AddtoWantedToggleButton);
-        AddtoWantedToggleButton.setBounds(332, 552, 91, 85);
+        AddtoWantedToggleButton.setBounds(332, 552, 93, 85);
 
         AddtoReadToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/TickIcon.png"))); // NOI18N
         AddtoReadToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -306,7 +306,7 @@ public class BookForm extends javax.swing.JDialog {
             }
         });
         getContentPane().add(AddtoReadToggleButton);
-        AddtoReadToggleButton.setBounds(188, 558, 97, 79);
+        AddtoReadToggleButton.setBounds(188, 558, 98, 79);
 
         ViewRequestsButton.setText("View Requests");
         ViewRequestsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -321,13 +321,13 @@ public class BookForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BookReviewsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookReviewsIconButtonActionPerformed
-         ListForm bookReviewsList = new ListForm(this, true, "BookReview", user, book, null);
+        ListForm bookReviewsList = new ListForm(this, true, "BookReview", user, book, null);
         bookReviewsList.setVisible(true);
     }//GEN-LAST:event_BookReviewsIconButtonActionPerformed
 
     private void ReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReviewButtonActionPerformed
-         MyReviewForm reviewForm = new MyReviewForm(this, true, true, user, book , null);
-                 reviewForm.setVisible(true);
+        MyReviewForm reviewForm = new MyReviewForm(this, true, true, user, book, null);
+        reviewForm.setVisible(true);
     }//GEN-LAST:event_ReviewButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
@@ -336,8 +336,8 @@ public class BookForm extends javax.swing.JDialog {
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void SendRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendRequestButtonActionPerformed
-       MyRequestForm requestForm = new MyRequestForm(this, true, true, user, book , null);
-                 requestForm.setVisible(true);
+        MyRequestForm requestForm = new MyRequestForm(this, true, true, user, book, null);
+        requestForm.setVisible(true);
     }//GEN-LAST:event_SendRequestButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -345,46 +345,31 @@ public class BookForm extends javax.swing.JDialog {
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void AddtoFavouritesToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddtoFavouritesToggleButtonActionPerformed
-         if(AddtoFavouritesToggleButton.isSelected()){
-            if(!user.getFavoriteBooks().contains(book)){
-                
-        userManager.addFavoriteBookToUser(book, user);
-            }
-        } else {
-             if(user.getFavoriteBooks().contains(book)){
-        userManager.deleteFavoriteBookFromUser(book, user);
-        }
+        if (AddtoFavouritesToggleButton.isSelected()) {
+            List<Integer> books = new ArrayList<>();
+            books.add(book.getId());
+            userManager.addFavoriteBooksToUser(books, user);
         }
     }//GEN-LAST:event_AddtoFavouritesToggleButtonActionPerformed
 
     private void AddtoWantedToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddtoWantedToggleButtonActionPerformed
-        if(AddtoWantedToggleButton.isSelected()){
-            if(!user.getWantedBooks().contains(book)){
-                
-        userManager.addWantedBookToUser(book, user);
-            }
-        } else {
-             if(user.getWantedBooks().contains(book)){
-        userManager.deleteWantedBookFromUser(book, user);
-        }
+        if (AddtoWantedToggleButton.isSelected()) {
+            List<Integer> books = new ArrayList<>();
+            books.add(book.getId());
+            userManager.addWantedBooksToUser(books, user);
         }
     }//GEN-LAST:event_AddtoWantedToggleButtonActionPerformed
 
     private void AddtoReadToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddtoReadToggleButtonActionPerformed
-        if(AddtoReadToggleButton.isSelected()){
-            if(!user.getReadBooks().contains(book)){
-                
-        userManager.addReadBookToUser(book, user);
-            }
-        } else {
-             if(user.getReadBooks().contains(book)){
-        userManager.deleteReadBookFromUser(book, user);
-        }
+        if (AddtoReadToggleButton.isSelected()) {
+            List<Integer> books = new ArrayList<>();
+            books.add(book.getId());
+            userManager.addReadBooksToUser(books, user);
         }
     }//GEN-LAST:event_AddtoReadToggleButtonActionPerformed
 
     private void ViewRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewRequestsButtonActionPerformed
-        ListForm authorReviewsList = new ListForm(this, true, "RequestsByBook", null,book,null);
+        ListForm authorReviewsList = new ListForm(this, true, "RequestsByBook", null, book, null);
         authorReviewsList.setVisible(true);
 
     }//GEN-LAST:event_ViewRequestsButtonActionPerformed
@@ -392,7 +377,6 @@ public class BookForm extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddToFavoriteBooksLabel;

@@ -35,7 +35,6 @@
                   <Component id="TagTextField" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ViewRequestsButton" min="-2" pref="104" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="AddTagButton" min="-2" pref="104" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -46,6 +45,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="DeleteGenreButton" min="-2" pref="104" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="ViewRequestsButton" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>

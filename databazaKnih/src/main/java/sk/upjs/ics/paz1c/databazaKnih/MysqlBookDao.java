@@ -223,7 +223,6 @@ public class MysqlBookDao implements InterfaceBookDao {
 
     @Override
     public void removeReviewsFromBook(int idbook) {
-        jdbcTemplate.update(SqlQueries.REMOVE_TAG_FROM_ALL_BOOKS, idbook);
+        jdbcTemplate.update(SqlQueries.REMOVE_ALL_REVIEWS_FROM_BOOK, idbook);
     }
-
 }

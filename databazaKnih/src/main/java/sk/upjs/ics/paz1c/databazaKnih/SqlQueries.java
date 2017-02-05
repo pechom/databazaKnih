@@ -91,7 +91,8 @@ public class SqlQueries {
             + "(rating, review, isActive, author_idauthor, user_iduser) "
             + "VALUES (?,?,?,?,?)";
 
-    public static final String UPDATE_AUTHORREVIEW = "UPDATE authorreview SET "
+    public static final String UPDATE_AUTHORREVIEW 
+            = "UPDATE authorreview SET "
             + "rating=?, review=?, isActive=? "
             + "WHERE idauthorreview=?";
 
@@ -200,10 +201,10 @@ public class SqlQueries {
             + "WHERE tag_idtag=?";
 
     public static final String ADD_REVIEW_TO_BOOK
-            = "UPDATE book SET (numberOfReviews=?, averageOfReviews=?, "
-            + "bayesianAverage=?, numberInChart=?) "
+            = "UPDATE book SET numberOfReviews=?, averageOfReviews=?, "
+            + "bayesianAverage=?, numberInChart=? "
             + "WHERE idbook=?";
-
+   
     public static final String REMOVE_REVIEW_FROM_BOOK
             = "UPDATE book SET (numberOfReviews=?, averageOfReviews=?, "
             + "bayesianAverage=?, numberInChart=?) "

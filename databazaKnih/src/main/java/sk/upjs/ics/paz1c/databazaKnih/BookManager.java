@@ -97,5 +97,4 @@ public interface BookManager {
     List<Book> getBooksToBayesian(int average, List<Book> books);
 
     List<Book> getBooksFromToBayesian(int from, int to, List<Book> books);
-
 }
