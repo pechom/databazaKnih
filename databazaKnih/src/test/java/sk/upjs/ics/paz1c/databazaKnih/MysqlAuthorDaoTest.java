@@ -57,16 +57,17 @@ public class MysqlAuthorDaoTest {
         Author jano = new Author();
         Author pali = new Author();
         jano.setName("Jano");
+        jano.setIsActive(true);
         pali.setName("Pali");
+        pali.setIsActive(true);
         expResult.add(pali);
         expResult.add(jano);
         authorDao.insertAuthor(jano);
         authorDao.insertAuthor(pali);
         List<Author> result = authorDao.getAllAuthors();
         assertEquals(expResult.size(), result.size());
-        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_0);
-        jdbcTemplate.update(SqlQueries.TRUNCATE_AUTHOR);
-        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_1);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, result.get(1).getId());
     }
 
     /**
@@ -84,9 +85,7 @@ public class MysqlAuthorDaoTest {
         //Author author = authorDao.findById(1); // kedze je jediny v databaze musi mat id 1
         Author author = dao.findById(1);
         assertEquals(jano.getName(), author.getName());
-//        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_0);
-//        jdbcTemplate.update(SqlQueries.TRUNCATE_AUTHOR);
-//        jdbcTemplate.update(SqlQueries.SET_FOREIGN_KEY_CHECKS_1);
+
     }
 
     /**
