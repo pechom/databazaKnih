@@ -78,14 +78,11 @@ public class MysqlAuthorDaoTest {
         System.out.println("insertAuthor");
         Author jano = new Author();
         jano.setName("Jano");
-        JdbcTemplate template = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
-        MysqlAuthorDao dao = new MysqlAuthorDao(template);
-        //authorDao.insertAuthor(jano);
-        dao.insertAuthor(jano);
-        //Author author = authorDao.findById(1); // kedze je jediny v databaze musi mat id 1
-        Author author = dao.findById(1);
-        assertEquals(jano.getName(), author.getName());
-
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        List<Author> result = authorDao.getAllAuthors();
+        assertEquals(1, result.size());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, result.get(0).getId());
     }
 
     /**
@@ -93,14 +90,15 @@ public class MysqlAuthorDaoTest {
      */
     @Test
     public void testDeleteAuthor() {
-        // tu som skoncil
         System.out.println("deleteAuthor");
         Author jano = new Author();
         jano.setName("Jano");
+        jano.setIsActive(true);
         authorDao.insertAuthor(jano);
-        authorDao.deleteAuthor(1);
-        List<Author> autori = new ArrayList<>();
-
+        List<Author> result = authorDao.getAllAuthors();
+        authorDao.deleteAuthor(result.get(0).getId());
+        result = authorDao.getAllAuthors();
+        assertEquals(result.size(), 0);
     }
 
     /**
@@ -109,11 +107,16 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testUpdateAuthor() {
         System.out.println("updateAuthor");
-        Author author = null;
-        MysqlAuthorDao instance = null;
-        instance.updateAuthor(author);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        List<Author> result = authorDao.getAllAuthors();
+        result.get(0).setName("pali");
+        authorDao.updateAuthor(result.get(0));
+        result = authorDao.getAllAuthors();
+        assertEquals("pali", result.get(0).getName());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, result.get(0).getId());
     }
 
     /**

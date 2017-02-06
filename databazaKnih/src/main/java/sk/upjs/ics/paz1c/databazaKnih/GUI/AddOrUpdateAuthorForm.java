@@ -371,7 +371,7 @@ private Author author;
         authorManager.addBooksToAuthor(bookList, author);
         author.setBiography(BiographyTextArea.getText());
         author.setIsActive(true);
-        authorManager.insertAuthor(author);
+        authorManager.updateAuthor(author);
         this.setVisible(false);
     }//GEN-LAST:event_UpdateAuthorButtonActionPerformed
 
