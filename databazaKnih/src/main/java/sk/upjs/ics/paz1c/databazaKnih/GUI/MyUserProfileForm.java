@@ -505,12 +505,12 @@ public class MyUserProfileForm extends javax.swing.JDialog {
     }//GEN-LAST:event_FavouriteReviewersIconButtonActionPerformed
 
     private void BookReviewsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookReviewsButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "MyAuthorReviews", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "MyBookReviews", user,null,null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_BookReviewsButtonActionPerformed
 
     private void AuthorReviewsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuthorReviewsButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "MyBookReviews", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "MyAuthorReviews", user,null,null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_AuthorReviewsButtonActionPerformed
 

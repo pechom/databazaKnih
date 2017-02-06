@@ -59,7 +59,7 @@ public class MysqlGenreDao implements InterfaceGenreDao {
 
     @Override
     public void deleteGenre(int id) {
-        jdbcTemplate.update(SqlQueries.UPDATE_GENRE, id);
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, id);
     }
 
     @Override

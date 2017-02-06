@@ -91,19 +91,19 @@ public class SqlQueries {
             + "(rating, review, isActive, author_idauthor, user_iduser) "
             + "VALUES (?,?,?,?,?)";
 
-    public static final String UPDATE_AUTHORREVIEW 
+    public static final String UPDATE_AUTHORREVIEW
             = "UPDATE authorreview SET "
             + "rating=?, review=?, isActive=? "
             + "WHERE idauthorreview=?";
 
     public static final String SELECT_AUTHORREVIEW_BY_ID = "SELECT "
             + "authorreview.idauthorreview, authorreview.rating, "
-            + "authorreview.isActive, "
+            + "authorreview.review, authorreview.isActive, "
             + "authorreview.author_idauthor, authorreview.user_iduser "
             + "FROM authorreview "
             + "LEFT JOIN author ON author.idauthor=authorreview.author_idauthor "
-            + "LEFT JOIN user ON user.iduser=authorreview.user_iduser"
-            + " WHERE authorreview.isActive=1 and authorreview.idauthorreview=";
+            + "LEFT JOIN user ON user.iduser=authorreview.user_iduser "
+            + "WHERE authorreview.isActive=1 and authorreview.idauthorreview=";
 
     public static final String DELETE_AUTHORREVIEWS_WITH_AUTHOR
             = "DELETE FROM authorreview "
@@ -204,7 +204,7 @@ public class SqlQueries {
             = "UPDATE book SET numberOfReviews=?, averageOfReviews=?, "
             + "bayesianAverage=?, numberInChart=? "
             + "WHERE idbook=?";
-   
+
     public static final String REMOVE_REVIEW_FROM_BOOK
             = "UPDATE book SET (numberOfReviews=?, averageOfReviews=?, "
             + "bayesianAverage=?, numberInChart=?) "
@@ -270,7 +270,8 @@ public class SqlQueries {
             = "INSERT INTO genre "
             + "(name, isActive) VALUES (?,?)";
 
-    public static final String UPDATE_GENRE = "UPDATE genre SET "
+    public static final String UPDATE_GENRE
+            = "UPDATE genre SET "
             + "name=?, isActive=? "
             + "WHERE idgenre=?";
 
@@ -658,7 +659,7 @@ public class SqlQueries {
 
     public static final String SET_FOREIGN_KEY_CHECKS_0
             = "SET FOREIGN_KEY_CHECKS = 0";
-    
+
     public static final String SET_FOREIGN_KEY_CHECKS_1
             = "SET FOREIGN_KEY_CHECKS = 1";
 }

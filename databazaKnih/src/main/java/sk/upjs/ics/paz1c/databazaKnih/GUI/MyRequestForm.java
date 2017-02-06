@@ -113,6 +113,7 @@ public class MyRequestForm extends javax.swing.JDialog {
         if(!isBook){
             AuthorRequest request = new AuthorRequest();
             request.setAuthor(author.getId());
+            request.setIsActive(true);
             request.setRequester(user.getId());
             
             request.setContent(MessageTextArea.getText());
@@ -120,6 +121,7 @@ public class MyRequestForm extends javax.swing.JDialog {
         } else {
             BookRequest request = new BookRequest();
              request.setBook(book.getId());
+             request.setIsActive(true);
             request.setRequester(user.getId());
             request.setContent(MessageTextArea.getText());
             bookrequestManager.insertRequest(request);

@@ -19,7 +19,9 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
     @Override
     public List<AuthorReview> getAllReviews() {
 
-        return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORREVIEWS, (ResultSet rs) -> {
+        return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORREVIEWS, new ResultSetExtractor<List<AuthorReview>>() {
+           @Override
+            public List<AuthorReview> extractData(ResultSet rs) throws SQLException, DataAccessException {
             List<AuthorReview> reviews = new ArrayList<>();
 
             AuthorReview authorReview = null;
@@ -49,10 +51,12 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                 }
             }
             return reviews;
+            }
         });
     }
 
     @Override
+
     public void insertReview(AuthorReview review) {
         jdbcTemplate.update(SqlQueries.INSERT_AUTHORREVIEW, review.getRating(),
                 review.getReview(), review.isIsActive(),
@@ -80,6 +84,7 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                     if (authorReview == null || authorReview.getId() != id) {
                         authorReview = new AuthorReview();
                         authorReview.setId(id);
+
                         authorReview.setRating(rs.getInt("rating"));
                         authorReview.setReview(rs.getString("review"));
 

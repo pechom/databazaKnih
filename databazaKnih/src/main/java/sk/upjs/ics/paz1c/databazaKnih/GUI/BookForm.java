@@ -63,6 +63,8 @@ public class BookForm extends javax.swing.JDialog {
         ISBNLabel.setText("ISBN: " + book.getISBN());
         YearLabel.setText("Year of publication: " + book.getYear());
         RatingLabel.setText("Rating: " + book.getBayesianAverage());
+        LengthLabel.setText("Number of Pages:" + book.getNumberOfPages());
+        
 
         List<Integer> genres = book.getGenres();
         String[] genreNames = new String[genres.size()];
@@ -321,7 +323,7 @@ public class BookForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BookReviewsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookReviewsIconButtonActionPerformed
-        ListForm bookReviewsList = new ListForm(this, true, "BookReview", user, book, null);
+        ListForm bookReviewsList = new ListForm(this, true, "BookReviews", user, book, null);
         bookReviewsList.setVisible(true);
     }//GEN-LAST:event_BookReviewsIconButtonActionPerformed
 

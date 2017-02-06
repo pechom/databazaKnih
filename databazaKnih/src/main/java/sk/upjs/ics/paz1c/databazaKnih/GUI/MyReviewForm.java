@@ -130,7 +130,7 @@ public class MyReviewForm extends javax.swing.JDialog {
     private void ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmButtonActionPerformed
         if(!isBook){
             AuthorReview review = new AuthorReview();
-            
+            review.setIsActive(true);
             review.setAuthor(author.getId());
             review.setUser( user.getId());
             review.setReview(ReviewTextArea.getText());
@@ -142,7 +142,7 @@ public class MyReviewForm extends javax.swing.JDialog {
         BookReview review = new BookReview();
             review.setBook(book.getId());
             review.setUser( user.getId());
-            
+            review.setIsActive(true);
             review.setReview(ReviewTextArea.getText());
             review.setRating((int) RatingSpinner.getValue()); 
             bookReviewManager.insertReview(review);
