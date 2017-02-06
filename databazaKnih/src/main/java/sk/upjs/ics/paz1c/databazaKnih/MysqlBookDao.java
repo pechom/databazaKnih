@@ -163,7 +163,7 @@ public class MysqlBookDao implements InterfaceBookDao {
     }
 
     @Override
-    public void addAuthorToBook(int idauthor, int idbook) {
+    public void addAuthorToBook(int idbook, int idauthor) {
         jdbcTemplate.update(SqlQueries.ADD_AUTHOR_TO_BOOK, idbook, idauthor);
     }
 

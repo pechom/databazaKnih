@@ -363,7 +363,7 @@ book.setName(NameTextField.getText());
         newBook.setYear(Integer.parseInt(YearTextField.getText()));
         if (AuthorList.getSelectedIndex() != -1) {
             newBook.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
-            bookManager.addAuthorToBook(newBook, authorManager.findById(book.getAuthor()));
+            bookManager.addAuthorToBook(newBook, authorManager.findById(newBook.getAuthor()));
         }
 
         if (AuthorList.getSelectedIndex() != -1) {

@@ -125,26 +125,14 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        int id = 0;
-        MysqlAuthorDao instance = null;
-        Author expResult = null;
-        Author result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of undeleteAuthor method, of class MysqlAuthorDao.
-     */
-    @Test
-    public void testUndeleteAuthor() {
-        System.out.println("undeleteAuthor");
-        int id = 0;
-        MysqlAuthorDao instance = null;
-        instance.undeleteAuthor(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        List<Author> result = authorDao.getAllAuthors();
+        Author resultA = authorDao.findById(result.get(0).getId());
+        assertEquals(resultA.getId(), result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, result.get(0).getId());
     }
 
     /**
@@ -153,12 +141,22 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testAddBookToAuthor() {
         System.out.println("addBookToAuthor");
-        int bookid = 0;
-        int authorid = 0;
-        MysqlAuthorDao instance = null;
-        instance.addBookToAuthor(bookid, authorid);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<Author> authors = authorDao.getAllAuthors();
+        List<Book> books = bookDao.getAllBooks();
+        authorDao.addBookToAuthor(books.get(0).getId(), authors.get(0).getId());
+        authors = authorDao.getAllAuthors();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(authors.get(0).getBooks().get(0)), Long.valueOf(books.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -167,12 +165,24 @@ public class MysqlAuthorDaoTest {
     @Test
     public void testRemoveBookFromAuthor() {
         System.out.println("removeBookFromAuthor");
-        int bookid = 0;
-        int authorid = 0;
-        MysqlAuthorDao instance = null;
-        instance.removeBookFromAuthor(bookid, authorid);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<Author> authors = authorDao.getAllAuthors();
+        List<Book> books = bookDao.getAllBooks();
+        authorDao.addBookToAuthor(books.get(0).getId(), authors.get(0).getId());
+        authorDao.removeBookFromAuthor(books.get(0).getId(), authors.get(0).getId());
+        authors = authorDao.getAllAuthors();
+        books = bookDao.getAllBooks();
+        authors = authorDao.getAllAuthors();
+        assertEquals(Long.valueOf(authors.get(0).getBooks().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
