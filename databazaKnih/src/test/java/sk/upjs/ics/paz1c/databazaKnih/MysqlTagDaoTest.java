@@ -113,18 +113,6 @@ public class MysqlTagDaoTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of undeleteTag method, of class MysqlTagDao.
-     */
-    @Test
-    public void testUndeleteTag() {
-        System.out.println("undeleteTag");
-        int id = 0;
-        MysqlTagDao instance = null;
-        instance.undeleteTag(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of addBookToTag method, of class MysqlTagDao.

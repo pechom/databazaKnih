@@ -30,6 +30,7 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                     if (bookReview == null || bookReview.getId() != id) {
                         bookReview = new BookReview();
                         bookReview.setId(id);
+                        bookReview.setIsActive(rs.getBoolean("isActive"));
                         bookReview.setRating(rs.getInt("rating"));
                         bookReview.setReview(rs.getString("review"));
                         reviews.add(bookReview);
@@ -83,6 +84,7 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                     if (bookReview == null || bookReview.getId() != id) {
                         bookReview = new BookReview();
                         bookReview.setId(id);
+                        bookReview.setIsActive(rs.getBoolean("isActive"));
                         bookReview.setRating(rs.getInt("rating"));
                         bookReview.setReview(rs.getString("review"));
 

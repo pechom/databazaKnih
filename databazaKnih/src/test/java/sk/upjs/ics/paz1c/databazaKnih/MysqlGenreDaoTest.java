@@ -112,18 +112,6 @@ public class MysqlGenreDaoTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of undeleteGenre method, of class MysqlGenreDao.
-     */
-    @Test
-    public void testUndeleteGenre() {
-        System.out.println("undeleteGenre");
-        int id = 0;
-        MysqlGenreDao instance = null;
-        instance.undeleteGenre(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of addBookToGenre method, of class MysqlGenreDao.

@@ -112,18 +112,6 @@ public class MysqlBookReviewDaoTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of undeleteReview method, of class MysqlBookReviewDao.
-     */
-    @Test
-    public void testUndeleteReview() {
-        System.out.println("undeleteReview");
-        int id = 0;
-        MysqlBookReviewDao instance = null;
-        instance.undeleteReview(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of deleteReviewsWithBook method, of class MysqlBookReviewDao.

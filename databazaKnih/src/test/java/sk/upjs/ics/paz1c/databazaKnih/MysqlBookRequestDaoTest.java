@@ -123,18 +123,6 @@ public class MysqlBookRequestDaoTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of undeleteRequest method, of class MysqlBookRequestDao.
-     */
-    @Test
-    public void testUndeleteRequest() {
-        System.out.println("undeleteRequest");
-        int id = 0;
-        MysqlBookRequestDao instance = null;
-        instance.undeleteRequest(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of findById method, of class MysqlBookRequestDao.

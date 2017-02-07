@@ -50,12 +50,31 @@ public class MysqlAuthorRequestDaoTest {
     @Test
     public void testGetAllRequests() {
         System.out.println("getAllRequests");
-        MysqlAuthorRequestDao instance = null;
-        List<AuthorRequest> expResult = null;
-        List<AuthorRequest> result = instance.getAllRequests();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorRequest r1 = new AuthorRequest();
+        AuthorRequest r2 = new AuthorRequest();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setRequester(users.get(0).getId());
+        r2.setRequester(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        r2.setAuthor(authors.get(0).getId());
+        requestDao.insertRequest(r1);
+        requestDao.insertRequest(r2);
+        List<AuthorRequest> requests = requestDao.getAllRequests();
+        assertEquals(requests.size(), 2);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -63,12 +82,27 @@ public class MysqlAuthorRequestDaoTest {
      */
     @Test
     public void testInsertRequest() {
-        System.out.println("insertRequest");
-        AuthorRequest request = null;
-        MysqlAuthorRequestDao instance = null;
-        instance.insertRequest(request);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("InsertRequest");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorRequest r1 = new AuthorRequest();
+        r1.setIsActive(true);
+        r1.setRequester(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        requestDao.insertRequest(r1);
+        List<AuthorRequest> requests = requestDao.getAllRequests();
+        assertEquals(requests.size(), 1);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -77,11 +111,33 @@ public class MysqlAuthorRequestDaoTest {
     @Test
     public void testDeleteRequest() {
         System.out.println("deleteRequest");
-        int id = 0;
-        MysqlAuthorRequestDao instance = null;
-        instance.deleteRequest(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorRequest r1 = new AuthorRequest();
+        AuthorRequest r2 = new AuthorRequest();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setRequester(users.get(0).getId());
+        r2.setRequester(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        r2.setAuthor(authors.get(0).getId());
+        requestDao.insertRequest(r1);
+        requestDao.insertRequest(r2);
+        List<AuthorRequest> requests = requestDao.getAllRequests();
+        requestDao.deleteRequest(requests.get(0).getId());
+        requests = requestDao.getAllRequests();
+        assertEquals(requests.size(), 1);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -90,26 +146,27 @@ public class MysqlAuthorRequestDaoTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        int id = 0;
-        MysqlAuthorRequestDao instance = null;
-        AuthorRequest expResult = null;
-        AuthorRequest result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of undeleteRequest method, of class MysqlAuthorRequestDao.
-     */
-    @Test
-    public void testUndeleteRequest() {
-        System.out.println("undeleteRequest");
-        int id = 0;
-        MysqlAuthorRequestDao instance = null;
-        instance.undeleteRequest(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorRequest r1 = new AuthorRequest();
+        r1.setIsActive(true);
+        r1.setRequester(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        requestDao.insertRequest(r1);
+        List<AuthorRequest> requests = requestDao.getAllRequests();
+        AuthorRequest result = requestDao.findById(requests.get(0).getId());
+        assertEquals(result.getId(), requests.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -117,12 +174,30 @@ public class MysqlAuthorRequestDaoTest {
      */
     @Test
     public void testUpdateRequest() {
-        System.out.println("updateRequest");
-        AuthorRequest request = null;
-        MysqlAuthorRequestDao instance = null;
-        instance.updateRequest(request);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorRequest r1 = new AuthorRequest();
+        r1.setIsActive(true);
+        r1.setContent("yadyada");
+        r1.setRequester(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        requestDao.insertRequest(r1);
+        List<AuthorRequest> requests = requestDao.getAllRequests();
+        requests.get(0).setContent("yareyare");
+        requestDao.updateRequest(requests.get(0));
+        requests = requestDao.getAllRequests();
+        assertEquals(requests.get(0).getContent(), "yareyare");
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -131,11 +206,35 @@ public class MysqlAuthorRequestDaoTest {
     @Test
     public void testDeleteAllWithRequester() {
         System.out.println("deleteAllWithRequester");
-        int iduser = 0;
-        MysqlAuthorRequestDao instance = null;
-        instance.deleteAllWithRequester(iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorRequest r1 = new AuthorRequest();
+        AuthorRequest r2 = new AuthorRequest();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setRequester(users.get(0).getId());
+        r2.setRequester(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        r2.setAuthor(authors.get(0).getId());
+        requestDao.insertRequest(r1);
+        requestDao.insertRequest(r2);
+        List<AuthorRequest> requests = requestDao.getAllRequests();
+        User requester = userDao.getAllUsers().get(0);
+        requestDao.deleteAllWithRequester(requester.getId());
+        requests = requestDao.getAllRequests();
+        assertEquals(requests.size(), 0);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+
     }
 
     /**
@@ -144,11 +243,34 @@ public class MysqlAuthorRequestDaoTest {
     @Test
     public void testDeleteAllWithAuthor() {
         System.out.println("deleteAllWithAuthor");
-        int idauthor = 0;
-        MysqlAuthorRequestDao instance = null;
-        instance.deleteAllWithAuthor(idauthor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorRequest r1 = new AuthorRequest();
+        AuthorRequest r2 = new AuthorRequest();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setRequester(users.get(0).getId());
+        r2.setRequester(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        r2.setAuthor(authors.get(0).getId());
+        requestDao.insertRequest(r1);
+        requestDao.insertRequest(r2);
+        List<AuthorRequest> requests = requestDao.getAllRequests();
+        Author author=authorDao.getAllAuthors().get(0);
+        requestDao.deleteAllWithAuthor(author.getId());
+        requests = requestDao.getAllRequests();
+        assertEquals(requests.size(), 0);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
 }

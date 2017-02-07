@@ -76,7 +76,7 @@ public class SqlQueries {
 
     public static final String SELECT_ALL_AUTHORREVIEWS = "SELECT "
             + "authorreview.idauthorreview, authorreview.rating, "
-            + "authorreview.isActive, "
+            + "authorreview.isActive, authorreview.review, "
             + "authorreview.author_idauthor, authorreview.user_iduser "
             + "FROM authorreview "
             + "LEFT JOIN author ON "
@@ -662,5 +662,4 @@ public class SqlQueries {
 
     public static final String SET_FOREIGN_KEY_CHECKS_1
             = "SET FOREIGN_KEY_CHECKS = 1";
-
 }

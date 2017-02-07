@@ -113,19 +113,6 @@ public class MysqlBookDaoTest {
     }
 
     /**
-     * Test of undeleteBook method, of class MysqlBookDao.
-     */
-    @Test
-    public void testUndeleteBook() {
-        System.out.println("undeleteBook");
-        int id = 0;
-        MysqlBookDao instance = null;
-        instance.undeleteBook(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of addAuthorToBook method, of class MysqlBookDao.
      */
     @Test

@@ -114,18 +114,6 @@ public class MysqlUserDaoTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of undeleteUser method, of class MysqlUserDao.
-     */
-    @Test
-    public void testUndeleteUser() {
-        System.out.println("undeleteUser");
-        int id = 0;
-        MysqlUserDao instance = null;
-        instance.undeleteUser(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of changePassword method, of class MysqlUserDao.

@@ -30,6 +30,7 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
                         request = new AuthorRequest();
                         request.setContent(rs.getString("content"));
                         request.setId(id);
+                        request.setIsActive(rs.getBoolean("isActive"));
                         requests.add(request);
 
                         int authorid = rs.getInt("author_idauthor");
@@ -75,6 +76,7 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
                     if (request == null || request.getId() != id) {
                         request = new AuthorRequest();
                         request.setId(id);
+                        request.setIsActive(rs.getBoolean("isActive"));
                         request.setContent(rs.getString("content"));
                     }
                     int authorid = rs.getInt("author_idauthor");
