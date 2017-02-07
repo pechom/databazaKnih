@@ -19,27 +19,27 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @author Peťo Chomič
  */
 public class MysqlBookReviewDaoTest {
-    
-    private InterfaceBookReviewDao bookReviewDao;
+
+    private InterfaceBookReviewDao reviewDao;
     private JdbcTemplate jdbcTemplate;
-    
+
     public MysqlBookReviewDaoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        bookReviewDao = ObjectFactoryNaTesty.INSTANCE.getBookReviewDao();
+        reviewDao = ObjectFactoryNaTesty.INSTANCE.getBookReviewDao();
         jdbcTemplate = ObjectFactoryNaTesty.INSTANCE.getJdbcTemplate();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -50,12 +50,30 @@ public class MysqlBookReviewDaoTest {
     @Test
     public void testGetAllReviews() {
         System.out.println("getAllReviews");
-        MysqlBookReviewDao instance = null;
-        List<BookReview> expResult = null;
-        List<BookReview> result = instance.getAllReviews();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        BookReview r1 = new BookReview();
+        BookReview r2 = new BookReview();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r2.setUser(users.get(0).getId());
+        r1.setBook(books.get(0).getId());
+        r2.setBook(books.get(0).getId());
+        reviewDao.insertReview(r1);
+        reviewDao.insertReview(r2);
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.size(), 2);
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -64,11 +82,25 @@ public class MysqlBookReviewDaoTest {
     @Test
     public void testInsertReview() {
         System.out.println("insertReview");
-        BookReview review = null;
-        MysqlBookReviewDao instance = null;
-        instance.insertReview(review);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        BookReview r1 = new BookReview();
+        r1.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r1.setBook(books.get(0).getId());
+        reviewDao.insertReview(r1);
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.size(), 1);
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -77,11 +109,32 @@ public class MysqlBookReviewDaoTest {
     @Test
     public void testDeleteReview() {
         System.out.println("deleteReview");
-        int id = 0;
-        MysqlBookReviewDao instance = null;
-        instance.deleteReview(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        BookReview r1 = new BookReview();
+        BookReview r2 = new BookReview();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r2.setUser(users.get(0).getId());
+        r1.setBook(books.get(0).getId());
+        r2.setBook(books.get(0).getId());
+        reviewDao.insertReview(r1);
+        reviewDao.insertReview(r2);
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        reviewDao.deleteReview(reviews.get(0).getId());
+        reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.size(), 1);
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -90,11 +143,28 @@ public class MysqlBookReviewDaoTest {
     @Test
     public void testUpdateReview() {
         System.out.println("updateReview");
-        BookReview review = null;
-        MysqlBookReviewDao instance = null;
-        instance.updateReview(review);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        BookReview r1 = new BookReview();
+        r1.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r1.setBook(books.get(0).getId());
+        reviewDao.insertReview(r1);
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        reviews.get(0).setReview("yareyare");
+        reviewDao.updateReview(reviews.get(0));
+        reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.get(0).getReview(), "yareyare");
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -103,15 +173,27 @@ public class MysqlBookReviewDaoTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        int id = 0;
-        MysqlBookReviewDao instance = null;
-        BookReview expResult = null;
-        BookReview result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        BookReview r1 = new BookReview();
+        r1.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r1.setBook(books.get(0).getId());
+        reviewDao.insertReview(r1);
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        BookReview result = reviewDao.findById(reviews.get(0).getId());
+        assertEquals(result.getId(), reviews.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
-
 
     /**
      * Test of deleteReviewsWithBook method, of class MysqlBookReviewDao.
@@ -119,11 +201,32 @@ public class MysqlBookReviewDaoTest {
     @Test
     public void testDeleteReviewsWithBook() {
         System.out.println("deleteReviewsWithBook");
-        int idbook = 0;
-        MysqlBookReviewDao instance = null;
-        instance.deleteReviewsWithBook(idbook);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        BookReview r1 = new BookReview();
+        BookReview r2 = new BookReview();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r2.setUser(users.get(0).getId());
+        r1.setBook(books.get(0).getId());
+        r2.setBook(books.get(0).getId());
+        reviewDao.insertReview(r1);
+        reviewDao.insertReview(r2);
+        Book b= bookDao.getAllBooks().get(0);
+        reviewDao.deleteReviewsWithBook(b.getId());
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.size(), 0);
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -132,11 +235,32 @@ public class MysqlBookReviewDaoTest {
     @Test
     public void testDeleteReviewsWithUser() {
         System.out.println("deleteReviewsWithUser");
-        int iduser = 0;
-        MysqlBookReviewDao instance = null;
-        instance.deleteReviewsWithUser(iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        BookReview r1 = new BookReview();
+        BookReview r2 = new BookReview();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r2.setUser(users.get(0).getId());
+        r1.setBook(books.get(0).getId());
+        r2.setBook(books.get(0).getId());
+        reviewDao.insertReview(r1);
+        reviewDao.insertReview(r2);
+        User u = userDao.getAllUsers().get(0);
+        reviewDao.deleteReviewsWithUser(u.getId());
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.size(), 0);
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
-    
+
 }

@@ -27,7 +27,7 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
                     int id = rs.getInt("idbookrequest");
                     if (request == null || request.getId() != id) {
                         request = new BookRequest();
-                         request.setIsActive(rs.getBoolean("isActive"));
+                        request.setIsActive(rs.getBoolean("isActive"));
                         request.setContent(rs.getString("content"));
                         request.setId(id);
                         requests.add(request);

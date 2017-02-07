@@ -227,10 +227,9 @@ public class MysqlAuthorRequestDaoTest {
         r2.setAuthor(authors.get(0).getId());
         requestDao.insertRequest(r1);
         requestDao.insertRequest(r2);
-        List<AuthorRequest> requests = requestDao.getAllRequests();
         User requester = userDao.getAllUsers().get(0);
         requestDao.deleteAllWithRequester(requester.getId());
-        requests = requestDao.getAllRequests();
+        List<AuthorRequest> requests = requestDao.getAllRequests();
         assertEquals(requests.size(), 0);
         jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
         jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
@@ -264,10 +263,9 @@ public class MysqlAuthorRequestDaoTest {
         r2.setAuthor(authors.get(0).getId());
         requestDao.insertRequest(r1);
         requestDao.insertRequest(r2);
-        List<AuthorRequest> requests = requestDao.getAllRequests();
-        Author author=authorDao.getAllAuthors().get(0);
+        Author author = authorDao.getAllAuthors().get(0);
         requestDao.deleteAllWithAuthor(author.getId());
-        requests = requestDao.getAllRequests();
+        List<AuthorRequest> requests = requestDao.getAllRequests();
         assertEquals(requests.size(), 0);
         jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
         jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());

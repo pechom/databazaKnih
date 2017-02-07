@@ -26,7 +26,7 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                 List<BookReview> reviews = new ArrayList<>();
                 BookReview bookReview = null;
                 while (rs.next()) {
-                    int id = rs.getInt("bookreview");
+                    int id = rs.getInt("idbookreview");
                     if (bookReview == null || bookReview.getId() != id) {
                         bookReview = new BookReview();
                         bookReview.setId(id);

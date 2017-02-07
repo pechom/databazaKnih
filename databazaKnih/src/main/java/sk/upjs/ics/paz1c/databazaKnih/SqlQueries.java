@@ -375,7 +375,7 @@ public class SqlQueries {
             + "bookrequest.book_idbook=book.idbook "
             + "LEFT JOIN user ON "
             + "bookrequest.user_iduser=user.iduser "
-            + "WHERE bookrequest.isActive=1 and"
+            + "WHERE bookrequest.isActive=1 and "
             + "bookrequest.idbookrequest=";
 
     public static final String DELETE_AUTHOR_REQUESTS_WITH_USER

@@ -20,38 +20,38 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
     public List<AuthorReview> getAllReviews() {
 
         return jdbcTemplate.query(SqlQueries.SELECT_ALL_AUTHORREVIEWS, new ResultSetExtractor<List<AuthorReview>>() {
-           @Override
+            @Override
             public List<AuthorReview> extractData(ResultSet rs) throws SQLException, DataAccessException {
-            List<AuthorReview> reviews = new ArrayList<>();
+                List<AuthorReview> reviews = new ArrayList<>();
 
-            AuthorReview authorReview = null;
-            while (rs.next()) {
-                int id = rs.getInt("idauthorreview");
-                if (authorReview == null || authorReview.getId() != id) {
-                    authorReview = new AuthorReview();
-                    authorReview.setId(id);
-                    authorReview.setIsActive(rs.getBoolean("isActive"));
-                    authorReview.setRating(rs.getInt("rating"));
-                    authorReview.setReview(rs.getString("review"));
-                    reviews.add(authorReview);
+                AuthorReview authorReview = null;
+                while (rs.next()) {
+                    int id = rs.getInt("idauthorreview");
+                    if (authorReview == null || authorReview.getId() != id) {
+                        authorReview = new AuthorReview();
+                        authorReview.setId(id);
+                        authorReview.setIsActive(rs.getBoolean("isActive"));
+                        authorReview.setRating(rs.getInt("rating"));
+                        authorReview.setReview(rs.getString("review"));
+                        reviews.add(authorReview);
 
-                    int authorid = rs.getInt("author_idauthor");
-                    if (!rs.wasNull()) {
-                        authorReview.setAuthor(authorid);
-                    } else {
-                        authorReview.setAuthor(0);
-                    }
+                        int authorid = rs.getInt("author_idauthor");
+                        if (!rs.wasNull()) {
+                            authorReview.setAuthor(authorid);
+                        } else {
+                            authorReview.setAuthor(0);
+                        }
 
-                    int userid = rs.getInt("user_iduser");
-                    if (!rs.wasNull()) {
-                        authorReview.setUser(userid);
+                        int userid = rs.getInt("user_iduser");
+                        if (!rs.wasNull()) {
+                            authorReview.setUser(userid);
 
-                    } else {
-                        authorReview.setUser(0);
+                        } else {
+                            authorReview.setUser(0);
+                        }
                     }
                 }
-            }
-            return reviews;
+                return reviews;
             }
         });
     }

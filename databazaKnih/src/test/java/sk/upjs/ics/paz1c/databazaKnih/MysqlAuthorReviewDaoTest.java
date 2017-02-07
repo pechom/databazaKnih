@@ -207,11 +207,33 @@ public class MysqlAuthorReviewDaoTest {
     @Test
     public void testDeleteReviewsWithAuthor() {
         System.out.println("deleteReviewsWithAuthor");
-        int idauthor = 0;
-        MysqlAuthorReviewDao instance = null;
-        instance.deleteReviewsWithAuthor(idauthor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorReview r1 = new AuthorReview();
+        AuthorReview r2 = new AuthorReview();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r2.setUser(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        r2.setAuthor(authors.get(0).getId());
+        reviewDao.insertReview(r1);
+        reviewDao.insertReview(r2);
+        Author author = authorDao.getAllAuthors().get(0);
+        reviewDao.deleteReviewsWithAuthor(author.getId());
+        List<AuthorReview> reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.size(), 0);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -220,11 +242,33 @@ public class MysqlAuthorReviewDaoTest {
     @Test
     public void testDeleteReviewsWithUser() {
         System.out.println("deleteReviewsWithUser");
-        int iduser = 0;
-        MysqlAuthorReviewDao instance = null;
-        instance.deleteReviewsWithUser(iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        authorDao.insertAuthor(jano);
+        User user = new User();
+        user.setIsActive(true);
+        InterfaceUserDao userDao = ObjectFactoryNaTesty.INSTANCE.getUserDao();
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorReview r1 = new AuthorReview();
+        AuthorReview r2 = new AuthorReview();
+        r1.setIsActive(true);
+        r2.setIsActive(true);
+        r1.setUser(users.get(0).getId());
+        r2.setUser(users.get(0).getId());
+        r1.setAuthor(authors.get(0).getId());
+        r2.setAuthor(authors.get(0).getId());
+        reviewDao.insertReview(r1);
+        reviewDao.insertReview(r2);
+        User u = userDao.getAllUsers().get(0);
+        reviewDao.deleteReviewsWithUser(u.getId());
+        List<AuthorReview> reviews = reviewDao.getAllReviews();
+        assertEquals(reviews.size(), 0);
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
 }
