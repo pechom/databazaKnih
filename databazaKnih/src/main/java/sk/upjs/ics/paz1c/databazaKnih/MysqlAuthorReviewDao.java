@@ -34,21 +34,20 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                         authorReview.setRating(rs.getInt("rating"));
                         authorReview.setReview(rs.getString("review"));
                         reviews.add(authorReview);
+                    }
+                    int authorid = rs.getInt("author_idauthor");
+                    if (!rs.wasNull()) {
+                        authorReview.setAuthor(authorid);
+                    } else {
+                        authorReview.setAuthor(0);
+                    }
 
-                        int authorid = rs.getInt("author_idauthor");
-                        if (!rs.wasNull()) {
-                            authorReview.setAuthor(authorid);
-                        } else {
-                            authorReview.setAuthor(0);
-                        }
+                    int userid = rs.getInt("user_iduser");
+                    if (!rs.wasNull()) {
+                        authorReview.setUser(userid);
 
-                        int userid = rs.getInt("user_iduser");
-                        if (!rs.wasNull()) {
-                            authorReview.setUser(userid);
-
-                        } else {
-                            authorReview.setUser(0);
-                        }
+                    } else {
+                        authorReview.setUser(0);
                     }
                 }
                 return reviews;
@@ -88,9 +87,7 @@ public class MysqlAuthorReviewDao implements InterfaceAuthorReviewDao {
                         authorReview.setIsActive(rs.getBoolean("isActive"));
                         authorReview.setRating(rs.getInt("rating"));
                         authorReview.setReview(rs.getString("review"));
-
                     }
-
                     int authorid = rs.getInt("author_idauthor");
                     if (!rs.wasNull()) {
                         authorReview.setAuthor(authorid);

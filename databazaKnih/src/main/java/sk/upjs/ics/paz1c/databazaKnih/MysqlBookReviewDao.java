@@ -34,7 +34,7 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         bookReview.setRating(rs.getInt("rating"));
                         bookReview.setReview(rs.getString("review"));
                         reviews.add(bookReview);
-
+                    }
                         int bookid = rs.getInt("book_idbook");
                         if (!rs.wasNull()) {
                             bookReview.setBook(bookid);
@@ -48,7 +48,6 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         } else {
                             bookReview.setUser(0);
                         }
-                    }
                 }
                 return reviews;
             }

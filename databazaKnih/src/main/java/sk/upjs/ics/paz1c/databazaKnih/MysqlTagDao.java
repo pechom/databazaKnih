@@ -32,11 +32,10 @@ public class MysqlTagDao implements InterfaceTagDao {
                         tag.setIsActive(rs.getBoolean("isActive"));
                         tag.setBooksWithTag(new ArrayList<>());
                         tags.add(tag);
-
-                        int bookid = rs.getInt("tagofbook.book_idbook");
-                        if (!rs.wasNull()) {
-                            tag.getBooksWithTag().add(bookid);
-                        }
+                    }
+                    int bookid = rs.getInt("tagofbook.book_idbook");
+                    if (!rs.wasNull()) {
+                        tag.getBooksWithTag().add(bookid);
                     }
                 }
                 return tags;

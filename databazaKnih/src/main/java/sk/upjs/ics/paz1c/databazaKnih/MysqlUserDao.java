@@ -56,62 +56,61 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setReading(new ArrayList<>());
                         user.setWantedBooks(new ArrayList<>());
                         users.add(user);
+                    }
+                    int areviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!rs.wasNull()) {
+                        user.getAuthorReviews().add(areviewid);
+                    }
 
-                        int areviewid = rs.getInt("authorreview.idauthorreview");
-                        if (!rs.wasNull()) {
-                            user.getAuthorReviews().add(areviewid);
-                        }
+                    int breviewid = rs.getInt("bookreview.idbookreview");
+                    if (!rs.wasNull()) {
+                        user.getBookReviews().add(breviewid);
+                    }
 
-                        int breviewid = rs.getInt("bookreview.idbookreview");
-                        if (!rs.wasNull()) {
-                            user.getBookReviews().add(breviewid);
-                        }
+                    int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
+                    if (!rs.wasNull()) {
+                        user.getFavoriteAuthors().add(favauthorid);
+                    }
 
-                        int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
-                        if (!rs.wasNull()) {
-                            user.getFavoriteAuthors().add(favauthorid);
-                        }
+                    int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
+                    if (!rs.wasNull()) {
+                        user.getFavoriteBooks().add(favbookid);
+                    }
 
-                        int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
-                        if (!rs.wasNull()) {
-                            user.getFavoriteBooks().add(favbookid);
-                        }
+                    int favuserid = rs.getInt("favoriteuser.favoriteuser");
+                    if (!rs.wasNull()) {
+                        user.getFavoriteReviewers().add(favuserid);
+                    }
 
-                        int favuserid = rs.getInt("favoriteuser.favoriteuser");
-                        if (!rs.wasNull()) {
-                            user.getFavoriteReviewers().add(favuserid);
-                        }
+                    int friendid = rs.getInt("friend.friend");
+                    if (!rs.wasNull()) {
+                        user.getFriends().add(friendid);
+                    }
 
-                        int friendid = rs.getInt("friend.friend");
-                        if (!rs.wasNull()) {
-                            user.getFriends().add(friendid);
-                        }
+                    int readid = rs.getInt("readbook.readbook_idbook");
+                    if (!rs.wasNull()) {
+                        user.getReadBooks().add(readid);
+                    }
 
-                        int readid = rs.getInt("readbook.readbook_idbook");
-                        if (!rs.wasNull()) {
-                            user.getReadBooks().add(readid);
-                        }
+                    int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
+                    if (!rs.wasNull()) {
+                        user.getWantedBooks().add(wantedid);
+                    }
 
-                        int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
-                        if (!rs.wasNull()) {
-                            user.getWantedBooks().add(wantedid);
-                        }
+                    int noteid = rs.getInt("booknote.booknote_idbook");
+                    String note = rs.getString("booknote.note");
+                    if (!rs.wasNull()) {
+                        Map<Integer, String> bookWithNote = new HashMap<>();
+                        bookWithNote.put(noteid, note);
+                        user.getNote().add(bookWithNote);
+                    }
 
-                        int noteid = rs.getInt("booknote.booknote_idbook");
-                        String note = rs.getString("booknote.note");
-                        if (!rs.wasNull()) {
-                            Map<Integer, String> bookWithNote = new HashMap<>();
-                            bookWithNote.put(noteid, note);
-                            user.getNote().add(bookWithNote);
-                        }
-
-                        int readingid = rs.getInt("readingbook.readingbook_idbook");
-                        int pocetReading = rs.getInt("readingbook.numberOfPages");
-                        if (!rs.wasNull()) {
-                            Map<Integer, Integer> readingWithPage = new HashMap<>();
-                            readingWithPage.put(readingid, pocetReading);
-                            user.getReading().add(readingWithPage);
-                        }
+                    int readingid = rs.getInt("readingbook.readingbook_idbook");
+                    int pocetReading = rs.getInt("readingbook.numberOfPages");
+                    if (!rs.wasNull()) {
+                        Map<Integer, Integer> readingWithPage = new HashMap<>();
+                        readingWithPage.put(readingid, pocetReading);
+                        user.getReading().add(readingWithPage);
                     }
                 }
                 return users;
@@ -171,61 +170,61 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setReadBooks(new ArrayList<>());
                         user.setReading(new ArrayList<>());
                         user.setWantedBooks(new ArrayList<>());
-                        int areviewid = rs.getInt("authorreview.idauthorreview");
-                        if (!rs.wasNull()) {
-                            user.getAuthorReviews().add(areviewid);
-                        }
+                    }
+                    int areviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!rs.wasNull()) {
+                        user.getAuthorReviews().add(areviewid);
+                    }
 
-                        int breviewid = rs.getInt("bookreview.idbookreview");
-                        if (!rs.wasNull()) {
-                            user.getBookReviews().add(breviewid);
-                        }
+                    int breviewid = rs.getInt("bookreview.idbookreview");
+                    if (!rs.wasNull()) {
+                        user.getBookReviews().add(breviewid);
+                    }
 
-                        int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
-                        if (!rs.wasNull()) {
-                            user.getFavoriteAuthors().add(favauthorid);
-                        }
+                    int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
+                    if (!rs.wasNull()) {
+                        user.getFavoriteAuthors().add(favauthorid);
+                    }
 
-                        int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
-                        if (!rs.wasNull()) {
-                            user.getFavoriteBooks().add(favbookid);
-                        }
+                    int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
+                    if (!rs.wasNull()) {
+                        user.getFavoriteBooks().add(favbookid);
+                    }
 
-                        int favuserid = rs.getInt("favoriteuser.favoriteuser");
-                        if (!rs.wasNull()) {
-                            user.getFavoriteReviewers().add(favuserid);
-                        }
+                    int favuserid = rs.getInt("favoriteuser.favoriteuser");
+                    if (!rs.wasNull()) {
+                        user.getFavoriteReviewers().add(favuserid);
+                    }
 
-                        int friendid = rs.getInt("friend.friend");
-                        if (!rs.wasNull()) {
-                            user.getFriends().add(friendid);
-                        }
+                    int friendid = rs.getInt("friend.friend");
+                    if (!rs.wasNull()) {
+                        user.getFriends().add(friendid);
+                    }
 
-                        int readid = rs.getInt("readbook.readbook_idbook");
-                        if (!rs.wasNull()) {
-                            user.getReadBooks().add(readid);
-                        }
+                    int readid = rs.getInt("readbook.readbook_idbook");
+                    if (!rs.wasNull()) {
+                        user.getReadBooks().add(readid);
+                    }
 
-                        int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
-                        if (!rs.wasNull()) {
-                            user.getWantedBooks().add(wantedid);
-                        }
+                    int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
+                    if (!rs.wasNull()) {
+                        user.getWantedBooks().add(wantedid);
+                    }
 
-                        int noteid = rs.getInt("booknote.booknote_idbook");
-                        String note = rs.getString("booknote.note");
-                        if (!rs.wasNull()) {
-                            Map<Integer, String> bookWithNote = new HashMap<>();
-                            bookWithNote.put(noteid, note);
-                            user.getNote().add(bookWithNote);
-                        }
+                    int noteid = rs.getInt("booknote.booknote_idbook");
+                    String note = rs.getString("booknote.note");
+                    if (!rs.wasNull()) {
+                        Map<Integer, String> bookWithNote = new HashMap<>();
+                        bookWithNote.put(noteid, note);
+                        user.getNote().add(bookWithNote);
+                    }
 
-                        int readingid = rs.getInt("readingbook.readingbook_idbook");
-                        int pocetReading = rs.getInt("readingbook.numberOfPages");
-                        if (!rs.wasNull()) {
-                            Map<Integer, Integer> readingWithPage = new HashMap<>();
-                            readingWithPage.put(readingid, pocetReading);
-                            user.getReading().add(readingWithPage);
-                        }
+                    int readingid = rs.getInt("readingbook.readingbook_idbook");
+                    int pocetReading = rs.getInt("readingbook.numberOfPages");
+                    if (!rs.wasNull()) {
+                        Map<Integer, Integer> readingWithPage = new HashMap<>();
+                        readingWithPage.put(readingid, pocetReading);
+                        user.getReading().add(readingWithPage);
                     }
                 }
                 return user;

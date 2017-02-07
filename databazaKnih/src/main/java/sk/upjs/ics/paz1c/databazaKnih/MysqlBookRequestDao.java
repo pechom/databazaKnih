@@ -31,7 +31,7 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
                         request.setContent(rs.getString("content"));
                         request.setId(id);
                         requests.add(request);
-
+                    }
                         int bookid = rs.getInt("book_idbook");
                         if (!rs.wasNull()) {
                             request.setBook(bookid);
@@ -45,7 +45,6 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
                         } else {
                             request.setRequester(0);
                         }
-                    }
                 }
                 return requests;
             }

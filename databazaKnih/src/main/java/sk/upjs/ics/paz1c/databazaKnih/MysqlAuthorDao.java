@@ -45,21 +45,20 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                         author.setGenres(new ArrayList<>());
 
                         authors.add(author);
+                    }
+                    int bookid = rs.getInt("authorofbook.book_idbook");
+                    if (!rs.wasNull()) {
+                        author.getBooks().add(bookid);
+                    }
 
-                        int bookid = rs.getInt("authorofbook.book_idbook");
-                        if (!rs.wasNull()) {
-                            author.getBooks().add(bookid);
-                        }
-                        
-                        int genreid = rs.getInt("genreofauthor.genre_idgenre");
-                        if (!rs.wasNull()) {
-                            author.getGenres().add(genreid);
-                        }
-                        
-                        int reviewid = rs.getInt("authorreview.idauthorreview");
-                        if (!rs.wasNull()) {
-                            author.getAuthorReviews().add(reviewid);
-                        }
+                    int genreid = rs.getInt("genreofauthor.genre_idgenre");
+                    if (!rs.wasNull()) {
+                        author.getGenres().add(genreid);
+                    }
+
+                    int reviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!rs.wasNull()) {
+                        author.getAuthorReviews().add(reviewid);
                     }
                 }
                 return authors;
