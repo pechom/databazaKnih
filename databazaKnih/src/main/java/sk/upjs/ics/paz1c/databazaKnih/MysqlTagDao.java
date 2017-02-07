@@ -104,7 +104,7 @@ public class MysqlTagDao implements InterfaceTagDao {
 
     @Override
     public void removeBook(int idbook) {
-        jdbcTemplate.update(SqlQueries.REMOVE_BOOK_FROM_TAG, idbook);
+        jdbcTemplate.update(SqlQueries.REMOVE_BOOK_FROM_ALL_TAGS, idbook);
     }
 
 }

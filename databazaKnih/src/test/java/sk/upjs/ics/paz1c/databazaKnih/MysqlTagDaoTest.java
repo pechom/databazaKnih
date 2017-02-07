@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -51,12 +52,19 @@ public class MysqlTagDaoTest {
     @Test
     public void testGetAllTag() {
         System.out.println("getAllTag");
-        MysqlTagDao instance = null;
-        List<Tag> expResult = null;
-        List<Tag> result = instance.getAllTag();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Tag> expResult = new ArrayList<>();
+        Tag tag1 = new Tag();
+        Tag tag2 = new Tag();
+        tag1.setIsActive(true);
+        tag2.setIsActive(true);
+        expResult.add(tag1);
+        expResult.add(tag2);
+        tagDao.insertTag(tag1);
+        tagDao.insertTag(tag2);
+        List<Tag> result = tagDao.getAllTag();
+        assertEquals(expResult.size(), result.size());
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, result.get(1).getId());
     }
 
     /**
@@ -65,11 +73,12 @@ public class MysqlTagDaoTest {
     @Test
     public void testInsertTag() {
         System.out.println("insertTag");
-        Tag tag = null;
-        MysqlTagDao instance = null;
-        instance.insertTag(tag);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Tag tag1 = new Tag();
+        tag1.setIsActive(true);
+        tagDao.insertTag(tag1);
+        List<Tag> result = tagDao.getAllTag();
+        assertEquals(1, result.size());
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, result.get(0).getId());
     }
 
     /**
@@ -78,11 +87,13 @@ public class MysqlTagDaoTest {
     @Test
     public void testDeleteTag() {
         System.out.println("deleteTag");
-        int id = 0;
-        MysqlTagDao instance = null;
-        instance.deleteTag(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Tag tag1 = new Tag();
+        tag1.setIsActive(true);
+        tagDao.insertTag(tag1);
+        List<Tag> result = tagDao.getAllTag();
+        tagDao.deleteTag(result.get(0).getId());
+        result = tagDao.getAllTag();
+        assertEquals(result.size(), 0);
     }
 
     /**
@@ -91,11 +102,16 @@ public class MysqlTagDaoTest {
     @Test
     public void testUpdateTag() {
         System.out.println("updateTag");
-        Tag tag = null;
-        MysqlTagDao instance = null;
-        instance.updateTag(tag);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Tag tag1 = new Tag();
+        tag1.setIsActive(true);
+        tag1.setName("dark");
+        tagDao.insertTag(tag1);
+        List<Tag> result = tagDao.getAllTag();
+        result.get(0).setName("steampunk");
+        tagDao.updateTag(result.get(0));
+        result = tagDao.getAllTag();
+        assertEquals("steampunk", result.get(0).getName());
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, result.get(0).getId());
     }
 
     /**
@@ -104,15 +120,14 @@ public class MysqlTagDaoTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        int id = 0;
-        MysqlTagDao instance = null;
-        Tag expResult = null;
-        Tag result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Tag tag1 = new Tag();
+        tag1.setIsActive(true);
+        tagDao.insertTag(tag1);
+        List<Tag> result = tagDao.getAllTag();
+        Tag resultT = tagDao.findById(result.get(0).getId());
+        assertEquals(resultT.getId(), result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, result.get(0).getId());
     }
-
 
     /**
      * Test of addBookToTag method, of class MysqlTagDao.
@@ -120,12 +135,21 @@ public class MysqlTagDaoTest {
     @Test
     public void testAddBookToTag() {
         System.out.println("addBookToTag");
-        int idbook = 0;
-        int idtag = 0;
-        MysqlTagDao instance = null;
-        instance.addBookToTag(idbook, idtag);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Tag tag1 = new Tag();
+        tag1.setIsActive(true);
+        tagDao.insertTag(tag1);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<Tag> tags = tagDao.getAllTag();
+        List<Book> books = bookDao.getAllBooks();
+        tagDao.addBookToTag(books.get(0).getId(), tags.get(0).getId());
+        tags = tagDao.getAllTag();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(tags.get(0).getBooksWithTag().get(0)), Long.valueOf(books.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, tags.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -134,12 +158,22 @@ public class MysqlTagDaoTest {
     @Test
     public void testRemoveBookFromTag() {
         System.out.println("removeBookFromTag");
-        int idbook = 0;
-        int idtag = 0;
-        MysqlTagDao instance = null;
-        instance.removeBookFromTag(idbook, idtag);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Tag tag1 = new Tag();
+        tag1.setIsActive(true);
+        tagDao.insertTag(tag1);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<Tag> tags = tagDao.getAllTag();
+        List<Book> books = bookDao.getAllBooks();
+        tagDao.addBookToTag(books.get(0).getId(), tags.get(0).getId());
+        tagDao.removeBookFromTag(books.get(0).getId(), tags.get(0).getId());
+        tags = tagDao.getAllTag();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(tags.get(0).getBooksWithTag().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, tags.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -148,11 +182,28 @@ public class MysqlTagDaoTest {
     @Test
     public void testRemoveBook() {
         System.out.println("removeBook");
-        int idbook = 0;
-        MysqlTagDao instance = null;
-        instance.removeBook(idbook);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Tag tag1 = new Tag();
+        Tag tag2 = new Tag();
+        tag1.setIsActive(true);
+        tag2.setIsActive(true);
+        tagDao.insertTag(tag1);
+        tagDao.insertTag(tag2);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<Tag> tags = tagDao.getAllTag();
+        List<Book> books = bookDao.getAllBooks();
+        tagDao.addBookToTag(books.get(0).getId(), tags.get(0).getId());
+        tagDao.addBookToTag(books.get(0).getId(), tags.get(1).getId());
+        tagDao.removeBook(books.get(0).getId());
+        tags = tagDao.getAllTag();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(tags.get(0).getBooksWithTag().size()), Long.valueOf(0));
+        assertEquals(Long.valueOf(tags.get(1).getBooksWithTag().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, tags.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_TAG, tags.get(1).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
 }

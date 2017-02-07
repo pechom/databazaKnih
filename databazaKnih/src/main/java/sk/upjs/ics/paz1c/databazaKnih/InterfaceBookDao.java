@@ -14,7 +14,7 @@ public interface InterfaceBookDao {
 
     void updateBook(Book book);
 
-    void addAuthorToBook(int idauthor, int idbook);
+    void addAuthorToBook(int idbook, int idauthor);
 
     void removeAuthorFromBook(int idbook);
 

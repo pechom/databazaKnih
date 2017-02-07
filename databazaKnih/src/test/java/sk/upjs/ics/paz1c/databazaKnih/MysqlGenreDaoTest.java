@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -50,12 +51,19 @@ public class MysqlGenreDaoTest {
     @Test
     public void testGetAllGenre() {
         System.out.println("getAllGenre");
-        MysqlGenreDao instance = null;
-        List<Genre> expResult = null;
-        List<Genre> result = instance.getAllGenre();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Genre> expResult = new ArrayList<>();
+        Genre genre1 = new Genre();
+        Genre genre2 = new Genre();
+        genre1.setIsActive(true);
+        genre2.setIsActive(true);
+        expResult.add(genre1);
+        expResult.add(genre2);
+        genreDao.insertGenre(genre1);
+        genreDao.insertGenre(genre2);
+        List<Genre> result = genreDao.getAllGenre();
+        assertEquals(expResult.size(), result.size());
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, result.get(1).getId());
     }
 
     /**
@@ -64,11 +72,12 @@ public class MysqlGenreDaoTest {
     @Test
     public void testInsertGenre() {
         System.out.println("insertGenre");
-        Genre genre = null;
-        MysqlGenreDao instance = null;
-        instance.insertGenre(genre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre1 = new Genre();
+        genre1.setIsActive(true);
+        genreDao.insertGenre(genre1);
+        List<Genre> result = genreDao.getAllGenre();
+        assertEquals(1, result.size());
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, result.get(0).getId());
     }
 
     /**
@@ -77,11 +86,13 @@ public class MysqlGenreDaoTest {
     @Test
     public void testDeleteGenre() {
         System.out.println("deleteGenre");
-        int id = 0;
-        MysqlGenreDao instance = null;
-        instance.deleteGenre(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre1 = new Genre();
+        genre1.setIsActive(true);
+        genreDao.insertGenre(genre1);
+        List<Genre> result = genreDao.getAllGenre();
+        genreDao.deleteGenre(result.get(0).getId());
+        result = genreDao.getAllGenre();
+        assertEquals(result.size(), 0);
     }
 
     /**
@@ -90,11 +101,16 @@ public class MysqlGenreDaoTest {
     @Test
     public void testUpdateGenre() {
         System.out.println("updateGenre");
-        Genre genre = null;
-        MysqlGenreDao instance = null;
-        instance.updateGenre(genre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre1 = new Genre();
+        genre1.setIsActive(true);
+        genre1.setName("fantasy");
+        genreDao.insertGenre(genre1);
+        List<Genre> result = genreDao.getAllGenre();
+        result.get(0).setName("scifi");
+        genreDao.updateGenre(result.get(0));
+        result = genreDao.getAllGenre();
+        assertEquals("scifi", result.get(0).getName());
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, result.get(0).getId());
     }
 
     /**
@@ -103,15 +119,16 @@ public class MysqlGenreDaoTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        int id = 0;
-        MysqlGenreDao instance = null;
-        Genre expResult = null;
-        Genre result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("updateGenre");
+        Genre genre1 = new Genre();
+        genre1.setIsActive(true);
+        genre1.setName("fantasy");
+        genreDao.insertGenre(genre1);
+        List<Genre> result = genreDao.getAllGenre();
+        Genre resultG = genreDao.findById(result.get(0).getId());
+        assertEquals(resultG.getId(), result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, result.get(0).getId());
     }
-
 
     /**
      * Test of addBookToGenre method, of class MysqlGenreDao.
@@ -119,12 +136,21 @@ public class MysqlGenreDaoTest {
     @Test
     public void testAddBookToGenre() {
         System.out.println("addBookToGenre");
-        int idbook = 0;
-        int idgenre = 0;
-        MysqlGenreDao instance = null;
-        instance.addBookToGenre(idbook, idgenre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre = new Genre();
+        genre.setIsActive(true);
+        genreDao.insertGenre(genre);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        Book book = new Book();
+        book.setIsActive(true);
+        bookDao.insertBook(book);
+        List<Genre> genres = genreDao.getAllGenre();
+        List<Book> books = bookDao.getAllBooks();
+        genreDao.addBookToGenre(books.get(0).getId(), genres.get(0).getId());
+        genres = genreDao.getAllGenre();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(genres.get(0).getBooksWithGenre().get(0)), Long.valueOf(books.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -133,12 +159,22 @@ public class MysqlGenreDaoTest {
     @Test
     public void testRemoveBookFromGenre() {
         System.out.println("removeBookFromGenre");
-        int idbook = 0;
-        int idgenre = 0;
-        MysqlGenreDao instance = null;
-        instance.removeBookFromGenre(idbook, idgenre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre = new Genre();
+        genre.setIsActive(true);
+        genreDao.insertGenre(genre);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        Book book = new Book();
+        book.setIsActive(true);
+        bookDao.insertBook(book);
+        List<Genre> genres = genreDao.getAllGenre();
+        List<Book> books = bookDao.getAllBooks();
+        genreDao.addBookToGenre(books.get(0).getId(), genres.get(0).getId());
+        genreDao.removeBookFromGenre(books.get(0).getId(), genres.get(0).getId());
+        genres = genreDao.getAllGenre();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(genres.get(0).getBooksWithGenre().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -147,11 +183,29 @@ public class MysqlGenreDaoTest {
     @Test
     public void testRemoveBook() {
         System.out.println("removeBook");
-        int idbook = 0;
-        MysqlGenreDao instance = null;
-        instance.removeBook(idbook);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre1 = new Genre();
+        Genre genre2 = new Genre();
+        genre1.setIsActive(true);
+        genre2.setIsActive(true);
+        genreDao.insertGenre(genre1);
+        genreDao.insertGenre(genre2);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        Book book = new Book();
+        book.setIsActive(true);
+        bookDao.insertBook(book);
+        List<Genre> genres = genreDao.getAllGenre();
+        List<Book> books = bookDao.getAllBooks();
+        genreDao.addBookToGenre(books.get(0).getId(), genres.get(0).getId());
+        genreDao.addBookToGenre(books.get(0).getId(), genres.get(1).getId());
+        genreDao.removeBook(books.get(0).getId());
+        genres = genreDao.getAllGenre();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(genres.get(0).getBooksWithGenre().size()), Long.valueOf(0));
+        assertEquals(Long.valueOf(genres.get(1).getBooksWithGenre().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(1).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+
     }
 
     /**
@@ -159,13 +213,22 @@ public class MysqlGenreDaoTest {
      */
     @Test
     public void testAddAuthorToGenre() {
-        System.out.println("addAuthorToGenre");
-        int idauthor = 0;
-        int idgenre = 0;
-        MysqlGenreDao instance = null;
-        instance.addAuthorToGenre(idauthor, idgenre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre = new Genre();
+        genre.setIsActive(true);
+        genreDao.insertGenre(genre);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        List<Author> authors = authorDao.getAllAuthors();
+        List<Genre> genres = genreDao.getAllGenre();
+        genreDao.addAuthorToGenre(authors.get(0).getId(), genres.get(0).getId());
+        genres = genreDao.getAllGenre();
+        authors = authorDao.getAllAuthors();
+        assertEquals(Long.valueOf(genres.get(0).getAuthorsWithGenre().get(0)), Long.valueOf(authors.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
     }
 
     /**
@@ -174,12 +237,23 @@ public class MysqlGenreDaoTest {
     @Test
     public void testRemoveAuthorFromGenre() {
         System.out.println("removeAuthorFromGenre");
-        int idauthor = 0;
-        int idgenre = 0;
-        MysqlGenreDao instance = null;
-        instance.removeAuthorFromGenre(idauthor, idgenre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre = new Genre();
+        genre.setIsActive(true);
+        genreDao.insertGenre(genre);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        List<Author> authors = authorDao.getAllAuthors();
+        List<Genre> genres = genreDao.getAllGenre();
+        genreDao.addAuthorToGenre(authors.get(0).getId(), genres.get(0).getId());
+        genreDao.removeAuthorFromGenre(authors.get(0).getId(), genres.get(0).getId());
+        genres = genreDao.getAllGenre();
+        authors = authorDao.getAllAuthors();
+        assertEquals(Long.valueOf(genres.get(0).getAuthorsWithGenre().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
     }
 
     /**
@@ -188,11 +262,28 @@ public class MysqlGenreDaoTest {
     @Test
     public void testRemoveAuthor() {
         System.out.println("removeAuthor");
-        int idauthor = 0;
-        MysqlGenreDao instance = null;
-        instance.removeAuthor(idauthor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Genre genre1 = new Genre();
+        Genre genre2 = new Genre();
+        genre1.setIsActive(true);
+        genre2.setIsActive(true);
+        genreDao.insertGenre(genre1);
+        genreDao.insertGenre(genre2);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        Author jano = new Author();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        authorDao.insertAuthor(jano);
+        List<Author> authors = authorDao.getAllAuthors();
+        List<Genre> genres = genreDao.getAllGenre();
+        genreDao.addAuthorToGenre(authors.get(0).getId(), genres.get(0).getId());
+        genreDao.addAuthorToGenre(authors.get(0).getId(), genres.get(1).getId());
+        genreDao.removeAuthor(authors.get(0).getId());
+        genres = genreDao.getAllGenre();
+        authors = authorDao.getAllAuthors();
+        assertEquals(Long.valueOf(genres.get(0).getAuthorsWithGenre().size()), Long.valueOf(0));
+        assertEquals(Long.valueOf(genres.get(1).getAuthorsWithGenre().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_GENRE, genres.get(1).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
     }
-
 }

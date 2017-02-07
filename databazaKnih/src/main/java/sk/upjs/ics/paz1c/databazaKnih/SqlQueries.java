@@ -206,8 +206,8 @@ public class SqlQueries {
             + "WHERE idbook=?";
 
     public static final String REMOVE_REVIEW_FROM_BOOK
-            = "UPDATE book SET (numberOfReviews=?, averageOfReviews=?, "
-            + "bayesianAverage=?, numberInChart=?) "
+            = "UPDATE book SET numberOfReviews=?, averageOfReviews=?, "
+            + "bayesianAverage=?, numberInChart=? "
             + "WHERE idbook=?";
 
     public static final String REMOVE_ALL_REVIEWS_FROM_BOOK
@@ -578,11 +578,11 @@ public class SqlQueries {
 
     public static final String REMOVE_BOOKREVIEW
             = "DELETE FROM bookreview "
-            + "WHERE user_iduser=? AND book_idbook=?";
+            + "WHERE user_iduser=? AND idbookreview=?";
 
     public static final String REMOVE_AUTHORREVIEW
             = "DELETE FROM authorreview "
-            + "WHERE user_iduser=? AND author_idauthor=?";
+            + "WHERE user_iduser=? AND idauthorreview=?";
 
     public static final String ADD_READING_BOOK
             = "INSERT INTO readingbook "

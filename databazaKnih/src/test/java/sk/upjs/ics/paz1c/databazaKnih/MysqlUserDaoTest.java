@@ -5,8 +5,8 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -25,7 +25,7 @@ public class MysqlUserDaoTest {
     private JdbcTemplate jdbcTemplate;
 
     public MysqlUserDaoTest() {
-        
+
     }
 
     @BeforeClass
@@ -52,12 +52,21 @@ public class MysqlUserDaoTest {
     @Test
     public void testGetAllUsers() {
         System.out.println("getAllUsers");
-        MysqlUserDao instance = null;
-        List<User> expResult = null;
-        List<User> result = instance.getAllUsers();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<User> expResult = new ArrayList<>();
+        User jano = new User();
+        User pali = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        pali.setName("Pali");
+        pali.setIsActive(true);
+        expResult.add(pali);
+        expResult.add(jano);
+        userDao.insertUser(jano);
+        userDao.insertUser(pali);
+        List<User> result = userDao.getAllUsers();
+        assertEquals(expResult.size(), result.size());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, result.get(1).getId());
     }
 
     /**
@@ -66,11 +75,13 @@ public class MysqlUserDaoTest {
     @Test
     public void testInsertUser() {
         System.out.println("insertUser");
-        User user = null;
-        MysqlUserDao instance = null;
-        instance.insertUser(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        List<User> result = userDao.getAllUsers();
+        assertEquals(1, result.size());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, result.get(0).getId());
     }
 
     /**
@@ -79,11 +90,14 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteUser() {
         System.out.println("deleteUser");
-        int id = 0;
-        MysqlUserDao instance = null;
-        instance.deleteUser(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        List<User> result = userDao.getAllUsers();
+        userDao.deleteUser(result.get(0).getId());
+        result = userDao.getAllUsers();
+        assertEquals(result.size(), 0);
     }
 
     /**
@@ -92,11 +106,16 @@ public class MysqlUserDaoTest {
     @Test
     public void testUpdateUser() {
         System.out.println("updateUser");
-        User user = null;
-        MysqlUserDao instance = null;
-        instance.updateUser(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        List<User> result = userDao.getAllUsers();
+        result.get(0).setName("pali");
+        userDao.updateUser(result.get(0));
+        result = userDao.getAllUsers();
+        assertEquals("pali", result.get(0).getName());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, result.get(0).getId());
     }
 
     /**
@@ -105,27 +124,14 @@ public class MysqlUserDaoTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        int id = 0;
-        MysqlUserDao instance = null;
-        User expResult = null;
-        User result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-
-    /**
-     * Test of changePassword method, of class MysqlUserDao.
-     */
-    @Test
-    public void testChangePassword() {
-        System.out.println("changePassword");
-        User user = null;
-        MysqlUserDao instance = null;
-        instance.changePassword(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        List<User> result = userDao.getAllUsers();
+        User resultU = userDao.findById(result.get(0).getId());
+        assertEquals(resultU.getId(), result.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, result.get(0).getId());
     }
 
     /**
@@ -134,12 +140,22 @@ public class MysqlUserDaoTest {
     @Test
     public void testAddReadBookToUser() {
         System.out.println("addReadBookToUser");
-        int idbook = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addReadBookToUser(idbook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        userDao.addReadBookToUser(books.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(users.get(0).getReadBooks().get(0)), Long.valueOf(books.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -148,12 +164,23 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteReadBookFromUser() {
         System.out.println("deleteReadBookFromUser");
-        int idbook = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteReadBookFromUser(idbook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        userDao.addReadBookToUser(books.get(0).getId(), users.get(0).getId());
+        userDao.deleteReadBookFromUser(books.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(users.get(0).getReadBooks().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -162,12 +189,22 @@ public class MysqlUserDaoTest {
     @Test
     public void testAddFavoriteBookToUser() {
         System.out.println("addFavoriteBookToUser");
-        int idbook = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addFavoriteBookToUser(idbook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        userDao.addFavoriteBookToUser(books.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(users.get(0).getFavoriteBooks().get(0)), Long.valueOf(books.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -176,12 +213,23 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteFavoriteBookFromUser() {
         System.out.println("deleteFavoriteBookFromUser");
-        int idbook = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteFavoriteBookFromUser(idbook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        userDao.addFavoriteBookToUser(books.get(0).getId(), users.get(0).getId());
+        userDao.deleteFavoriteBookFromUser(books.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(users.get(0).getFavoriteBooks().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -190,12 +238,22 @@ public class MysqlUserDaoTest {
     @Test
     public void testAddWantedBookToUser() {
         System.out.println("addWantedBookToUser");
-        int idbook = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addWantedBookToUser(idbook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        userDao.addWantedBookToUser(books.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(users.get(0).getWantedBooks().get(0)), Long.valueOf(books.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -204,12 +262,23 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteWantedBookFromUser() {
         System.out.println("deleteWantedBookFromUser");
-        int idbook = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteWantedBookFromUser(idbook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        Book book = new Book();
+        book.setIsActive(true);
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        bookDao.insertBook(book);
+        List<User> users = userDao.getAllUsers();
+        List<Book> books = bookDao.getAllBooks();
+        userDao.addWantedBookToUser(books.get(0).getId(), users.get(0).getId());
+        userDao.deleteWantedBookFromUser(books.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        books = bookDao.getAllBooks();
+        assertEquals(Long.valueOf(users.get(0).getWantedBooks().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
     }
 
     /**
@@ -218,11 +287,29 @@ public class MysqlUserDaoTest {
     @Test
     public void testRemoveAuthor() {
         System.out.println("removeAuthor");
-        int idauthor = 0;
-        MysqlUserDao instance = null;
-        instance.removeAuthor(idauthor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        User pali = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        pali.setName("Pali");
+        pali.setIsActive(true);
+        userDao.insertUser(jano);
+        userDao.insertUser(pali);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        Author author = new Author();
+        author.setName("Jano");
+        author.setIsActive(true);
+        authorDao.insertAuthor(author);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        userDao.addFavoriteAuthorToUser(authors.get(0).getId(), users.get(0).getId());
+        userDao.addFavoriteAuthorToUser(authors.get(0).getId(), users.get(1).getId());
+        userDao.removeAuthor(authors.get(0).getId());
+        users = userDao.getAllUsers();
+        assertEquals(Long.valueOf(users.get(0).getFavoriteAuthors().size()), Long.valueOf(0));
+        assertEquals(Long.valueOf(users.get(1).getFavoriteAuthors().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(1).getId());
     }
 
     /**
@@ -231,12 +318,23 @@ public class MysqlUserDaoTest {
     @Test
     public void testAddFavoriteAuthorToUser() {
         System.out.println("addFavoriteAuthorToUser");
-        int idauthor = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addFavoriteAuthorToUser(idauthor, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        Author author = new Author();
+        author.setName("Jano");
+        author.setIsActive(true);
+        authorDao.insertAuthor(author);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        userDao.addFavoriteAuthorToUser(authors.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        authors = authorDao.getAllAuthors();
+        assertEquals(Long.valueOf(users.get(0).getFavoriteAuthors().get(0)), Long.valueOf(authors.get(0).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
     }
 
     /**
@@ -245,12 +343,24 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteFavoriteAuthorFromUser() {
         System.out.println("deleteFavoriteAuthorFromUser");
-        int idauthor = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteFavoriteAuthorFromUser(idauthor, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        userDao.insertUser(jano);
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        Author author = new Author();
+        author.setName("Jano");
+        author.setIsActive(true);
+        authorDao.insertAuthor(author);
+        List<User> users = userDao.getAllUsers();
+        List<Author> authors = authorDao.getAllAuthors();
+        userDao.addFavoriteAuthorToUser(authors.get(0).getId(), users.get(0).getId());
+        userDao.deleteFavoriteAuthorFromUser(authors.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        authors = authorDao.getAllAuthors();
+        assertEquals(Long.valueOf(users.get(0).getFavoriteAuthors().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
     }
 
     /**
@@ -259,12 +369,20 @@ public class MysqlUserDaoTest {
     @Test
     public void testAddFriendToUser() {
         System.out.println("addFriendToUser");
-        int idfriend = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addFriendToUser(idfriend, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        User pali = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        pali.setName("Pali");
+        pali.setIsActive(true);
+        userDao.insertUser(jano);
+        userDao.insertUser(pali);
+        List<User> users = userDao.getAllUsers();
+        userDao.addFriendToUser(users.get(1).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        assertEquals(Long.valueOf(users.get(0).getFriends().get(0)), Long.valueOf(users.get(1).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(1).getId());
     }
 
     /**
@@ -273,12 +391,21 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteFriendFromUser() {
         System.out.println("deleteFriendFromUser");
-        int idfriend = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteFriendFromUser(idfriend, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        User pali = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        pali.setName("Pali");
+        pali.setIsActive(true);
+        userDao.insertUser(jano);
+        userDao.insertUser(pali);
+        List<User> users = userDao.getAllUsers();
+        userDao.addFriendToUser(users.get(1).getId(), users.get(0).getId());
+        userDao.deleteFriendFromUser(users.get(1).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        assertEquals(Long.valueOf(users.get(0).getFriends().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(1).getId());
     }
 
     /**
@@ -287,12 +414,20 @@ public class MysqlUserDaoTest {
     @Test
     public void testAddFavoriteReviewerToUser() {
         System.out.println("addFavoriteReviewerToUser");
-        int idreviewer = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addFavoriteReviewerToUser(idreviewer, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        User pali = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        pali.setName("Pali");
+        pali.setIsActive(true);
+        userDao.insertUser(jano);
+        userDao.insertUser(pali);
+        List<User> users = userDao.getAllUsers();
+        userDao.addFavoriteReviewerToUser(users.get(1).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        assertEquals(Long.valueOf(users.get(0).getFavoriteReviewers().get(0)), Long.valueOf(users.get(1).getId()));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(1).getId());
     }
 
     /**
@@ -301,12 +436,21 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteFavoriteReviewerFromUser() {
         System.out.println("deleteFavoriteReviewerFromUser");
-        int idreviewer = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteFavoriteReviewerFromUser(idreviewer, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User jano = new User();
+        User pali = new User();
+        jano.setName("Jano");
+        jano.setIsActive(true);
+        pali.setName("Pali");
+        pali.setIsActive(true);
+        userDao.insertUser(jano);
+        userDao.insertUser(pali);
+        List<User> users = userDao.getAllUsers();
+        userDao.addFavoriteReviewerToUser(users.get(1).getId(), users.get(0).getId());
+        userDao.deleteFavoriteReviewerFromUser(users.get(1).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        assertEquals(Long.valueOf(users.get(0).getFriends().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(1).getId());
     }
 
     /**
@@ -315,12 +459,28 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteBookReviewFromUser() {
         System.out.println("deleteBookReviewFromUser");
-        int idreview = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteBookReviewFromUser(idreview, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User user = new User();
+        user.setIsActive(true);
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        InterfaceBookDao bookDao = ObjectFactoryNaTesty.INSTANCE.getBookDao();
+        Book book = new Book();
+        book.setIsActive(true);
+        bookDao.insertBook(book);
+        List<Book> books = bookDao.getAllBooks();
+        BookReview rev1 = new BookReview();
+        rev1.setIsActive(true);
+        rev1.setBook(books.get(0).getId());
+        rev1.setUser(users.get(0).getId());
+        InterfaceBookReviewDao reviewDao = ObjectFactoryNaTesty.INSTANCE.getBookReviewDao();
+        reviewDao.insertReview(rev1);
+        List<BookReview> reviews = reviewDao.getAllReviews();
+        users = userDao.getAllUsers();
+        userDao.deleteBookReviewFromUser(reviews.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        assertEquals(Long.valueOf(users.get(0).getBookReviews().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_BOOK, books.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
 
     /**
@@ -329,68 +489,27 @@ public class MysqlUserDaoTest {
     @Test
     public void testDeleteAuthorReviewFromUser() {
         System.out.println("deleteAuthorReviewFromUser");
-        int idreview = 0;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteAuthorReviewFromUser(idreview, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User user = new User();
+        user.setIsActive(true);
+        userDao.insertUser(user);
+        List<User> users = userDao.getAllUsers();
+        InterfaceAuthorDao authorDao = ObjectFactoryNaTesty.INSTANCE.getAuthorDao();
+        Author author = new Author();
+        author.setIsActive(true);
+        authorDao.insertAuthor(author);
+        List<Author> authors = authorDao.getAllAuthors();
+        AuthorReview rev1 = new AuthorReview();
+        rev1.setIsActive(true);
+        rev1.setAuthor(authors.get(0).getId());
+        rev1.setUser(users.get(0).getId());
+        InterfaceAuthorReviewDao reviewDao = ObjectFactoryNaTesty.INSTANCE.getAuthorReviewDao();
+        reviewDao.insertReview(rev1);
+        List<AuthorReview> reviews = reviewDao.getAllReviews();
+        users = userDao.getAllUsers();
+        userDao.deleteAuthorReviewFromUser(reviews.get(0).getId(), users.get(0).getId());
+        users = userDao.getAllUsers();
+        assertEquals(Long.valueOf(users.get(0).getAuthorReviews().size()), Long.valueOf(0));
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
-
-    /**
-     * Test of addReadingBooksToUser method, of class MysqlUserDao.
-     */
-    @Test
-    public void testAddReadingBooksToUser() {
-        System.out.println("addReadingBooksToUser");
-        Map<Integer, Integer> reading = null;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addReadingBooksToUser(reading, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of deleteReadingBooksFromUser method, of class MysqlUserDao.
-     */
-    @Test
-    public void testDeleteReadingBooksFromUser() {
-        System.out.println("deleteReadingBooksFromUser");
-        Map<Integer, Integer> reading = null;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteReadingBooksFromUser(reading, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addNoteBooksToUser method, of class MysqlUserDao.
-     */
-    @Test
-    public void testAddNoteBooksToUser() {
-        System.out.println("addNoteBooksToUser");
-        Map<Integer, String> notebook = null;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.addNoteBooksToUser(notebook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of deleteNoteBooksFromUser method, of class MysqlUserDao.
-     */
-    @Test
-    public void testDeleteNoteBooksFromUser() {
-        System.out.println("deleteNoteBooksFromUser");
-        Map<Integer, String> notebook = null;
-        int iduser = 0;
-        MysqlUserDao instance = null;
-        instance.deleteNoteBooksFromUser(notebook, iduser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
 }

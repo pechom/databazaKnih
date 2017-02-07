@@ -297,5 +297,4 @@ public class MysqlAuthorDaoTest {
         jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
         jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
     }
-
 }
