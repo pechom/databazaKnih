@@ -4,6 +4,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 //medzi objektami a remove ak treba odstranit chybny vztah pripadne ak treba prerusit vztahy pred tym ako nieco odstranim (pri realnom odstraneni)
 // u vsetkych manazerov treba urobit vynimky !
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DefaultAuthorManager implements AuthorManager {
@@ -74,11 +75,15 @@ public class DefaultAuthorManager implements AuthorManager {
 
     @Override
     public void removeBooksFromAuthor(List<Integer> books, Author author) {
-        for (int book : books) {
-            if (author.getBooks().contains(book)) {
-                author.getBooks().remove(book);
-                authorDao.removeBookFromAuthor(book, author.getId());
-            }
+        Iterator<Integer> iter = author.getBooks().iterator();
+           
+        while(iter.hasNext()){
+         int i = iter.next();  
+        if(books.contains(i)){
+            
+                iter.remove();
+               authorDao.removeBookFromAuthor(i, author.getId());
+        }
         }
     }
 
@@ -94,11 +99,15 @@ public class DefaultAuthorManager implements AuthorManager {
 
     @Override
     public void removeGenresFromAuthor(List<Integer> genres, Author author) {
-        for (int genre : genres) {
-            if (author.getGenres().contains(genre)) {
-                author.getGenres().remove(genre);
-                authorDao.removeGenreFromAuthor(genre, author.getId());
-            }
+        Iterator<Integer> iter = author.getGenres().iterator();
+           
+        while(iter.hasNext()){
+         int i = iter.next();  
+        if(genres.contains(i)){
+            
+                iter.remove();
+               authorDao.removeGenreFromAuthor(i, author.getId());
+        }
         }
     }
 

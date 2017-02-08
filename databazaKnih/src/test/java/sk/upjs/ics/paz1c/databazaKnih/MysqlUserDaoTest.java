@@ -310,6 +310,7 @@ public class MysqlUserDaoTest {
         assertEquals(Long.valueOf(users.get(1).getFavoriteAuthors().size()), Long.valueOf(0));
         jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(0).getId());
         jdbcTemplate.update(SqlQueries.DELETE_USER, users.get(1).getId());
+        jdbcTemplate.update(SqlQueries.DELETE_AUTHOR, authors.get(0).getId());
     }
 
     /**

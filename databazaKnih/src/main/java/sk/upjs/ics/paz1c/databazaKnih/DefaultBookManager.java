@@ -5,6 +5,7 @@ package sk.upjs.ics.paz1c.databazaKnih;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class DefaultBookManager implements BookManager {
@@ -124,7 +125,7 @@ public class DefaultBookManager implements BookManager {
 
     @Override
     public void addGenresToBook(List<Integer> genres, Book book) {
-        for (int genre : genres) {
+       for (int genre : genres) {
             if (!book.getGenres().contains(genre)) {
                 book.getGenres().add(genre);
                 bookDao.addGenreToBook(genre, book.getId());
@@ -134,12 +135,17 @@ public class DefaultBookManager implements BookManager {
 
     @Override
     public void removeGenresFromBook(List<Integer> genres, Book book) {
-        for (int genre : genres) {
-            if (book.getGenres().contains(genre)) {
-                book.getGenres().remove(genre);
-                bookDao.removeGenreFromBook(genre, book.getId());
-            }
+        Iterator<Integer> iter = book.getGenres().iterator();
+           
+        while(iter.hasNext()){
+         int i = iter.next();  
+        if(genres.contains(i)){
+            
+                iter.remove();
+               bookDao.removeGenreFromBook(i, book.getId());
         }
+        }
+        
     }
 
     @Override
@@ -168,11 +174,15 @@ public class DefaultBookManager implements BookManager {
 
     @Override
     public void removeTagsFromBook(List<Integer> tags, Book book) {
-        for (int tag : tags) {
-            if (book.getTags().contains(tag)) {
-                book.getTags().remove(tag);
-                bookDao.removeTagFromBook(tag, book.getId());
-            }
+        Iterator<Integer> iter = book.getTags().iterator();
+           
+        while(iter.hasNext()){
+         int i = iter.next();  
+        if(tags.contains(i)){
+            
+                iter.remove();
+               bookDao.removeTagFromBook(i, book.getId());
+        }
         }
     }
 
