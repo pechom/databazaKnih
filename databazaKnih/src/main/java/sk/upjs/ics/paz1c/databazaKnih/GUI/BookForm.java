@@ -38,6 +38,7 @@ public class BookForm extends javax.swing.JDialog {
     public BookForm(java.awt.Dialog parent, boolean modal, User user, Book book) {
         super(parent, modal);
         initComponents();
+        this.setSize(606, 648);
         this.book = book;
         this.user = user;
         if (!user.isIsAdmin()) {
@@ -65,7 +66,7 @@ public class BookForm extends javax.swing.JDialog {
         RatingLabel.setText("Rating: " + book.getBayesianAverage());
         LengthLabel.setText("Number of Pages:" + book.getNumberOfPages());
         
-
+        System.out.println("Bookform pred manipulaciou: " + book.getGenres().size());
         List<Integer> genres = book.getGenres();
         String[] genreNames = new String[genres.size()];
         int i = 0;
@@ -74,7 +75,7 @@ public class BookForm extends javax.swing.JDialog {
             i++;
         }
         GenreList.setListData(genreNames);
-
+        System.out.println("Bookform po liste: " + book.getGenres().size());
         List<Integer> tags = book.getTags();
         String[] tagNames = new String[tags.size()];
         int j = 0;
@@ -170,7 +171,7 @@ public class BookForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(GenreList);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 158, 170, 139);
+        jScrollPane1.setBounds(10, 158, 170, 130);
 
         TagsBookLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TagsBookLabel.setForeground(new java.awt.Color(0, 102, 255));
@@ -186,7 +187,7 @@ public class BookForm extends javax.swing.JDialog {
         jScrollPane2.setViewportView(TagList);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 315, 170, 139);
+        jScrollPane2.setBounds(10, 315, 170, 130);
 
         SynopsisTextArea.setColumns(20);
         SynopsisTextArea.setRows(5);
@@ -290,7 +291,7 @@ public class BookForm extends javax.swing.JDialog {
             }
         });
         getContentPane().add(AddtoFavouritesToggleButton);
-        AddtoFavouritesToggleButton.setBounds(495, 552, 82, 85);
+        AddtoFavouritesToggleButton.setBounds(495, 552, 81, 85);
 
         AddtoWantedToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/WantedBookIcon.png"))); // NOI18N
         AddtoWantedToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -299,7 +300,7 @@ public class BookForm extends javax.swing.JDialog {
             }
         });
         getContentPane().add(AddtoWantedToggleButton);
-        AddtoWantedToggleButton.setBounds(332, 552, 93, 85);
+        AddtoWantedToggleButton.setBounds(332, 552, 91, 85);
 
         AddtoReadToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/TickIcon.png"))); // NOI18N
         AddtoReadToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +309,7 @@ public class BookForm extends javax.swing.JDialog {
             }
         });
         getContentPane().add(AddtoReadToggleButton);
-        AddtoReadToggleButton.setBounds(188, 558, 98, 79);
+        AddtoReadToggleButton.setBounds(188, 558, 97, 79);
 
         ViewRequestsButton.setText("View Requests");
         ViewRequestsButton.addActionListener(new java.awt.event.ActionListener() {

@@ -328,46 +328,51 @@ public class ListForm extends javax.swing.JDialog {
             return;
         } else {
 
-            switch (type) {
-                case "Book":
+            
+                if(type.equals("Book")){
                     if (ContentList.getSelectedIndex() != -1) {
                         Book book = bookarray[ContentList.getSelectedIndex()];
                         BookForm bookform = new BookForm(this, true, user, book);
                         bookform.setVisible(true);
                     }
-                case "Author":
+                }
+                if(type.equals("Author")){
                     if (ContentList.getSelectedIndex() != -1) {
                         Author author = authorarray[ContentList.getSelectedIndex()];
                         AuthorForm authorForm = new AuthorForm(this, true, author, user);
                         authorForm.setVisible(true);
                     }
+                }
 
-                case "User":
+                if(type.equals("User")){
                     if (ContentList.getSelectedIndex() != -1) {
                         User userProfile = userarray[ContentList.getSelectedIndex()];
                         UserProfileForm userForm = new UserProfileForm(this, true, user, userProfile);
                         userForm.setVisible(true);
                     }
-                case "BookReview":
+                }
+                if(type.equals("BookReview")){
                     if (ContentList.getSelectedIndex() != -1) {
                         BookReview bookReview = bookreviewarray[ContentList.getSelectedIndex()];
                         ReviewForm bookreviewForm = new ReviewForm(this, true, true, bookReview, null);
                         bookreviewForm.setVisible(true);
                     }
-                case "AuthorReview":
+                }
+                if(type.equals("AuthorReview")){
                     if (ContentList.getSelectedIndex() != -1) {
                         AuthorReview authorReview = authorreviewarray[ContentList.getSelectedIndex()];
                         ReviewForm authorreviewForm = new ReviewForm(this, true, false, null, authorReview);
                         authorreviewForm.setVisible(true);
                     }
-                case "AuthorRequest":
+                }
+                if(type.equals("AuthorRequest")){
                     if (ContentList.getSelectedIndex() != -1) {
                         AuthorRequest request = authorrequestarray[ContentList.getSelectedIndex()];
                         RequestForm requestForm = new RequestForm(this, true, request, null, false);
                         requestForm.setVisible(true);
                     }
-
-                case "BookRequest":
+                }
+                if(type.equals("BookRequest")){
                     if (ContentList.getSelectedIndex() != -1) {
                         BookRequest request = bookrequestarray[ContentList.getSelectedIndex()];
                         RequestForm requestForm = new RequestForm(this, true, null, request, false);

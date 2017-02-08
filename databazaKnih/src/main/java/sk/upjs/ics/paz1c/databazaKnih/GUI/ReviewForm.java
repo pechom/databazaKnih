@@ -62,6 +62,7 @@ BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
         jScrollPane1 = new javax.swing.JScrollPane();
         ReviewTextArea = new javax.swing.JTextArea();
         UserLabel = new javax.swing.JLabel();
+        OkButton = new javax.swing.JButton();
 
         CancelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Obrazky/CancelIcon.png"))); // NOI18N
 
@@ -83,6 +84,13 @@ BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
         UserLabel.setForeground(new java.awt.Color(0, 102, 255));
         UserLabel.setText("by:");
 
+        OkButton.setText("OK");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,6 +108,10 @@ BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RatingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,18 +123,26 @@ BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RatingLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
+        this.setVisible(false);
+        this.getParent().setVisible(false);
+    }//GEN-LAST:event_OkButtonActionPerformed
+
     
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton1;
+    private javax.swing.JButton OkButton;
     private javax.swing.JLabel RatingLabel;
     private javax.swing.JLabel ReviewLabel;
     private javax.swing.JTextArea ReviewTextArea;

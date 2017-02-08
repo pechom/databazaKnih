@@ -44,6 +44,7 @@ public class BookSearchForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
          this.user=user;
+         
         List<Genre> genres = genreManager.getAllGenres();
              
              genreNames = new String[genres.size()];
@@ -339,7 +340,7 @@ public class BookSearchForm extends javax.swing.JDialog {
     }//GEN-LAST:event_MaxRatingTextFieldActionPerformed
 
     private void FilterBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterBButtonActionPerformed
-       List<Book> currentList = bookManager.getVerificatedBooks();
+       List<Book> currentList = bookManager.getAllBooks();
         if(!NameTextField.getText().isEmpty()){
         List<Book> newList = bookManager.GetBooksByName(NameTextField.getText(), currentList);
         currentList = newList;
@@ -347,14 +348,14 @@ public class BookSearchForm extends javax.swing.JDialog {
         
         if(!AuthorTextField.getText().isEmpty()){
         List<Author> authorlist = authorManager.getAuthorsByName(AuthorTextField.getText(), authorManager.getAllAuthors());
-            for (Author author : authorlist) {
+           Author author = authorlist.get(0);
             List<Book> newList = bookManager.GetBooksByAuthor(author, currentList);
-            currentList.addAll(newList);
-            }
+            currentList = newList;
+            
         
         }
         if(!ISBNTextField.getText().isEmpty()){
-        Book book = bookManager.getBookByISBN(Integer.parseInt(NameTextField.getText()), currentList);
+        Book book = bookManager.getBookByISBN(Integer.parseInt(ISBNTextField.getText()), currentList);
         List<Book> newList= new ArrayList<Book>();
         newList.add(book);
         currentList = newList;
@@ -404,6 +405,7 @@ public class BookSearchForm extends javax.swing.JDialog {
         currentList = ratingList;
         } 
         }
+         
          if(GenreList.getSelectedIndex()!=-1){
           int[] arrayOfGenres = GenreList.getSelectedIndices();
         List<Genre> genreList = new ArrayList<Genre>();
@@ -414,6 +416,8 @@ public class BookSearchForm extends javax.swing.JDialog {
         List<Book> booksByGenre = bookManager.GetBooksByGenres(genreList, currentList);
         currentList = booksByGenre;
          }
+         
+         
          if(TagList.getSelectedIndex()!=-1){
         int[] arrayofTags = TagList.getSelectedIndices();
         List<Tag> tagList = new ArrayList<Tag>();
@@ -450,6 +454,7 @@ public class BookSearchForm extends javax.swing.JDialog {
     private void BookSearchViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookSearchViewButtonActionPerformed
 if(ResultList.getSelectedIndex()!=-1){
         Book book=  bookArray[ResultList.getSelectedIndex()];
+        System.out.println("BookSearch selected: " + book.getGenres().size());
             BookForm bookForm = new BookForm(this, true, user, book);
             bookForm.setVisible(true);
 }

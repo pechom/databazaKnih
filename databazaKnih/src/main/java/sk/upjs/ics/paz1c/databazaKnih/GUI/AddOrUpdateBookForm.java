@@ -13,6 +13,8 @@ import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.BookManager;
 import sk.upjs.ics.paz1c.databazaKnih.Genre;
 import sk.upjs.ics.paz1c.databazaKnih.GenreManager;
+import sk.upjs.ics.paz1c.databazaKnih.InterfaceAuthorDao;
+import sk.upjs.ics.paz1c.databazaKnih.InterfaceBookDao;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.Tag;
 import sk.upjs.ics.paz1c.databazaKnih.TagManager;
@@ -28,6 +30,8 @@ public class AddOrUpdateBookForm extends javax.swing.JDialog {
     TagManager tagManager = ObjectFactory.INSTANCE.getTagManager();
     AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
     BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
+    InterfaceBookDao bookDao = ObjectFactory.INSTANCE.getBookDao();
+    InterfaceAuthorDao authorDao = ObjectFactory.INSTANCE.getAuthorDao();
     private String[] genreNames;
     private String[] tagNames;
     private int[] genreArray;
@@ -66,7 +70,7 @@ public class AddOrUpdateBookForm extends javax.swing.JDialog {
         }
         TagList.setListData(tagNames);
 
-        GenreList.setListData(genreNames);
+        
 
         List<Author> authors = authorManager.getAllAuthors();
         authorNames = new String[authors.size()];
@@ -316,19 +320,23 @@ book.setName(NameTextField.getText());
          book.setISBN(Integer.parseInt(ISBNTextField.getText()));
          book.setNumberOfPages(Integer.parseInt(LengthTextField.getText()));
          book.setYear(Integer.parseInt(YearTextField.getText()));
-         if(AuthorList.getSelectedIndex()!=-1){
-             if(authorManager.findById(book.getAuthor())!=null){
-             if(!authorManager.findById(book.getAuthor()).getName().equals(authorNames[AuthorList.getSelectedIndex()])){
-                 bookManager.removeAuthorFromBook(book);
-               book.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
-         bookManager.addAuthorToBook(book, authorManager.findById(book.getAuthor()));  
-             }
-             } else {
-             book.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
-         bookManager.addAuthorToBook(book, authorManager.findById(book.getAuthor()));
-             }
          
-         }
+         
+         if(AuthorList.getSelectedIndex()!=-1){
+             if(book.getAuthor()!=0){
+             if((!authorManager.findById(book.getAuthor()).getName().equals(authorNames[AuthorList.getSelectedIndex()]))){
+                 bookManager.removeAuthorFromBook(book);
+             }
+             }
+             
+               Author author =  authorManager.findById(authorArray[AuthorList.getSelectedIndex()]);
+         bookManager.addAuthorToBook(book, author);  
+         book.setAuthor(author.getId());
+          
+             }
+    
+         
+         
 
         GenreList.getSelectedIndices();
         int[] genreIndeces = GenreList.getSelectedIndices();
@@ -336,17 +344,26 @@ book.setName(NameTextField.getText());
         for (int i = 0; i < genreIndeces.length; i++) {
             genreList.add(genreArray[genreIndeces[i]]);
         }
-        book.setGenres(genreList);
+       
+        System.out.println((book.getGenres().size()));
+         bookManager.removeGenresFromBook(book.getGenres(), book);
         bookManager.addGenresToBook(genreList, book);
-
+        book.setGenres(genreList);
+        
+        
         TagList.getSelectedIndices();
         int[] tagIndeces = TagList.getSelectedIndices();
         List<Integer> tagList = new ArrayList<Integer>();
         for (int i = 0; i < tagIndeces.length; i++) {
             tagList.add(tagArray[tagIndeces[i]]);
         }
-        book.setTags(tagList);
+        
+        
+        
+         bookManager.removeTagsFromBook(book.getTags(), book);
         bookManager.addTagsToBook(tagList, book);
+        book.setTags(tagList);
+        
         book.setDescription(SynopsisTextArea.getText());
         book.setVerificationStatus(true);
         book.setIsActive(true);
@@ -361,37 +378,69 @@ book.setName(NameTextField.getText());
         newBook.setISBN(Integer.parseInt(ISBNTextField.getText()));
         newBook.setNumberOfPages(Integer.parseInt(LengthTextField.getText()));
         newBook.setYear(Integer.parseInt(YearTextField.getText()));
+       
         if (AuthorList.getSelectedIndex() != -1) {
             newBook.setAuthor(authorArray[AuthorList.getSelectedIndex()]);
-            bookManager.addAuthorToBook(newBook, authorManager.findById(newBook.getAuthor()));
+           
         }
+        List<Integer> genreList = new ArrayList<Integer>();
 
-        if (AuthorList.getSelectedIndex() != -1) {
-            GenreList.getSelectedIndices();
+        if (GenreList.getSelectedIndex() != -1) {
+            
             int[] genreIndeces = GenreList.getSelectedIndices();
-            List<Integer> genreList = new ArrayList<Integer>();
+            
             for (int i = 0; i < genreIndeces.length; i++) {
                 genreList.add(genreArray[genreIndeces[i]]);
             }
-            newBook.setGenres(genreList);
-            bookManager.addGenresToBook(genreList, newBook);
+            
+            
         }
-        if (AuthorList.getSelectedIndex() != -1) {
-            TagList.getSelectedIndices();
+        
+        List<Integer> tagList = new ArrayList<Integer>();
+        if (TagList.getSelectedIndex() != -1) {
+            
             int[] tagIndeces = TagList.getSelectedIndices();
-            List<Integer> tagList = new ArrayList<Integer>();
+            
             for (int i = 0; i < tagIndeces.length; i++) {
                 tagList.add(tagArray[tagIndeces[i]]);
             }
-            newBook.setTags(tagList);
-            bookManager.addTagsToBook(tagList, newBook);
+            
+            
         }
-
+        newBook.setGenres(genreList);
+        newBook.setTags(tagList);
         newBook.setVerificationStatus(true);
         newBook.setIsActive(true);
         newBook.setDescription(SynopsisTextArea.getText());
+        System.out.println("Newbook pocet zanrov: " + newBook.getGenres().size());
         bookManager.insertBook(newBook);
+        
+        List<Book> books = bookManager.GetBooksByName(NameTextField.getText(), bookManager.getAllBooks());
+        Book book = books.get(0);
+        System.out.println("GetBook: " + book.getGenres().get(0));
+        if (AuthorList.getSelectedIndex() != -1) {
+            
+        bookManager.addAuthorToBook(book, authorManager.findById((authorArray[AuthorList.getSelectedIndex()])));
+        }
+        
+        bookManager.addGenresToBook(genreList, book);
+        System.out.println("Book po pridani zanrov AddUpdate: " + book.getGenres().size());
+            
+        
+        
+        if (TagList.getSelectedIndex() != -1) {
+         
+        bookManager.addTagsToBook(tagList, book);
+        }
+         System.out.println("Book po pridani tagov AddUpdate: " + book.getGenres().size());
+        
+       
+        
+        books = bookManager.GetBooksByName(NameTextField.getText(), bookManager.getAllBooks());
+         book = books.get(0);
+        System.out.println("Book po get " + book.getGenres().size());;
         this.setVisible(false);
+        
     }//GEN-LAST:event_AddBookButtonActionPerformed
 
 

@@ -6,6 +6,7 @@
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
 
+import java.awt.Dialog;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
 import sk.upjs.ics.paz1c.databazaKnih.User;
@@ -137,7 +138,12 @@ public class MyReviewForm extends javax.swing.JDialog {
             review.setRating((int) RatingSpinner.getValue());
             authorReviewManager.insertReview(review);
            userManager.addAuthorReview(review, user);
-        
+           this.setVisible(false);
+           User updateduser = userManager.findById(user.getId());
+           Author updatedauthor = authorManager.findById(author.getId());
+           AuthorForm authorform = new AuthorForm((Dialog)this.getParent().getParent(),true, updatedauthor, updateduser);
+           this.getParent().setVisible(false);
+           authorform.setVisible(true);
         } else {
         BookReview review = new BookReview();
             review.setBook(book.getId());
@@ -148,6 +154,12 @@ public class MyReviewForm extends javax.swing.JDialog {
             bookReviewManager.insertReview(review);
             bookManager.addReview(review, book);
            userManager.addBookReview(review, user);
+           this.setVisible(false);
+           User updateduser = userManager.findById(user.getId());
+           Book updatedbook = bookManager.findById(book.getId());
+           BookForm bookform = new BookForm((Dialog)this.getParent().getParent(),true, updateduser, updatedbook);
+           this.getParent().setVisible(false);
+           bookform.setVisible(true);
         }
     }//GEN-LAST:event_ConfirmButtonActionPerformed
 

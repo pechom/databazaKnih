@@ -54,17 +54,7 @@ public class AuthorSearchForm extends javax.swing.JDialog {
              GenreList.setListData(data);
             
     
-     List<Book> books = bookManager.getAllBooks();
-             
-             bookNames = new String[books.size()];
-             bookArray= new Book[books.size()];
-             int j = 0;
-            for (Genre genre : genres) {
-               data[j]= genre.getName();
-               genreArray[j] = genre;
-               i++;
-            }
-             GenreList.setListData(data);
+     
             }
     
 
@@ -100,9 +90,6 @@ public class AuthorSearchForm extends javax.swing.JDialog {
         GenreLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         GenreList = new javax.swing.JList<>();
-        BooksLable = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        BookList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -179,17 +166,6 @@ public class AuthorSearchForm extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(GenreList);
 
-        BooksLable.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        BooksLable.setForeground(new java.awt.Color(0, 102, 204));
-        BooksLable.setText("Books:");
-
-        BookList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(BookList);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,10 +203,8 @@ public class AuthorSearchForm extends javax.swing.JDialog {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(AuthorSearchViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(GenreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BooksLable, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)))
                 .addGap(19, 19, 19))
         );
@@ -238,7 +212,8 @@ public class AuthorSearchForm extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(AuthorNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,10 +235,6 @@ public class AuthorSearchForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BooksLable, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BrithAuthorSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -280,9 +251,8 @@ public class AuthorSearchForm extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AuthorSearchViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                            .addComponent(AuthorSearchViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -335,6 +305,8 @@ public class AuthorSearchForm extends javax.swing.JDialog {
         List<Author> newList = authorManager.getAuthorsByGenres(genreList, currentList);
         currentList = newList;
         }
+        
+        
         
         if(!MinBirthTextField.getText().isEmpty()){
             if(!MaxBirthTextField.getText().isEmpty()){
@@ -403,9 +375,7 @@ public class AuthorSearchForm extends javax.swing.JDialog {
     private javax.swing.JLabel BirthAuthorSeparatorLabel;
     private javax.swing.JLabel BirthAuthorSeparatorLabel1;
     private javax.swing.JLabel BookLabel;
-    private javax.swing.JList<String> BookList;
     private javax.swing.JTextField BookTextField;
-    private javax.swing.JLabel BooksLable;
     private javax.swing.JLabel BrithAuthorSearchLabel;
     private javax.swing.JLabel DeathAuthorSearchLabel;
     private javax.swing.JButton FilterButton;
@@ -423,6 +393,5 @@ public class AuthorSearchForm extends javax.swing.JDialog {
     private javax.swing.JList<String> ResultList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 }

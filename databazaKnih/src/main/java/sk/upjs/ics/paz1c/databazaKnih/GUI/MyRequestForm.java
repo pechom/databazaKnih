@@ -5,14 +5,18 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.awt.Dialog;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
+import sk.upjs.ics.paz1c.databazaKnih.AuthorManager;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorRequest;
 import sk.upjs.ics.paz1c.databazaKnih.User;
 import sk.upjs.ics.paz1c.databazaKnih.AuthorRequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.BookManager;
 import sk.upjs.ics.paz1c.databazaKnih.BookRequest;
 import sk.upjs.ics.paz1c.databazaKnih.BookRequestManager;
+import sk.upjs.ics.paz1c.databazaKnih.UserManager;
 
 /**
  *
@@ -22,6 +26,9 @@ public class MyRequestForm extends javax.swing.JDialog {
 
     AuthorRequestManager authorrequestManager = ObjectFactory.INSTANCE.getAuthorRequestManager();
     BookRequestManager bookrequestManager = ObjectFactory.INSTANCE.getBookRequestManager();
+    BookManager bookManager = ObjectFactory.INSTANCE.getBookManager();
+    AuthorManager authorManager = ObjectFactory.INSTANCE.getAuthorManager();
+    UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
      private static User user;
      private static Book book;
      private static Author author;
@@ -118,13 +125,28 @@ public class MyRequestForm extends javax.swing.JDialog {
             
             request.setContent(MessageTextArea.getText());
             authorrequestManager.insertRequest(request);
+             this.setVisible(false);
+           User updateduser = userManager.findById(user.getId());
+           Author updatedauthor = authorManager.findById(author.getId());
+           AuthorForm authorform = new AuthorForm((Dialog)this.getParent().getParent(),true, updatedauthor, updateduser);
+           this.getParent().setVisible(false);
+           authorform.setVisible(true);
         } else {
             BookRequest request = new BookRequest();
+            
              request.setBook(book.getId());
              request.setIsActive(true);
             request.setRequester(user.getId());
             request.setContent(MessageTextArea.getText());
+            System.out.println("blabla");
             bookrequestManager.insertRequest(request);
+            System.out.println("blabla");
+             this.setVisible(false);
+           User updateduser = userManager.findById(user.getId());
+           Book updatedbook = bookManager.findById(book.getId());
+           BookForm bookform = new BookForm((Dialog)this.getParent().getParent(),true, updateduser, updatedbook);
+           this.getParent().setVisible(false);
+           bookform.setVisible(true);
         }
     }//GEN-LAST:event_ConfirmButtonActionPerformed
 
