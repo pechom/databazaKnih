@@ -412,19 +412,16 @@ book.setName(NameTextField.getText());
         newBook.setVerificationStatus(true);
         newBook.setIsActive(true);
         newBook.setDescription(SynopsisTextArea.getText());
-        System.out.println("Newbook pocet zanrov: " + newBook.getGenres().size());
         bookManager.insertBook(newBook);
         
         List<Book> books = bookManager.GetBooksByName(NameTextField.getText(), bookManager.getAllBooks());
         Book book = books.get(0);
-        System.out.println("GetBook: " + book.getGenres().get(0));
         if (AuthorList.getSelectedIndex() != -1) {
             
         bookManager.addAuthorToBook(book, authorManager.findById((authorArray[AuthorList.getSelectedIndex()])));
         }
         
         bookManager.addGenresToBook(genreList, book);
-        System.out.println("Book po pridani zanrov AddUpdate: " + book.getGenres().size());
             
         
         
@@ -432,13 +429,8 @@ book.setName(NameTextField.getText());
          
         bookManager.addTagsToBook(tagList, book);
         }
-         System.out.println("Book po pridani tagov AddUpdate: " + book.getGenres().size());
-        
-       
-        
         books = bookManager.GetBooksByName(NameTextField.getText(), bookManager.getAllBooks());
          book = books.get(0);
-        System.out.println("Book po get " + book.getGenres().size());;
         this.setVisible(false);
         
     }//GEN-LAST:event_AddBookButtonActionPerformed

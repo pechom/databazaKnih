@@ -454,7 +454,6 @@ public class BookSearchForm extends javax.swing.JDialog {
     private void BookSearchViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookSearchViewButtonActionPerformed
 if(ResultList.getSelectedIndex()!=-1){
         Book book=  bookArray[ResultList.getSelectedIndex()];
-        System.out.println("BookSearch selected: " + book.getGenres().size());
             BookForm bookForm = new BookForm(this, true, user, book);
             bookForm.setVisible(true);
 }

@@ -66,7 +66,6 @@ public class BookForm extends javax.swing.JDialog {
         RatingLabel.setText("Rating: " + book.getBayesianAverage());
         LengthLabel.setText("Number of Pages:" + book.getNumberOfPages());
         
-        System.out.println("Bookform pred manipulaciou: " + book.getGenres().size());
         List<Integer> genres = book.getGenres();
         String[] genreNames = new String[genres.size()];
         int i = 0;
@@ -75,7 +74,6 @@ public class BookForm extends javax.swing.JDialog {
             i++;
         }
         GenreList.setListData(genreNames);
-        System.out.println("Bookform po liste: " + book.getGenres().size());
         List<Integer> tags = book.getTags();
         String[] tagNames = new String[tags.size()];
         int j = 0;
