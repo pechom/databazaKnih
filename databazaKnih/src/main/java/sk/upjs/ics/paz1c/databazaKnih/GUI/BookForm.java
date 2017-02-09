@@ -332,7 +332,7 @@ public class BookForm extends javax.swing.JDialog {
     }//GEN-LAST:event_ReviewButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        AddOrUpdateBookForm updateBookForm = new AddOrUpdateBookForm(this, true, book, true);
+        AddOrUpdateBookForm updateBookForm = new AddOrUpdateBookForm(this, true, book, true,user);
         updateBookForm.setVisible(true);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 

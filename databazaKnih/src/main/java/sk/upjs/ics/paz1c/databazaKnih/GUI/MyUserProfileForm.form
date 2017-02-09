@@ -54,15 +54,6 @@
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ReadBooksLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ReadBooksIconButton" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
-                                  <Component id="FriendsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="FriendsIconButton" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="DeleteProfileButton" alignment="1" max="32767" attributes="0"/>
                                   <Component id="ChangePassWordButton" alignment="1" pref="131" max="32767" attributes="0"/>
@@ -70,6 +61,17 @@
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="RefreshButton" min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ReadBooksLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="ReadBooksIconButton" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+                          <Component id="FriendsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="FriendsIconButton" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -162,12 +164,15 @@
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="ReadBooksLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="ReadBooksIconButton" pref="87" max="32767" attributes="0"/>
+              <Component id="ReadBooksIconButton" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="FriendsLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="FriendsIconButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="FriendsIconButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="RefreshButton" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -577,6 +582,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangePassWordButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="RefreshButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="refresh"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RefreshButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

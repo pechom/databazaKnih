@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.awt.Frame;
 import javax.swing.JFrame;
 import sk.upjs.ics.paz1c.databazaKnih.InterfaceUserDao;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
@@ -16,44 +17,39 @@ import sk.upjs.ics.paz1c.databazaKnih.UserManager;
  * @author szoplakz
  */
 public class MyUserProfileForm extends javax.swing.JDialog {
-    
+
     private static User user;
-  
+
     UserManager userManager = ObjectFactory.INSTANCE.getUserManager();
     InterfaceUserDao userDao = ObjectFactory.INSTANCE.getUserDao();
 
     /**
      * Creates new form MyUserProfileForm
      */
-    
-    
-    
     public MyUserProfileForm(java.awt.Frame parent, boolean modal, User user) {
         super(parent, modal);
         initComponents();
-        this.user=user;
-        
+        this.user = user;
+
         WelcomeUsernameLabel.setText("Welcome " + user.getUserName() + " !");
-        if(user.getName()!=null){
-        NameLabel.setText("Name: " + user.getName());
+        if (user.getName() != null) {
+            NameLabel.setText("Name: " + user.getName());
         }
-        if(user.getSurname()!=null){
-        SurnameLabel.setText("Surname: " + user.getSurname());
+        if (user.getSurname() != null) {
+            SurnameLabel.setText("Surname: " + user.getSurname());
         }
-        
+
         EmailLabel.setText("E-mail: " + user.getMail());
-        if(user.isIsAdmin()){
-        StatusLabel.setText("Status: Admin");
-        ManageDatabaseButton.setVisible(true);
-        ManageDatabaseButton.enable(true);
+        if (user.isIsAdmin()) {
+            StatusLabel.setText("Status: Admin");
+            ManageDatabaseButton.setVisible(true);
+            ManageDatabaseButton.enable(true);
         } else {
-        StatusLabel.setText("Status: User");
-        ManageDatabaseButton.setVisible(false);
-        ManageDatabaseButton.enable(false);
+            StatusLabel.setText("Status: User");
+            ManageDatabaseButton.setVisible(false);
+            ManageDatabaseButton.enable(false);
         }
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,6 +93,7 @@ public class MyUserProfileForm extends javax.swing.JDialog {
         BookIconLabel = new javax.swing.JLabel();
         SurnameLabel = new javax.swing.JLabel();
         ChangePassWordButton = new javax.swing.JButton();
+        RefreshButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -272,6 +269,13 @@ public class MyUserProfileForm extends javax.swing.JDialog {
             }
         });
 
+        RefreshButton.setText("refresh");
+        RefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -301,17 +305,19 @@ public class MyUserProfileForm extends javax.swing.JDialog {
                                 .addComponent(BookIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(22, 22, 22))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ReadBooksLabel)
-                                    .addComponent(ReadBooksIconButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FriendsLabel)
-                                    .addComponent(FriendsIconButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(260, 260, 260))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(DeleteProfileButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ChangePassWordButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                                .addContainerGap())))))
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(RefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ReadBooksLabel)
+                            .addComponent(ReadBooksIconButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FriendsLabel)
+                            .addComponent(FriendsIconButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(260, 260, 260))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -383,12 +389,14 @@ public class MyUserProfileForm extends javax.swing.JDialog {
                 .addGap(35, 35, 35)
                 .addComponent(ReadBooksLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ReadBooksIconButton, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addComponent(ReadBooksIconButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(FriendsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FriendsIconButton)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FriendsIconButton)
+                    .addComponent(RefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -442,21 +450,21 @@ public class MyUserProfileForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        if (SearchComboBox.getSelectedItem()=="Books"){
-            BookSearchForm bookSearchForm = new BookSearchForm(this, true,  user);
+        if (SearchComboBox.getSelectedItem() == "Books") {
+            BookSearchForm bookSearchForm = new BookSearchForm(this, true, user);
             bookSearchForm.setVisible(true);
         }
-        if (SearchComboBox.getSelectedItem()=="Authors"){
+        if (SearchComboBox.getSelectedItem() == "Authors") {
             AuthorSearchForm authorSearchForm = new AuthorSearchForm(this, true, user);
             authorSearchForm.setVisible(true);
         }
-        if (SearchComboBox.getSelectedItem()=="Users"){
+        if (SearchComboBox.getSelectedItem() == "Users") {
             UserSearchForm userSearchForm = new UserSearchForm(this, true, user);
             userSearchForm.setVisible(true);
     }//GEN-LAST:event_SearchButtonActionPerformed
     }
     private void FriendsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FriendsIconButtonActionPerformed
-      ListForm favouriteBooksList = new ListForm(this, true, "Friends", user, null, null);
+        ListForm favouriteBooksList = new ListForm(this, true, "Friends", user, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_FriendsIconButtonActionPerformed
 
@@ -479,43 +487,43 @@ public class MyUserProfileForm extends javax.swing.JDialog {
     }//GEN-LAST:event_DeleteProfileButtonActionPerformed
 
     private void FavouriteBookIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavouriteBookIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteBooks", user, null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteBooks", user, null, null);
         favouriteBooksList.setVisible(true);
-        
+
     }//GEN-LAST:event_FavouriteBookIconButtonActionPerformed
 
     private void ReadBooksIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadBooksIconButtonActionPerformed
-         ListForm favouriteBooksList = new ListForm(this, true, "ReadBooks", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "ReadBooks", user, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_ReadBooksIconButtonActionPerformed
 
     private void WantedBooksIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WantedBooksIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "WantedBooks", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "WantedBooks", user, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_WantedBooksIconButtonActionPerformed
 
     private void FavouriteAuthorsIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavouriteAuthorsIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteAuthors", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteAuthors", user, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_FavouriteAuthorsIconButtonActionPerformed
 
     private void FavouriteReviewersIconButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavouriteReviewersIconButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteReviewers", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "FavouriteReviewers", user, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_FavouriteReviewersIconButtonActionPerformed
 
     private void BookReviewsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookReviewsButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "MyBookReviews", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "MyBookReviews", user, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_BookReviewsButtonActionPerformed
 
     private void AuthorReviewsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuthorReviewsButtonActionPerformed
-        ListForm favouriteBooksList = new ListForm(this, true, "MyAuthorReviews", user,null,null);
+        ListForm favouriteBooksList = new ListForm(this, true, "MyAuthorReviews", user, null, null);
         favouriteBooksList.setVisible(true);
     }//GEN-LAST:event_AuthorReviewsButtonActionPerformed
 
     private void ManageDatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDatabaseButtonActionPerformed
-        AdminForm adminForm = new AdminForm(this, true);
+        AdminForm adminForm = new AdminForm(this, true, user);
         adminForm.setVisible(true);
     }//GEN-LAST:event_ManageDatabaseButtonActionPerformed
 
@@ -524,10 +532,16 @@ public class MyUserProfileForm extends javax.swing.JDialog {
         changePassWordForm.setVisible(true);
     }//GEN-LAST:event_ChangePassWordButtonActionPerformed
 
+    private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
+        User u = userManager.findById(user.getId());
+        MyUserProfileForm mupf = new MyUserProfileForm((Frame) this.getParent(), true, u);
+        this.setVisible(false);
+        mupf.setVisible(true);
+    }//GEN-LAST:event_RefreshButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AuthorReviewsButton;
@@ -554,6 +568,7 @@ public class MyUserProfileForm extends javax.swing.JDialog {
     private javax.swing.JLabel NameLabel;
     private javax.swing.JButton ReadBooksIconButton;
     private javax.swing.JLabel ReadBooksLabel;
+    private javax.swing.JButton RefreshButton;
     private javax.swing.JButton SearchButton;
     private javax.swing.JComboBox<String> SearchComboBox;
     private javax.swing.JLabel SearchLabelLine1;

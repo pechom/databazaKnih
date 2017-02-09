@@ -331,7 +331,7 @@ public class AuthorForm extends javax.swing.JDialog {
     }//GEN-LAST:event_ReviewButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        AddOrUpdateAuthorForm updateAuthorForm = new AddOrUpdateAuthorForm(this, true, author, true);
+        AddOrUpdateAuthorForm updateAuthorForm = new AddOrUpdateAuthorForm(this, true, author, true,user);
         updateAuthorForm.setVisible(true);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 

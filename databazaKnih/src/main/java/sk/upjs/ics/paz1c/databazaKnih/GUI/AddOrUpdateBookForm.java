@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.awt.Dialog;
 import java.util.ArrayList;
 import java.util.List;
 import sk.upjs.ics.paz1c.databazaKnih.Author;
@@ -39,14 +40,15 @@ public class AddOrUpdateBookForm extends javax.swing.JDialog {
     private String[] authorNames;
     private int[] authorArray;
     private Book book;
-
+    private User user;
     /**
      * Creates new form BookRequestForm
      */
-    public AddOrUpdateBookForm(java.awt.Dialog parent, boolean modal, Book book, boolean isUpdate) {
+    public AddOrUpdateBookForm(java.awt.Dialog parent, boolean modal, Book book, boolean isUpdate, User user) {
         super(parent, modal);
         initComponents();
         this.book = book;
+        this.user = user;
         List<Genre> genres = genreManager.getAllGenres();
 
         genreNames = new String[genres.size()];
@@ -368,6 +370,10 @@ book.setName(NameTextField.getText());
         book.setVerificationStatus(true);
         book.setIsActive(true);
         bookManager.updateBook(book);
+        BookForm bookform = new BookForm((Dialog) this.getParent().getParent(), true, user, book);
+        this.getParent().setVisible(false);
+        bookform.setVisible(true);
+        
         this.setVisible(false);
 
     }//GEN-LAST:event_UpdateButtonActionPerformed

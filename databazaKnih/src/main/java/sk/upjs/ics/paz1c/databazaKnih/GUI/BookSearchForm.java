@@ -409,7 +409,7 @@ public class BookSearchForm extends javax.swing.JDialog {
          if(GenreList.getSelectedIndex()!=-1){
           int[] arrayOfGenres = GenreList.getSelectedIndices();
         List<Genre> genreList = new ArrayList<Genre>();
-        for (int i = 0; arrayOfGenres.length < i; i++) {
+        for (int i = 0; i<arrayOfGenres.length; i++) {
             genreList.add(genreArray[arrayOfGenres[i]]);
             
         }

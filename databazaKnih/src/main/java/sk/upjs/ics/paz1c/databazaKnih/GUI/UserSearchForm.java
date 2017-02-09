@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.util.ArrayList;
 import java.util.List;
 import sk.upjs.ics.paz1c.databazaKnih.Book;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
@@ -72,6 +73,12 @@ public class UserSearchForm extends javax.swing.JDialog {
         EmailSearchLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         EmailSearchLabel1.setForeground(new java.awt.Color(0, 102, 204));
         EmailSearchLabel1.setText("E-mail:");
+
+        EmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailTextFieldActionPerformed(evt);
+            }
+        });
 
         StatusSearchLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         StatusSearchLabel.setForeground(new java.awt.Color(0, 102, 204));
@@ -192,7 +199,8 @@ public class UserSearchForm extends javax.swing.JDialog {
         currentList = newList;
         }
         if(!EmailTextField.getText().isEmpty()){
-        List<User> newList = userManager.getUsersByName(EmailTextField.getText(), currentList);
+        List<User> newList  = new ArrayList<>();
+          newList.add(userManager.getUserByMail(EmailTextField.getText(), currentList));
         currentList = newList;
         }
         if(StatusComboBox.getSelectedIndex()==1){
@@ -224,6 +232,10 @@ public class UserSearchForm extends javax.swing.JDialog {
             userForm.setVisible(true);
         }
     }//GEN-LAST:event_BookSearchViewButtonActionPerformed
+
+    private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

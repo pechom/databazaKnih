@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.databazaKnih.GUI;
 
+import java.awt.Dialog;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,14 +31,16 @@ private int[] genreArray;
 private String[] bookNames;
 private int[] bookArray;
 private Author author;
+private User user;
 
     /**
      * Creates new form AuthorRequestForm
      */
-    public AddOrUpdateAuthorForm(java.awt.Dialog parent, boolean modal, Author author, boolean isUpdate) {
+    public AddOrUpdateAuthorForm(java.awt.Dialog parent, boolean modal, Author author, boolean isUpdate, User user) {
         super(parent, modal);
         initComponents();
         this.author = author; 
+        this.user = user;
         List<Genre> genres = genreManager.getAllGenres();
              
              genreNames = new String[genres.size()];
@@ -337,6 +340,7 @@ private Author author;
         System.out.println(author.getGenres().size());
         authorManager.addGenresToAuthor(genreList, author);
         authorManager.addBooksToAuthor(bookList, author);
+       
         this.setVisible(false);
     }//GEN-LAST:event_AddAuthorButtonActionPerformed
 
@@ -383,6 +387,9 @@ private Author author;
         author.setBiography(BiographyTextArea.getText());
         author.setIsActive(true);
         authorManager.updateAuthor(author);
+        AuthorForm authorform = new AuthorForm((Dialog) this.getParent().getParent(), true, author, user);
+        this.getParent().setVisible(false);
+        authorform.setVisible(true);
         
         this.setVisible(false);
     }//GEN-LAST:event_UpdateAuthorButtonActionPerformed

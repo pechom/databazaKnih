@@ -10,6 +10,7 @@ import sk.upjs.ics.paz1c.databazaKnih.GenreManager;
 import sk.upjs.ics.paz1c.databazaKnih.ObjectFactory;
 import sk.upjs.ics.paz1c.databazaKnih.Tag;
 import sk.upjs.ics.paz1c.databazaKnih.TagManager;
+import sk.upjs.ics.paz1c.databazaKnih.User;
 
 /**
  *
@@ -18,12 +19,14 @@ import sk.upjs.ics.paz1c.databazaKnih.TagManager;
 public class AdminForm extends javax.swing.JDialog {
 GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
      TagManager tagManager = ObjectFactory.INSTANCE.getTagManager();
+     private User user;
     /**
      * Creates new form AdminForm
      */
-    public AdminForm(java.awt.Dialog parent, boolean modal) {
+    public AdminForm(java.awt.Dialog parent, boolean modal, User user) {
         super(parent, modal);
         initComponents();
+        this.user = user;
     }
 
     /**
@@ -151,12 +154,12 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookButtonActionPerformed
-        AddOrUpdateBookForm addBookForm = new AddOrUpdateBookForm(this, true, null, false);
+        AddOrUpdateBookForm addBookForm = new AddOrUpdateBookForm(this, true, null, false,user);
         addBookForm.setVisible(true);
     }//GEN-LAST:event_AddBookButtonActionPerformed
 
     private void AddAuthorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAuthorButtonActionPerformed
-           AddOrUpdateAuthorForm updateAuthorForm = new AddOrUpdateAuthorForm(this, true, null, false);
+           AddOrUpdateAuthorForm updateAuthorForm = new AddOrUpdateAuthorForm(this, true, null, false,user);
                  updateAuthorForm.setVisible(true);
     }//GEN-LAST:event_AddAuthorButtonActionPerformed
 
@@ -184,11 +187,13 @@ ListForm authorReviewsList = new ListForm(this, true, "AllRequests", null,null,n
     private void DeleteGenreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteGenreButtonActionPerformed
     Genre genre = genreManager.getByName(GenreTextField.getText());
     genreManager.deleteGenre(genre.getId());
+     GenreTextField.setText("");
     }//GEN-LAST:event_DeleteGenreButtonActionPerformed
 
     private void DeleteTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteTagButtonActionPerformed
          Tag tag = tagManager.getTagByName(TagTextField.getText());
     tagManager.deleteTag(tag.getId());
+     TagTextField.setText("");
     }//GEN-LAST:event_DeleteTagButtonActionPerformed
 
    
