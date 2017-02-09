@@ -35,19 +35,19 @@ public class MysqlBookReviewDao implements InterfaceBookReviewDao {
                         bookReview.setReview(rs.getString("review"));
                         reviews.add(bookReview);
                     }
-                        int bookid = rs.getInt("book_idbook");
-                        if (!rs.wasNull()) {
-                            bookReview.setBook(bookid);
-                        } else {
-                            bookReview.setBook(0);
-                        }
+                    int bookid = rs.getInt("book_idbook");
+                    if (!rs.wasNull()) {
+                        bookReview.setBook(bookid);
+                    } else {
+                        bookReview.setBook(0);
+                    }
 
-                        int userid = rs.getInt("user_iduser");
-                        if (!rs.wasNull()) {
-                            bookReview.setUser(userid);
-                        } else {
-                            bookReview.setUser(0);
-                        }
+                    int userid = rs.getInt("user_iduser");
+                    if (!rs.wasNull()) {
+                        bookReview.setUser(userid);
+                    } else {
+                        bookReview.setUser(0);
+                    }
                 }
                 return reviews;
             }

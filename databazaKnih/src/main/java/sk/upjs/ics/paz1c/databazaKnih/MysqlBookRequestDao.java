@@ -32,19 +32,19 @@ public class MysqlBookRequestDao implements InterfaceBookRequestDao {
                         request.setId(id);
                         requests.add(request);
                     }
-                        int bookid = rs.getInt("book_idbook");
-                        if (!rs.wasNull()) {
-                            request.setBook(bookid);
-                        } else {
-                            request.setBook(0);
-                        }
+                    int bookid = rs.getInt("book_idbook");
+                    if (!rs.wasNull()) {
+                        request.setBook(bookid);
+                    } else {
+                        request.setBook(0);
+                    }
 
-                        int userid = rs.getInt("user_iduser");
-                        if (!rs.wasNull()) {
-                            request.setRequester(userid);
-                        } else {
-                            request.setRequester(0);
-                        }
+                    int userid = rs.getInt("user_iduser");
+                    if (!rs.wasNull()) {
+                        request.setRequester(userid);
+                    } else {
+                        request.setRequester(0);
+                    }
                 }
                 return requests;
             }

@@ -33,13 +33,12 @@ public class MysqlTagDao implements InterfaceTagDao {
                         tag.setBooksWithTag(new ArrayList<>());
                         tags.add(tag);
                     }
-                        int bookid = rs.getInt("tagofbook.book_idbook");
-                        if(tag.getBooksWithTag().contains(bookid)){
+                    int bookid = rs.getInt("tagofbook.book_idbook");
+                    if (!tag.getBooksWithTag().contains(bookid)) {
                         if (!rs.wasNull()) {
                             tag.getBooksWithTag().add(bookid);
                         }
-                        }
-                    
+                    }
                 }
                 return tags;
             }
@@ -78,11 +77,11 @@ public class MysqlTagDao implements InterfaceTagDao {
                         tag.setBooksWithTag(new ArrayList<>());
                     }
                     int bookid = rs.getInt("tagofbook.book_idbook");
-                        if(tag.getBooksWithTag().contains(bookid)){
+                    if (!tag.getBooksWithTag().contains(bookid)) {
                         if (!rs.wasNull()) {
                             tag.getBooksWithTag().add(bookid);
                         }
-                        }
+                    }
                 }
                 return tag;
             }
@@ -112,4 +111,3 @@ public class MysqlTagDao implements InterfaceTagDao {
     }
 
 }
-

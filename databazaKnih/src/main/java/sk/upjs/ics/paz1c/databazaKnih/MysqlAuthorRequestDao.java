@@ -33,19 +33,19 @@ public class MysqlAuthorRequestDao implements InterfaceAuthorRequestDao {
                         request.setIsActive(rs.getBoolean("isActive"));
                         requests.add(request);
                     }
-                        int authorid = rs.getInt("author_idauthor");
-                        if (!rs.wasNull()) {
-                            request.setAuthor(authorid);
-                        } else {
-                            request.setAuthor(0);
-                        }
+                    int authorid = rs.getInt("author_idauthor");
+                    if (!rs.wasNull()) {
+                        request.setAuthor(authorid);
+                    } else {
+                        request.setAuthor(0);
+                    }
 
-                        int userid = rs.getInt("user_iduser");
-                        if (!rs.wasNull()) {
-                            request.setRequester(userid);
-                        } else {
-                            request.setRequester(0);
-                        }               
+                    int userid = rs.getInt("user_iduser");
+                    if (!rs.wasNull()) {
+                        request.setRequester(userid);
+                    } else {
+                        request.setRequester(0);
+                    }
                 }
                 return requests;
             }

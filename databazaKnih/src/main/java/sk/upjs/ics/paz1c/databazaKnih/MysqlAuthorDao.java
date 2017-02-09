@@ -46,24 +46,24 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
 
                         authors.add(author);
                     }
-                        int bookid = rs.getInt("authorofbook.book_idbook");
-                        if(!author.getBooks().contains(bookid)){
+                    int bookid = rs.getInt("authorofbook.book_idbook");
+                    if (!author.getBooks().contains(bookid)) {
                         if (!rs.wasNull()) {
                             author.getBooks().add(bookid);
                         }
-                        }
-                        int genreid = rs.getInt("genreofauthor.genre_idgenre");
-                        if(!author.getGenres().contains(genreid)){
+                    }
+                    int genreid = rs.getInt("genreofauthor.genre_idgenre");
+                    if (!author.getGenres().contains(genreid)) {
                         if (!rs.wasNull()) {
                             author.getGenres().add(genreid);
                         }
-                        }
-                        int reviewid = rs.getInt("authorreview.idauthorreview");
-                        if(!author.getGenres().contains(genreid)){
+                    }
+                    int reviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!author.getGenres().contains(genreid)) {
                         if (!rs.wasNull()) {
                             author.getAuthorReviews().add(reviewid);
                         }
-                        }
+                    }
                 }
                 return authors;
             }
@@ -117,24 +117,24 @@ public class MysqlAuthorDao implements InterfaceAuthorDao {
                         author.setGenres(new ArrayList<>());
 
                     }
-                        int bookid = rs.getInt("authorofbook.book_idbook");
-                        if(!author.getBooks().contains(bookid)){
+                    int bookid = rs.getInt("authorofbook.book_idbook");
+                    if (!author.getBooks().contains(bookid)) {
                         if (!rs.wasNull()) {
                             author.getBooks().add(bookid);
                         }
-                        }
-                        int genreid = rs.getInt("genreofauthor.genre_idgenre");
-                        if(!author.getGenres().contains(genreid)){
+                    }
+                    int genreid = rs.getInt("genreofauthor.genre_idgenre");
+                    if (!author.getGenres().contains(genreid)) {
                         if (!rs.wasNull()) {
                             author.getGenres().add(genreid);
                         }
-                        }
-                        int reviewid = rs.getInt("authorreview.idauthorreview");
-                        if(!author.getGenres().contains(genreid)){
+                    }
+                    int reviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!author.getGenres().contains(genreid)) {
                         if (!rs.wasNull()) {
                             author.getAuthorReviews().add(reviewid);
                         }
-                        }
+                    }
                 }
                 return author;
             }

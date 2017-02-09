@@ -47,36 +47,34 @@ public class MysqlBookDao implements InterfaceBookDao {
                         book.setTags(new ArrayList<>());
                         books.add(book);
                     }
-                        int reviewid = rs.getInt("bookreview.idbookreview");
-                        if(!book.getBookReviews().contains(reviewid)){
+                    int reviewid = rs.getInt("bookreview.idbookreview");
+                    if (!book.getBookReviews().contains(reviewid)) {
                         if (!rs.wasNull()) {
                             book.getBookReviews().add(reviewid);
                         }
-                        }
-                        int genreid = rs.getInt("genreofbook.genre_idgenre");
-                        if(!book.getGenres().contains(genreid)){
+                    }
+                    int genreid = rs.getInt("genreofbook.genre_idgenre");
+                    if (!book.getGenres().contains(genreid)) {
                         if (!rs.wasNull()) {
                             book.getGenres().add(genreid);
 
                         }
-                        }
-                        int tagid = rs.getInt("tagofbook.tag_idtag");
-                        if(!book.getTags().contains(tagid)){
+                    }
+                    int tagid = rs.getInt("tagofbook.tag_idtag");
+                    if (!book.getTags().contains(tagid)) {
                         if (!rs.wasNull()) {
                             book.getTags().add(tagid);
                         }
-                        }
-                        int authorid = rs.getInt("authorofbook.author_idauthor");
-                         
-                        if (!rs.wasNull()) {
-                            book.setAuthor(authorid);
-                        } else {
-                            book.setAuthor(0);
-                        }
                     }
-                
-                return books;
+                    int authorid = rs.getInt("authorofbook.author_idauthor");
 
+                    if (!rs.wasNull()) {
+                        book.setAuthor(authorid);
+                    } else {
+                        book.setAuthor(0);
+                    }
+                }
+                return books;
             }
         });
     }
@@ -130,33 +128,33 @@ public class MysqlBookDao implements InterfaceBookDao {
                         book.setGenres(new ArrayList<>());
                         book.setTags(new ArrayList<>());
                     }
-                      int reviewid = rs.getInt("bookreview.idbookreview");
-                        if(!book.getBookReviews().contains(reviewid)){
+                    int reviewid = rs.getInt("bookreview.idbookreview");
+                    if (!book.getBookReviews().contains(reviewid)) {
                         if (!rs.wasNull()) {
                             book.getBookReviews().add(reviewid);
                         }
-                        }
-                        int genreid = rs.getInt("genreofbook.genre_idgenre");
-                        if(!book.getGenres().contains(genreid)){
+                    }
+                    int genreid = rs.getInt("genreofbook.genre_idgenre");
+                    if (!book.getGenres().contains(genreid)) {
                         if (!rs.wasNull()) {
                             book.getGenres().add(genreid);
 
                         }
-                        }
-                        int tagid = rs.getInt("tagofbook.tag_idtag");
-                        if(!book.getTags().contains(tagid)){
+                    }
+                    int tagid = rs.getInt("tagofbook.tag_idtag");
+                    if (!book.getTags().contains(tagid)) {
                         if (!rs.wasNull()) {
                             book.getTags().add(tagid);
                         }
-                        }
-                        int authorid = rs.getInt("authorofbook.author_idauthor");
-                         
-                        if (!rs.wasNull()) {
-                            book.setAuthor(authorid);
-                        } else {
-                            book.setAuthor(0);
-                        }
-                    
+                    }
+                    int authorid = rs.getInt("authorofbook.author_idauthor");
+
+                    if (!rs.wasNull()) {
+                        book.setAuthor(authorid);
+                    } else {
+                        book.setAuthor(0);
+                    }
+
                 }
                 return book;
             }

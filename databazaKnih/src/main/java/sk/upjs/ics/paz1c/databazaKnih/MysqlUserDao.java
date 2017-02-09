@@ -57,71 +57,71 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setWantedBooks(new ArrayList<>());
                         users.add(user);
                     }
-                        int areviewid = rs.getInt("authorreview.idauthorreview");
-                        if(!user.getAuthorReviews().contains(areviewid)){
+                    int areviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!user.getAuthorReviews().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getAuthorReviews().add(areviewid);
                         }
-                        }
-                        int breviewid = rs.getInt("bookreview.idbookreview");
-                        if(!user.getBookReviews().contains(areviewid)){
+                    }
+                    int breviewid = rs.getInt("bookreview.idbookreview");
+                    if (!user.getBookReviews().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getBookReviews().add(breviewid);
                         }
-                        }
-                        int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
-                        if(!user.getFavoriteAuthors().contains(areviewid)){
+                    }
+                    int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
+                    if (!user.getFavoriteAuthors().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFavoriteAuthors().add(favauthorid);
                         }
-                        }
-                        int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
-                        if(!user.getFavoriteAuthors().contains(areviewid)){
+                    }
+                    int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
+                    if (!user.getFavoriteAuthors().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFavoriteBooks().add(favbookid);
                         }
-                        }
-                        int favuserid = rs.getInt("favoriteuser.favoriteuser");
-                        if(!user.getFavoriteReviewers().contains(areviewid)){
+                    }
+                    int favuserid = rs.getInt("favoriteuser.favoriteuser");
+                    if (!user.getFavoriteReviewers().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFavoriteReviewers().add(favuserid);
                         }
-                        }
-                        int friendid = rs.getInt("friend.friend");
-                        if(!user.getFriends().contains(areviewid)){
+                    }
+                    int friendid = rs.getInt("friend.friend");
+                    if (!user.getFriends().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFriends().add(friendid);
                         }
-                        }
-                        
-                        int readid = rs.getInt("readbook.readbook_idbook");
-                        if(!user.getReadBooks().contains(areviewid)){
+                    }
+
+                    int readid = rs.getInt("readbook.readbook_idbook");
+                    if (!user.getReadBooks().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getReadBooks().add(readid);
                         }
-                        }
-                        int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
-                        if(!user.getWantedBooks().contains(areviewid)){
+                    }
+                    int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
+                    if (!user.getWantedBooks().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getWantedBooks().add(wantedid);
                         }
-                        }
-                        int noteid = rs.getInt("booknote.booknote_idbook");
-                        String note = rs.getString("booknote.note");
-                        if (!rs.wasNull()) {
-                            Map<Integer, String> bookWithNote = new HashMap<>();
-                            bookWithNote.put(noteid, note);
-                            user.getNote().add(bookWithNote);
-                        }
+                    }
+                    int noteid = rs.getInt("booknote.booknote_idbook");
+                    String note = rs.getString("booknote.note");
+                    if (!rs.wasNull()) {
+                        Map<Integer, String> bookWithNote = new HashMap<>();
+                        bookWithNote.put(noteid, note);
+                        user.getNote().add(bookWithNote);
+                    }
 
-                        int readingid = rs.getInt("readingbook.readingbook_idbook");
-                        int pocetReading = rs.getInt("readingbook.numberOfPages");
-                        if (!rs.wasNull()) {
-                            Map<Integer, Integer> readingWithPage = new HashMap<>();
-                            readingWithPage.put(readingid, pocetReading);
-                            user.getReading().add(readingWithPage);
-                        }
-                    
+                    int readingid = rs.getInt("readingbook.readingbook_idbook");
+                    int pocetReading = rs.getInt("readingbook.numberOfPages");
+                    if (!rs.wasNull()) {
+                        Map<Integer, Integer> readingWithPage = new HashMap<>();
+                        readingWithPage.put(readingid, pocetReading);
+                        user.getReading().add(readingWithPage);
+                    }
+
                 }
                 return users;
             }
@@ -181,71 +181,71 @@ public class MysqlUserDao implements InterfaceUserDao {
                         user.setReading(new ArrayList<>());
                         user.setWantedBooks(new ArrayList<>());
                     }
-                        int areviewid = rs.getInt("authorreview.idauthorreview");
-                        if(!user.getAuthorReviews().contains(areviewid)){
+                    int areviewid = rs.getInt("authorreview.idauthorreview");
+                    if (!user.getAuthorReviews().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getAuthorReviews().add(areviewid);
                         }
-                        }
-                        int breviewid = rs.getInt("bookreview.idbookreview");
-                        if(!user.getBookReviews().contains(areviewid)){
+                    }
+                    int breviewid = rs.getInt("bookreview.idbookreview");
+                    if (!user.getBookReviews().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getBookReviews().add(breviewid);
                         }
-                        }
-                        int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
-                        if(!user.getFavoriteAuthors().contains(areviewid)){
+                    }
+                    int favauthorid = rs.getInt("favoriteauthor.favoriteauthor_idauthor");
+                    if (!user.getFavoriteAuthors().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFavoriteAuthors().add(favauthorid);
                         }
-                        }
-                        int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
-                        if(!user.getFavoriteAuthors().contains(areviewid)){
+                    }
+                    int favbookid = rs.getInt("favoritebook.favoritebook_idbook");
+                    if (!user.getFavoriteAuthors().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFavoriteBooks().add(favbookid);
                         }
-                        }
-                        int favuserid = rs.getInt("favoriteuser.favoriteuser");
-                        if(!user.getFavoriteReviewers().contains(areviewid)){
+                    }
+                    int favuserid = rs.getInt("favoriteuser.favoriteuser");
+                    if (!user.getFavoriteReviewers().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFavoriteReviewers().add(favuserid);
                         }
-                        }
-                        int friendid = rs.getInt("friend.friend");
-                        if(!user.getFriends().contains(areviewid)){
+                    }
+                    int friendid = rs.getInt("friend.friend");
+                    if (!user.getFriends().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getFriends().add(friendid);
                         }
-                        }
-                        
-                        int readid = rs.getInt("readbook.readbook_idbook");
-                        if(!user.getReadBooks().contains(areviewid)){
+                    }
+
+                    int readid = rs.getInt("readbook.readbook_idbook");
+                    if (!user.getReadBooks().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getReadBooks().add(readid);
                         }
-                        }
-                        int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
-                        if(!user.getWantedBooks().contains(areviewid)){
+                    }
+                    int wantedid = rs.getInt("wantedbook.wantedbook_idbook");
+                    if (!user.getWantedBooks().contains(areviewid)) {
                         if (!rs.wasNull()) {
                             user.getWantedBooks().add(wantedid);
                         }
-                        }
-                        int noteid = rs.getInt("booknote.booknote_idbook");
-                        String note = rs.getString("booknote.note");
-                        if (!rs.wasNull()) {
-                            Map<Integer, String> bookWithNote = new HashMap<>();
-                            bookWithNote.put(noteid, note);
-                            user.getNote().add(bookWithNote);
-                        }
+                    }
+                    int noteid = rs.getInt("booknote.booknote_idbook");
+                    String note = rs.getString("booknote.note");
+                    if (!rs.wasNull()) {
+                        Map<Integer, String> bookWithNote = new HashMap<>();
+                        bookWithNote.put(noteid, note);
+                        user.getNote().add(bookWithNote);
+                    }
 
-                        int readingid = rs.getInt("readingbook.readingbook_idbook");
-                        int pocetReading = rs.getInt("readingbook.numberOfPages");
-                        if (!rs.wasNull()) {
-                            Map<Integer, Integer> readingWithPage = new HashMap<>();
-                            readingWithPage.put(readingid, pocetReading);
-                            user.getReading().add(readingWithPage);
-                        }
-                    
+                    int readingid = rs.getInt("readingbook.readingbook_idbook");
+                    int pocetReading = rs.getInt("readingbook.numberOfPages");
+                    if (!rs.wasNull()) {
+                        Map<Integer, Integer> readingWithPage = new HashMap<>();
+                        readingWithPage.put(readingid, pocetReading);
+                        user.getReading().add(readingWithPage);
+                    }
+
                 }
                 return user;
             }
