@@ -45,7 +45,6 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="DeleteGenreButton" min="-2" pref="104" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="ViewRequestsButton" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -76,9 +75,7 @@
                   <Component id="AddTagButton" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="DeleteTagButton" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
-              <Component id="ViewRequestsButton" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,14 +115,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddTagButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="ViewRequestsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Requests"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewRequestsButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="DeleteGenreButton">

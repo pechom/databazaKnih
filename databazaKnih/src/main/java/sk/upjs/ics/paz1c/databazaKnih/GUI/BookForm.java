@@ -38,7 +38,7 @@ public class BookForm extends javax.swing.JDialog {
     public BookForm(java.awt.Dialog parent, boolean modal, User user, Book book) {
         super(parent, modal);
         initComponents();
-        this.setSize(606, 648);
+        this.setSize(606, 685);
         this.book = book;
         this.user = user;
         if (!user.isIsAdmin()) {

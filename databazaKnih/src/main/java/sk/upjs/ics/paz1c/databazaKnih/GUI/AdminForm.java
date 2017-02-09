@@ -44,7 +44,6 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
         AddGenreButton = new javax.swing.JButton();
         TagTextField = new javax.swing.JTextField();
         AddTagButton = new javax.swing.JButton();
-        ViewRequestsButton = new javax.swing.JButton();
         DeleteGenreButton = new javax.swing.JButton();
         DeleteTagButton = new javax.swing.JButton();
 
@@ -75,13 +74,6 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
         AddTagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddTagButtonActionPerformed(evt);
-            }
-        });
-
-        ViewRequestsButton.setText("View Requests");
-        ViewRequestsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewRequestsButtonActionPerformed(evt);
             }
         });
 
@@ -121,8 +113,7 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(AddGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(DeleteGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ViewRequestsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(DeleteGenreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -145,9 +136,7 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DeleteTagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(ViewRequestsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,11 +168,6 @@ GenreManager genreManager = ObjectFactory.INSTANCE.getGenreManager();
         TagTextField.setText("");
     }//GEN-LAST:event_AddTagButtonActionPerformed
 
-    private void ViewRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewRequestsButtonActionPerformed
-ListForm authorReviewsList = new ListForm(this, true, "AllRequests", null,null,null);
-        authorReviewsList.setVisible(true);        
-    }//GEN-LAST:event_ViewRequestsButtonActionPerformed
-
     private void DeleteGenreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteGenreButtonActionPerformed
     Genre genre = genreManager.getByName(GenreTextField.getText());
     genreManager.deleteGenre(genre.getId());
@@ -207,6 +191,5 @@ ListForm authorReviewsList = new ListForm(this, true, "AllRequests", null,null,n
     private javax.swing.JButton DeleteTagButton;
     private javax.swing.JTextField GenreTextField;
     private javax.swing.JTextField TagTextField;
-    private javax.swing.JButton ViewRequestsButton;
     // End of variables declaration//GEN-END:variables
 }

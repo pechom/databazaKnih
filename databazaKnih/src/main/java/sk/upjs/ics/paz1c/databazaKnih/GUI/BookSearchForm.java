@@ -400,7 +400,7 @@ public class BookSearchForm extends javax.swing.JDialog {
             currentList = ratingList;
             }  
         } else {
-        if(!MaxLengthTextField.getText().isEmpty()){
+        if(!MaxRatingTextField.getText().isEmpty()){
            List<Book> ratingList = bookManager.getBooksToBayesian(Integer.parseInt(MaxLengthTextField.getText()), currentList);
         currentList = ratingList;
         } 
